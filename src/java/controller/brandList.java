@@ -22,9 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *brand List
- * take all brand from database
- * @author ThaiNV 
+ * brand List take all brand from database
+ *
+ * @author ThaiNV
  */
 @WebServlet(name = "brandList", urlPatterns = {"/brandList"})
 public class brandList extends HttpServlet {
@@ -42,7 +42,7 @@ public class brandList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-         
+
         }
     }
 
@@ -59,12 +59,9 @@ public class brandList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        HttpSession ses = request.getSession();
-//        int selectedBrand = Integer.parseInt(request.getParameter("bid"));
-//        ses.setAttribute("selectedBrand", selectedBrand);
-//        response.sendRedirect("productList");
-request.getRequestDispatcher("view/brandList.jsp").forward(request, response);
-        
+
+        request.getRequestDispatcher("view/brandList.jsp").forward(request, response);
+
     }
 
     /**

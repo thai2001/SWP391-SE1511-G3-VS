@@ -5,11 +5,14 @@
         <group>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/controller/brandList.java</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/controller/search.java</file>
+            <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/web/view/productList.jsp</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/entity/Brand.java</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/controller/productList.java</file>
+            <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/context/DBContext.java</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/web/view/brandList.jsp</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/web/view/homePage.jsp</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/web/view/navbar.jsp</file>
+            <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/web/css/style.css</file>
             <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/controller/homePage.java</file>
         </group>
     </open-files>

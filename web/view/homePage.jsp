@@ -79,7 +79,7 @@
                                     </div>
                                     <h2 class="text-center mt-auto">${b.name}</h2>             
                                     <div class="mt-auto text-end">
-                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="brandList?bid=${b.id}">See more >></a></button>
+                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productList?bid=${b.id}&&vtid=1">See more >></a></button>
 
                                     </div>
 
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button type="button" class="btn" > <a class="btn btn-outline-secondary  m-3" href="productList?vtid=1&&vtname=Car">See more >></a></button>
+                    <button type="button" class="btn" > <a class="btn btn-outline-secondary  m-3" href="productList?vtid=1">See more >></a></button>
 
                 </div>
             </div>
@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button type="button" class="btn" > <a class="btn btn-outline-secondary  m-3" href="productList?vtid=2&&vtname=Moto">See more >></a></button>
+                    <button type="button" class="btn" > <a class="btn btn-outline-secondary  m-3" href="productList?vtid=2">See more >></a></button>
 
                 </div>
             </div>

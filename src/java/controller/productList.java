@@ -51,7 +51,7 @@ public class productList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,62 +67,61 @@ public class productList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
- ProductDAO productDAO = new ProductDAO();
-        HttpSession ses = request.getSession();
+            ProductDAO productDAO = new ProductDAO();
+            HttpSession ses = request.getSession();
 
-        int vtid = 0;
-        int brandId = 0;
-        String vtName = "";
-        String keyWord = "";
-        String sort = "";
-        if (request.getParameter("vtid") != null) {
-            vtid = Integer.parseInt(request.getParameter("vtid"));
-        } else {
-            vtid = (int) ses.getAttribute("vtid");
-        }
-        if(request.getParameter("vtname")!=null){
-            vtName =(String) request.getParameter("vtname");
-        }else{
-            vtName = (String)ses.getAttribute("vtName");
+            int vtid = 0;
+            int brandId = 0;
+            String vtName = "";
+            String keyWord = "";
+            String sort = "";
+            if (request.getParameter("vtid") != null) {
+                vtid = Integer.parseInt(request.getParameter("vtid"));
+            } else {
+                vtid = (int) ses.getAttribute("vtid");
+            }
+            if (vtid == 1) {
+                vtName = "Car";
+            } else {
+                vtName = "Moto";
+            }
+
+            int pi = 1;
+            if (request.getParameter("pi") != null) {
+                pi = Integer.parseInt(request.getParameter("pi"));
+            }
+            if (ses.getAttribute("selectedBrand") == null) {
+                brandId = 0;
+            } else {
+                brandId = (int) ses.getAttribute("selectedBrand");
+            }
+            if (request.getParameter("bid") != null) {
+                brandId = Integer.parseInt(request.getParameter("bid"));
+            }
+            if (ses.getAttribute("sortOp") == null) {
+                sort = "ManufactureYear desc";
+            } else {
+                sort = (String) ses.getAttribute("sortOp");
+            }
+            if (ses.getAttribute("keyWord") == null) {
+                keyWord = "";
+            } else {
+                keyWord = (String) ses.getAttribute("keyWord");
+            }
+
+            Vector<Product> allProduct = productDAO.getProductInPage(pi, vtid, brandId, keyWord, sort);
+            int numberOfPage = productDAO.getNumberOfPage(vtid, brandId, keyWord);
+            ses.setAttribute("numberOfPage", numberOfPage);
+            ses.setAttribute("availableProduct", allProduct);
+            ses.setAttribute("selectedBrand", brandId);
+            ses.setAttribute("vtid", vtid);
+            ses.setAttribute("vtName", vtName);
+            ses.setAttribute("pi", pi);
+            request.getRequestDispatcher("view/productList.jsp").forward(request, response);
         }
 
-        int pi = 1;
-        if (request.getParameter("pi") != null) {
-            pi = Integer.parseInt(request.getParameter("pi"));
-        }
-        if (ses.getAttribute("selectedBrand") == null) {
-            brandId = 0;
-        } else {
-            brandId = (int) ses.getAttribute("selectedBrand");
-        }
-        if(ses.getAttribute("sortOp")==null){
-            sort = "ManufactureYear desc";
-        }else{
-            sort = (String)ses.getAttribute("sortOp");
-        }
-        if(ses.getAttribute("keyWord")==null){
-            keyWord = "";
-        }else{
-        keyWord = (String) ses.getAttribute("keyWord");   
-        }
-                
-
-        
-      
-
-        Vector<Product> allProduct = productDAO.getProductInPage(pi, vtid, brandId, keyWord, sort);
-        int numberOfPage = productDAO.getNumberOfPage(vtid, brandId, keyWord);
-        ses.setAttribute("numberOfPage", numberOfPage);
-        ses.setAttribute("availableProduct", allProduct);
-        ses.setAttribute("selectedBrand", brandId);
-        ses.setAttribute("vtid", vtid);
-        ses.setAttribute("vtName", vtName);
-        ses.setAttribute("pi", pi);
-        request.getRequestDispatcher("view/productList.jsp").forward(request, response);
-        }
-       
     }
 
     /**
