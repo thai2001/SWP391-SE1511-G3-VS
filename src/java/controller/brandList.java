@@ -1,32 +1,33 @@
 /*
- * Copyright(C) 2021, group 3 SE1511JS
- * T.NET:
- *  Vehicle Store
+ * Copyright(C) 2005, G3-VS.
+ * Vehicle Store
+ *  
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2021-02-09      1.0                 ThaiNV           Add Field
+ * 2022-02-18      1.0                 ThaiNV           First Implement
  */
 package controller;
 
-import dao.ProductDAO;
-import entity.Product;
+import dao.BrandDAO;
+import entity.Brand;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * lớp này trích xuất data từ data theo dữ liệu được lấy từ form search từ
- * productList
- *
- * @author ThaiNV
+ *brand List
+ * take all brand from database
+ * @author ThaiNV 
  */
-public class search extends HttpServlet {
+@WebServlet(name = "brandList", urlPatterns = {"/brandList"})
+public class brandList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +42,7 @@ public class search extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+         
         }
     }
 
@@ -58,6 +59,12 @@ public class search extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        HttpSession ses = request.getSession();
+//        int selectedBrand = Integer.parseInt(request.getParameter("bid"));
+//        ses.setAttribute("selectedBrand", selectedBrand);
+//        response.sendRedirect("productList");
+request.getRequestDispatcher("view/brandList.jsp").forward(request, response);
+        
     }
 
     /**
@@ -71,27 +78,7 @@ public class search extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        HttpSession ses = request.getSession();
-        String vtName ="";
-        String keyWord = request.getParameter("keyWord").trim();
-        if(keyWord == null){
-            keyWord = "";
-        }
-        int brandId = Integer.parseInt(request.getParameter("brand"));
-        int vtid = Integer.parseInt(request.getParameter("vtid"));
-        if (vtid==1) {
-            vtName = "Car";
-        }else{
-            vtName = "Moto";
-        }
-        String sort = request.getParameter("sort");
-        ses.setAttribute("vtid", vtid);
-        ses.setAttribute("vtName", vtName);
-        ses.setAttribute("selectedBrand", brandId);
-        ses.setAttribute("sortOp", sort);
-        ses.setAttribute("keyWord", keyWord);
-        response.sendRedirect("productList");
+        processRequest(request, response);
     }
 
     /**

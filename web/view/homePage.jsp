@@ -79,7 +79,7 @@
                                     </div>
                                     <h2 class="text-center mt-auto">${b.name}</h2>             
                                     <div class="mt-auto text-end">
-                                        <button type="button" class="btn btn-outline-secondary m-2"> <a href="#"></a>See more >> </button>
+                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="brandList?bid=${b.id}">See more >></a></button>
 
                                     </div>
 
@@ -115,12 +115,12 @@
                                         <h2 class="product-price"> ${p.price}$</h3>
 
                                     </section>
-                                        <section>
+                                    <section>
                                         <p class=""><i class="bi bi-geo-alt-fill"></i> ${p.madeIn}</p>
                                         <p class=""><i class="bi bi-calendar"></i> ${p.manufactureYear}</p>
 
                                     </section>
-                                        
+
                                     <div class="mt-auto">
                                         <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productDetail?pid=${p.id}">Detail</a></button>
                                         <button type="button" class="btn" > <a class="btn btn-outline-secondary " ><i class="bi bi-cart-plus-fill"></i></a></button>
@@ -129,7 +129,7 @@
                                 </div>
                                 123</div>
                             </c:forEach>
-                        
+
 
 
 
@@ -141,12 +141,12 @@
                 </div>
             </div>
             <!-- end newest Car product -->
-             <div class="newest-car-product bg-dark text-light">
+            <div class="newest-car-product bg-dark text-light">
                 <h3 class="bg-secondery text-center pt-4">Newest Moto Product</h3>
                 <br>
                 <div class="p-5">
                     <div class="row gy-5">
-                    <c:forEach items="${allMoto}" var="p" begin="0" end="8" >
+                        <c:forEach items="${allMoto}" var="p" begin="0" end="8" >
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <div class="box rounded product bg-dark d-flex flex-column text-light p-4 h-100">
                                     <section class="card-img">
@@ -159,20 +159,20 @@
                                         <h2 class="product-price"> ${p.price}$</h3>
 
                                     </section>
-                                         <section>
+                                    <section>
                                         <p class=""><i class="bi bi-geo-alt-fill"></i> ${p.madeIn}</p>
                                         <p class=""><i class="bi bi-calendar"></i> ${p.manufactureYear}</p>
 
                                     </section>
                                     <div class="mt-auto">
-                                       <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productDetail?pid=${p.id}">Detail</a></button>
+                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productDetail?pid=${p.id}">Detail</a></button>
                                         <button type="button" class="btn" > <a class="btn btn-outline-secondary  " ><i class="bi bi-cart-plus-fill"></i></a></button>
                                     </div>
 
                                 </div>
                                 123</div>
                             </c:forEach>
-                        
+
 
 
 

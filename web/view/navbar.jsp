@@ -35,7 +35,7 @@
           </div>
           
          
-            <a class="btn mx-2 btn-dark link-light" href="#">Brand</a>
+            <a class="btn mx-2 btn-dark link-light" href="brandList">Brand</a>
 
         </div>
         <div class="navlink login logout">
