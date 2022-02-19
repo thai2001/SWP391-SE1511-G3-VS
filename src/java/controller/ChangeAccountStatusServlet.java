@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Thay đổi status của account
+ *
  * @author nqt26
  */
 public class ChangeAccountStatusServlet extends HttpServlet {
@@ -62,7 +63,18 @@ public class ChangeAccountStatusServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
+        String status = request.getParameter("status");// lấy thông tin trạng thái của tài khoản
+        String username = request.getParameter("username"); // lấy username của tài khoản
+        IManageAccountDAO manageAccountDAO = new ManageAccountDAO();
+        if (status.equalsIgnoreCase("active")) {
+            manageAccountDAO.deactiveAccount(username);
+            request.setAttribute("note", "Hủy kích hoạt tài khoản thành công");
+            request.getRequestDispatcher("manageAccount").forward(request, response);            
+        } else if (status.equalsIgnoreCase("inactive")) {
+            manageAccountDAO.activeAccount(username);
+            request.setAttribute("note", "Kích hoạt tài khoản thành công");
+            request.getRequestDispatcher("manageAccount").forward(request, response);
+        }
     }
 
     /**
@@ -76,16 +88,7 @@ public class ChangeAccountStatusServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String status = request.getParameter("status");// lấy thông tin trạng thái của tài khoản
-        String username = request.getParameter("username"); // lấy username của tài khoản
-        IManageAccountDAO manageAccountDAO = new ManageAccountDAO();
-        if (status.equalsIgnoreCase("active")){
-            manageAccountDAO.deactiveAccount(username);
-        }
-        if (status.equalsIgnoreCase("inactive")){
-            manageAccountDAO.activeAccount(username);
-        }
-        response.sendRedirect("manageAccount");
+        processRequest(request, response);
     }
 
     /**

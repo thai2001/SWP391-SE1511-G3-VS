@@ -85,7 +85,7 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            String sql = "UPDATE dbo.ACCOUNT SET Status = 'Active' WHERE Username = ?";
+            String sql = "UPDATE dbo.ACCOUNT SET Status = 'active' WHERE Username = ?";
             try {
                 con = getConnection();
             } catch (Exception e) {
@@ -111,7 +111,7 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            String sql = "UPDATE dbo.ACCOUNT SET Status = 'Active' WHERE Username = ?";
+            String sql = "UPDATE dbo.ACCOUNT SET Status = 'inactive' WHERE Username = ?";
             try {
                 con = getConnection();
             } catch (Exception e) {
@@ -130,5 +130,11 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
                 Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    public static void main(String[] args) {
+        ManageAccountDAO m = new  ManageAccountDAO();
+        m.deactiveAccount("buyer1");
+        List<Account> account = m.searchAccount(2, 2);
+        System.out.println(account.get(0).getStatus());
     }
 }
