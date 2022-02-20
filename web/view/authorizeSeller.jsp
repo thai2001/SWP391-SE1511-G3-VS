@@ -54,8 +54,8 @@
                             <td>${s.address}</td>
                             <td>${s.gmail}</td>
                             <td>${s.phone}</td>
-                            <td><button type="button" class="btn btn-secondary" ><a href="authorizeSeller?id=${s.sellerId}">Accept</a></button>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-secondary" ><a href="deleteSellerAccount?username=${s.username.getusername()}">Deny</a></button></td>
+                            <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${s.username.status}&username=${s.username.username}">Accept</a></button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn btn-secondary" ><a href="deleteSellerAccount?username=${s.username.getUsername()}">Deny</a></button></td>
                         </tr>
                     </c:forEach>
                 </tbody>

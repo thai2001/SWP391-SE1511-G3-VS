@@ -96,14 +96,7 @@ public class AuthorizeSellerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            String username = request.getParameter("username");
-            IManageAccountDAO iManageAccountDAO = new ManageAccountDAO();
-            iManageAccountDAO.activeAccount(username);
-            response.sendRedirect("authorizeSeller");
-        } catch (NullPointerException npt) {
-            response.sendRedirect("login");
-        }
+        processRequest(request, response);
     }
 
     /**
