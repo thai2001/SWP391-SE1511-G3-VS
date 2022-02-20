@@ -9,8 +9,14 @@
  */
 package controller;
 
+import dao.AuthorizeSellerDAO;
+import dao.ManageAccountDAO;
+import dao.impl.IAuthorizeSellerDAO;
+import dao.impl.IManageAccountDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +66,14 @@ public class DeleteSellerAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int roleId = Integer.parseInt(request.getParameter("roleId")); // vai trò khách hàng
+        int cusId = Integer.parseInt(request.getParameter("cusId"));// Id khách hàng
+        IManageAccountDAO iManageAccountDao = new ManageAccountDAO();
+        List<Account> listAccount = iManageAccountDao.searchAccount(roleId, cusId);
+        Account account = listAccount.get(0);
+        IAuthorizeSellerDAO iAuthorizeSellerDAO = new AuthorizeSellerDAO();
+        iAuthorizeSellerDAO.denySellerAccount(account.getUsername());
+        response.sendRedirect("authorize");
     }
 
     /**

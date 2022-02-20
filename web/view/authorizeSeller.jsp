@@ -29,11 +29,11 @@
         <!-- navbar dung chung -->
         <jsp:include page="navbar.jsp"></jsp:include>
             <div class="container-fluid">
-                <div class="row">
+                <div class="row title">
                     <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Transaction</b></a></div>
                     <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Report</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Account</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="#">Authorize <b>Seller</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="manageAccount">Manage <b>Account</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
                 </div>
                 <table class="table table-bordered">
                     <thead>
@@ -55,7 +55,7 @@
                             <td>${s.gmail}</td>
                             <td>${s.phone}</td>
                             <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${s.username.status}&username=${s.username.username}">Accept</a></button>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-secondary" ><a href="deleteSellerAccount?username=${s.username.getUsername()}">Deny</a></button></td>
+                                <button type="button" class="btn btn-secondary" ><a href="deleteSellerAccount?roleId=${s.getUsername().getRoleId().getRoleId()}&cusId=${s.sellerId}">Deny</a></button></td>
                         </tr>
                     </c:forEach>
                 </tbody>

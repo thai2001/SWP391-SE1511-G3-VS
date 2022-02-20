@@ -183,46 +183,43 @@
                     <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Transaction</b></a></div>
                     <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Report</b></a></div>
                     <div class="col-sm-3"><a class="link-dark" href="manageAccount">Manage <b>Account</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="authorizeSeller">Authorize <b>Seller</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
                 </div>
                 <div class="row">
                     <form class="navbar-form navbar-right" action="searchAccount" method="get" >
                         <select name="roleId">
                             <c:forEach items="${requestScope.role}" var="r">
                             <option  value="${r.roleId}" > ${r.roleName} </option>
-                        </c:forEach> 
-                    </select>    
-                    <input value="" name="uid" type="text" class="SearchBox" placeholder="Id">
+                            </c:forEach> 
+                        </select>    
+                        <input value="" name="uid" type="text" class="SearchBox" placeholder="Id">
 
-                    <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
-                </form>
+                        <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                    </form>
 
-            </div>
-            <div class="row">
-
+                </div>
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tài khoản</th>
-                            <th>Vai trò</th>
-                            <th>Trạng thái</th>
-                            <th>Mục điều chỉnh</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        <thead>
+                            <tr>
+                                <th>Tài khoản</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                                <th>Mục điều chỉnh</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                     <c:forEach  items="${requestScope.account}" var="a">
-                        <tr>
-                            <td>${a.getUsername()}</td>
-                            <td>${a.getRoleId().getRoleName()}</td>
-                            <td>${a.getStatus()}  </td>
-                            <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${a.getStatus()}&username=${a.username}">change</a></button></td>
+                            <tr>
+                                <td>${a.getUsername()}</td>
+                                <td>${a.getRoleId().getRoleName()}</td>
+                                <td>${a.getStatus()}  </td>
+                                <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${a.getStatus()}&username=${a.username}">change</a></button></td>
 
-                        </tr>
+                            </tr>
                     </c:forEach>
                     </tbody>
                 </table>
-            </div>
-                <h3> ${requestScope.note} </h3>
+            <h3> ${requestScope.note} </h3>
         </div>
         <!-- end container part -->
         <!-- footer  -->
