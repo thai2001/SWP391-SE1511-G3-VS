@@ -73,7 +73,7 @@ public class DeleteSellerAccountServlet extends HttpServlet {
         Account account = listAccount.get(0);
         IAuthorizeSellerDAO iAuthorizeSellerDAO = new AuthorizeSellerDAO();
         iAuthorizeSellerDAO.denySellerAccount(account.getUsername());
-        response.sendRedirect("authorize");
+        request.getRequestDispatcher("authorize").forward(request, response);
     }
 
     /**
