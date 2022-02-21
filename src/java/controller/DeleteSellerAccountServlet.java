@@ -73,7 +73,7 @@ public class DeleteSellerAccountServlet extends HttpServlet {
         Account account = listAccount.get(0);
         IAuthorizeSellerDAO iAuthorizeSellerDAO = new AuthorizeSellerDAO();
         iAuthorizeSellerDAO.denySellerAccount(account.getUsername());
-        request.getRequestDispatcher("authorize").forward(request, response);
+        response.sendRedirect("authorize");
     }
 
     /**
@@ -87,13 +87,7 @@ public class DeleteSellerAccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String username = request.getParameter("username");
-            
-            
-        } catch (NullPointerException npt){
-            response.sendRedirect("login");
-        }
+        processRequest(request, response);
     }
 
     /**
