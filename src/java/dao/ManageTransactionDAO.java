@@ -11,6 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageTransactionDAO;
+import entity.Buyer;
 import entity.Order;
 import entity.Seller;
 import java.sql.Connection;
@@ -41,20 +42,26 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             } catch (Exception e) {
                 System.out.println("lỗi khi kết nối:" + e);
             }
-            String sql = "  SELECT * FROM dbo.[ORDER] INNER JOIN dbo.Buyer ON Buyer.BuyerID = [ORDER].BuyerId\n"
-                    + "  INNER JOIN dbo.Seller ON Seller.SellerID = [ORDER].SellerId\n"
-                    + "  ORDER BY OrderId DESC";
+            String sql = "  SELECT * FROM dbo.[ORDER] ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
                 Order order = new Order(rs.getInt("OrderId"),rs.getDate("DateCreated"), rs.getDouble("TotalPrice")
-                        , new Seller(rs.getInt("SellerId")), buyerId);
+                        , new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId")));
+                listOrder.add(order);
             }
         } catch (SQLException se) {
             Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, se);
-        } finally {
-            con.close;
+        } finally {            
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return listOrder;
     }
 
     @Override
