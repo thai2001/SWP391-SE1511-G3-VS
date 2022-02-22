@@ -71,6 +71,62 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
     
+     @Override
+    public List<Product> getProductByUsername(String name){
+        List<Product> list=new ArrayList<>();
+        String sql="Select \n" +
+                   "ProductId,\n" +
+                   "VehicleTypeId,\n" +
+                   "ProductName,\n" +
+                   "BrandId,\n" +
+                   "MadeIn,\n" +
+                   "ManufactureYear,\n" +
+                   "Product.[Description],\n" +
+                   "Image,\n" +
+                   "Quantity,\n" +
+                   "UnitPrice,\n" +
+                   "Discount,\n" +
+                   "Product.SellerId\n" +
+                   "FROM Product INNER JOIN Seller On Product.SellerId = Seller.SellerID\n" +
+"                      INNER JOIN ACCOUNT ON ACCOUNT.Username = Seller.Username\n" +
+"					  Where ACCOUNT.Username like ? ";
+        
+        try{
+            con = getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setString(1,"%" +name+ "%");
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Product p=new Product();
+                p.setId(rs.getInt("ProductId"));
+                p.setBrandId(rs.getInt("BrandId"));
+                p.setVehicleTypeId(rs.getInt("vehicleTypeId"));
+                p.setName(rs.getString("ProductName"));
+                p.setMadeIn(rs.getString("MadeIn"));
+                p.setManufactureYear(rs.getString("ManufactureYear"));
+                p.setDescript(rs.getString("Description"));
+                p.setImg(rs.getString("Image"));
+                p.setQuatity(rs.getInt("Quantity"));
+                p.setPrice(rs.getFloat("UnitPrice"));
+                p.setDiscount(rs.getFloat("Discount"));               
+                p.setSellerId(rs.getInt("SellerId"));
+                list.add(p);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        } finally{
+            try {
+                ps.close();
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return list;
+      }
+    }
+    
+    
     // Tìm kiếm sản phẩm theo tên
      @Override
     public List<Product> SearchProductByNameForSeller(int sid,String name){

@@ -28,5 +28,6 @@ public interface IManageProductDao {
                               String MadeIn,String manufactureYear,String description,
                               String image,String quantity,String price ,String discount,int id);
        public List<Product> SearchProductByNameForSeller(int sid,String name);
+       public List<Product> getProductByUsername(String name);
 
 }
