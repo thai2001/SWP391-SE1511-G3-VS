@@ -94,7 +94,7 @@ public class AddProduct extends HttpServlet {
 
        ManageProductDAO manageProductDao = new ManageProductDAO();
        manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
-       response.sendRedirect("manageproduct");
+
     }
 
     /**
