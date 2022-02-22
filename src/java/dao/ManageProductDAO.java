@@ -11,6 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageProductDao;
+import entity.Brand;
 import entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -311,10 +312,53 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             }
       }
     }
+    
+       @Override
+     public List<Product> getProductByBrandId(int sellid,int brandid){
+        List<Product> list=new ArrayList<>();
+        String sql="Select *\n" +
+"       from Product \n" +
+"	   where BrandId = ? \n" +
+"	   and SellerId = ? ";
+                
+        try{
+            con = getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setInt(1,brandid);
+            ps.setInt(2,sellid);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Product p=new Product();
+                p.setVehicleTypeId(rs.getInt("VehicleTypeId"));
+                p.setName(rs.getString("ProductName"));
+                p.setBrandId(rs.getInt("Brandid"));
+                p.setMadeIn(rs.getString("MadeIn"));
+                p.setManufactureYear(rs.getString("ManufactureYear"));   
+                p.setDescript(rs.getString("Description"));
+                p.setImg(rs.getString("Image"));
+                p.setQuatity(rs.getInt("Quantity"));
+                p.setPrice(rs.getFloat("UnitPrice"));
+                p.setDiscount(rs.getInt("Discount"));
+                p.setSellerId(rs.getInt("SellerId"));
+                list.add(p);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }  catch (Exception ex) {
+               Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+           }  finally{
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      }
+        return list;
+}
     public static void main(String[] args) {
          ManageProductDAO bd = new ManageProductDAO();
-         bd.EditProduct(1, "Ghibli", 2, "USA", "2018", "Race-bred power and razor-sharp, sports car-like handling. This is where passion meets the road", "https://s7g10.scene7.com/is/image/maserati/maserati/international/Models/my22/ghibli-my22/my22/16_9/gh_3_4_front.jpg?$1920x2000$&fit=constrain", 10, 117800, 1, 2);
-       
+         bd.getProductByBrandId(2, 2);
            
     }
     

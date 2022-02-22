@@ -9,6 +9,7 @@
  */
 package dao.impl;
 
+import entity.Brand;
 import entity.Product;
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface IManageProductDao {
                               String image,int quantity,float price ,float discount,int id);
        public List<Product> SearchProductByNameForSeller(int sid,String name);
        public List<Product> getProductByUsername(String name);
-
+     public List<Product> getProductByBrandId(int sellid,int brandid);
 }
