@@ -68,6 +68,10 @@
         <servlet-name>ChangeAccountStatusServlet</servlet-name>
         <servlet-class>controller.ChangeAccountStatusServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchBrandForSeller</servlet-name>
+        <servlet-class>controller.SearchBrandForSeller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>ChangeAccountStatusServlet</servlet-name>
         <url-pattern>/changeAccountStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBrandForSeller</servlet-name>
+        <url-pattern>/searchbrandforseller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
