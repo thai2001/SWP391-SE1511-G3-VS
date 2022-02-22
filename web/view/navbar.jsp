@@ -39,9 +39,9 @@
 
         </div>
         <div class="navlink login logout">
-          <a class="nav-link link-light " href="#">Login</a>
-          <a class="nav-link link-light " href="#">Login</a>
-          <a class="nav-link link-light " href="#">Sign up</a>
+          <a class="nav-link link-light " href="login">Login</a>
+          <a class="nav-link link-light " href="#">Sign Up</a>
+          <a class="nav-link link-light " href="#">Sign Out</a>
       </div>
       </div>
     </nav>
