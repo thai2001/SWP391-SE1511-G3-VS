@@ -181,12 +181,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                                int sid){
        
          String sql="insert Product\n" +
-"(vehicleTypeId,ProductName,BranId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+"(vehicleTypeId,ProductName,BrandId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
          try{
               con = getConnection();
-            ps= con.prepareStatement(sql);
-            rs=ps.executeQuery();   
+            ps= con.prepareStatement(sql);  
             ps.setInt(1,vehicleTypeid);
             ps.setString(2,name);
             ps.setInt(3,brandid);
@@ -206,7 +205,6 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
          finally{
             try {
                 ps.close();
-                rs.close();
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -321,9 +319,9 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     
      public static void main(String[] args) {
          ManageProductDAO bd = new ManageProductDAO();
-       List <Product> list = bd.SearchProductByNameForSeller(2,"Ghibli");
+        bd.AddProduct(1, "Ferrari", 2, "USA","2020", "hehehe", "ssfdf", 30, 193233, 1, 2);
        
-            System.out.println(list.get(0).getName());
+            
     }
 
    

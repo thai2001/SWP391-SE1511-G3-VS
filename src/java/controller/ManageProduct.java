@@ -70,16 +70,16 @@ public class ManageProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sess = request.getSession();
-        Account a = (Account) sess.getAttribute("acc");
-        String uname = a.getUsername();
+        //HttpSession sess = request.getSession();
+       // Account a = (Account) sess.getAttribute("account");
+      //  String uname = a.getUsername();
        // int sid = Integer.parseInt(request.getParameter("sid"));
        IManageProductDao manageProductDao = new ManageProductDAO();
        BrandDAO brandDao = new BrandDAO();
        VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
        
        List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-       List<Product> listproduct = manageProductDao.getProductByUsername(uname);
+       List<Product> listproduct = manageProductDao.getProductBySellerid(2);
        List<Brand> listbrand = brandDao.getAllBrand();
         
        request.setAttribute("vehicleType", listvehicleType);
