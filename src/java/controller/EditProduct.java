@@ -81,19 +81,19 @@ public class EditProduct extends HttpServlet {
         
         String name = request.getParameter("name");
         String image = request.getParameter("image");
-        String price = request.getParameter("price");
+        float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
         String category = request.getParameter("category");
-        String discount = request.getParameter("discount");
-        String brand = request.getParameter("brand");
-        String type = request.getParameter("type");
+        float discount =Float.parseFloat(request.getParameter("discount"));
+        int brand =Integer.parseInt(request.getParameter("brand"));
+        int type =Integer.parseInt(request.getParameter("type"));
         String manufactureyear = request.getParameter("Myear");
         String madein = request.getParameter("MadeIn");
          int pid = Integer.parseInt(request.getParameter("productid"));
-        String quantity = request.getParameter("quantity");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
         
         ManageProductDAO manageProductDao = new ManageProductDAO();
-        manageProductDao.EditProduct(brand, type, name,madein , manufactureyear, description, image, quantity, price, discount, pid);
+        manageProductDao.EditProduct(type,name,brand, madein , manufactureyear, description, image, quantity, price, discount, pid);
         response.sendRedirect("manageproduct");
     }
 

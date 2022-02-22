@@ -181,12 +181,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                                int sid){
        
          String sql="insert Product\n" +
-"(vehicleTypeId,ProductName,BranId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+"(vehicleTypeId,ProductName,BrandId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
          try{
               con = getConnection();
-            ps= con.prepareStatement(sql);
-            rs=ps.executeQuery();   
+            ps= con.prepareStatement(sql);  
             ps.setInt(1,vehicleTypeid);
             ps.setString(2,name);
             ps.setInt(3,brandid);
@@ -206,10 +205,9 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
          finally{
             try {
                 ps.close();
-                rs.close();
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
      }
@@ -231,7 +229,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 ps.close();
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
     }
@@ -279,11 +277,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
    
 //Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
     @Override
-    public void EditProduct(String Branid, String vehicleTypeId, String name, String MadeIn, String manufactureYear, String description, String image, String quantity, String price, String discount, int id) {
+    public void EditProduct(int vehicleTypeId,String name,int Branid,String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) {
          String sql= "update Product\n" +
-"set  BrandId = ?,\n" +
-"     vehicleTypeId = ?,\n" +
+"set  vehicleTypeId = ?,\n" +
 "     ProductName = ?,\n" +
+"     BrandId = ?,\n" +   
 "     MadeIn = ?,\n" +
 "     ManufactureYear = ?,\n" +
 "     Description = ?,\n" +
@@ -291,19 +289,19 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
 "     Quantity = ?,\n" +
 "     UnitPrice = ?,\n" +
 "     Discount = ? \n" +
-"	where ProductId = ?";
+"	where ProductId = ? ";
          try{
             ps=con.prepareStatement(sql);
-            ps.setString(1,Branid);
-            ps.setString(2,vehicleTypeId);
-            ps.setString(3,name);
+            ps.setInt(1,vehicleTypeId);
+            ps.setString(2,name );
+            ps.setInt(3,Branid);
             ps.setString(4,MadeIn);
             ps.setString(5,manufactureYear);
             ps.setString(6,description);
             ps.setString(7,image);
-            ps.setString(8,quantity);
-            ps.setString(9,price);
-            ps.setString(10,discount);
+            ps.setInt(8,quantity);
+            ps.setFloat(9,price);
+            ps.setFloat(10,discount);
             ps.setInt(11,id);
             ps.executeUpdate();
          }catch(Exception e){
@@ -314,16 +312,16 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 ps.close();
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
     }
     
      public static void main(String[] args) {
          ManageProductDAO bd = new ManageProductDAO();
-       List <Product> list = bd.SearchProductByNameForSeller(2,"Ghibli");
+         bd.EditProduct(1, "Ghibli", 2, "Hongkong", "2018", "Race-bred power and razor-sharp, sports car-like handling. This is where passion meets the road", "https://s7g10.scene7.com/is/image/maserati/maserati/international/Models/my22/ghibli-my22/my22/16_9/gh_3_4_front.jpg?$1920x2000$&fit=constrain", 10, 117800, 1, 2);
        
-            System.out.println(list.get(0).getName());
+           
     }
 
    

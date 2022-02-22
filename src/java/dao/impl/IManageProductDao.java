@@ -24,9 +24,9 @@ public interface IManageProductDao {
                                int sid);
      public void deleteProduct(String pid);
      public Product getProductByID(int pid);
-      public void EditProduct(String Branid,String vehicleTypeId,String name,
+      public void EditProduct(int vehicleTypeId,String name,int Branid,
                               String MadeIn,String manufactureYear,String description,
-                              String image,String quantity,String price ,String discount,int id);
+                              String image,int quantity,float price ,float discount,int id);
        public List<Product> SearchProductByNameForSeller(int sid,String name);
        public List<Product> getProductByUsername(String name);
 
