@@ -230,7 +230,7 @@ header img{
                         <th>User ID</th>
                         <th>Product Name</th>
                         <th>Image</th>
-                        <th>Brand</th>
+                        <th>MadeIn</th>
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
@@ -247,7 +247,7 @@ header img{
                         <td>
                             <img src="${o.img}">
                         </td>
-                        <td>${o.brandId}</td>
+                        <td>${o.madeIn}</td>
                         <td>${o.price}Đ</td>
                         <td>
                         
