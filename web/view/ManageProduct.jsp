@@ -251,8 +251,8 @@ header img{
                         <td>${o.price}Đ</td>
                         <td>
                         
-                            <a href="loadeditproduct?pid=${o.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                            <a href="deleteproduct?pid=${o.id}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <a href="loadeditproduct?pid=${o.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="deleteproduct?pid=${o.id}" class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                     </c:forEach>
