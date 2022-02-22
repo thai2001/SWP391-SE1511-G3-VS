@@ -34,6 +34,10 @@ public class Seller {
         this.username = username;
     }
 
+    public Seller(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
     public Seller() {
     }
 

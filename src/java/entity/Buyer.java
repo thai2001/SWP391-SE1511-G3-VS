@@ -10,6 +10,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.logging.Logger;
 
 /**
  * tạo các trường cho lớp Buyer
@@ -34,6 +35,10 @@ public class Buyer {
         this.phone = phone;
         this.birthday = birthday;
         this.username = username;
+    }
+
+    public Buyer(int buyerId) {
+        this.buyerId = buyerId;
     }
 
     public Buyer() {
