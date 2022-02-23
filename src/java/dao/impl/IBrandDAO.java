@@ -17,8 +17,9 @@ import java.util.Vector;
  * @author Thainv
  */
 public interface IBrandDAO {
-     /*
+
+    /*
     take all brand ==>  will return a list of brand contain : brandID, brandName
-    */
-    public Vector<Brand> getAllBrand();
+     */
+    public Vector<Brand> getAllBrand() throws Exception;
 }

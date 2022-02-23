@@ -17,8 +17,9 @@ import java.util.Vector;
  * @author thainv
  */
 public interface IVehicleTypeDAO {
+
     /*
     take all vehicleType from dâtbase ==>  will return a list of VehicleType contain : vehicleTypeID, cehicleTypeName
-    */
-    public Vector<VehicleType> getAllVehicleType();
+     */
+    public Vector<VehicleType> getAllVehicleType() throws Exception;
 }

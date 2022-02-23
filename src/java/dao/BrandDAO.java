@@ -22,29 +22,30 @@ import dao.impl.IBrandDAO;
 
 /**
  * Lớp này có các phương thức thực hiện truy vấn hoặc cập nhật dữ liệu từ bảng
- * Brand. Trong các phương thức update or insert của lớp, dữ liệu được chuẩn hóa (loại bỏ dấu cách ở hai đầu) trước khi được cập nhật vào cơ sở dữ liệu
- * Các phương thức sẽ trả về một đối tượng của lớp java.lang.Exception khi có bất cứ lỗi nào xảy ra trong quá trình truy vấn, cập nhật dữ liệu
- * Bugs : 
+ * Brand. Trong các phương thức update or insert của lớp, dữ liệu được chuẩn hóa
+ * (loại bỏ dấu cách ở hai đầu) trước khi được cập nhật vào cơ sở dữ liệu Các
+ * phương thức sẽ trả về một đối tượng của lớp java.lang.Exception khi có bất cứ
+ * lỗi nào xảy ra trong quá trình truy vấn, cập nhật dữ liệu Bugs :
  *
  * @author Nguyen Viet Thai
  */
-
-
 /**
  * The class contains method find, update, delete, insert brand information from
- * Brand table in database. In the update or insert method, all data will be normalized (trim space) before update/insert into database
- * The method wil throw an object  of java.lang.Exception class if there is any error occurring when finding, inserting, or updating data
- * <p>Bugs: 
+ * Brand table in database. In the update or insert method, all data will be
+ * normalized (trim space) before update/insert into database The method wil
+ * throw an object of java.lang.Exception class if there is any error occurring
+ * when finding, inserting, or updating data
+ * <p>
+ * Bugs:
  *
  * @author Nguyen Viet Thai
  */
-
 public class BrandDAO extends DBContext implements IBrandDAO {
 
     /*
     take all brand ==>  will return a list of brand contain : brandID, brandName
-    */
-    public Vector<Brand> getAllBrand() {
+     */
+    public Vector<Brand> getAllBrand() throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -52,11 +53,7 @@ public class BrandDAO extends DBContext implements IBrandDAO {
         try {
 
             con = getConnection();
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
+
             String sql = "SELECT * \n"
                     + "  FROM [Brand]";
             ps = con.prepareStatement(sql);
@@ -68,21 +65,18 @@ public class BrandDAO extends DBContext implements IBrandDAO {
                 )
                 );
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
-        }finally{
-            try {
-                ps.close();
-                rs.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            ps.close();
+            rs.close();
+            con.close();
         }
+
         return vec;
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws Exception {
         BrandDAO dao = new BrandDAO();
         Vector<Brand> vec = dao.getAllBrand();
         for (Brand brand : vec) {

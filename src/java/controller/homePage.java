@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.impl.IProductDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *HomePage
@@ -61,20 +63,24 @@ public class homePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        HttpSession ses = request.getSession();
-        IProductDAO productDao = new ProductDAO();
-        VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-        BrandDAO brandDao = new BrandDAO();
-        Vector<Product> allCar = (Vector) productDao.getAllProductsByVehicleTypeId(1);
-        Vector<Product> allMoto = (Vector) productDao.getAllProductsByVehicleTypeId(2);
-        Vector<VehicleType> allVehicleType = (Vector) vehicleTypeDao.getAllVehicleType();
-        Vector<Brand> allBrand = brandDao.getAllBrand();
-        ses.setAttribute("allBrand", allBrand);
-        ses.setAttribute("allVehicleType", allVehicleType);
-        ses.setAttribute("allCar", allCar);
-        ses.setAttribute("allMoto", allMoto);
-        request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
+        try {
+            //processRequest(request, response);
+            HttpSession ses = request.getSession();
+            IProductDAO productDao = new ProductDAO();
+            VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+            BrandDAO brandDao = new BrandDAO();
+            Vector<Product> allCar = (Vector) productDao.getAllProductsByVehicleTypeId(1);
+            Vector<Product> allMoto = (Vector) productDao.getAllProductsByVehicleTypeId(2);
+            Vector<VehicleType> allVehicleType = (Vector) vehicleTypeDao.getAllVehicleType();
+            Vector<Brand> allBrand = brandDao.getAllBrand();
+            ses.setAttribute("allBrand", allBrand);
+            ses.setAttribute("allVehicleType", allVehicleType);
+            ses.setAttribute("allCar", allCar);
+            ses.setAttribute("allMoto", allMoto);
+            request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

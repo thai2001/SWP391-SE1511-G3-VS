@@ -20,21 +20,21 @@ public interface IProductDAO {
     /* get all product from database ==> return a list ò product coitain : int id, int brandId, int vehicleTypeId, 
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
-    public Vector<Product> getAllProducts(); 
+    public Vector<Product> getAllProducts() throws Exception; 
     
     
     
     /* get all product by vehicleType from database ==> return a list of product coitain : int id, int brandId, int vehicleTypeId, 
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
-    public Vector<Product> getAllProductsByVehicleTypeId(int vtid) ;
+    public Vector<Product> getAllProductsByVehicleTypeId(int vtid) throws Exception;
     
     
     
      /* get a product by ID from database ==> return a list of product coitain : int id, int brandId, int vehicleTypeId, 
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
-     public Product getProductById(int pid) ;
+     public Product getProductById(int pid) throws Exception ;
     
     
     
@@ -49,15 +49,15 @@ public interface IProductDAO {
     ==> return a list of product coitain : int id, int brandId, int vehicleTypeId, 
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
-    public Vector<Product> getAllProductsWithCondition(int vtid,int brandId,String keyWord,String sort) ;
+    public Vector<Product> getAllProductsWithCondition(int vtid,int brandId,String keyWord,String sort) throws Exception ;
     
     
     /* get the number of page base on all product in database
      */
-     public int getNumberOfPage(int vtid, int brandId, String keyWord);
+     public int getNumberOfPage(int vtid, int brandId, String keyWord) throws Exception;
      
      
      /* get the Product in page number base on all product in database
      */
-     public Vector<Product> getProductInPage(int index,int vtid, int brandId, String keyWord, String sort);
+     public Vector<Product> getProductInPage(int index,int vtid, int brandId, String keyWord, String sort) throws Exception;
 }

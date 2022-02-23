@@ -46,19 +46,13 @@ public class ProductDAO extends DBContext implements IProductDAO {
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
     @Override
-    public Vector<Product> getAllProducts() {
+    public Vector<Product> getAllProducts() throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Vector vec = new Vector();
         try {
             con = getConnection();
-
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "SELECT * from Product"
                     + " order by ManufactureYear desc ";
             ps = con.prepareStatement(sql);
@@ -79,16 +73,12 @@ public class ProductDAO extends DBContext implements IProductDAO {
                 )
                 );
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
+        } catch (SQLException ex) {
+            throw ex;
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            rs.close();
+            ps.close();
+            con.close();
         }
         return vec;
     }
@@ -97,19 +87,13 @@ public class ProductDAO extends DBContext implements IProductDAO {
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
     @Override
-    public Vector<Product> getAllProductsByVehicleTypeId(int vtid) {
+    public Vector<Product> getAllProductsByVehicleTypeId(int vtid) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Vector vec = new Vector();
         try {
             con = getConnection();
-
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "SELECT * from Product"
                     + " where vehicleTypeId = ? "
                     + "order by ManufactureYear desc";
@@ -132,17 +116,14 @@ public class ProductDAO extends DBContext implements IProductDAO {
                 )
                 );
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
+        } catch (SQLException ex) {
+            throw ex;
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            rs.close();
+            ps.close();
+            con.close();
         }
+
         return vec;
     }
 
@@ -155,7 +136,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
     @Override
-    public Vector<Product> getAllProductsWithCondition(int vtid, int brandId, String keyWord, String sort) {
+    public Vector<Product> getAllProductsWithCondition(int vtid, int brandId, String keyWord, String sort) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -163,11 +144,6 @@ public class ProductDAO extends DBContext implements IProductDAO {
         try {
             con = getConnection();
 
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "select * from Product \n"
                     + "where vehicleTypeId = ? \n";
             if (brandId != 0) {
@@ -196,22 +172,19 @@ public class ProductDAO extends DBContext implements IProductDAO {
                 )
                 );
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
+        } catch (SQLException ex) {
+            throw ex;
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            rs.close();
+            ps.close();
+            con.close();
         }
         return vec;
     }
 
     @Override
-    public Product getProductById(int pid) {
+    public Product getProductById(int pid) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -219,11 +192,6 @@ public class ProductDAO extends DBContext implements IProductDAO {
         try {
             con = getConnection();
 
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "select * from Product\n"
                     + "where ProductId =  ? ";
 
@@ -246,16 +214,12 @@ public class ProductDAO extends DBContext implements IProductDAO {
                         rs.getInt(12)
                 ));
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
+        } catch (SQLException ex) {
+            throw ex;
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            rs.close();
+            ps.close();
+            con.close();
         }
         return p;
     }
@@ -263,7 +227,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
     /* get the number of page base on all product in database
      */
     @Override
-    public int getNumberOfPage(int vtid, int brandId, String keyWord) {
+    public int getNumberOfPage(int vtid, int brandId, String keyWord) throws Exception {
         int pageCount = 0;
         Connection con = null;
         PreparedStatement ps = null;
@@ -271,11 +235,6 @@ public class ProductDAO extends DBContext implements IProductDAO {
         try {
             con = getConnection();
 
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "select COUNT(*) from Product \n"
                     + "where vehicleTypeId = ? \n";
             if (brandId != 0) {
@@ -295,49 +254,40 @@ public class ProductDAO extends DBContext implements IProductDAO {
         } catch (Exception ex) {
             System.out.println("Error");
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            rs.close();
+            ps.close();
+            con.close();
+
         }
         return pageCount;
-}
+    }
 
-
-
-/* get the Product in page number base on all product in database
- */
-@Override
-        public Vector<Product> getProductInPage(int index,int vtid, int brandId, String keyWord, String sort) {
-          Connection con = null;
+    /* get the Product in page number base on all product in database
+     */
+    @Override
+    public Vector<Product> getProductInPage(int index, int vtid, int brandId, String keyWord, String sort) throws Exception {
+        Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Vector vec = new Vector();
         try {
             con = getConnection();
 
-            try {
-                System.out.println("Ket noi Thanh cong");
-            } catch (Exception e) {
-                System.out.println("Co loi khi ket noi " + e.getMessage());
-            }
             String sql = "select * from Product \n"
                     + "where vehicleTypeId = ? \n";
             if (brandId != 0) {
                 sql += " and BrandId = " + brandId;
             }
             sql += " and ProductName like '%" + keyWord + "%' \n"
-                    + "order by " + sort 
+                    + "order by " + sort
                     + " OFFSET ? ROWS \n"
                     + "FETCH first 9 ROWS ONLY";
 
             ps = con.prepareStatement(sql);
 
             ps.setInt(1, vtid);
-            ps.setInt(2, (index-1)*9);
+            ps.setInt(2, (index - 1) * 9);
             rs = ps.executeQuery();
             while (rs.next()) {
                 vec.add(new Product(rs.getInt(1),
@@ -355,27 +305,19 @@ public class ProductDAO extends DBContext implements IProductDAO {
                 )
                 );
             }
-        } catch (Exception ex) {
-            System.out.println("Error");
+        } catch (SQLException ex) {
+            throw ex;
         } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            
+            rs.close();
+            ps.close();
+            con.close();
 
-} catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class
-.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+
         return vec;
     }
 
-    
-    
-    
-      public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ProductDAO dao = new ProductDAO();
 //        Vector<Product> vec = dao.getAllProductsByVehicleTypeId(1);
 //        for (Product brand : vec) {
@@ -385,18 +327,17 @@ public class ProductDAO extends DBContext implements IProductDAO {
 //        for (Product brand : vec2) {
 //            System.out.println(brand);
 //        }
-        Vector<Product> vec3 = dao.getProductInPage(1,1, 2, "a", "ManufactureYear desc");
+        Vector<Product> vec3 = dao.getProductInPage(1, 1, 2, "a", "ManufactureYear desc");
         for (Product brand : vec3) {
             System.out.println(brand);
         }
-        
+
         int count = dao.getNumberOfPage(1, 2, "a");
-          System.out.println(count);
-        
+        System.out.println(count);
+
 //        Product p = dao.getProductById(2);
 //       
 //            System.out.println(p);
-        
     }
 
 }

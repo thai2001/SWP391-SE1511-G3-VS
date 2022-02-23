@@ -14,6 +14,8 @@ import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -120,6 +122,8 @@ public class productList extends HttpServlet {
             ses.setAttribute("vtName", vtName);
             ses.setAttribute("pi", pi);
             request.getRequestDispatcher("view/productList.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(productList.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
