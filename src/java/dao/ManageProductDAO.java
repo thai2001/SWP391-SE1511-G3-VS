@@ -58,7 +58,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setSellerId(rs.getInt("SellerId"));
                 list.add(p);
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e);
         } finally{
             try {
@@ -153,15 +153,13 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setDiscount(rs.getFloat("Discount"));
                 return p;
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e);
-        } catch (Exception ex) {
-             Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-         } finally{
+        }  finally{
             try {
                 ps.close();
                 con.close();
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
@@ -200,7 +198,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setSellerId(rs.getInt("SellerId"));
                 list.add(p);
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e);
         } finally{
             try {
@@ -256,7 +254,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setSellerId(rs.getInt("SellerId"));
                 list.add(p);
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e);
         } finally{
             try {
@@ -342,11 +340,9 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setSellerId(rs.getInt("SellerId"));
                 list.add(p);
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println(e);
-        }  catch (Exception ex) {
-               Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-           }  finally{
+        }   finally{
             try {
                 ps.close();
                 con.close();
