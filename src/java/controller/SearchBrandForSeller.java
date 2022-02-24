@@ -16,6 +16,8 @@ import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +67,7 @@ public class SearchBrandForSeller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
       int bid= Integer.parseInt(request.getParameter("brandid"));
         ManageProductDAO  manageproductdao= new ManageProductDAO();
         BrandDAO brandDao = new BrandDAO();
@@ -74,8 +77,10 @@ public class SearchBrandForSeller extends HttpServlet {
         request.setAttribute("product", listproductbrand);
         request.setAttribute("brand", listbrand);
         request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
+    }catch(Exception ex){
+    Logger.getLogger(SearchBrandForSeller.class.getName()).log(Level.SEVERE, null, ex);
+}
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *

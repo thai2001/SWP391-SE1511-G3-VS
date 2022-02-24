@@ -20,6 +20,8 @@ import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -74,6 +76,7 @@ public class ManageProduct extends HttpServlet {
       //  Account a = (Account) sess.getAttribute("acc");
        // String uname = a.getUsername();
        // int sid = Integer.parseInt(request.getParameter("sid"));
+       try{
        IManageProductDao manageProductDao = new ManageProductDAO();
        BrandDAO brandDao = new BrandDAO();
        VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
@@ -86,6 +89,9 @@ public class ManageProduct extends HttpServlet {
        request.setAttribute("brand", listbrand);
        request.setAttribute("product", listproduct);
        request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
+    }catch(Exception ex){
+    Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);
+}
     }
 
     /**

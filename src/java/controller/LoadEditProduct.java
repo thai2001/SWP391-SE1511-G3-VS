@@ -18,6 +18,8 @@ import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -68,6 +70,7 @@ public class LoadEditProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
          int pid = Integer.parseInt(request.getParameter("pid"));
         ManageProductDAO manageproductdao = new ManageProductDAO();
         BrandDAO brandDao = new BrandDAO();
@@ -75,12 +78,15 @@ public class LoadEditProduct extends HttpServlet {
         Product prod = manageproductdao.getProductByID(pid);
         List<Brand> listbrand = brandDao.getAllBrand();
         List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-        
-        
+   
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
         request.setAttribute("product", prod);
         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
+    
+    }catch(Exception ex){
+    Logger.getLogger(LoadEditProduct.class.getName()).log(Level.SEVERE, null, ex);
+}
     }
 
     /**
