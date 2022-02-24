@@ -71,7 +71,7 @@ public class LoadEditProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-         int pid = Integer.parseInt(request.getParameter("pid"));
+         int pid = Integer.parseInt(request.getParameter("pid")); //Lấy id của sản phẩm
         ManageProductDAO manageproductdao = new ManageProductDAO();
         BrandDAO brandDao = new BrandDAO();
          VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();

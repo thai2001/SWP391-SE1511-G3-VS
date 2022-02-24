@@ -62,7 +62,7 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String pid = request.getParameter("pid");
+         String pid = request.getParameter("pid"); //   Lấy id của sản phẩm
      ManageProductDAO manageproductdao = new ManageProductDAO();
      manageproductdao.deleteProduct(pid);
       response.sendRedirect("manageproduct");

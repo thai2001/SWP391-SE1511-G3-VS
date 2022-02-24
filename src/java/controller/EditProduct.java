@@ -77,9 +77,9 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.setCharacterEncoding("UTF-8");
+         request.setCharacterEncoding("UTF-8"); // Hiển thị Tiêng Việt
         
-        String name = request.getParameter("name");
+        String name = request.getParameter("name"); 
         String image = request.getParameter("image");
         float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
