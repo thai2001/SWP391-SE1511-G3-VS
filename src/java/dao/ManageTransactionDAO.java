@@ -66,7 +66,40 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
 
     @Override
     public List<Order> GetOrderByCusId(int sellerId, int buyerId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Order> listOrder = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            try {
+                con = getConnection();
+            } catch (Exception e) {
+                System.out.println("lỗi khi kết nối:" + e);
+            }
+            String sql = "  SELECT * FROM dbo.[ORDER] WHERE 1=1 ";
+            if ( sellerId > 0 ) { sql += "and Seller ";} else {
+                sql = sql + "";
+            }
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Order order = new Order(rs.getInt("OrderId"),rs.getDate("DateCreated"), rs.getDouble("TotalPrice")
+                        , new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId")));
+                listOrder.add(order);
+            }
+        } catch (SQLException se) {
+            Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, se);
+        } finally {            
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return listOrder;
+        
     }
 
     @Override
