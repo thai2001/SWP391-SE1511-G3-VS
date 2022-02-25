@@ -18,7 +18,26 @@ import java.util.List;
  * @author nqt26
  */
 public interface IManageAccountDAO {
-    public List<Account> searchAccount(int roleId,int id);
-    public void activeAccount(String username);
-    public void deactiveAccount(String username);
+    /**
+     * Handles the <code>Search Account</code> method.
+     *
+     * @param roleId role of user
+     * @param id servlet response
+     * @throws Exception if any error occurs
+     */
+    public List<Account> searchAccount(int roleId,int id) throws Exception;
+    /**
+     * Handles the <code>activeAccount</code> method.
+     *
+     * @param username username of account
+     * @throws Exception if any error occurs
+     */
+    public void activeAccount(String username) throws Exception;
+    /**
+     * Handles the <code>deactiveAccount</code> method.
+     *
+     * @param username username of account
+     * @throws Exception if any error occurs
+     */
+    public void deactiveAccount(String username) throws Exception;
 }

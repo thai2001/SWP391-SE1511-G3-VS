@@ -29,9 +29,15 @@ import java.util.List;
  */
 public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
 
-    // tìm kiếm tài khoản theo vai trò và id của người dùng
+    /**
+     * Handles the <code>Search Account</code> method.
+     *
+     * @param roleId role of user
+     * @param id servlet response
+     * @throws Exception if any error occurs
+     */
     @Override
-    public List<Account> searchAccount(int roleId, int id) {
+    public List<Account> searchAccount(int roleId, int id) throws Exception{
         List<Account> listAccount = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -62,7 +68,7 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
             ps.setInt(2, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Account account =  new Account(rs.getString("username"), rs.getString("password"), rs.getString("status"),
+                Account account = new Account(rs.getString("username"), rs.getString("password"), rs.getString("status"),
                         new Role(rs.getInt("roleId"), rs.getString("roleName")));
                 listAccount.add(account);
             }
@@ -80,8 +86,14 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         return listAccount;
     }
 
+    /**
+     * Handles the <code>activeAccount</code> method.
+     *
+     * @param username username of account
+     * @throws Exception if any error occurs
+     */
     @Override
-    public void activeAccount(String username) {
+    public void activeAccount(String username)throws Exception{
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -106,8 +118,14 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         }
     }
 
+    /**
+     * Handles the <code>deactiveAccount</code> method.
+     *
+     * @param username username of account
+     * @throws Exception if any error occurs
+     */
     @Override
-    public void deactiveAccount(String username) {
+    public void deactiveAccount(String username)throws Exception{
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -131,8 +149,9 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
             }
         }
     }
+
     public static void main(String[] args) {
-        ManageAccountDAO m = new  ManageAccountDAO();
+        ManageAccountDAO m = new ManageAccountDAO();
         m.deactiveAccount("buyer1");
         List<Account> account = m.searchAccount(2, 2);
         System.out.println(account.get(0).getStatus());
