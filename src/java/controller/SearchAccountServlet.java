@@ -18,6 +18,8 @@ import entity.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +73,12 @@ public class SearchAccountServlet extends HttpServlet {
             int roleId = Integer.parseInt(request.getParameter("roleId").trim());
             int id = Integer.parseInt(request.getParameter("uid").trim());
             IManageAccountDAO manageaccountdao = new ManageAccountDAO();
-            List<Account> account = manageaccountdao.searchAccount(roleId, id);
+            List<Account> account = null;
+        try {
+            account = manageaccountdao.searchAccount(roleId, id);
+        } catch (Exception ex) {
+            Logger.getLogger(SearchAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
             request.setAttribute("account", account);
             request.getRequestDispatcher("manageAccount").forward(request, response);
 //        } catch (NullPointerException npt) {

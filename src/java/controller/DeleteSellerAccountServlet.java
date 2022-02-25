@@ -17,6 +17,8 @@ import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +71,12 @@ public class DeleteSellerAccountServlet extends HttpServlet {
         int roleId = Integer.parseInt(request.getParameter("roleId")); // vai trò khách hàng
         int cusId = Integer.parseInt(request.getParameter("cusId"));// Id khách hàng
         IManageAccountDAO iManageAccountDao = new ManageAccountDAO();
-        List<Account> listAccount = iManageAccountDao.searchAccount(roleId, cusId);
+        List<Account> listAccount = null;
+        try {
+            listAccount = iManageAccountDao.searchAccount(roleId, cusId);
+        } catch (Exception ex) {
+            Logger.getLogger(DeleteSellerAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Account account = listAccount.get(0);
         IAuthorizeSellerDAO iAuthorizeSellerDAO = new AuthorizeSellerDAO();
         iAuthorizeSellerDAO.denySellerAccount(account.getUsername());

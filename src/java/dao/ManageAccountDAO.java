@@ -150,8 +150,8 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         }
     }
 
-    public static void main(String[] args) {
-        ManageAccountDAO m = new ManageAccountDAO();
+    public static void main(String[] args) throws Exception {
+        ManageAccountDAO m = new ManageAccountDAO();        
         m.deactiveAccount("buyer1");
         List<Account> account = m.searchAccount(2, 2);
         System.out.println(account.get(0).getStatus());

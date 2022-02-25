@@ -13,6 +13,8 @@ import dao.ManageAccountDAO;
 import dao.impl.IManageAccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,11 +69,19 @@ public class ChangeAccountStatusServlet extends HttpServlet {
         String username = request.getParameter("username"); // lấy username của tài khoản
         IManageAccountDAO manageAccountDAO = new ManageAccountDAO();
         if (status.equalsIgnoreCase("active")) {
-            manageAccountDAO.deactiveAccount(username);
+            try {
+                manageAccountDAO.deactiveAccount(username);
+            } catch (Exception ex) {
+                Logger.getLogger(ChangeAccountStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.setAttribute("note", "Hủy kích hoạt tài khoản thành công");
             request.getRequestDispatcher("manageAccount").forward(request, response);            
         } else if (status.equalsIgnoreCase("inactive")) {
-            manageAccountDAO.activeAccount(username);
+            try {
+                manageAccountDAO.activeAccount(username);
+            } catch (Exception ex) {
+                Logger.getLogger(ChangeAccountStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             request.setAttribute("note", "Kích hoạt tài khoản thành công");
             request.getRequestDispatcher("manageAccount").forward(request, response);
         }
