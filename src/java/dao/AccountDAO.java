@@ -13,7 +13,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import entity.Account;
+import entity.Buyer;
 import entity.Product;
+import entity.Role;
+import entity.Seller;
 import java.sql.Connection;
 import java.util.Vector;
 
@@ -58,6 +61,9 @@ public class AccountDAO extends DBContext {
                 ac = new Account();
                 ac.setUsername(rs.getString(1));
                 ac.setPassword(rs.getString(2));
+                ac.setCode(rs.getInt("Code"));
+                ac.setRoleId(new Role(rs.getInt("Role")));
+                ac.setStatus(rs.getString("Status"));
             }
         } catch (Exception ex) {
             System.out.println("Error ");
@@ -80,21 +86,24 @@ public class AccountDAO extends DBContext {
     public String Insert(Account a) {
         Connection con = null;
         PreparedStatement ps = null;
+        int k = 0;
         try {
             con = getConnection();
-
             try {
                 System.out.println("Ket noi Thanh cong");
             } catch (Exception e) {
                 System.out.println("Co loi khi ket noi " + e.getMessage());
             }
+            con.setAutoCommit(false);
             String sql = "INSERT INTO [dbo].[ACCOUNT]\n"
                     + "           ([Username]\n"
                     + "           ,[Password]\n"
                     + "           ,[Status]\n"
-                    + "           ,[Role])\n"
+                    + "           ,[Role]\n"
+                    + "           ,[Code])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?)";
@@ -103,10 +112,99 @@ public class AccountDAO extends DBContext {
             ps.setString(2, a.getPassword());
             ps.setString(3, a.getStatus());
             ps.setInt(4, a.getRoleId().getRoleId());
+            ps.setInt(5, a.getCode());
             ps.executeUpdate();
+
+            k = 1;
+            if (a.getRoleId().getRoleId() == 1) {
+                sql = "INSERT INTO [dbo].[Buyer]\n"
+                        + "           ([BuyerName]\n"
+                        + "           ,[Gmail]\n"
+                        + "           ,[Phone]\n"
+                        + "           ,[Username])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, a.getName());
+                ps.setString(2, a.getEmail());
+                ps.setString(3, a.getPhone());
+                ps.setString(4, a.getUsername());
+                ps.executeUpdate();
+            } else {
+                sql = "INSERT INTO [dbo].[Seller]\n"
+                        + "           ([SellerName]\n"
+                        + "           ,[Description]\n"
+                        + "           ,[Address]\n"
+                        + "           ,[Gmail]\n"
+                        + "           ,[Phone]\n"
+                        + "           ,[Username])\n"
+                        + "     VALUES\n"
+                        + "           (?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?\n"
+                        + "           ,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, a.getName());
+                ps.setString(2, a.getDescription());
+                ps.setString(3, a.getAddress());
+                ps.setString(4, a.getEmail());
+                ps.setString(5, a.getPhone());
+                ps.setString(6, a.getUsername());
+                ps.executeUpdate();
+            }
+            con.commit();
         } catch (Exception ex) {
-            System.out.println("Error");
-            return "not oke";
+            System.out.println(ex);
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            if (k == 0) {
+                return "AccountExit";
+            } else {
+                return "GmailExit";
+            }
+        } finally {
+            try {
+                con.setAutoCommit(true);
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return "oke";
+    }
+
+    /* Update code from database"
+     */
+    public void updateCode(Account a) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account ac = null;
+        try {
+            con = getConnection();
+            try {
+                System.out.println("Ket noi Thanh cong");
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+            String sql = " UPDATE [dbo].[ACCOUNT]\n"
+                    + "   SET [Code] = 0\n"
+                    + " WHERE username = ?;";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, a.getUsername());
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error ");
         } finally {
             try {
                 ps.close();
@@ -115,7 +213,6 @@ public class AccountDAO extends DBContext {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return "oke";
     }
 
 }

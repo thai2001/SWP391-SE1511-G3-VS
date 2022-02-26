@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.AccountDAO;
 import entity.Account;
+
 /**
- * Lớp này có các phương thức thực hiện truy vấn dữ liệu từ bảng
- * Account.
- * 
+ * Lớp này có các phương thức thực hiện truy vấn dữ liệu từ bảng Account.
+ *
  *
  * @author levan
  */
@@ -39,7 +39,6 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -52,6 +51,8 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int messcode = 0;
+        request.setAttribute("messcode", messcode);
         request.getRequestDispatcher("view/login.jsp").forward(request, response);
     }
 
@@ -67,22 +68,53 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String contextPath = request.getContextPath();
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
+        String user = request.getParameter("username").trim();
+        String pass = request.getParameter("password").trim();
+        int code = Integer.parseInt(request.getParameter("code").trim());
         AccountDAO adb = new AccountDAO();
         Account ac = new Account();
+        Account acdb = new Account();
         ac.setUsername(user);
         ac.setPassword(pass);
-        if (adb.getAccount(ac) != null) {
-            request.setAttribute("Account", null);
-            ac = adb.getAccount(ac);
-            request.getSession().setAttribute("account", ac);
-            response.sendRedirect(contextPath + "/homePage");
-        } else {
+        acdb = adb.getAccount(ac);
+        if (acdb == null) {
+            String mess = "InvalidAC";
+            int messcode = 0;
+            request.setAttribute("messcode", messcode);
+            request.setAttribute("mess", mess);
             request.setAttribute("Account", ac);
             request.getRequestDispatcher("view/login.jsp").forward(request, response);
+            return;
         }
+
+        if (acdb.getCode() == 0) {
+            request.getSession().setAttribute("account", ac);
+            response.sendRedirect(contextPath + pathConnect(ac));
+            return;
+        }
+
+        if (acdb.getCode() == code && acdb.getCode() != 0) {
+            adb.updateCode(ac);
+            request.getSession().setAttribute("account", ac);
+            response.sendRedirect(contextPath + pathConnect(ac));   
+            return;
+        }
+        
+        if (acdb.getCode() != code && acdb.getCode() != 0) {
+            int messcode = 1;
+            String mess = "InValidCode";
+            request.setAttribute("messcode", messcode);
+            request.setAttribute("mess", mess);
+            request.setAttribute("Account", acdb);
+            request.getRequestDispatcher("view/login.jsp").forward(request, response);
+            return;
+        }
+        
+
     }
 
-   
+    String pathConnect(Account ac) {
+        return "/homePage";
+    }
+
 }
