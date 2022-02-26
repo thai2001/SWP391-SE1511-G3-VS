@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Acer/SWP391-SE1511-G3-VS/src/java/controller/SearchBrandForSeller.java</file>
-            <file>file:/C:/Users/Acer/SWP391-SE1511-G3-VS/src/java/entity/Product.java</file>
-            <file>file:/C:/Users/Acer/SWP391-SE1511-G3-VS/web/view/ManageProduct.jsp</file>
+            <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/context/DBContext.java</file>
+            <file>file:/D:/Source/Work/Project/SWP391-SE1511-G3-VS/src/java/dao/ProductDAO.java</file>
         </group>
     </open-files>
 </project-private>
