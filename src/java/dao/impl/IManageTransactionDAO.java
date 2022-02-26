@@ -20,9 +20,8 @@ import java.util.List;
  * @author nqt26
  */
 public interface IManageTransactionDAO {
-    public List<Order> GetAllOrder ();
-    public List<Order> GetOrderByCusId(int sellerId, int buyerId);
-    public List<Order> GetOrderByDate(Date dateFrom,Date dateTo);
-    public List<Order> GetOrderDetail(int orderId);
-    public List<Order> SortOrder (String column, String sort);
+    public List<Order> GetAllOrder () throws Exception;
+    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom,Date dateTo) throws Exception;
+    public List<Order> GetOrderDetail(int orderId) throws Exception;
+    public List<Order> SortOrder (String column, String sort) throws Exception;
 }
