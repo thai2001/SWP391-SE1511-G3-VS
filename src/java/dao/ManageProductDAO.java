@@ -31,8 +31,14 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         ResultSet rs = null;
         
      //Lấy danh sách các sản phẩm theo ID của người bán
+    /**
+     *
+     * @param sid
+     * @return
+     * @throws Exception
+     */
     @Override
-    public List<Product> getProductBySellerid(int sid) {
+    public List<Product> getProductBySellerid(int sid) throws Exception {
        List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
                    "where SellerId = ?" ;
@@ -72,8 +78,23 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
 
+    /**
+     *
+     * @param vehicleTypeid
+     * @param name
+     * @param brandid
+     * @param madein
+     * @param manufactureYear
+     * @param descript
+     * @param img
+     * @param quatity
+     * @param price
+     * @param discount
+     * @param sid
+     * @throws Exception
+     */
     @Override
-    public void AddProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) {
+    public void AddProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) throws Exception {
         String sql="insert Product\n" +
 "(vehicleTypeId,ProductName,BrandId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -107,8 +128,13 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     }
 
     //Xoá sản phẩm theo id sản phẩm
+    /**
+     *
+     * @param pid
+     * @throws Exception
+     */
     @Override
-    public void deleteProduct(String pid) {
+    public void deleteProduct(String pid) throws Exception {
             String sql="delete from Product\n" +
                     "where ProductId = ?";
          try{
@@ -129,8 +155,14 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     }
 
     //Hiển thị thông tin sản phẩm dựa trên id sản phẩm
+    /**
+     *
+     * @param pid
+     * @return
+     * @throws Exception
+     */
     @Override
-    public Product getProductByID(int pid) {
+    public Product getProductByID(int pid) throws Exception{
         String sql="select * from Product\n" 
         +"where ProductId= ?";
         try{
@@ -169,8 +201,16 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
 
     
     // Tìm kiếm sản phẩm theo tên
+
+    /**
+     *
+     * @param sid
+     * @param name
+     * @return
+     * @throws Exception
+     */
     @Override
-    public List<Product> SearchProductByNameForSeller(int sid, String name) {
+    public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
                    "where SellerId = ? " +
@@ -213,8 +253,14 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
     @Override
-    public List<Product> getProductByUsername(String name) {
+    public List<Product> getProductByUsername(String name) throws Exception {
        List<Product> list=new ArrayList<>();
         String sql="Select \n" +
                    "ProductId,\n" +
@@ -269,8 +315,23 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     }
     
     //Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
+    /**
+     *
+     * @param vehicleTypeId
+     * @param name
+     * @param Branid
+     * @param MadeIn
+     * @param manufactureYear
+     * @param description
+     * @param image
+     * @param quantity
+     * @param price
+     * @param discount
+     * @param id
+     * @throws Exception
+     */
     @Override
-    public void EditProduct(int vehicleTypeId, String name, int Branid, String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) {
+    public void EditProduct(int vehicleTypeId, String name, int Branid, String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
          String sql= "update Product\n" +
 "set  vehicleTypeId = ?,\n" +
 "     ProductName = ?,\n" +
@@ -311,8 +372,15 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
     
-       @Override
-     public List<Product> getProductByBrandId(int sellid,int brandid){
+    /**
+     *
+     * @param sellid
+     * @param brandid
+     * @return
+     * @throws Exception
+     */
+    @Override
+     public List<Product> getProductByBrandId(int sellid,int brandid) throws Exception{
         List<Product> list=new ArrayList<>();
         String sql="Select *\n" +
 "       from Product \n" +
@@ -352,7 +420,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
         return list;
 }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
          bd.getProductByBrandId(2, 2);
            
