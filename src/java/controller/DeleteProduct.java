@@ -12,6 +12,8 @@ package controller;
 import dao.ManageProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,10 +64,14 @@ public class DeleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
          String pid = request.getParameter("pid"); //   Lấy id của sản phẩm
      ManageProductDAO manageproductdao = new ManageProductDAO();
      manageproductdao.deleteProduct(pid);
       response.sendRedirect("manageproduct");
+        }catch(Exception ex){
+            Logger.getLogger(DeleteProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

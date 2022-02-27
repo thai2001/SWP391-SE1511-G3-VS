@@ -13,6 +13,8 @@ import dao.ManageProductDAO;
 import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,6 +80,7 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         String name = request.getParameter("productname");
         String image = request.getParameter("img");
         float price = Float.parseFloat( request.getParameter("price"));
@@ -95,6 +98,9 @@ public class AddProduct extends HttpServlet {
        ManageProductDAO manageProductDao = new ManageProductDAO();
        manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
        response.sendRedirect("manageproduct");
+    } catch(Exception ex) {
+          Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**

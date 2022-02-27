@@ -14,6 +14,8 @@ import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +65,7 @@ public class SearchProductforSeller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
        request.setCharacterEncoding("UTF-8");
      //  int sid = Integer.parseInt(request.getParameter("sid"));
         String name= request.getParameter("productname");
@@ -72,6 +75,9 @@ public class SearchProductforSeller extends HttpServlet {
         request.setAttribute("product", listproduct);
         request.setAttribute("prodname", name);
         request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
+        }catch(Exception ex){
+            Logger.getLogger(SearchProductforSeller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -12,6 +12,8 @@ package controller;
 import dao.ManageProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,8 +79,8 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
          request.setCharacterEncoding("UTF-8"); // Hiển thị Tiêng Việt
-        
         String name = request.getParameter("name"); 
         String image = request.getParameter("image");
         float price = Float.parseFloat(request.getParameter("price"));
@@ -95,6 +97,9 @@ public class EditProduct extends HttpServlet {
         ManageProductDAO manageProductDao = new ManageProductDAO();
         manageProductDao.EditProduct(type,name,brand, madein , manufactureyear, description, image, quantity, price, discount, pid);
         response.sendRedirect("manageproduct");
+        }catch(Exception ex){
+            Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
