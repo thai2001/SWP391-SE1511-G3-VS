@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public class ManageTransactionDAO extends DBContext implements IManageTransactionDAO {
 
     @Override
-    public List<Order> GetAllOrder() {
+    public List<Order> GetAllOrder() throws Exception{
         List<Order> listOrder = new ArrayList();
         Connection con = null;
         PreparedStatement ps = null;
@@ -51,12 +51,12 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
                 listOrder.add(order);
             }
         } catch (SQLException se) {
-            Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, se);
+            throw se;
         } finally {            
             try {
-                con.close();
-                ps.close();
                 rs.close();
+                ps.close();
+                con.close();                
             } catch (SQLException ex) {
                 Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -65,7 +65,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
     }
 
     @Override
-    public List<Order> GetOrderByCusId(int sellerId, int buyerId) {
+    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom, Date dateTo,String sortColumn) throws Exception{
         List<Order> listOrder = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -77,9 +77,11 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
                 System.out.println("lỗi khi kết nối:" + e);
             }
             String sql = "  SELECT * FROM dbo.[ORDER] WHERE 1=1 ";
-            if ( sellerId > 0 ) { sql += "and Seller ";} else {
-                sql = sql + "";
-            }
+            if ( sellerId > 0 ) { sql += "and SellerId = " + sellerId +" "; }
+            if ( buyerId > 0 ) { sql += "and SellerId = " + buyerId + " "; }
+            if ( dateFrom != null) { sql += "and DateCreated >= '" + dateFrom + "' "; }
+            if ( dateTo != null) { sql += "and DateCreated <= '" + dateTo + "' "; }
+            if ( !sortColumn.isEmpty() ) { sql += " order by " + sortColumn + " "; } 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
@@ -88,12 +90,12 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
                 listOrder.add(order);
             }
         } catch (SQLException se) {
-            Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, se);
+            throw se;
         } finally {            
             try {
-                con.close();
-                ps.close();
                 rs.close();
+                ps.close();
+                con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -102,19 +104,9 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
         
     }
 
-    @Override
-    public List<Order> GetOrderByDate(Date dateFrom, Date dateTo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public List<Order> GetOrderDetail(int orderId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<Order> SortOrder(String column, String sort) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
