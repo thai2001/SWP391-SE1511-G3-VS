@@ -29,15 +29,15 @@
         <jsp:include page="navbar.jsp"></jsp:include>
 
 
-        <div class="text-center p-3">
-            <h2>Shopping Carts</h2>
-        </div>
+            <div class="text-center p-3">
+                <h2>Shopping Carts</h2>
+            </div>
         <c:if test="${empty shoppingCart}">
-        <div class="nothing d-flex justify-content-center">
-            <a href="productList" class="btn btn-danger ">Let Buy Something</a>
-        </div>     
+            <div class="nothing d-flex justify-content-center">
+                <a href="productList" class="btn btn-danger ">Let Buy Something</a>
+            </div>     
         </c:if>
-       
+
         <div class="container">
             <div class="row  text-center">
                 <p class="col-4">Product</p>
@@ -47,51 +47,35 @@
                 <p class="col">Activity</p>
             </div>
             <form action="">
+                <c:forEach items="${shoppingCart}" var="cart">
+                    <div class="mt-3">
+                        <div class="row shopping-card-row border-top border-secondary rounded text-center">
+                            <div class="col-4 d-flex">
+                                <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="123" onclick="checkedCard(this)"> 
+                                <img class="add-img" src="${cart.product.img}" alt="">
+                                <p class="add-name ms-2">${cart.product.name}</p>
+                            </div>
+                            <p class="col" >${cart.product.price}</p>
+                            <input type="number" name="price" class="price" value="${cart.product.price}" hidden>
+                            <div class="col">
 
-                <div class="mt-3">
-                    <div class="row shopping-card-row border-top border-secondary rounded text-center">
-                        <div class="col-4 d-flex">
-                            <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="123" onclick="checkedCard(this)"> 
-                            <img class="add-img" src="sieu-xe-la-gi-muaxegiatot-vn.jpg" alt="">
-                            <p class="add-name ms-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        </div>
-                        <p class="col" >10000</p>
-                        <input type="number" name="price" class="price" value="10000" hidden>
-                        <div class="col">
-
-                            <i class="bi bi-dash-circle" onclick="plusMinus(this, -1)"></i><input class="w-25 quantity" type="number" max="10" min="1"   value="1" onchange="quantityChanged(this)"> <i class="bi bi-plus-circle" onclick="plusMinus(this, 1)"></i>
-                        </div>
-                        <p class="col cardPrice" >0 $</p>
-                        <p class="col"><a href="#" class="btn btn-danger delete"> Delete</a></p>
-                    </div>   
-                </div>
+                                <i class="bi bi-dash-circle" onclick="plusMinus(this, -1)"></i><input class="w-25 quantity" type="number" max="${cart.product.quantity}" min="1"   value="1" onchange="quantityChanged(this)"> <i class="bi bi-plus-circle" onclick="plusMinus(this, 1)"></i>
+                            </div>
+                            <p class="col cardPrice" >${cart.product.price} $</p>
+                            <p class="col"><a href="deleteCart?pid=${cart.product.id}" class="btn btn-danger delete"> Delete</a></p>
+                        </div>   
+                    </div> 
+                </c:forEach>
 
 
 
-                <div class="mt-3">
-                    <div class="row shopping-card-row border-secondary border-top rounded text-center ">
-                        <div class="col-4 d-flex">
-                            <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="123" onclick="checkedCard(this)"> 
-                            <img class="add-img" src="sieu-xe-la-gi-muaxegiatot-vn.jpg" alt="">
-                            <p class="add-name ms-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                        </div>
-                        <p class="col" >10000</p>
-                        <input type="number" name="price" class="price" value="10000" hidden>
-                        <div class="col">
-
-                            <i class="bi bi-dash-circle" onclick="plusMinus(this, -1)"></i><input  class="w-25 quantity" type="number" max="10" min="1"  value="1" onchange="quantityChanged(this)"> <i class="bi bi-plus-circle" onclick="plusMinus(this, 1)" ></i>
-                        </div>
-                        <p class="col cardPrice" >0 $</p>
-                        <p class="col"><a href="#" class="btn btn-danger delete"> xoa</a></p>
-                    </div>
-                </div>
 
                 <div class="pay bg-dark p-4 rounded d-flex">
                     <div class="text-light">
-                        Da chon <span class="nop"> 0 </span> san pham 
+                        Selected <span class="nop"> 0 </span> product 
                     </div>
                     <div class="totalPrice text-light">
-                        tong tien : 1000$
+                        tong tien : 0 $
                     </div>
                     <input  class="btn btn-danger pay-button" type="submit" value="Pay" disabled="true"></input>
                 </div>

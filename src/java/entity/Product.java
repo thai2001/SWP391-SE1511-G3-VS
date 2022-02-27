@@ -22,7 +22,7 @@ public class Product {
     private String manufactureYear;
     private String descript;
     private String img;
-    private int quatity;
+    private int quantity;
     private float price;
     private float discount;
     private int sellerId;
@@ -39,7 +39,7 @@ public class Product {
         this.manufactureYear = manufactureYear;
         this.descript = descript;
         this.img = img;
-        this.quatity = quatity;
+        this.quantity = quatity;
         this.price = price;
         this.discount = discount;
         this.sellerId = sellerId;
@@ -109,12 +109,12 @@ public class Product {
         this.img = img;
     }
 
-    public int getQuatity() {
-        return quatity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuatity(int quatity) {
-        this.quatity = quatity;
+    public void setQuantity(int quatity) {
+        this.quantity = quatity;
     }
 
     public float getPrice() {
@@ -143,7 +143,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", brandId=" + brandId + ", vehicleTypeId=" + vehicleTypeId + ", madeIn=" + madeIn + ", ManufactureYear=" + manufactureYear + ", descript=" + descript + ", img=" + img + ", quatity=" + quatity + ", price=" + price + ", discount=" + discount + ", sellerId=" + sellerId + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", brandId=" + brandId + ", vehicleTypeId=" + vehicleTypeId + ", madeIn=" + madeIn + ", ManufactureYear=" + manufactureYear + ", descript=" + descript + ", img=" + img + ", quatity=" + quantity + ", price=" + price + ", discount=" + discount + ", sellerId=" + sellerId + '}';
     }
 
     

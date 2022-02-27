@@ -25,9 +25,12 @@ public class Buyer {
     private String gmail;
     private String phone;
     private Date birthday;
-    private Account username;
+    private String username;
 
-    public Buyer(int buyerId, String buyerName, String address, String gmail, String phone, Date birthday, Account username) {
+    public Buyer() {
+    }
+
+    public Buyer(int buyerId, String buyerName, String address, String gmail, String phone, Date birthday, String username) {
         this.buyerId = buyerId;
         this.buyerName = buyerName;
         this.address = address;
@@ -35,13 +38,6 @@ public class Buyer {
         this.phone = phone;
         this.birthday = birthday;
         this.username = username;
-    }
-
-    public Buyer(int buyerId) {
-        this.buyerId = buyerId;
-    }
-
-    public Buyer() {
     }
 
     public int getBuyerId() {
@@ -92,12 +88,13 @@ public class Buyer {
         this.birthday = birthday;
     }
 
-    public Account getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Account username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
+    
 }

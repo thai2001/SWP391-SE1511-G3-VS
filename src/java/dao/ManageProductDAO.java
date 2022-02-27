@@ -58,7 +58,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setManufactureYear(rs.getString("ManufactureYear"));
                 p.setDescript(rs.getString("Description"));
                 p.setImg(rs.getString("Image"));
-                p.setQuatity(rs.getInt("Quantity"));
+                p.setQuantity(rs.getInt("Quantity"));
                 p.setPrice(rs.getFloat("UnitPrice"));
                 p.setDiscount(rs.getFloat("Discount"));               
                 p.setSellerId(rs.getInt("SellerId"));
@@ -180,7 +180,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setManufactureYear(rs.getString("ManufactureYear"));
                 p.setDescript(rs.getString("Description"));
                 p.setImg(rs.getString("Image"));
-                p.setQuatity(rs.getInt("Quantity"));
+                p.setQuantity(rs.getInt("Quantity"));
                 p.setPrice(rs.getFloat("UnitPrice"));
                 p.setDiscount(rs.getFloat("Discount"));
                 return p;
@@ -232,7 +232,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setManufactureYear(rs.getString("ManufactureYear"));
                 p.setDescript(rs.getString("Description"));
                 p.setImg(rs.getString("Image"));
-                p.setQuatity(rs.getInt("Quantity"));
+                p.setQuantity(rs.getInt("Quantity"));
                 p.setPrice(rs.getFloat("UnitPrice"));
                 p.setDiscount(rs.getFloat("Discount"));               
                 p.setSellerId(rs.getInt("SellerId"));
@@ -294,7 +294,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setManufactureYear(rs.getString("ManufactureYear"));
                 p.setDescript(rs.getString("Description"));
                 p.setImg(rs.getString("Image"));
-                p.setQuatity(rs.getInt("Quantity"));
+                p.setQuantity(rs.getInt("Quantity"));
                 p.setPrice(rs.getFloat("UnitPrice"));
                 p.setDiscount(rs.getFloat("Discount"));               
                 p.setSellerId(rs.getInt("SellerId"));
@@ -402,7 +402,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
                 p.setManufactureYear(rs.getString("ManufactureYear"));   
                 p.setDescript(rs.getString("Description"));
                 p.setImg(rs.getString("Image"));
-                p.setQuatity(rs.getInt("Quantity"));
+                p.setQuantity(rs.getInt("Quantity"));
                 p.setPrice(rs.getFloat("UnitPrice"));
                 p.setDiscount(rs.getInt("Discount"));
                 p.setSellerId(rs.getInt("SellerId"));
