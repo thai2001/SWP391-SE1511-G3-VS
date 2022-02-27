@@ -70,20 +70,20 @@ public class addShoppingCart extends HttpServlet {
             Vector<ShoppingCart> allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId());
             String mess = "";
             int pid = Integer.parseInt(request.getParameter("pid"));
-            for (ShoppingCart shoppingCart : allShoppingCart) {
-                if (shoppingCart.getProduct().getId() == pid) {
+            for (ShoppingCart cart : allShoppingCart) {
+                if (cart.getProduct().getId() == pid) {
                     mess = "Product already added to Shopping Cart";
                     request.setAttribute("messError", mess);
+                    request.getRequestDispatcher("view/productList.jsp").forward(request, response);
                     break;
-
-                } else {
-                    shoppingCartDAO.addToShoppingCart(buyer.getBuyerId(), pid);
-                    mess = "Add to Shopping Cart succusfull";
-                    request.setAttribute("messSuccess", mess);
                 }
             }
+
+            shoppingCartDAO.addToShoppingCart(buyer.getBuyerId(), pid);
+            mess = "Add to Shopping Cart succusfull";
+            request.setAttribute("messSuccess", mess);
             allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId());
-            ses.setAttribute("shoppingCart",allShoppingCart);
+            ses.setAttribute("shoppingCart", allShoppingCart);
             request.getRequestDispatcher("view/productList.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(addShoppingCart.class.getName()).log(Level.SEVERE, null, ex);

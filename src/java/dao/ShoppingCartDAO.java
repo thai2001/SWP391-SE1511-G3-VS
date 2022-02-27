@@ -81,6 +81,7 @@ public class ShoppingCartDAO extends DBContext implements IShoppingCartDAO {
     public void addToShoppingCart(int buyerId, int pid) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
+
         try {
             con = getConnection();
             String sql = "INSERT INTO [dbo].[ShoppingCart]\n"
@@ -92,7 +93,30 @@ public class ShoppingCartDAO extends DBContext implements IShoppingCartDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, buyerId);
             ps.setInt(2, pid);
-           
+            ps.execute();
+
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            ps.close();
+            con.close();
+        }
+    }
+
+    @Override
+    public void deleteCart(int buyerId, int pid) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+            String sql = "DELETE FROM [dbo].[ShoppingCart]\n"
+                    + "      WHERE BuyerId = ? and ProductId = ? ";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, buyerId);
+            ps.setInt(2, pid);
+            ps.execute();
+
         } catch (SQLException ex) {
             throw ex;
         } finally {
@@ -108,6 +132,6 @@ public class ShoppingCartDAO extends DBContext implements IShoppingCartDAO {
         for (ShoppingCart shoppingCart : vec) {
             System.out.println(shoppingCart);
         }
-        dao.addToShoppingCart(1, 25);
+//        dao.addToShoppingCart(1, 15);
     }
 }

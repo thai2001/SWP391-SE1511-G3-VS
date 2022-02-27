@@ -10,12 +10,9 @@
 package controller;
 
 import dao.ShoppingCartDAO;
-import dao.impl.IShoppingCartDAO;
 import entity.Buyer;
-import entity.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -29,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author taola
  */
-@WebServlet(name = "shoppingCart", urlPatterns = {"/shoppingCart"})
-public class shoppingCart extends HttpServlet {
+@WebServlet(name = "deleteCart", urlPatterns = {"/deleteCart"})
+public class deleteCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,10 +46,10 @@ public class shoppingCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet shoppingCard</title>");            
+            out.println("<title>Servlet deleteCart</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet shoppingCard at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet deleteCart at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,14 +69,14 @@ public class shoppingCart extends HttpServlet {
             throws ServletException, IOException {
         try {
             //processRequest(request, response);
+            int pid = Integer.parseInt(request.getParameter("pid"));
             HttpSession ses = request.getSession();
             Buyer buyer = (Buyer) ses.getAttribute("buyer");
-            IShoppingCartDAO shoppingCartDAO = new ShoppingCartDAO();
-            Vector<ShoppingCart> allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId());
-            ses.setAttribute("shoppingCart", allShoppingCart);
-            request.getRequestDispatcher("view/shoppingCart.jsp").forward(request, response);
+            ShoppingCartDAO shoppingCartDAO = new ShoppingCartDAO();
+            shoppingCartDAO.deleteCart(buyer.getBuyerId(), pid);
+            response.sendRedirect("shoppingCart");
         } catch (Exception ex) {
-            Logger.getLogger(shoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deleteCart.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

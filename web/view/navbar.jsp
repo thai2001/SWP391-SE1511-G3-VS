@@ -40,7 +40,7 @@
         </div>
         
         <c:if test="${shoppingCart != null}" >
-        <button type="button" class="btn btn-dark m-2"> <a href="shoppingCard"><i class="bi bi-cart3 text-white"></i></a>  ${shoppingCart.size()} </button>
+        <button type="button" class="btn btn-dark m-2"> <a href="shoppingCart"><i class="bi bi-cart3 text-white"></i></a>  ${shoppingCart.size()} </button>
         </c:if>
         
 
