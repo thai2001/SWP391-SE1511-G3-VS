@@ -19,6 +19,7 @@ import entity.Product;
 import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,10 +85,26 @@ public class ManageProduct extends HttpServlet {
        List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
        List<Product> listproduct = manageProductDao.getProductBySellerid(2);
        List<Brand> listbrand = brandDao.getAllBrand();
-        
+        int size= listproduct.size();
+        int numperPage=4;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ // luc dau moi chay
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); // phan tu dau tien va cuoi cung cua trang thu page
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+          List<Product> listprod= manageProductDao.getProductByPage(listproduct, start, end);
+          
        request.setAttribute("vehicleType", listvehicleType);
        request.setAttribute("brand", listbrand);
-       request.setAttribute("product", listproduct);
+       request.setAttribute("num", numPage); 
+       request.setAttribute("product", listprod);
+        request.setAttribute("page", page);
        request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
     }catch(Exception ex){
     Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);

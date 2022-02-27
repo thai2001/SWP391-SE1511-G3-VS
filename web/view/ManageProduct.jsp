@@ -163,7 +163,7 @@ header img{
               }
              .pagination a {
                 color: black;
-                font-size: 22px;
+                font-size: 15px;
                 float: left;
                 padding: 8px 16px;
                 text-decoration: none;
@@ -242,6 +242,7 @@ header img{
             <a href="#addProduct" type="button" class="btn btn-info add-new" data-toggle="modal"><i class="fa fa-plus"></i> Add New</a>
                     </div>
             </div>
+            
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -276,10 +277,10 @@ header img{
                     </c:forEach>
                 </tbody>
             </table>
-                     <div class="pagination">
+                         <div class="pagination">
         <c:forEach begin="1" end="${requestScope.num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
-               href="list?page=${i}"> ${i} <a/>
+               href="manageproduct?page=${i}"> ${i} <a/>
             </c:forEach>
         </div>
         </div>
