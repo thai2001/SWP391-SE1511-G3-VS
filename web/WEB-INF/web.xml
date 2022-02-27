@@ -72,6 +72,14 @@
         <servlet-name>SearchBrandForSeller</servlet-name>
         <servlet-class>controller.SearchBrandForSeller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>forgotPass</servlet-name>
+        <servlet-class>controller.forgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changePass</servlet-name>
+        <servlet-class>controller.changePass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>SearchBrandForSeller</servlet-name>
         <url-pattern>/searchbrandforseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forgotPass</servlet-name>
+        <url-pattern>/forgotPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePass</servlet-name>
+        <url-pattern>/changePass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
