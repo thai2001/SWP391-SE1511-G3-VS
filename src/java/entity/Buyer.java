@@ -40,6 +40,10 @@ public class Buyer {
         this.username = username;
     }
 
+    public Buyer(int buyerId) {
+        this.buyerId = buyerId;
+    }
+    
     public int getBuyerId() {
         return buyerId;
     }

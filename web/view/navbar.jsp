@@ -48,9 +48,9 @@
             <c:if test="${sessionScope.acc == null}">
           <a class="nav-link link-light " href="login">Login</a>
             </c:if>
-          <a class="nav-link link-light " href="#">Sign Up</a>
+          <a class="nav-link link-light " href="register">Sign Up</a>
           <c:if test="${sessionScope.acc == null}">
-          <a class="nav-link link-light " href="#">Sign Out</a>
+          <a class="nav-link link-light " href="logout">Sign Out</a>
           </c:if>
       </div>
       </div>

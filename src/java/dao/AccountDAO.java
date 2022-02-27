@@ -215,4 +215,120 @@ public class AccountDAO extends DBContext {
         }
     }
 
+    public void changePass(Account a, String newpass) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account ac = null;
+        try {
+            con = getConnection();
+            try {
+                System.out.println("Ket noi Thanh cong");
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+            String sql = " UPDATE [dbo].[ACCOUNT]\n"
+                    + "   SET [password] = ?\n"
+                    + " WHERE username = ?;";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, newpass);
+            ps.setString(2, a.getUsername());
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Error ");
+        } finally {
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public String getUsername(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account ac = null;
+        try {
+            con = getConnection();
+
+            try {
+                System.out.println("Ket noi Thanh cong");
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+            String sql = " select * from Account\n"
+                    + "where [username] = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return "oke";
+            }
+        } catch (Exception ex) {
+            System.out.println("Error ");
+            return null;
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public String getEmail(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account ac = null;
+        try {
+            con = getConnection();
+
+            try {
+                System.out.println("Ket noi Thanh cong");
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+            String sql = "SELECT [Gmail]   \n"
+                    + "  FROM [VehicleShop].[dbo].[Buyer]\n"
+                    + "  where username = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString("Gmail");
+            }
+
+            sql = "SELECT [Gmail]   \n"
+                    + "  FROM [VehicleShop].[dbo].[Seller]\n"
+                    + "  where username = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString("Gmail");
+            }
+        } catch (Exception ex) {
+            System.out.println("Error ");
+            return null;
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        }
+        return null;
+    }
 }

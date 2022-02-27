@@ -19,7 +19,7 @@
         <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 
         <div class="registration-form">
-            <form action="login" method="post" onsubmit="return validateform()"> 
+            <form action="changePass" method="post" onsubmit="return validateform()"> 
                 <div class="form-icon">
                     <span><i class="icon icon-user"></i></span>
                 </div>
@@ -27,15 +27,6 @@
                         style="display:none;"
                     </c:if>> Your account or password wrong! please reenter</p>
 
-                <p id="validcode"<c:if test = "${mess != 'ValidCode'}">
-                   style="display:none;"
-                    </c:if>
-                   style="color: green;">You have successfully registered! Please enter the code</p>
-                
-                <p id="invalidcode"<c:if test = "${mess != 'InValidCode'}">
-                   style="display:none;"
-                    </c:if>>You have not verified the code or Your code is not correct! Please check it again</p>
-                
                 <div class="form-group">
                     <p id="username" style="display: none;">Username must be no more than 20 characters long and not blank</p>
                     <input type="text" class="form-control item" name="username" placeholder="Username"
@@ -45,38 +36,45 @@
                                </c:when>
                            </c:choose>>
                 </div>
+                
                 <div class="form-group">
-                    <p id="password" style="display: none;">Password must be at least 6 characters long and not blank</p>
-                    <input type="password" class="form-control item" name="password" placeholder="Password"
+                    <p id="oldpassword" style="display: none;">Old Password must be at least 6 characters long and not blank and no more than 20 characters</p>
+                    <input type="password" class="form-control item" name="oldpassword" placeholder="Old Password"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.password}"
                                </c:when>
                            </c:choose>>
                 </div>
-                <div class="form-group" <c:if test = "${messcode == 0}">
-                     style="display:none;"
-                    </c:if>>
-                    <p id="code" style="display: none;">Code must be digist and no more than 10 character </p>
-                    <input type="code" class="form-control item" name="code" placeholder="Enter code"
+                
+                <div class="form-group">
+                    <p id="newpassword" style="display: none;">New Password must be at least 6 characters long and not blank and no more than 20 characters</p>
+                    <input type="password" class="form-control item" name="newpassword" placeholder="New Password"
                            <c:choose>
-                               <c:when test="${messcode == 0}">
-                                   value=0
+                               <c:when test="${Account != null}">
+                                   value="${newpass}"
                                </c:when>
                            </c:choose>>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block create-account">Login</button>
+                    <p id="repassword" style="display: none;">Confirm password must be the same pass</p>
+                    <input type="password" class="form-control item" name="repassword" placeholder="Confirm Password"
+                           <c:choose>
+                               <c:when test="${Account != null}">
+                                   value="${newpass}"
+                               </c:when>
+                           </c:choose>>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block create-account">Change Password</button>
+                </div>
+                <div class="form-group">
+                    <button onclick="window.location.href = './login'" type="button" class="btn btn-block create-account">Login</button>
                 </div>
                 <div class="form-group">
                     <button onclick="window.location.href = './register'" type="button" class="btn btn-block create-account">Register</button>
-                </div>
-                <div class="form-group">
-                    <button onclick="window.location.href = './changePass'" type="button" class="btn btn-block create-account">Change Password</button>
-                </div>
-                <div class="form-group">
-                    <button onclick="window.location.href = './forgotPass'" type="button" class="btn btn-block create-account">Forgot Password</button>
                 </div>
             </form>
             <div class="social-media">
@@ -91,15 +89,13 @@
         <script src="<c:url value="https://code.jquery.com/jquery-3.2.1.min.js" />"></script>
         <script src="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" />"></script>
         <script>
-                        setTimeout(function () {
-                            document.getElementById('validcode').style.display = 'none';
-                        }, 4000);
-                        function validateform(){
-                            
+                        function validateform() {
+
                             var user = document.getElementsByName("username")[0].value;
-                            var pass = document.getElementsByName("password")[0].value;
-                            var code = document.getElementsByName("code")[0].value;
-                            
+                            var oldpass = document.getElementsByName("oldpassword")[0].value;
+                            var newpass = document.getElementsByName("newpassword")[0].value;
+                            var repass = document.getElementsByName("repassword")[0].value;
+
                             if (user.trim() == "" || user.trim().length > 20) {
                                 document.getElementById('username').style.display = 'block';
                                 return false;
@@ -108,21 +104,28 @@
                                 document.getElementById('username').style.display = 'none';
                             }
                             
-                            if (pass.trim().length < 6) {
-                                document.getElementById('password').style.display = 'block';
+                            if (oldpass.trim().length < 6 || oldpass.trim().length > 20) {
+                                document.getElementById('oldpassword').style.display = 'block';
                                 return false;
                             } else
                             {
-                                document.getElementById('password').style.display = 'none';
+                                document.getElementById('oldpassword').style.display = 'none';
                             }
                             
-                            var regexcode = /^\d{1,6}$/;
-                            if (!code.trim().match(regexcode)) {
-                                document.getElementById('code').style.display = 'block';
+                            if (newpass.trim().length < 6 || newpass.trim().length > 20) {
+                                document.getElementById('newpassword').style.display = 'block';
                                 return false;
                             } else
                             {
-                                document.getElementById('code').style.display = 'none';
+                                document.getElementById('newpassword').style.display = 'none';
+                            }
+
+                            if (newpass.trim() != repass.trim()) {
+                                document.getElementById('repassword').style.display = 'block';
+                                return false;
+                            } else
+                            {
+                                document.getElementById('repassword').style.display = 'none';
                             }
                         }
         </script>
