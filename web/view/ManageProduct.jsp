@@ -277,12 +277,14 @@ header img{
                     </c:forEach>
                 </tbody>
             </table>
-                         <div class="pagination">
+                        <div class="pagination">
         <c:forEach begin="1" end="${requestScope.num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
                href="manageproduct?page=${i}"> ${i} <a/>
             </c:forEach>
+                    
         </div>
+      
         </div>
     </div>
 </div>  

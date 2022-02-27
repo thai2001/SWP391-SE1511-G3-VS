@@ -71,8 +71,23 @@ public class SearchProductforSeller extends HttpServlet {
         String name= request.getParameter("productname");
         ManageProductDAO  manageproductdao= new ManageProductDAO();
         List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(2, name);
-        
-        request.setAttribute("product", listproduct);
+         int size= listproduct.size();
+        int numperPage=5;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ 
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); 
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+          List<Product> listprod= manageproductdao.getProductByPage(listproduct, start, end);
+        request.setAttribute("product", listprod);
+        request.setAttribute("num", numPage);
+          request.setAttribute("page", page);
         request.setAttribute("prodname", name);
         request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
         }catch(Exception ex){

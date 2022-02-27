@@ -73,8 +73,24 @@ public class SearchBrandForSeller extends HttpServlet {
         BrandDAO brandDao = new BrandDAO();
         List<Product> listproductbrand = manageproductdao.getProductByBrandId(2, bid);
         List<Brand>   listbrand = brandDao.getAllBrand();
-        
-        request.setAttribute("product", listproductbrand);
+        int size= listproductbrand.size();
+        int numperPage=5;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ 
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); 
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+          List<Product> listprod= manageproductdao.getProductByPage(listproductbrand, start, end);
+          
+        request.setAttribute("product", listprod);
+         request.setAttribute("num", numPage);
+          request.setAttribute("page", page);
         request.setAttribute("brand", listbrand);
         request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
     }catch(Exception ex){
