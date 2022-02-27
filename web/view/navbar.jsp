@@ -38,6 +38,9 @@
             <a class="btn mx-2 btn-dark link-light" href="brandList">Brand</a>
 
         </div>
+        
+        <button type="button" class="btn btn-dark m-2"> <a href="shoppingCard"><i class="bi bi-cart3 text-white"></i></a> 3 </button>
+
         <div class="navlink login logout">
             <c:if test="${sessionScope.acc == null}">
           <a class="nav-link link-light " href="login">Login</a>

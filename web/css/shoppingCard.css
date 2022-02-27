@@ -1,0 +1,80 @@
+/*
+ * Copyright(C) 2005, G3-VS.
+ * Vehicle Store
+ *  
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2018-09-10      1.0                 Thainv           First Implement
+ */
+/* 
+    Created on : Feb 27, 2022, 7:59:33 AM
+    Author     : taola
+*/
+
+.add-img {
+  width: 80px;
+  height: 80px;
+}
+.add-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.bi-dash-circle:hover,
+.bi-plus-circle:hover {
+  color: crimson;
+}
+.nothing {
+  width: 100%;
+  height: 50em;
+  align-items: center;
+}
+.pay {
+  width: 85%;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-around;
+}
+
+/* footer {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: HurmeGeometricSans2-Regular, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
+}
+
+.navlink {
+  display: flex;
+  flex-direction: row;
+}
+header {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  height: auto;
+  z-index: 100000;
+}
+.logo {
+  width: 50%;
+}
+.container {
+  width: 100%;
+  padding-bottom: 122px;
+}
