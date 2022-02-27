@@ -65,7 +65,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
     }
 
     @Override
-    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom, Date dateTo,String sortColumn) throws Exception{
+    public List<Order> GetOrderByFilter(int orderId, int sellerId, int buyerId,Date dateFrom, Date dateTo,String sortColumn) throws Exception{
         List<Order> listOrder = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -77,8 +77,11 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
                 System.out.println("lỗi khi kết nối:" + e);
             }
             String sql = "  SELECT * FROM dbo.[ORDER] WHERE 1=1 ";
+            if (orderId > 0) {
+                sql += "and orderId = " + orderId + " ";
+            }
             if ( sellerId > 0 ) { sql += "and SellerId = " + sellerId +" "; }
-            if ( buyerId > 0 ) { sql += "and SellerId = " + buyerId + " "; }
+            if ( buyerId > 0 ) { sql += "and BuyerId = " + buyerId + " "; }
             if ( dateFrom != null) { sql += "and DateCreated >= '" + dateFrom + "' "; }
             if ( dateTo != null) { sql += "and DateCreated <= '" + dateTo + "' "; }
             if ( !sortColumn.isEmpty() ) { sql += " order by " + sortColumn + " "; } 

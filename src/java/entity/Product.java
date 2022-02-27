@@ -45,6 +45,10 @@ public class Product {
         this.sellerId = sellerId;
     }
 
+    public Product(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

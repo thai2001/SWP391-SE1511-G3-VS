@@ -170,17 +170,24 @@ body {
     </style>
 </head> 
 <body>
-               <jsp:include page="navbar.jsp"></jsp:include>
+<jsp:include page="navbar.jsp"></jsp:include>
 
-<div class="container-fluid">
-    <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item" ><a href=""> Quản lí tài khoản</a></li>
-                    <li class="list-group-item"><a href="">Quản lí hóa đơn </a></li>
-                    <li class="list-group-item"><a href="">Quản lí giao dịch</a></li>
-                </ul>     
-    </div>
-    <div class="col-md-9">
+            <div class="container-fluid">
+                <div class="row title">
+                    <div class="col-sm-3"><a class="link-dark" href="manageTransaction">Manage <b>Transaction</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="manageReport">Manage <b>Report</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="manageAccount">Manage <b>Account</b></a></div>
+                    <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
+                </div>
+                <div class="row">
+                    <form class="navbar-form navbar-right" action="searchManageTransaction" method="get" >  
+                        <input value="" name="orderId" type="text" class="SearchBox" placeholder="Nhập orderId">
+                        <input value="" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
+                        <input value="" name="sellerId" type="text" class="SearchBox" placeholder="Nhập sellerId">
+                        <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                    </form>
+
+                </div>
 
             <table class="table table-bordered">
                 <thead>
@@ -189,22 +196,21 @@ body {
                         <th>ID người bán</th>
                         <th>ID người mua</th>
                         <th>Ngày tạo</th>
-                        <th>Mục điều chỉnh</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${requestScope.bookk}" var="o">
+                    <c:forEach items="${requestScope.order}" var="o">
                     <tr>
                         <td>                          
-                            ${o}
+                            ${o.orderId}
                         </td>
-                        <td>${o}</td>
-                        <td>${o}</td>
+                        <td>${o.sellerId}</td>
+                        <td>${o.buyerId}</td>
                         <td>                          
-                            ${o}
+                            ${o.dateCreated}
                         </td>
                         <td>                          
-                            ${o}
                         </td>
                        
                     </tr>
