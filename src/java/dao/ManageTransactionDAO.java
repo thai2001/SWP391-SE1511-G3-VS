@@ -86,7 +86,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()){
                 Order order = new Order(rs.getInt("OrderId"),rs.getDate("DateCreated"), rs.getDouble("TotalPrice")
-                        , new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId")));
+                        ,new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId"))) ;
                 listOrder.add(order);
             }
         } catch (SQLException se) {
