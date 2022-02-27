@@ -14,7 +14,6 @@ import dao.impl.IManageTransactionDAO;
 import entity.Buyer;
 import entity.Order;
 import entity.Seller;
-import java.rmi.ServerError;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -66,7 +65,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
     }
 
     @Override
-    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom, Date dateTo) throws Exception{
+    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom, Date dateTo,String sortColumn) throws Exception{
         List<Order> listOrder = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -82,6 +81,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             if ( buyerId > 0 ) { sql += "and SellerId = " + buyerId + " "; }
             if ( dateFrom != null) { sql += "and DateCreated >= '" + dateFrom + "' "; }
             if ( dateTo != null) { sql += "and DateCreated <= '" + dateTo + "' "; }
+            if ( !sortColumn.isEmpty() ) { sql += " order by " + sortColumn + " "; } 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
@@ -109,10 +109,4 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
     public List<Order> GetOrderDetail(int orderId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<Order> SortOrder(String column, String sort) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

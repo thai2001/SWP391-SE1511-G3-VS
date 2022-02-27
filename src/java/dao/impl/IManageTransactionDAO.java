@@ -14,14 +14,13 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Interface của quản lý giao dịch chứa các phương thức truy vấn dữ liệu
- * từ database
+ * Interface của quản lý giao dịch chứa các phương thức truy vấn dữ liệu bảng order
+ * từ database. Khi gặp lỗi sẽ throw <code>Exception</code> cho servlet
  * <p>Bug:</p>
  * @author nqt26
  */
 public interface IManageTransactionDAO {
     public List<Order> GetAllOrder () throws Exception;
-    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom,Date dateTo) throws Exception;
+    public List<Order> GetOrderByCusId(int sellerId, int buyerId,Date dateFrom,Date dateTo, String sortColunm) throws Exception;
     public List<Order> GetOrderDetail(int orderId) throws Exception;
-    public List<Order> SortOrder (String column, String sort) throws Exception;
 }
