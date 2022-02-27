@@ -247,7 +247,7 @@ header{
                        
                         
                         <div class="modal-footer">
-                            <a href="manage" type="button" class="btn btn-default" data-dismiss="modal" >Cancel </a>
+                            <a href="manageproduct" type="button" class="btn btn-default" data-dismiss="modal" >Cancel </a>
                             <input type="submit" class="btn btn-danger" value="Edit">
                         </div>
                     </form>
