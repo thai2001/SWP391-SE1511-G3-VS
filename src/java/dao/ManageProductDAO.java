@@ -372,6 +372,14 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
     
+    public List<Product> getProductByPage(List<Product> list,int start,int end) throws Exception{
+        List<Product> t=new ArrayList<>();
+        for(int i=start;i<end;i++){
+            t.add(list.get(i));
+        }
+        return t;
+    }
+    
     /**
      *
      * @param sellid

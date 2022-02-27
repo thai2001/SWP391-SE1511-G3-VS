@@ -157,6 +157,24 @@ header img{
     margin-bottom: -10px;
     margin-top: 10px;
 }
+
+ .pagination {
+                 display: inline-block;
+              }
+             .pagination a {
+                color: black;
+                font-size: 22px;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+              }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+              }
+            .pagination a:hover:not(.active) {
+                background-color: chocolate;
+            }
     </style>
 <!--
 
@@ -258,9 +276,16 @@ header img{
                     </c:forEach>
                 </tbody>
             </table>
+                     <div class="pagination">
+        <c:forEach begin="1" end="${requestScope.num}" var="i">
+            <a class="${requestScope.page==i?"active":""}"
+               href="list?page=${i}"> ${i} <a/>
+            </c:forEach>
+        </div>
         </div>
     </div>
 </div>  
+            
     
                 
 <div id="addProduct" class="modal fade">
