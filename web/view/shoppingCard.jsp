@@ -55,7 +55,7 @@
                                 <img class="add-img" src="${cart.product.img}" alt="">
                                 <p class="add-name ms-2">${cart.product.name}</p>
                             </div>
-                            <p class="col" >${cart.product.price}</p>
+                            <p class="col" >${cart.product.price} $ </p>
                             <input type="number" name="price" class="price" value="${cart.product.price}" hidden>
                             <div class="col">
 
@@ -74,8 +74,8 @@
                     <div class="text-light">
                         Selected <span class="nop"> 0 </span> product 
                     </div>
-                    <div class="totalPrice text-light">
-                        tong tien : 0 $
+                    <div class="text-light">
+                        Total Price :<span class="totalPrice"> 0 $ </span> 
                     </div>
                     <input  class="btn btn-danger pay-button" type="submit" value="Pay" disabled="true"></input>
                 </div>

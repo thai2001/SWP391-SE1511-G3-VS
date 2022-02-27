@@ -24,13 +24,13 @@ public class Buyer {
     private String address;
     private String gmail;
     private String phone;
-    private Date birthday;
+    private String birthday;
     private String username;
 
     public Buyer() {
     }
 
-    public Buyer(int buyerId, String buyerName, String address, String gmail, String phone, Date birthday, String username) {
+    public Buyer(int buyerId, String buyerName, String address, String gmail, String phone, String birthday, String username) {
         this.buyerId = buyerId;
         this.buyerName = buyerName;
         this.address = address;
@@ -80,11 +80,11 @@ public class Buyer {
         this.phone = phone;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -95,6 +95,13 @@ public class Buyer {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "Buyer{" + "buyerId=" + buyerId + ", buyerName=" + buyerName + ", address=" + address + ", gmail=" + gmail + ", phone=" + phone + ", birthday=" + birthday + ", username=" + username + '}';
+    }
+
+    
 
     
 }

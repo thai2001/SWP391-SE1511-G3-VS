@@ -21,4 +21,5 @@ public interface IShoppingCartDAO {
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */
      public Vector<ShoppingCart> getShoppingCart(int buyerId) throws Exception;
+     public void addToShoppingCart(int buyerId,int pid) throws Exception;
 }

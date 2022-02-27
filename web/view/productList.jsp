@@ -67,8 +67,17 @@
 
 
                 <!-- start list -->
+
                 <div class="col-10 newest-moto-product bg-dark text-light">
-                    <h3 class=" text-center text-light pt-5 border-bottom"> ${vtName} Product</h3>
+                <c:if test="${messError != null}">
+                    <div class="text-danger text-center">${messError}</div>
+                </c:if>
+                <c:if test="${messSuccess != null}">
+                    <div class="text-success text-center">${messSuccess}</div>
+
+                </c:if>
+
+                <h3 class=" text-center text-light pt-5 border-bottom"> ${vtName} Product</h3>
                 <br>
                 <div class="p-5">
                     <c:if test="${empty availableProduct}">
@@ -97,7 +106,7 @@
                                     </section>
                                     <div class="mt-auto">
                                         <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productDetail?pid=${p.id}">Detail</a></button>
-                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary  " ><i class="bi bi-cart-plus-fill"></i></a></button>
+                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary  " href="addShoppingCart?pid=${p.id}" ><i class="bi bi-cart-plus-fill"></i></a></button>
                                     </div>
 
                                 </div>
@@ -111,16 +120,16 @@
 
                 <!-- paging -->
                 <c:if test="${numberOfPage != 0}">
-                <div class="pt-3 d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <c:forEach begin="1" end="${numberOfPage}" var="index"><li class="page-item ${index==pi?"active":""} "><a class="page-link " href="productList?pi=${index}">${index}</a></li></c:forEach>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
+                    <div class="pt-3 d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <c:forEach begin="1" end="${numberOfPage}" var="index"><li class="page-item ${index==pi?"active":""} "><a class="page-link " href="productList?pi=${index}">${index}</a></li></c:forEach>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
 
-                </div>
+                        </div>
                 </c:if>
             </div>
         </div>

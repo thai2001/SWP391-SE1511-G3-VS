@@ -9,10 +9,13 @@
  */
 package dao.impl;
 
+import entity.Buyer;
+
 /**
  *
  * @author thainv
  */
 public interface IBuyerDAO {
-    
+//    get a buyer from username
+     public Buyer getBuyer(String username) throws Exception;
 }

@@ -77,7 +77,7 @@ function updateTotalPrice() {
         document.getElementsByClassName('pay-button')[0].removeAttribute('disabled')
     }
     document.getElementsByClassName('nop')[0].innerHTML = number
-    document.getElementsByClassName('totalPrice')[0].innerHTML = totalPrice + " $ "
+    document.getElementsByClassName('totalPrice')[0].innerHTML = " " + totalPrice + " $ "
 }
 
 

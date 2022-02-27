@@ -1,45 +1,36 @@
 /*
- * Copyright(C) 2021, group 3 SE1511JS
- * T.NET:
- *  Vehicle Store
+ * Copyright(C) 2005, G3-VS.
+ * Vehicle Store
+ *  
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2021-02-09      1.0                 ThaiNV           Add Field
+ * 2018-09-10      1.0                 Thainv           First Implement
  */
 package controller;
 
-import dao.BrandDAO;
-import dao.BuyerDAO;
-import dao.ProductDAO;
 import dao.ShoppingCartDAO;
-import dao.VehicleTypeDAO;
-import dao.impl.IBuyerDAO;
-import entity.Product;
-import entity.VehicleType;
-import entity.Brand;
+import dao.impl.IShoppingCartDAO;
+import entity.Buyer;
+import entity.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import dao.impl.IProductDAO;
-import dao.impl.IShoppingCartDAO;
-import entity.Account;
-import entity.Buyer;
-import entity.ShoppingCart;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * HomePage take all car and moto from database
  *
- * @author ThaiNV
+ * @author taola
  */
-public class homePage extends HttpServlet {
+@WebServlet(name = "addShoppingCart", urlPatterns = {"/addShoppingCart"})
+public class addShoppingCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,6 +45,7 @@ public class homePage extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
 
         }
     }
@@ -73,29 +65,28 @@ public class homePage extends HttpServlet {
         try {
             //processRequest(request, response);
             HttpSession ses = request.getSession();
-            IProductDAO productDao = new ProductDAO();
-            VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-            BrandDAO brandDao = new BrandDAO();
-            Vector<Product> allCar = (Vector) productDao.getAllProductsByVehicleTypeId(1);
-            Vector<Product> allMoto = (Vector) productDao.getAllProductsByVehicleTypeId(2);
-            Vector<VehicleType> allVehicleType = (Vector) vehicleTypeDao.getAllVehicleType();
-            Vector<Brand> allBrand = brandDao.getAllBrand();
-            if (ses.getAttribute("account") != null) {
-                Account account = (Account) ses.getAttribute("account");
-                IShoppingCartDAO shoppingCartDAO = new ShoppingCartDAO();
-                IBuyerDAO buyerDAO = new BuyerDAO();
-                Buyer buyer = buyerDAO.getBuyer(account.getUsername());
-                Vector<ShoppingCart> allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId()); 
-                ses.setAttribute("shoppingCart", allShoppingCart);
-                ses.setAttribute("buyer", buyer);
+            Buyer buyer = (Buyer) ses.getAttribute("buyer");
+            IShoppingCartDAO shoppingCartDAO = new ShoppingCartDAO();
+            Vector<ShoppingCart> allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId());
+            String mess = "";
+            int pid = Integer.parseInt(request.getParameter("pid"));
+            for (ShoppingCart shoppingCart : allShoppingCart) {
+                if (shoppingCart.getProduct().getId() == pid) {
+                    mess = "Product already added to Shopping Cart";
+                    request.setAttribute("messError", mess);
+                    break;
+
+                } else {
+                    shoppingCartDAO.addToShoppingCart(buyer.getBuyerId(), pid);
+                    mess = "Add to Shopping Cart succusfull";
+                    request.setAttribute("messSuccess", mess);
+                }
             }
-            ses.setAttribute("allBrand", allBrand);
-            ses.setAttribute("allVehicleType", allVehicleType);
-            ses.setAttribute("allCar", allCar);
-            ses.setAttribute("allMoto", allMoto);
-            request.getRequestDispatcher("view/homePage.jsp").forward(request, response);
+            allShoppingCart = shoppingCartDAO.getShoppingCart(buyer.getBuyerId());
+            ses.setAttribute("shoppingCart",allShoppingCart);
+            request.getRequestDispatcher("view/productList.jsp").forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(addShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
