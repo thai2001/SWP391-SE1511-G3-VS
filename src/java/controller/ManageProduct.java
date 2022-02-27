@@ -86,14 +86,14 @@ public class ManageProduct extends HttpServlet {
        List<Product> listproduct = manageProductDao.getProductBySellerid(2);
        List<Brand> listbrand = brandDao.getAllBrand();
         int size= listproduct.size();
-        int numperPage=4;
+        int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);
         String spage= request.getParameter("page");
         int page;
-        if(spage == null){ // luc dau moi chay
+        if(spage == null){ 
             page= 1;
         }else{
-            page = Integer.parseInt(spage); // phan tu dau tien va cuoi cung cua trang thu page
+            page = Integer.parseInt(spage); 
         }
         int start, end;
         start=(page-1)*numperPage;

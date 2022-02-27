@@ -106,7 +106,7 @@ table.table td .add {
 }
 
 img{
-    width: 190px;
+    width: 180px;
 }
 
 .fade{
@@ -169,11 +169,11 @@ header img{
                 text-decoration: none;
               }
             .pagination a.active {
-                background-color: #4CAF50;
+                background-color: red;
                 color: white;
               }
             .pagination a:hover:not(.active) {
-                background-color: chocolate;
+                background-color: red;
             }
     </style>
 <!--
