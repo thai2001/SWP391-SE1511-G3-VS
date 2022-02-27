@@ -71,7 +71,14 @@ function updateTotalPrice() {
             number++;
         }
     }
+    if (number == 0) {
+        document.getElementsByClassName('pay-button')[0].setAttribute('disabled', true)
+    } else {
+        document.getElementsByClassName('pay-button')[0].removeAttribute('disabled')
+    }
     document.getElementsByClassName('nop')[0].innerHTML = number
     document.getElementsByClassName('totalPrice')[0].innerHTML = totalPrice + " $ "
 }
+
+
 

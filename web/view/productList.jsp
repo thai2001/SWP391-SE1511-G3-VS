@@ -72,7 +72,7 @@
                 <br>
                 <div class="p-5">
                     <c:if test="${empty availableProduct}">
-                        <div class="row gy-5">
+                        <div class="row gy-5 nothing">
                             <h2>No result</h2>
                         </div>
                     </c:if>

@@ -39,7 +39,7 @@
 
         </div>
         
-        <button type="button" class="btn btn-dark m-2"> <a href="shoppingCard"><i class="bi bi-cart3 text-white"></i></a> 3 </button>
+        <button type="button" class="btn btn-dark m-2"> <a href="shoppingCard"><i class="bi bi-cart3 text-white"></i></a>${shoppingCart.size()} </button>
 
         <div class="navlink login logout">
             <c:if test="${sessionScope.acc == null}">

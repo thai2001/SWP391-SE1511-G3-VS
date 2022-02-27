@@ -13,7 +13,7 @@ import entity.Product;
 import java.util.Vector;
 
 /**
- *
+ *  
  * @author Thainv
  */
 public interface IProductDAO {

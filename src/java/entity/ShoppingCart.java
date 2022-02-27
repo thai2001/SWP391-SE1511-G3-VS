@@ -10,47 +10,44 @@
 package entity;
 
 /**
- * tạo các trường cho lớp ShoppingCart
- * thêm contrustor và getter,setter
- * <p>Bugs:
+ * tạo các trường cho lớp ShoppingCart thêm contrustor và getter,setter
+ * <p>
+ * Bugs:
+ *
  * @author nqt26
  */
-public class Shoppingcart {
-    private Buyer buyerId;
-    private Product productId;
-    private int quantity;
+public class ShoppingCart {
 
-    public Shoppingcart(Buyer buyerId, Product productId, int quantity) {
+    private int buyerId;
+    private Product product;
+
+    public ShoppingCart() {
+    }
+
+    public ShoppingCart(int buyerId, Product product) {
         this.buyerId = buyerId;
-        this.productId = productId;
-        this.quantity = quantity;
+        this.product = product;
     }
 
-    public Shoppingcart() {
-    }
-
-    public Buyer getBuyerId() {
+    public int getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(Buyer buyerId) {
+    public void setBuyerId(int buyerId) {
         this.buyerId = buyerId;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Override
+    public String toString() {
+        return "ShoppingCart{" + "buyerId=" + buyerId + ", product=" + product.toString() + '}';
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-    
 }

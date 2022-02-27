@@ -11,6 +11,7 @@ package controller;
 
 import dao.BrandDAO;
 import dao.ProductDAO;
+import dao.ShoppingCartDAO;
 import dao.VehicleTypeDAO;
 import entity.Product;
 import entity.VehicleType;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.impl.IProductDAO;
+import dao.impl.IShoppingCartDAO;
+import entity.ShoppingCart;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,6 +76,11 @@ public class homePage extends HttpServlet {
             Vector<Product> allMoto = (Vector) productDao.getAllProductsByVehicleTypeId(2);
             Vector<VehicleType> allVehicleType = (Vector) vehicleTypeDao.getAllVehicleType();
             Vector<Brand> allBrand = brandDao.getAllBrand();
+            if(ses.getAttribute("account") != null){
+                IShoppingCartDAO shoppingCartDAO = new ShoppingCartDAO();
+                Vector<ShoppingCart> allShoppingCart = shoppingCartDAO.getShoppingCart(1); // fix cunng
+                ses.setAttribute("shoppingCart", allShoppingCart);
+            }
             ses.setAttribute("allBrand", allBrand);
             ses.setAttribute("allVehicleType", allVehicleType);
             ses.setAttribute("allCar", allCar);
