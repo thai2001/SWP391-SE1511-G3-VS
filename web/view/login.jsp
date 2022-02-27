@@ -34,7 +34,7 @@
                 
                 <p id="invalidcode"<c:if test = "${mess != 'InValidCode'}">
                    style="display:none;"
-                    </c:if>>Your code is not correct!Please reenter</p>
+                    </c:if>>You have not verified the code or Your code is not correct! Please check it again</p>
                 
                 <div class="form-group">
                     <p id="username" style="display: none;">Username must be no more than 20 characters long and not blank</p>
@@ -71,6 +71,12 @@
                 </div>
                 <div class="form-group">
                     <button onclick="window.location.href = './register'" type="button" class="btn btn-block create-account">Register</button>
+                </div>
+                <div class="form-group">
+                    <button onclick="window.location.href = './changePass'" type="button" class="btn btn-block create-account">Change Password</button>
+                </div>
+                <div class="form-group">
+                    <button onclick="window.location.href = './forgotPass'" type="button" class="btn btn-block create-account">Forgot Password</button>
                 </div>
             </form>
             <div class="social-media">
