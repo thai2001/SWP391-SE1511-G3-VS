@@ -95,7 +95,7 @@ public class EditProduct extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         
         ManageProductDAO manageProductDao = new ManageProductDAO();
-        manageProductDao.EditProduct(type,name,brand, madein , manufactureyear, description, image, quantity, price, discount, pid);
+        manageProductDao.EditProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
         response.sendRedirect("manageproduct");
         }catch(Exception ex){
             Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, ex);

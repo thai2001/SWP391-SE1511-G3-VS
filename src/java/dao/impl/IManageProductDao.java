@@ -25,7 +25,7 @@ public interface IManageProductDao  {
                                int sid) throws Exception;
      public void deleteProduct(String pid) throws Exception;
      public Product getProductByID(int pid) throws Exception;
-      public void EditProduct(int vehicleTypeId,String name,int Branid,
+      public void EditProduct(int vehicleTypeId,int Branid,String name,
                               String MadeIn,String manufactureYear,String description,
                               String image,int quantity,float price ,float discount,int id) throws Exception;
        public List<Product> SearchProductByNameForSeller(int sid,String name) throws Exception;

@@ -331,11 +331,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @throws Exception
      */
     @Override
-    public void EditProduct(int vehicleTypeId, String name, int Branid, String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
+    public void EditProduct(int vehicleTypeId,int Branid, String name,  String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
          String sql= "update Product\n" +
-"set  vehicleTypeId = ?,\n" +
-"     ProductName = ?,\n" +
-"     BrandId = ?,\n" +   
+"set  BrandId = ?,\n" + 
+"     vehicleTypeId = ?,\n" +
+"     ProductName = ?,\n" +   
 "     MadeIn = ?,\n" +
 "     ManufactureYear = ?,\n" +
 "     Description = ?,\n" +
@@ -348,8 +348,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             con = getConnection();
             ps=con.prepareStatement(sql);
             ps.setInt(1,vehicleTypeId);
-            ps.setString(2,name );
-            ps.setInt(3,Branid);
+            ps.setInt(2,Branid );
+            ps.setString(3,name);
             ps.setString(4,MadeIn);
             ps.setString(5,manufactureYear);
             ps.setString(6,description);

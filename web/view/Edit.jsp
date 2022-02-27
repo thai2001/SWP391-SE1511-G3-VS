@@ -221,7 +221,7 @@ header{
                             </div>
                             <div class="form-group right">
                                 <label>Quantity</label>
-                                <input value="${product.quatity}" name="quantity" class="form-control" required></input>
+                                <input value="${product.quantity}" name="quantity" class="form-control" required></input>
                             </div>
                             </div>
                             
