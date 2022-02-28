@@ -192,8 +192,8 @@
                             <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
                         </c:forEach> 
                     </select>    
-                    <input value="" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
-                    <input value="" name="productId" type="text" class="SearchBox" placeholder="Nhập productId">
+                    <input value="0" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
+                    <input value="0" name="productId" type="text" class="SearchBox" placeholder="Nhập productId">
                     <select name="reportTypeId">                           
                         <option  value="reportId DESC" > Report Id giảm dần </option>
                     </select> 

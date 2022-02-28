@@ -182,11 +182,11 @@
                 </div>
                     <form class="navbar-form navbar-right" action="searchManageTransaction" method="get" >  
                         <label for="orderId">OrderId:</label>
-                        <input value="" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Nhập orderId">
+                        <input value="0" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Nhập orderId">
                         <label for="buyerId">BuyerId:</label>
-                        <input value="" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
+                        <input value="0" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
                         <label for="sellerId">SellerId:</label>
-                        <input value="" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Nhập sellerId">
+                        <input value="0" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Nhập sellerId">
                         <label for="start">Start date:</label>
                         <input type="date" id="start" name="dateFrom"
                                value="2018-01-01"

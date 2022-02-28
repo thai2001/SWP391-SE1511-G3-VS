@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -74,7 +76,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
             try {
                 con = getConnection();
             } catch (Exception ex) {
-                throw ex;
+                System.out.println("lỗi khi kết nối:" + ex);
             }
             String sql = " Select * from Report inner join ReportType on"
                     + " Report.TypeId = ReportType.TypeId WHERE 1=1 ";
@@ -98,7 +100,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                                 rs.getString("reportName")), rs.getString("content"));
                 listReport.add(report);
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw ex;
         } finally {
             try {
@@ -106,7 +108,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                 ps.close();
                 con.close();
             } catch (SQLException se) {
-                throw se;
+                Logger.getLogger(ManageReportDAO.class.getName()).log(Level.SEVERE, null, se);
             }
         }
         return listReport;

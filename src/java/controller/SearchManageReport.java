@@ -70,14 +70,8 @@ public class SearchManageReport extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int buyerId = 0;
-            int productId = 0;
-            if (request.getParameter("buyerId") != null) {
-                buyerId = Integer.parseInt(request.getParameter("buyerId"));
-            }
-            if (request.getParameter("productId") != null) {
-                productId = Integer.parseInt(request.getParameter("productId"));
-            }
+            int buyerId = Integer.parseInt(request.getParameter("buyerId"));
+            int productId = Integer.parseInt(request.getParameter("productId"));
             int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId"));
             String Sort = request.getParameter("sort");
             IManageReportDAO iManageReportDAO = new ManageReportDAO();
@@ -87,7 +81,7 @@ public class SearchManageReport extends HttpServlet {
             request.setAttribute("report", listReport);
             request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ManageReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchManageReport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
