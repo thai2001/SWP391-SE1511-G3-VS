@@ -73,6 +73,7 @@ public class ManageTransactionServlet extends HttpServlet {
         try{
             IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
             List<Order> listOrder = iManageTransactionDAO.GetAllOrder();
+            request.setAttribute("order", listOrder);
             request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
         } catch(Exception ex){
             Logger.getLogger(ManageTransactionServlet.class.getName()).log(Level.SEVERE, null, ex);

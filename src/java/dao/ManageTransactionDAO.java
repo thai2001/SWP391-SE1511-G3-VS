@@ -84,7 +84,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             if ( buyerId > 0 ) { sql += "and BuyerId = " + buyerId + " "; }
             if ( dateFrom != null) { sql += "and DateCreated >= '" + dateFrom + "' "; }
             if ( dateTo != null) { sql += "and DateCreated <= '" + dateTo + "' "; }
-            if ( !sortColumn.isEmpty() ) { sql += " order by " + sortColumn + " "; } 
+            if ( sortColumn != null ) { sql += " order by " + sortColumn + " "; } 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){

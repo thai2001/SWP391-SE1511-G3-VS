@@ -12,6 +12,7 @@ package controller;
 import dao.ManageReportDAO;
 import dao.impl.IManageReportDAO;
 import entity.Report;
+import entity.ReportType;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -47,7 +48,7 @@ public class SearchManageReport extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchManageReport</title>");            
+            out.println("<title>Servlet SearchManageReport</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SearchManageReport at " + request.getContextPath() + "</h1>");
@@ -68,16 +69,24 @@ public class SearchManageReport extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try{
-            int buyerId = Integer.parseInt(request.getParameter("buyerId"));
-            int productId = Integer.parseInt(request.getParameter("productId"));
+        try {
+            int buyerId = 0;
+            int productId = 0;
+            if (request.getParameter("buyerId") != null) {
+                buyerId = Integer.parseInt(request.getParameter("buyerId"));
+            }
+            if (request.getParameter("productId") != null) {
+                productId = Integer.parseInt(request.getParameter("productId"));
+            }
             int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId"));
             String Sort = request.getParameter("sort");
             IManageReportDAO iManageReportDAO = new ManageReportDAO();
-            List<Report> listReport = iManageReportDAO.getReportByFilter( buyerId, productId, reportTypeId, Sort);
+            List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, Sort);
+            List<ReportType> listReporttype = iManageReportDAO.getAllReportType();
+            request.setAttribute("reportType", listReporttype);
             request.setAttribute("report", listReport);
-            request.getRequestDispatcher("/manageReport").forward(request, response);
-        } catch (Exception ex){
+            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
+        } catch (Exception ex) {
             Logger.getLogger(ManageReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

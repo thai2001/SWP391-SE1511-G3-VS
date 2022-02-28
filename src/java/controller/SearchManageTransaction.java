@@ -79,7 +79,7 @@ public class SearchManageTransaction extends HttpServlet {
         IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
         List<Order> listOrder = iManageTransactionDAO.GetOrderByFilter(orderId, sellerId, buyerId, dateFrom, dateTo, sortColumn);
         request.setAttribute("order", listOrder);
-        request.getRequestDispatcher("/ManageTransaction").forward(request, response);
+        request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
         } catch (Exception ex) {
              Logger.getLogger(SearchManageTransaction.class.getName()).log(Level.SEVERE, null, ex);
         }   

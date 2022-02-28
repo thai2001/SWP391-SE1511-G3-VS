@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <!DOCTYPE html>
     <head>
@@ -186,44 +187,47 @@
                 </div>
                 <div class="row">
                     <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
-                        <select name="reportType">
-                            <c:forEach items="${requestScope.reportType}" var="r">
+                        <select name="reportTypeId">
+                        <c:forEach items="${requestScope.reportType}" var="r">
                             <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
-                            </c:forEach> 
-                        </select>    
-                        <input value="" name="uid" type="text" class="SearchBox" placeholder="Nhập buyerId">
-                        <input value="" name="uid" type="text" class="SearchBox" placeholder="Nhập productId">
-                        <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
-                    </form>
+                        </c:forEach> 
+                    </select>    
+                    <input value="" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
+                    <input value="" name="productId" type="text" class="SearchBox" placeholder="Nhập productId">
+                    <select name="reportTypeId">                           
+                        <option  value="reportId DESC" > Report Id giảm dần </option>
+                    </select> 
+                    <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                </form>
 
-                </div>
+            </div>
 
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID báo cáo</th>
-                        <th>ID người mua</th>
-                        <th>ID sản phẩm</th>
-                        <th>Loại báo cáo</th>
-                        <th>Nội dung</th>
+                        <th>Report Id</th>
+                        <th>Buyer Id</th>
+                        <th>Product Id</th>
+                        <th>Report Type</th>
+                        <th>Content</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${requestScope.report}" var="r">
-                    <tr>
-                        <td>                          
-                            ${r.reportId}
-                        </td>
-                        <td>${r.buyerId}</td>
-                        <td>${r.productId}</td>
-                        <td>                          
-                            ${r.reportTypeId.reportTypeId}
-                        </td>
-                        <td>                          
-                            ${r.content}
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach items="${requestScope.report}" var="r">
+                        <tr>
+                            <td>                          
+                                ${r.reportId}
+                            </td>
+                            <td>${r.buyerId.buyerId}</td>
+                            <td>${r.productId.id}</td>
+                            <td>                          
+                                ${r.reportTypeId.reportTypeId}
+                            </td>
+                            <td>                          
+                                ${r.content}
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

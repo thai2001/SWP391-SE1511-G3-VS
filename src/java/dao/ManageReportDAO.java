@@ -77,7 +77,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                 throw ex;
             }
             String sql = " Select * from Report inner join ReportType on"
-                    + " Report.ReportTypeId = ReportType.ReportTypeId WHERE 1=1 ";
+                    + " Report.TypeId = ReportType.TypeId WHERE 1=1 ";
             if (buyerId > 0) {
                 sql += "and buyerId = " + buyerId + " ";
             }
@@ -87,7 +87,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
             if (typeReportId > 0) {
                 sql += "and ReportTypeId = " + typeReportId + " ";
             }
-            if (!Sort.isEmpty()) {
+            if (Sort != null) {
                 sql += "order by " + Sort + " ";
             }
             ps = con.prepareStatement(sql);
@@ -144,5 +144,10 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
             }
         }
         return listReportType;
+    }
+    public static void main(String[] args) throws Exception{
+        ManageReportDAO m = new ManageReportDAO();
+        List<Report> li = m.getReportByFilter(2, 0, 0, "reportId DESC");
+        System.out.println(li.get(0).getReportId());
     }
 }
