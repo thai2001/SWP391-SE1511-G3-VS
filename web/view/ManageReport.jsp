@@ -188,13 +188,14 @@
                 <div class="row">
                     <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
                         <select name="reportTypeId">
+                            <option value="0" > Tất cả các loại</option>
                         <c:forEach items="${requestScope.reportType}" var="r">
                             <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
                         </c:forEach> 
                     </select>    
                     <input value="0" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
                     <input value="0" name="productId" type="text" class="SearchBox" placeholder="Nhập productId">
-                    <select name="reportTypeId">                           
+                    <select name="sort">                           
                         <option  value="reportId DESC" > Report Id giảm dần </option>
                     </select> 
                     <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
