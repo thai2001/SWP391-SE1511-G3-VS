@@ -122,6 +122,11 @@ header{
 .container h2{
     font-size: 40px;
 }
+
+.form-group label:after{
+   content: "*" ;
+   color: red;
+}
 </style>
   </head>
 
@@ -179,9 +184,15 @@ header{
                                 <label>Discount</label>
                                 <input name="discount" type="text" class="form-control" required placeholder="%">
                             </div>
-                            <div class="form-group">
+                                <div class="form-group">
                                 <label>Price</label>
-                                <input name="price" type="text" class="form-control" required placeholder="VNĐ">
+                                </div>
+                            <div class="input-group mb-1">
+                                 
+                                <input name="price" type="text" class="form-control" required>
+                                <div class="input-group-prepend">
+                                   <span class="input-group-text">VNĐ</span>
+                                  </div>
                             </div>
                             
                                 <div class="form-group">
@@ -231,6 +242,7 @@ header{
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea name="description" class="form-control" required></textarea>
+                                
                             </div>
                             
 
