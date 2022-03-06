@@ -5,14 +5,13 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-14      1.0                 QuanTBA          Add Field
+ * 2018-09-10      1.0                 MinhLH           First Implement
  */
 package controller;
 
 import dao.BrandDAO;
 import dao.ManageProductDAO;
 import dao.VehicleTypeDAO;
-import entity.Account;
 import entity.Brand;
 import entity.VehicleType;
 import java.io.IOException;
@@ -24,14 +23,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- *Thêm thông tin 1 sản phẩm mới vào trong database đồng thời hiển thị trong
- * danh sách sản phẩm của người bán
- * @author QuanTBA
+ *
+ * @author QuanTBA <your.name at your.org>
  */
-public class AddProduct extends HttpServlet {
+public class LoadAddProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +47,10 @@ public class AddProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddProduct</title>");            
+            out.println("<title>Servlet LoadAddProduct</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadAddProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,7 +68,18 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try{
+       BrandDAO brandDao = new BrandDAO();
+       VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+      
+       List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
+        List<Brand> listbrand = brandDao.getAllBrand();
+         request.setAttribute("vehicleType", listvehicleType);
+       request.setAttribute("brand", listbrand);
+       request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+    } catch(Exception ex) {
+          Logger.getLogger(LoadAddProduct.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -85,28 +93,7 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-        String name = request.getParameter("productname").trim();
-        String image = request.getParameter("img").trim();
-       
-        float price = Float.parseFloat( request.getParameter("price"));
-        String description = request.getParameter("description").trim();
-        int brand =Integer.parseInt( request.getParameter("brand"));
-        int vehicletype =Integer.parseInt( request.getParameter("type"));
-        float discount = Float.parseFloat( request.getParameter("discount"));
-        String ManufactureYear = request.getParameter("Myear").trim();
-        String MadeIn = request.getParameter("madeIn").trim();
-        int quantity = Integer.parseInt( request.getParameter("quantity"));
-//        HttpSession sess = request.getSession();
-  //     Account a = (Account) sess.getAttribute("acc");
- //      int sid = a.getRoleId().getRoleId();
-  ManageProductDAO manageProductDao = new ManageProductDAO();
-       
-       manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
-       response.sendRedirect("manageproduct");
-    } catch(Exception ex) {
-          Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        processRequest(request, response);
     }
 
     /**

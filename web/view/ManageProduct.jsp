@@ -239,7 +239,7 @@ header img{
           
        
     </form>
-            <a href="#addProduct" type="button" class="btn btn-info add-new" data-toggle="modal"><i class="fa fa-plus"></i> Add New</a>
+            <a href="loadaddproduct" type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</a>
                     </div>
             </div>
             
@@ -292,94 +292,7 @@ header img{
             
     
                 
-<div id="addProduct" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="addproduct" method="post">
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Add New Product</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                             
-                            <div class ="col-md-6">
-                            <div class="form-group">
-                                <label>Product Name</label>
-                                <input name="productname" class="form-control" required></input>
-                            </div>
-                    
-                                 <div class="form-group">
-                                <label>Discount</label>
-                                <input name="discount" type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Price</label>
-                                <input name="price" type="text" class="form-control" required placeholder="VNĐ">
-                            </div>
-                            
-                                <div class="form-group">
-                                <label>Brand</label>
-                                <select name="brand" class="form-select" aria-label="Default select example">
-                                    <c:forEach items="${requestScope.brand}" var="o">
-                                        <option value="${o.id}">${o.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                                <div class="form-group">
-                                <label>VehicleType</label>
-                                <select name="type" class="form-select" aria-label="Default select example">
-                                    <c:forEach items="${requestScope.vehicleType}" var="o">
-                                        <option value="${o.vehicleTypeId}">${o.vehicleTypeName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            </div>
-       
-                            
-                                <div class="col-md-6">
-                            <div class="form-group right">
-                                <label>Made In</label>
-                                <input name="madeIn" class="form-control" required></input>
-                            </div>
-                            <div class="form-group right">
-                                <label>Manufacture Year</label>
-                                <input name="Myear" class="form-control" required></input>
-                            </div>
-                            
-                            <div class="form-group right">
-                                <label>Image</label>
-                                <input name="img" class="form-control" required></input>
-                                
-                            </div>
-                                 <div class="form-group right">
-                                <label>Quantity</label>
-                                <input name="quantity" class="form-control" required></input>
-                            </div>   
-                            </div>
-                            </div>
-                                
-                            
-                            
-                            
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
-                            </div>
-                            
 
-                        </div>
-                        
-                       
-                        
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
-                            <input type="submit" class="btn btn-danger" value="Add">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     
  
 
