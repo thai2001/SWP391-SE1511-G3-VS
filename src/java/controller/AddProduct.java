@@ -103,6 +103,8 @@ public class AddProduct extends HttpServlet {
   ManageProductDAO manageProductDao = new ManageProductDAO();
        
        manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
+       request.setAttribute("alert", "Add succefully");
+       
        response.sendRedirect("manageproduct");
     } catch(Exception ex) {
           Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);

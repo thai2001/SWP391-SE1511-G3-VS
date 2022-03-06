@@ -41,7 +41,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public List<Product> getProductBySellerid(int sid) throws Exception {
        List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
-                   "where SellerId = ?" ;
+                   "where SellerId = ? \n" +
+                   "ORDER BY ProductId desc";
         
         try{
             con = getConnection();
