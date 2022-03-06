@@ -277,14 +277,15 @@ header img{
                     </c:forEach>
                 </tbody>
             </table>
+                <c:if test="${num != 0}">
                         <div class="pagination">
-        <c:forEach begin="1" end="${requestScope.num}" var="i">
+        <c:forEach begin="1" end="${num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
                href="manageproduct?page=${i}"> ${i} <a/>
             </c:forEach>
                     
         </div>
-      
+      </c:if>
         </div>
     </div>
 </div>  
@@ -349,6 +350,7 @@ header img{
                             <div class="form-group right">
                                 <label>Image</label>
                                 <input name="img" class="form-control" required></input>
+                                
                             </div>
                                  <div class="form-group right">
                                 <label>Quantity</label>

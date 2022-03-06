@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -68,7 +69,11 @@ public class SearchProductforSeller extends HttpServlet {
         try{
        request.setCharacterEncoding("UTF-8");
      //  int sid = Integer.parseInt(request.getParameter("sid"));
-        String name= request.getParameter("productname");
+     HttpSession ses = request.getSession();
+        String name= request.getParameter("productname").trim();
+        if(name == null){
+            name = "";
+        }
         ManageProductDAO  manageproductdao= new ManageProductDAO();
         List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(2, name);
          int size= listproduct.size();

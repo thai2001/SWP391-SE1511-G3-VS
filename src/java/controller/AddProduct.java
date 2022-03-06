@@ -81,15 +81,15 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-        String name = request.getParameter("productname");
-        String image = request.getParameter("img");
+        String name = request.getParameter("productname").trim();
+        String image = request.getParameter("img").trim();
         float price = Float.parseFloat( request.getParameter("price"));
-        String description = request.getParameter("description");
+        String description = request.getParameter("description").trim();
         int brand =Integer.parseInt( request.getParameter("brand"));
         int vehicletype =Integer.parseInt( request.getParameter("type"));
         float discount = Float.parseFloat( request.getParameter("discount"));
-        String ManufactureYear = request.getParameter("Myear");
-        String MadeIn = request.getParameter("madeIn");
+        String ManufactureYear = request.getParameter("Myear").trim();
+        String MadeIn = request.getParameter("madeIn").trim();
         int quantity = Integer.parseInt( request.getParameter("quantity"));
 //        HttpSession sess = request.getSession();
   //     Account a = (Account) sess.getAttribute("acc");
