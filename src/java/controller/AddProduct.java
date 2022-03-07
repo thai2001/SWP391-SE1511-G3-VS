@@ -101,9 +101,15 @@ public class AddProduct extends HttpServlet {
   //     Account a = (Account) sess.getAttribute("acc");
  //      int sid = a.getRoleId().getRoleId();
   ManageProductDAO manageProductDao = new ManageProductDAO();
+       BrandDAO brandDao = new BrandDAO();
+       VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
        
+       List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
+       List<Brand> listbrand = brandDao.getAllBrand();
        manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
-       request.setAttribute("alert", "Add succefully");
+        request.setAttribute("vehicleType", listvehicleType);
+       request.setAttribute("brand", listbrand);
+       request.setAttribute("alert", "Add succefully !");
        request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
        response.sendRedirect("manageproduct");
     } catch(Exception ex) {

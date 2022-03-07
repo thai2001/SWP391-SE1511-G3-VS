@@ -169,7 +169,7 @@ header{
                     <form action="addproduct" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Add New Product</h4>
-                            <p>${alert}</p>
+                            <p style="color:green">${alert}</p>
                         </div>
                         <div class="modal-body">
                             <div class="row">
