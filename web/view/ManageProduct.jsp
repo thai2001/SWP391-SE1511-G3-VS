@@ -246,7 +246,7 @@ header img{
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>User ID</th>
+                        <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Image</th>
                         <th>MadeIn</th>
@@ -258,7 +258,7 @@ header img{
                     <c:forEach items="${requestScope.product}" var="o">
                     <tr>
                         <td>
-                            ${o.sellerId}
+                            ${o.id}
                         </td>
                         <td>
                             ${o.name}
