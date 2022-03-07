@@ -9,9 +9,15 @@
  */
 package controller;
 
+import dao.BrandDAO;
 import dao.ManageProductDAO;
+import dao.VehicleTypeDAO;
+import entity.Brand;
+import entity.Product;
+import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -93,10 +99,20 @@ public class EditProduct extends HttpServlet {
         String madein = request.getParameter("MadeIn");
          int pid = Integer.parseInt(request.getParameter("productid"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        
+         BrandDAO brandDao = new BrandDAO();
+         VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+    
         ManageProductDAO manageProductDao = new ManageProductDAO();
         manageProductDao.EditProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
-        response.sendRedirect("manageproduct");
+        Product prod = manageProductDao.getProductByID(pid);
+        List<Brand> listbrand = brandDao.getAllBrand();
+        List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
+   
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+        request.setAttribute("product", prod);
+        request.setAttribute("alert", "Edit successfully!");
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
         }catch(Exception ex){
             Logger.getLogger(EditProduct.class.getName()).log(Level.SEVERE, null, ex);
         }

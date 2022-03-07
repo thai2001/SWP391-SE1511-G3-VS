@@ -165,7 +165,7 @@ header{
                     <form action="editproduct" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Product's<b> Info</b></h4>
-                           
+                            <p style="color:green">${alert}</p>
                         </div>
                         <div class="modal-body">
                             <div class="row">
