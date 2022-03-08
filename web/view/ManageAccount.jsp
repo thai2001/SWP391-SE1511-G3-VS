@@ -23,8 +23,12 @@
         <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <!-- CSS outsource -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <!-- custom CSS -->
         <style>
+            .sidebar {
+                position: inherit;
+            }
             .title {
                 margin-top: 30px;
                 margin-bottom: 30 px;
@@ -172,54 +176,97 @@
 
                 * { box-sizing: border-box; }
             }
+            body {
+                background-color: #eee
+            }
+
+            .nav-link {
+                border-radius: 0px !important;
+                transition: all 0.5s;
+                width: 100px;
+                display: flex;
+                flex-direction: column
+            }
+
+            .nav-link small {
+                font-size: 12px
+            }
+
+            .nav-link:hover {
+                background-color: #52525240 !important
+            }
+
+            .nav-link .fa {
+                transition: all 1s;
+                font-size: 20px
+            }
+
+            .nav-link:hover .fa {
+                transform: rotate(360deg)
+            }
         </style>
     </head> 
     <body>
         <!-- navbar dung chung -->
         <jsp:include page="navbar.jsp"></jsp:include>
-
             <div class="container-fluid">
-                <div class="row title">
-                    <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Transaction</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Report</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="manageAccount">Manage <b>Account</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
-                </div>
                 <div class="row">
-                    <form class="navbar-form navbar-right" action="searchAccount" method="get" >
-                        <select name="roleId">
-                            <c:forEach items="${requestScope.role}" var="r">
-                            <option  value="${r.roleId}" > ${r.roleName} </option>
-                            </c:forEach> 
-                        </select>    
-                        <input value="" name="uid" type="text" class="SearchBox" placeholder="Id">
+                    <div class="col-md-1">
+                        <div class="sidebar d-flex flex-column flex-shrink-0 bg-light vh-100" style="width: 100px;">
+                            <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                                <li class="nav-item"> <a href="#" class="nav-link active py-3 border-bottom"> <i class="fa fa-home"></i> <small>Home</small> </a> </li>
+                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-dashboard"></i> <small>Dashboard</small> </a> </li>
+                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-first-order"></i> <small>My Orders</small> </a> </li>
+                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-cog"></i> <small>Settings</small> </a> </li>
+                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-bookmark"></i> <small>Bookmark</small> </a> </li>
+                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa "></i> <small>Sign out</small> </a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row title">
+                            <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Transaction</b></a></div>
+                            <div class="col-sm-3"><a class="link-dark" href="#">Manage <b>Report</b></a></div>
+                            <div class="col-sm-3"><a class="link-dark" style="color: #007bff" href="manageAccount">Manage <b>Account</b></a></div>
+                            <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
+                        </div>
+                        <div class="row">
+                            <form class="navbar-form navbar-right" action="searchAccount" method="get" >
+                                <select name="roleId">
+                                <c:forEach items="${requestScope.role}" var="r">
+                                    <option  value="${r.roleId}" > ${r.roleName} </option>
+                                </c:forEach> 
+                            </select>    
+                            <input value="" name="uid" type="text" class="SearchBox" placeholder="Id">
 
-                        <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
-                    </form>
+                            <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                        </form>
 
-                </div>
-                <table class="table table-bordered">
+                    </div>
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Tài khoản</th>
-                                <th>Vai trò</th>
-                                <th>Trạng thái</th>
-                                <th>Mục điều chỉnh</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                    <c:forEach  items="${requestScope.account}" var="a">
-                            <tr>
-                                <td>${a.getUsername()}</td>
-                                <td>${a.getRoleId().getRoleName()}</td>
-                                <td>${a.getStatus()}  </td>
-                                <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${a.getStatus()}&username=${a.username}">change</a></button></td>
+                            <c:forEach  items="${requestScope.account}" var="a">
+                                <tr>
+                                    <td>${a.getUsername()}</td>
+                                    <td>${a.getRoleId().getRoleName()}</td>
+                                    <td>${a.getStatus()}  </td>
+                                    <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${a.getStatus()}&username=${a.username}">change</a></button></td>
 
-                            </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            <h3> ${requestScope.note} </h3>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <h3> ${requestScope.note} </h3>
+                </div>
+            </div>
         </div>
         <!-- end container part -->
         <!-- footer  -->
@@ -239,9 +286,11 @@
         </footer>
         <!-- end footer -->
 
-        <!-- Bootstrap core JavaScript -->
+        <!-- Bootstrap core JavaScript -->        
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+        <!-- Bootstrap core JavaScript --> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
