@@ -87,7 +87,7 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
         try{
         String name = request.getParameter("productname").trim();
-        String image =  request.getParameter("img").trim();
+        String  image =  request.getParameter("img").trim();
        
         float price = Float.parseFloat( request.getParameter("price"));
         String description = request.getParameter("description").trim();
