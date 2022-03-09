@@ -74,8 +74,8 @@ public class ManageProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // HttpSession sess = request.getSession();
-      //  Account a = (Account) sess.getAttribute("acc");
-       // String uname = a.getUsername();
+        //Account a = (Account) sess.getAttribute("acc");
+        //String uname = a.getUsername();
        // int sid = Integer.parseInt(request.getParameter("sid"));
        try{
        IManageProductDao manageProductDao = new ManageProductDAO();

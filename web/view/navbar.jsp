@@ -45,11 +45,18 @@
         
 
         <div class="navlink login logout">
+            <c:if test="${sessionScope.acc == 3}">
+                <li class="nav-item">
+                <a class="nav-link"  href="manageproduct">Manage Product</a>
+              </li>
+              </c:if>
             <c:if test="${sessionScope.acc == null}">
           <a class="nav-link link-light " href="login">Login</a>
             </c:if>
+           <c:if test="${sessionScope.acc == null}">
           <a class="nav-link link-light " href="register">Sign Up</a>
-          <c:if test="${sessionScope.acc == null}">
+           </c:if>
+          <c:if test="${sessionScope.acc != null}">
           <a class="nav-link link-light " href="logout">Sign Out</a>
           </c:if>
       </div>
