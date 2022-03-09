@@ -39,24 +39,24 @@
 
         </div>
         
-        <c:if test="${shoppingCart != null}" >
+        <c:if test="${shoppingCart != null && sessionScope.account.roleId.roleId != 3 }" >
         <button type="button" class="btn btn-dark m-2"> <a href="shoppingCart"><i class="bi bi-cart3 text-white"></i></a>  ${shoppingCart.size()} </button>
         </c:if>
         
 
         <div class="navlink login logout">
-            <c:if test="${sessionScope.acc == 3}">
-                <li class="nav-item">
-                <a class="nav-link"  href="manageproduct">Manage Product</a>
-              </li>
+            <c:if test="${sessionScope.account.roleId.roleId == 3}">
+                
+                <a class="nav-link link-light " href="manageproduct">Manage Product</a>
+             
               </c:if>
-            <c:if test="${sessionScope.acc == null}">
+            <c:if test="${sessionScope.account == null}">
           <a class="nav-link link-light " href="login">Login</a>
             </c:if>
-           <c:if test="${sessionScope.acc == null}">
+           <c:if test="${sessionScope.account == null}">
           <a class="nav-link link-light " href="register">Sign Up</a>
            </c:if>
-          <c:if test="${sessionScope.acc != null}">
+          <c:if test="${sessionScope.account != null}">
           <a class="nav-link link-light " href="logout">Sign Out</a>
           </c:if>
       </div>

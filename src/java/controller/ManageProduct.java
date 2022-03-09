@@ -16,6 +16,7 @@ import dao.impl.IManageProductDao;
 import entity.Account;
 import entity.Brand;
 import entity.Product;
+import entity.Seller;
 import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,17 +74,18 @@ public class ManageProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // HttpSession sess = request.getSession();
-        //Account a = (Account) sess.getAttribute("acc");
         //String uname = a.getUsername();
        // int sid = Integer.parseInt(request.getParameter("sid"));
        try{
+       HttpSession sess = request.getSession();
        IManageProductDao manageProductDao = new ManageProductDAO();
        BrandDAO brandDao = new BrandDAO();
        VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-       
+      
+          Account a = (Account) sess.getAttribute("account"); 
+          Seller seller = manageProductDao.getSeller(a.getUsername());
        List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-       List<Product> listproduct = manageProductDao.getProductBySellerid(2);
+       List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
        List<Brand> listbrand = brandDao.getAllBrand();
         int size= listproduct.size();
         int numperPage=5;

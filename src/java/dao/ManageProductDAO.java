@@ -11,8 +11,10 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageProductDao;
+import entity.Account;
 import entity.Brand;
 import entity.Product;
+import entity.Seller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +32,37 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
+    /**
+     *
+     * @param username
+     * @return
+     * @throws Exception
+     */
+    @Override
+        public Seller getSeller(String username) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Seller seller = new Seller();
+        try {
+            con = getConnection();
+            String sql = "select * from Seller\n"
+                    + "where Username = ? ";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                seller = new Seller(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),new Account(rs.getString(7)));
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
+        }
+        return seller;
+    }
      //Lấy danh sách các sản phẩm theo ID của người bán
     /**
      *

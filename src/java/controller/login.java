@@ -88,14 +88,14 @@ public class login extends HttpServlet {
         }
 
         if (acdb.getCode() == 0) {
-            request.getSession().setAttribute("account", ac);
+            request.getSession().setAttribute("account", acdb);
             response.sendRedirect(contextPath + pathConnect(ac));
             return;
         }
 
         if (acdb.getCode() == code && acdb.getCode() != 0) {
             adb.updateCode(ac);
-            request.getSession().setAttribute("account", ac);
+            request.getSession().setAttribute("account", acdb);
             response.sendRedirect(contextPath + pathConnect(ac));   
             return;
         }

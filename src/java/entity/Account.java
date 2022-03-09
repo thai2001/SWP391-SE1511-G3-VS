@@ -33,7 +33,9 @@ public class Account {
         this.status = status;
         this.roleId = roleId;
     }
-
+public Account(String username) {
+    this.username = username;
+}
     public Account(String username, String password, String status, Role roleId, int code, String name, String email, String phone) {
         this.username = username;
         this.password = password;
