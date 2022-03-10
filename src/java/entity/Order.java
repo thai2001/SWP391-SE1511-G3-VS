@@ -21,16 +21,9 @@ public class Order {
     private int orderId;
     private String dateCreated;
     private double totalPrice;
-    private int buyerId;
+    private Buyer buyer;
 
     public Order() {
-    }
-
-    public Order(int orderId, String dateCreated, double totalPrice, int buyerId) {
-        this.orderId = orderId;
-        this.dateCreated = dateCreated;
-        this.totalPrice = totalPrice;
-        this.buyerId = buyerId;
     }
 
     public int getOrderId() {
@@ -57,17 +50,19 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public int getBuyerId() {
-        return buyerId;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyerId=" + buyerId + '}';
+        return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyer=" + buyer + '}';
     }
+
+   
     
 }
