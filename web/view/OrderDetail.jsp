@@ -210,7 +210,6 @@ header img{
                         <th>Image</th>
                         <th>ProductName</th>
                         <th>Quantity</th>
-                        
                     </tr>
                 </thead>
                 <tbody>

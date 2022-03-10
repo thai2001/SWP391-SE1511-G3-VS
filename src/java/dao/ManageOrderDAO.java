@@ -42,6 +42,7 @@ Connection con = null;
 "	   Where SellerId = ?";
         
         try{
+            
             con = getConnection();
             ps= con.prepareStatement(sql);
             ps.setInt(1,sid);

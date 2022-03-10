@@ -34,6 +34,7 @@ public class Product {
         this.id = id;
         this.name = name;
         this.img = img;
+        
     }
 
     public Product(int id, int brandId, int vehicleTypeId, String name, String madeIn, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId) {

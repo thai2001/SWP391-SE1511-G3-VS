@@ -39,6 +39,7 @@ public class OrderDetail {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
+        
     }
 
     
