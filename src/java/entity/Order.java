@@ -19,20 +19,18 @@ import java.sql.Date;
  */
 public class Order {
     private int orderId;
-    private Date dateCreated;
+    private String dateCreated;
     private double totalPrice;
-    private Seller sellerId;
-    private Buyer buyerId;
+    private int buyerId;
 
-    public Order(int orderId, Date dateCreated, double totalPrice, Seller sellerId, Buyer buyerId) {
+    public Order() {
+    }
+
+    public Order(int orderId, String dateCreated, double totalPrice, int buyerId) {
         this.orderId = orderId;
         this.dateCreated = dateCreated;
         this.totalPrice = totalPrice;
-        this.sellerId = sellerId;
         this.buyerId = buyerId;
-    }
-
-    public Order() {
     }
 
     public int getOrderId() {
@@ -43,11 +41,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Date getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
@@ -59,20 +57,17 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Seller getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Seller sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public Buyer getBuyerId() {
+    public int getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(Buyer buyerId) {
+    public void setBuyerId(int buyerId) {
         this.buyerId = buyerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyerId=" + buyerId + '}';
     }
     
 }

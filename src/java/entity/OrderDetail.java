@@ -16,33 +16,39 @@ package entity;
  * @author nqt26
  */
 public class OrderDetail {
-    private Order orderId;
-    private Product productId;
+    private int orderId;
+    private Product product;
     private int quantity;
-
-    public OrderDetail(Order orderId, Product productId, int quantity) {
-        this.orderId = orderId;
-        this.productId = productId;
-        this.quantity = quantity;
-    }
+    private float deliverPrice;
+    private String start;
+    private String end;
 
     public OrderDetail() {
     }
 
-    public Order getOrderId() {
+    public OrderDetail(int orderId, Product product, int quantity, float deliverPrice, String start, String end) {
+        this.orderId = orderId;
+        this.product = product;
+        this.quantity = quantity;
+        this.deliverPrice = deliverPrice;
+        this.start = start;
+        this.end = end;
+    }
+
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -52,5 +58,40 @@ public class OrderDetail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public float getDeliverPrice() {
+        return deliverPrice;
+    }
+
+    public void setDeliverPrice(float deliverPrice) {
+        this.deliverPrice = deliverPrice;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" + "orderId=" + orderId + ", product=" + product + ", quantity=" + quantity + ", deliverPrice=" + deliverPrice + ", start=" + start + ", end=" + end + '}';
+    }
+
+  
+    
+    
+
+    
     
 }
