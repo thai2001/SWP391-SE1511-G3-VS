@@ -51,7 +51,7 @@
                     <div class="mt-3">
                         <div class="row shopping-card-row border-top border-secondary rounded text-center">
                             <div class="col-4 d-flex">
-                                <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="123" onclick="checkedCard(this)"> 
+                                <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="${cart.product.id}" onclick="checkedCard(this)"> 
                                 <img class="add-img" src="${cart.product.img}" alt="">
                                 <p class="add-name ms-2">${cart.product.name}</p>
                             </div>
