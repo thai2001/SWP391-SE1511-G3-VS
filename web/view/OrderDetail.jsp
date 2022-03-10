@@ -197,17 +197,19 @@ header img{
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="#">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="#">Report <b>List</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="#">Pre-order <b>Customers</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="#">Order <b>Detail</b></a></div>
+                    
                 </div>
                 
             </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>User ID</th>
-                        <th>User Name</th>
-                        <th>Comment</th>
+                        <th>OrderID</th>
+                        <th>ProductID</th>
+                        <th>Image</th>
+                        <th>ProductName</th>
+                        <th>Quantity</th>
                         
                     </tr>
                 </thead>

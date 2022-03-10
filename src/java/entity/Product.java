@@ -30,6 +30,12 @@ public class Product {
     public Product() {
     }
 
+    public Product(int id, String name, String img,int sellerId) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+    }
+
     public Product(int id, int brandId, int vehicleTypeId, String name, String madeIn, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId) {
         this.id = id;
         this.name = name;
@@ -48,6 +54,8 @@ public class Product {
     public Product(int id) {
         this.id = id;
     }
+
+ 
 
     public int getId() {
         return id;
