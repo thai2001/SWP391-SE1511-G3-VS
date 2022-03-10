@@ -88,6 +88,10 @@
         <servlet-name>LoadAddProduct</servlet-name>
         <servlet-class>controller.LoadAddProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageOrderDetail</servlet-name>
+        <servlet-class>controller.ManageOrderDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>LoadAddProduct</servlet-name>
         <url-pattern>/loadaddproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageOrderDetail</servlet-name>
+        <url-pattern>/manageorderdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

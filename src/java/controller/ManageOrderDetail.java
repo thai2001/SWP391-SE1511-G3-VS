@@ -5,22 +5,19 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-11      1.0                 QuanTBA          Add field
+ * 2022-03-11      1.0                 QuanTBA           First Implement
  */
 package controller;
 
-import dao.BrandDAO;
+import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
-import dao.VehicleTypeDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.IOderDetailDAO;
 import entity.Account;
-import entity.Brand;
-import entity.Product;
+import entity.OrderDetail;
 import entity.Seller;
-import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,10 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *Hiển thị 1 vài thông tin về các sản phẩm của người bán
- * @author Acer
+ *
+ * @author QuanTBA <your.name at your.org>
  */
-public class ManageProduct extends HttpServlet {
+public class ManageOrderDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,10 +50,10 @@ public class ManageProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageProduct</title>");            
+            out.println("<title>Servlet ManageOrderDetail</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageOrderDetail at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,43 +71,18 @@ public class ManageProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String uname = a.getUsername();
-       // int sid = Integer.parseInt(request.getParameter("sid"));
-       try{
-       HttpSession sess = request.getSession();
+        try{
+            HttpSession sess = request.getSession();
+             Account a = (Account) sess.getAttribute("account"); 
        IManageProductDao manageProductDao = new ManageProductDAO();
-       BrandDAO brandDao = new BrandDAO();
-       VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-      
-          Account a = (Account) sess.getAttribute("account"); 
+            IOderDetailDAO iOrderDetailDAO = new ManageOrderDAO();        
           Seller seller = manageProductDao.getSeller(a.getUsername());
-       List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-       List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
-       List<Brand> listbrand = brandDao.getAllBrand();
-        int size= listproduct.size();
-        int numperPage=5;
-        int numPage=size/numperPage+(size%numperPage== 0?0:1);
-        String spage= request.getParameter("page");
-        int page;
-        if(spage == null){ 
-            page= 1;
-        }else{
-            page = Integer.parseInt(spage); 
+            List<OrderDetail> listorderdetail = iOrderDetailDAO.getOrderBySellerId(seller.getSellerId());
+            request.setAttribute("orderdt", listorderdetail);
+            request.getRequestDispatcher("view/OrderDetail.jsp").forward(request, response);
+        }catch(Exception ex){
+            Logger.getLogger(ManageOrderDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int start, end;
-        start=(page-1)*numperPage;
-        end=Math.min(size, page*numperPage);
-          List<Product> listprod= manageProductDao.getProductByPage(listproduct, start, end);
-          
-       request.setAttribute("vehicleType", listvehicleType);
-       request.setAttribute("brand", listbrand);
-       request.setAttribute("num", numPage); 
-       request.setAttribute("product", listprod);
-        request.setAttribute("page", page);
-       request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
-    }catch(Exception ex){
-    Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);
-}
     }
 
     /**

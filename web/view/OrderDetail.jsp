@@ -196,8 +196,8 @@ header img{
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-4"><a class="link-dark" href="#">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="#">Order <b>Detail</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="manageorderdetail">Order <b>Detail</b></a></div>
                     
                 </div>
                 
@@ -213,13 +213,17 @@ header img{
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${requestScope.bookk}" var="o">
+                    <c:forEach items="${requestScope.orderdt}" var="odt">
                     <tr>
                         <td>                          
-                            ${o}
+                            ${odt.orderId}
                         </td>
-                        <td>${o}</td>
-                        <td>${o}</td>
+                        <td>${odt.product.id}</td>
+                        <td>
+                            <img src="${odt.product.img}">
+                        </td>
+                        <td>${odt.product.name}</td>
+                        <td>${odt.quantity}</td>
                        
                     </tr>
                     </c:forEach>

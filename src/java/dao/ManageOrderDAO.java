@@ -34,12 +34,12 @@ Connection con = null;
     public List<OrderDetail> getOrderBySellerId(int sid) throws Exception {
          List<OrderDetail> list=new ArrayList<>();
         String sql="Select OrderId,\n" +
-"       OrderDetail.ProductId,\n" +
+"          Product.ProductId,\n" +
 "	   Image,\n" +
 "	   Product.ProductName,\n" +
 "	   Product.Quantity\n" +
 "	   from OrderDetail INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
-"	   Where SellerId = ?";
+"	   Where SellerId = ? ";
         
         try{
             
@@ -49,7 +49,7 @@ Connection con = null;
             rs=ps.executeQuery();
             while(rs.next()){
                 OrderDetail od=new OrderDetail(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName"),rs.getInt("SellerId")),rs.getInt("Quantity"));
+                                               rs.getString("ProductName")),rs.getInt("Quantity"));
                 list.add(od);
             }
         }catch(Exception e){
@@ -60,7 +60,7 @@ Connection con = null;
                 rs.close();
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ManageOrderDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         return list;
       }
