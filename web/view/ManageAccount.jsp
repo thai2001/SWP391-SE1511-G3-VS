@@ -31,101 +31,83 @@
             }
             .title {
                 margin-top: 30px;
-                margin-bottom: 30 px;
+                margin-bottom: 30px;
                 padding-bottom: 30px;
             }
-            .table-wrapper {
-                width: 1100px;
-                margin: 30px auto;
-                background: #fff;
-                padding: 20px;	
-                box-shadow: 0 1px 1px rgba(0,0,0,.05);
-                padding-top: 150px;
+            .modal-notify .modal-header {
+                border-radius: 3px 3px 0 0;
             }
-            .table-title {
-                padding-bottom: 10px;
-                margin: 0 0 10px;
-            }
-            .table-title h2 {
-                margin: 6px 0 0;
-                font-size: 22px;
-            }
-            .table-title .add-new {
-                float: right;
-                height: 30px;
-                font-weight: bold;
-                font-size: 12px;
-                text-shadow: none;
-                min-width: 100px;
-                border-radius: 50px;
-                line-height: 13px;
-            }
-            .table-title .add-new i {
-                margin-right: 4px;
-
-            }
-            table.table {
-                table-layout: fixed;
-
-            }
-            table.table tr th, table.table tr td {
-                border-color: #e9e9e9;
-
-            }
-            table.table th i {
-                font-size: 13px;
-                margin: 0 5px;
-                cursor: pointer;
-
-            }
-            table.table th:last-child {
-                width: 100px;
-
-            }
-            table.table td a {
-                cursor: pointer;
-                display: inline-block;
-                margin: 0 5px;
-                min-width: 24px;
-
+            .modal-notify .modal-content {
+                border-radius: 3px;
             }    
-            table.table td a.add {
-                color: #27C46B;
-            }
-            table.table td a.edit {
-                color: #FFC107;
-            }
-            table.table td a.delete {
-                color: #E34724;
-            }
-            table.table td i {
-                font-size: 19px;
 
-            }
-            table.table td a.add i {
-                font-size: 24px;
-                margin-right: -1px;
-                position: relative;
-                top: 3px;
+            body {
 
-            }    
-            table.table .form-control {
-                height: 32px;
-                line-height: 32px;
-                box-shadow: none;
-                border-radius: 2px;
-            }
-            table.table .form-control.error {
-                border-color: #f50000;
-
-            }
-            table.table td .add {
-                display: none;
+                * { box-sizing: border-box; }
             }
 
-            img{
-                width: 190px;
+            .header {
+                background-color: #398B93;
+                color: black;
+                font-size: 1.5em;
+                padding: 1rem;
+                text-align: center;
+                text-transform: uppercase;
             }
+
+            img {
+                margin: 10px;
+                height:auto;
+                width:100px;
+            }
+
+            .table-users {
+                background-color: lightblue;
+                border: 1px solid darkgoldenrod;
+                border-radius: 10px;
+                box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+                max-width: calc(100% - 2em);
+                margin: 1em auto;
+                overflow: hidden;
+                width: 800px;
+            }
+            .mid{
+                text-align: center;
+            }
+            th{
+                text-align: center;
+            }
+            table {
+                width: 100%;
+
+                td, th { 
+                    color: darken(#398B93, 10%);
+                    padding: 10px; 
+                }
+
+                td {
+                    font-size: 10px;
+                    text-align: center;
+                    vertical-align: middle;
+
+                    &:last-child {
+                        font-size: 0.95em;
+                        line-height: 1.4;
+                        text-align: left;
+                    }
+                }
+
+                th { 
+                    background-color: lighten(#398B93, 50%);
+                    font-weight: 300;
+                }
+
+                tr {     
+                    &:nth-child(2n) { background-color: white; }
+                    &:nth-child(2n+1) { background-color: gainsboro; }
+                }
+            }
+
 
             .fade{
                 padding-top: 80px;
@@ -212,7 +194,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-1">
-                        <div class="sidebar d-flex flex-column flex-shrink-0 bg-light vh-100" style="width: 100px;">
+                        <div class="sidebar d-flex flex-column flex-shrink-0 bg-light vh-100" style="width: 100%;">
                             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                                 <li class="nav-item"> <a href="#" class="nav-link active py-3 border-bottom"> <i class="fa fa-home"></i> <small>Home</small> </a> </li>
                                 <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-dashboard"></i> <small>Dashboard</small> </a> </li>
@@ -243,27 +225,137 @@
                         </form>
 
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
+                    <div class="table-users">
+                        <div class="header">List Account</div>
+
+                        <table border="1px" >
                             <tr>
                                 <th>Username</th>
                                 <th>Role</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th width="120"></th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach  items="${requestScope.account}" var="a">
+                            <c:forEach items="${requestScope.account}" var="a">
                                 <tr>
-                                    <td>${a.getUsername()}</td>
-                                    <td>${a.getRoleId().getRoleName()}</td>
-                                    <td>${a.getStatus()}  </td>
-                                    <td><button type="button" class="btn btn-secondary" ><a href="changeAccountStatus?status=${a.getStatus()}&username=${a.username}">change</a></button></td>
+                                    <td>${a.username}</td>
+                                    <td ${a.roleId.roleName}</td>
+                                    <td class="mid">${a.status}</td>
+                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${d.ID}">Xóa</button> </td>
+                                </tr>     
 
-                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="updatemodal${d.ID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 15px">Cập nhật </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <br/>
+                                            </div>
+                                            <div>
+
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="id">ID</label>
+                                                        <input type="text" class="form-control" id="id" name="id" value="${d.ID}" readonly >
+                                                    </div>
+
+                                                    <div class="form-group ">
+                                                        <label for="name">Tên</label>
+                                                        <input type="text" class="form-control" id="name" name="name" value="${d.name}" >
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <label for="date">Ngày xuất bản</label>
+                                                        <input type="text" class="form-control" id="date" name="date" value=" ${d.date}" >
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="image">Ảnh</label>
+                                                        <input type="text" class="form-control" id="image" name="image" value="${d.image}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="size">Kích cỡ</label>
+                                                        <input type="text" class="form-control" id="size" name="size" value="${d.size}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="des">Mô tả</label>
+                                                        <textarea  class="form-control" id="des" name="des" >${d.description}</textarea>
+                                                    </div>
+                                                    <div class="form-row">                
+                                                        <div class="form-group col-md-4">
+                                                            <label for="cover">Loại bìa</label>
+                                                            <select id="cover" name="cover" class="form-control">
+                                                                <c:forEach items="${requestScope.cover}" var="c">
+                                                                    <option <c:if test="${d.cid.name==c.name}">selected</c:if> value="${c.id}">${c.name}</option>
+                                                                </c:forEach>
+                                                                <option>Khác</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="author">Tác giả</label>
+                                                            <select id="author" name="author" class="form-control">
+                                                                <c:forEach items="${requestScope.author}" var="a">
+                                                                    <option <c:if test="${d.aid.name==a.name}">selected</c:if> value="${a.ID}">${a.name}</option>
+                                                                </c:forEach>
+                                                                <option>Khác</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="publisher">Nhà Phát Hành</label>
+                                                            <select id="publisher" name="publisher" class="form-control">
+                                                                <c:forEach items="${requestScope.publisher}" var="p">
+                                                                    <option <c:if test="${d.pid.name==p.name}">selected</c:if> value="${p.ID}">${p.name}</option>
+                                                                </c:forEach>
+                                                                <option>Khác</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="quantity">Số lượng còn</label>
+                                                        <input type="number" class="form-control" id="quantity" name="quantity" value="${d.unitinstock}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price">Giá bán</label>
+                                                        <input type="text" class="form-control" id="price" name="price" value="${d.unitprice} ">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary"><a href="update?id=${d.ID}" style="color:yellow">Save changes</a></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Modal: modalConfirmDelete-->
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal${d.ID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Cảnh báo xóa sản phẩm</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <br/>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure to delete <strong style="color:red"> ${d.name}</strong> ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-primary"><a href="deletebook?id=${d.ID}">Yes</a></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
-                        </tbody>
-                    </table>
+                        </table>
+                    </div>
                     <h3> ${requestScope.note} </h3>
                 </div>
             </div>
