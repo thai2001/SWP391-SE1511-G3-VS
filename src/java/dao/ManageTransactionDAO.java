@@ -46,8 +46,8 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
-                Order order = new Order(rs.getInt("OrderId"),rs.getDate("DateCreated"), rs.getDouble("TotalPrice")
-                        , new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId")));
+                Order order = new Order(rs.getInt("OrderId"),rs.getString("DateCreated"), rs.getDouble("TotalPrice")
+                        , new Buyer(rs.getInt("BuyerId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
@@ -88,8 +88,8 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
-                Order order = new Order(rs.getInt("OrderId"),rs.getDate("DateCreated"), rs.getDouble("TotalPrice")
-                        ,new Seller(rs.getInt("SellerId")), new Buyer(rs.getInt("BuyerId"))) ;
+                Order order = new Order(rs.getInt("OrderId"),rs.getString("DateCreated"), 
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"))) ;
                 listOrder.add(order);
             }
         } catch (SQLException se) {

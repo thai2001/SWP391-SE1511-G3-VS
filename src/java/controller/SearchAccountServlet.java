@@ -9,12 +9,18 @@
  */
 package controller;
 
+import dao.BuyerDAO;
 import dao.ManageAccountDAO;
 import dao.RoleDAO;
+import dao.SellerDAO;
+import dao.impl.IBuyerDAO;
 import dao.impl.IManageAccountDAO;
 import dao.impl.IRoleDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
+import entity.Buyer;
 import entity.Role;
+import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * tìm kiếm tài khoản
+ *
  * @author nqt26
  */
 public class SearchAccountServlet extends HttpServlet {
@@ -48,7 +55,7 @@ public class SearchAccountServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchAccountServlet</title>");            
+            out.println("<title>Servlet SearchAccountServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SearchAccountServlet at " + request.getContextPath() + "</h1>");
@@ -70,17 +77,31 @@ public class SearchAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        try {
-            int roleId = Integer.parseInt(request.getParameter("roleId").trim());
-            int id = Integer.parseInt(request.getParameter("uid").trim());
-            IManageAccountDAO manageaccountdao = new ManageAccountDAO();
-            List<Account> account = null;
+        int roleId = Integer.parseInt(request.getParameter("roleId").trim());
+        int id = Integer.parseInt(request.getParameter("uid").trim());
+        IManageAccountDAO manageaccountdao = new ManageAccountDAO();
+        IBuyerDAO iBuyerDAO = new BuyerDAO();
+        ISellerDAO iSellerDAO = new SellerDAO();
+        List<Account> account = null;
+        Buyer buyer = null;
+        Seller seller = null;
         try {
             account = manageaccountdao.searchAccount(roleId, id);
+            if (roleId == 2) {
+                buyer = iBuyerDAO.getBuyer(account.get(0).getUsername());
+            }
+            if (roleId == 3) {
+                seller = iSellerDAO.getSeller(account.get(0).getUsername());
+                int numberProductSale = iSellerDAO.getNumberOfProductOnSale(seller.getSellerId());
+                request.setAttribute("numberProduct", numberProductSale);
+            }
         } catch (Exception ex) {
             Logger.getLogger(SearchAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-            request.setAttribute("account", account);
-            request.getRequestDispatcher("manageAccount").forward(request, response);
+        request.setAttribute("account", account);
+        request.setAttribute("seller", seller);
+        request.setAttribute("buyer", buyer);
+        request.getRequestDispatcher("manageAccount").forward(request, response);
 //        } catch (NullPointerException npt) {
 //            response.sendRedirect("login");
 //        }

@@ -10,7 +10,7 @@
     <!DOCTYPE html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
+        <title>Manage Account</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -79,10 +79,11 @@
             }
             table {
                 width: 100%;
-
+                border-collapse:collapse;
                 td, th { 
                     color: darken(#398B93, 10%);
                     padding: 10px; 
+                    border: 1px solid black;
                 }
 
                 td {
@@ -114,7 +115,7 @@
 
             }
             .form-group input{
-                width:180px;
+                width:100%;
                 height: 30px
             }
 
@@ -186,6 +187,9 @@
             .nav-link:hover .fa {
                 transform: rotate(360deg)
             }
+            .close {
+                margin-right: 5%
+            }
         </style>
     </head> 
     <body>
@@ -198,9 +202,6 @@
                             <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
                                 <li class="nav-item"> <a href="#" class="nav-link active py-3 border-bottom"> <i class="fa fa-home"></i> <small>Home</small> </a> </li>
                                 <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-dashboard"></i> <small>Dashboard</small> </a> </li>
-                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-first-order"></i> <small>My Orders</small> </a> </li>
-                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-cog"></i> <small>Settings</small> </a> </li>
-                                <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa fa-bookmark"></i> <small>Bookmark</small> </a> </li>
                                 <li> <a href="#" class="nav-link py-3 border-bottom"> <i class="fa "></i> <small>Sign out</small> </a> </li>
                             </ul>
                         </div>
@@ -228,7 +229,7 @@
                     <div class="table-users">
                         <div class="header">List Account</div>
 
-                        <table border="1px" >
+                        <table border="1px"  >
                             <tr>
                                 <th>Username</th>
                                 <th>Role</th>
@@ -237,118 +238,94 @@
                             </tr>
                             <c:forEach items="${requestScope.account}" var="a">
                                 <tr>
-                                    <td>${a.username}</td>
-                                    <td ${a.roleId.roleName}</td>
+                                    <td class="mid">${a.username}</td>
+                                    <td class="mid">${a.roleId.roleName}</td>
                                     <td class="mid">${a.status}</td>
-                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${d.ID}">Xóa</button> </td>
+                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Detail</button> </td>
                                 </tr>     
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="updatemodal${d.ID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 15px">Cập nhật </h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Account detail </h5>                                                                                                    
                                                 <br/>
                                             </div>
                                             <div>
-
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="id">ID</label>
-                                                        <input type="text" class="form-control" id="id" name="id" value="${d.ID}" readonly >
-                                                    </div>
-
-                                                    <div class="form-group ">
-                                                        <label for="name">Tên</label>
-                                                        <input type="text" class="form-control" id="name" name="name" value="${d.name}" >
-                                                    </div>
-                                                    <div class="form-group ">
-                                                        <label for="date">Ngày xuất bản</label>
-                                                        <input type="text" class="form-control" id="date" name="date" value=" ${d.date}" >
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="image">Ảnh</label>
-                                                        <input type="text" class="form-control" id="image" name="image" value="${d.image}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="size">Kích cỡ</label>
-                                                        <input type="text" class="form-control" id="size" name="size" value="${d.size}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="des">Mô tả</label>
-                                                        <textarea  class="form-control" id="des" name="des" >${d.description}</textarea>
-                                                    </div>
-                                                    <div class="form-row">                
-                                                        <div class="form-group col-md-4">
-                                                            <label for="cover">Loại bìa</label>
-                                                            <select id="cover" name="cover" class="form-control">
-                                                                <c:forEach items="${requestScope.cover}" var="c">
-                                                                    <option <c:if test="${d.cid.name==c.name}">selected</c:if> value="${c.id}">${c.name}</option>
-                                                                </c:forEach>
-                                                                <option>Khác</option>
-                                                            </select>
+                                                <c:if test="${ a.roleId.roleId == 2 }">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="buyerId">Buyer ID</label>
+                                                            <input type="text" class="form-control" id="buyerId" name="buyerId" value="${buyer.buyerId}" readonly >
                                                         </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="author">Tác giả</label>
-                                                            <select id="author" name="author" class="form-control">
-                                                                <c:forEach items="${requestScope.author}" var="a">
-                                                                    <option <c:if test="${d.aid.name==a.name}">selected</c:if> value="${a.ID}">${a.name}</option>
-                                                                </c:forEach>
-                                                                <option>Khác</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4">
-                                                            <label for="publisher">Nhà Phát Hành</label>
-                                                            <select id="publisher" name="publisher" class="form-control">
-                                                                <c:forEach items="${requestScope.publisher}" var="p">
-                                                                    <option <c:if test="${d.pid.name==p.name}">selected</c:if> value="${p.ID}">${p.name}</option>
-                                                                </c:forEach>
-                                                                <option>Khác</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="quantity">Số lượng còn</label>
-                                                        <input type="number" class="form-control" id="quantity" name="quantity" value="${d.unitinstock}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="price">Giá bán</label>
-                                                        <input type="text" class="form-control" id="price" name="price" value="${d.unitprice} ">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary"><a href="update?id=${d.ID}" style="color:yellow">Save changes</a></button>
-                                                </div>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                                        <div class="form-group ">
+                                                            <label for="buyerName">Name</label>
+                                                            <input type="text" class="form-control" id="buyerName" name="buyerName" value="${buyer.buyerName}" readonly >
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="buyerAddress">Address</label>
+                                                            <input type="text" class="form-control" id="buyerAddress" name="buyerAddress" value=" ${buyer.address}" readonly >
+                                                        </div>
 
-                                <!--Modal: modalConfirmDelete-->
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal${d.ID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Cảnh báo xóa sản phẩm</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <br/>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure to delete <strong style="color:red"> ${d.name}</strong> ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                <button type="button" class="btn btn-primary"><a href="deletebook?id=${d.ID}">Yes</a></button>
+                                                        <div class="form-group">
+                                                            <label for="buyerGmail">Gmail</label>
+                                                            <input type="text" class="form-control" id="buyerGmail" name="buyerGmail" value="${buyer.gmail}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="buyerPhone">Phone</label>
+                                                            <input type="text" class="form-control" id="buyerPhone" name="buyerPhone" value="${buyer.phone}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="buyerBirthday">Birthday</label>
+                                                            <input type="text"  class="form-control" id="buyerBirthday" name="buyerBirthday" value="${buyer.birthday}" readonly>
+                                                        </div>                                                 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?username=${a.username}&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${ a.roleId.roleId == 3 }">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="buyerId">Seller ID</label>
+                                                            <input type="text" class="form-control" id="buyerId" name="buyerId" value="${seller.sellerId}" readonly >
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <label for="sellerName">Name</label>
+                                                            <input type="text" class="form-control" id="sellerName" name="sellerName" value="${seller.sellerName}" readonly >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerDes">Description</label>
+                                                            <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${seller.description}" readonly>
+                                                        </div>  
+                                                        <div class="form-group ">
+                                                            <label for="sellerAddress">Address</label>
+                                                            <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${seller.address}" readonly >
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="sellerGmail">Gmail</label>
+                                                            <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${seller.gmail}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerPhone">Phone</label>
+                                                            <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${seller.phone}" readonly>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="numProductsOnSale">Number of products on sale</label>
+                                                            <input type="number"  class="form-control" id="numProductsOnSale" name="numProductsOnSale" value="${requestScope.numberProduct}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?username=${a.username}&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -379,8 +356,10 @@
         <!-- end footer -->
 
         <!-- Bootstrap core JavaScript -->        
-        <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- Bootstrap core JavaScript --> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

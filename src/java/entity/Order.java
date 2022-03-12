@@ -26,6 +26,13 @@ public class Order {
     public Order() {
     }
 
+    public Order(int orderId, String dateCreated, double totalPrice, Buyer buyer) {
+        this.orderId = orderId;
+        this.dateCreated = dateCreated;
+        this.totalPrice = totalPrice;
+        this.buyer = buyer;
+    }
+
     public int getOrderId() {
         return orderId;
     }
