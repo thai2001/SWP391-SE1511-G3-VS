@@ -215,6 +215,8 @@ public class AccountDAO extends DBContext {
         }
     }
 
+    /* Change password user from database"
+     */
     public void changePass(Account a, String newpass) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -247,6 +249,8 @@ public class AccountDAO extends DBContext {
         }
     }
 
+    /* select username from database"
+     */
     public String getUsername(String username) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -284,6 +288,8 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
+    /* Select email from database"
+     */
     public String getEmail(String username) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -332,6 +338,8 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
+    /* Select profile user from database"
+     */
     public Account getProfile(Account ac) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -389,6 +397,8 @@ public class AccountDAO extends DBContext {
         //return a;
     }
 
+    /* Update profile user from database"
+     */
     public void updateProfile(Account a) {
         Connection con = null;
         PreparedStatement ps = null;
