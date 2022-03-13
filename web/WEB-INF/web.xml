@@ -92,6 +92,10 @@
         <servlet-name>ManageOrder</servlet-name>
         <servlet-class>controller.ManageOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>controller.profile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>ManageOrder</servlet-name>
         <url-pattern>/manageorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
