@@ -78,7 +78,13 @@ public class SearchAccountServlet extends HttpServlet {
             throws ServletException, IOException {
 //        try {
         int roleId = Integer.parseInt(request.getParameter("roleId").trim());
-        int id = Integer.parseInt(request.getParameter("uid").trim());
+        int id = 0;
+        try {
+        id = Integer.parseInt(request.getParameter("uid").trim()); }
+        catch (NumberFormatException nfe){
+            request.setAttribute("notice", "Number required !");
+            request.getRequestDispatcher("manageAccount").forward(request, response);
+        }
         IManageAccountDAO manageaccountdao = new ManageAccountDAO();
         IBuyerDAO iBuyerDAO = new BuyerDAO();
         ISellerDAO iSellerDAO = new SellerDAO();
@@ -98,6 +104,8 @@ public class SearchAccountServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(SearchAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("roleId", roleId);
+        request.setAttribute("id", id);
         request.setAttribute("account", account);
         request.setAttribute("seller", seller);
         request.setAttribute("buyer", buyer);
