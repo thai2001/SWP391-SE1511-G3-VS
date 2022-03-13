@@ -40,16 +40,13 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      */
     @Override
         public Seller getSeller(String username) throws Exception {
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
         Seller seller = new Seller();
         try {
             con = getConnection();
             String sql = "select * from Seller\n"
-                    + "where Username = ? ";
+                    + "where Username like ? ";
             ps = con.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setString(1,"%"+ username +"%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 seller = new Seller(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),new Account(rs.getString(7)));
@@ -464,7 +461,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
 }
     public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
-         bd.getProductByBrandId(2, 2);
+         bd.getSeller("Nguyen A");
            
     }
     

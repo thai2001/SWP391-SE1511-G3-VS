@@ -11,6 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IOderDetailDAO;
+import entity.Order;
 import entity.OrderDetail;
 import entity.Product;
 import java.sql.Connection;
@@ -33,13 +34,15 @@ Connection con = null;
     @Override
     public List<OrderDetail> getOrderBySellerId(int sid) throws Exception {
          List<OrderDetail> list=new ArrayList<>();
-        String sql="Select OrderId,\n" +
-"          Product.ProductId,\n" +
+        String sql="Select OrderDetail.OrderId, \n" +
+"     Product.ProductId, \n" +
 "	   Image,\n" +
 "	   Product.ProductName,\n" +
-"	   Product.Quantity\n" +
+"	   OrderDetail.Quantity,\n" +
+"	   [Order].TotalPrice\n" +
 "	   from OrderDetail INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
-"	   Where SellerId = ? ";
+"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
+"	   Where [ORDER].SellerId = ? ";
         
         try{
             
@@ -49,7 +52,7 @@ Connection con = null;
             rs=ps.executeQuery();
             while(rs.next()){
                 OrderDetail od=new OrderDetail(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")),rs.getInt("Quantity"));
+                                               rs.getString("ProductName")),rs.getInt("Quantity"),new Order(rs.getDouble("TotalPrice")));
                 list.add(od);
             }
         }catch(Exception e){

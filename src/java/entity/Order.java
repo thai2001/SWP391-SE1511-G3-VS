@@ -33,6 +33,10 @@ public class Order {
         this.buyer = buyer;
     }
 
+    public Order(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public int getOrderId() {
         return orderId;
     }

@@ -22,9 +22,9 @@ public class OrderDetail {
     private float deliverPrice;
     private String start;
     private String end;
+    private Order order;
 
-    public OrderDetail() {
-    }
+  
 
     public OrderDetail(int orderId, Product product, int quantity, float deliverPrice, String start, String end) {
         this.orderId = orderId;
@@ -35,11 +35,11 @@ public class OrderDetail {
         this.end = end;
     }
 
-    public OrderDetail(int orderId, Product product, int quantity) {
+    public OrderDetail(int orderId, Product product, int quantity, Order order) {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
-        
+        this.order = order;
     }
 
     
@@ -66,7 +66,15 @@ public class OrderDetail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+      public Order getOrder() {
+        return order;
+    }
 
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+   
     public float getDeliverPrice() {
         return deliverPrice;
     }

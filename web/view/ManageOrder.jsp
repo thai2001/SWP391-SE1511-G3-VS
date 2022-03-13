@@ -176,19 +176,7 @@ header img{
 
 
     <!-- Header -->
-     <header>
-      <nav class="navbar bg-dark navbar-dark text-light">
-        <a href="#"> <img src="img/logo/onlinelogomaker-011922-2055-7830.png" alt="" /></a>
-        <div class="navlink">
-          <a class="nav-link link-light " href="#">Login</a>
-          <a class="nav-link link-light " href="#">Login</a>
-          <a class="nav-link link-light " href="#">Sign up</a>
-              
- 
-      </div>
-      </div>
-    </nav>
-  </header>
+       <jsp:include page="navbar.jsp"></jsp:include>
 
     <!-- Page Content -->
     <div class="container-lg">
@@ -206,10 +194,10 @@ header img{
                 <thead>
                     <tr>
                         <th>OrderID</th>
-                        <th>ProductID</th>
                         <th>Image</th>
                         <th>ProductName</th>
                         <th>Quantity</th>
+                        <th>TotalPrice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -218,12 +206,13 @@ header img{
                         <td>                          
                             ${odt.orderId}
                         </td>
-                        <td>${odt.product.id}</td>
+                        
                         <td>
                             <img src="${odt.product.img}">
                         </td>
                         <td>${odt.product.name}</td>
                         <td>${odt.quantity}</td>
+                        <td>${odt.order.totalPrice}</td>
                        
                     </tr>
                     </c:forEach>
