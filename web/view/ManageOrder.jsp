@@ -13,7 +13,7 @@
     <title>Vehicle Shopping</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         .table-wrapper {
     width: 1100px;
@@ -105,7 +105,7 @@ table.table td .add {
 }
 
 img{
-    width: 190px;
+    width: 180px;
 }
 
 .fade{
@@ -136,9 +136,7 @@ header{
     height: auto;
 
 }
-header img{
-    width: 50%;
-}
+
 .row1{
     margin-bottom: 30px;
     margin-top: 20px;
@@ -150,10 +148,30 @@ header img{
 .row a{
     font-size: 30px;
 }
-.row1 select{
+.row0 select{
     width: 100px;
     height: 30px;
+    margin-bottom: -10px;
+    margin-top: 10px;
 }
+
+ .pagination {
+                 display: inline-block;
+              }
+             .pagination a {
+                color: black;
+                font-size: 15px;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+              }
+            .pagination a.active {
+                background-color: red;
+                color: white;
+              }
+            .pagination a:hover:not(.active) {
+                background-color: red;
+            }
     </style>
 <!--
 
@@ -185,7 +203,7 @@ header img{
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Order <b>Detail</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Manage <b>Orders</b></a></div>
                     
                 </div>
                 
@@ -198,6 +216,7 @@ header img{
                         <th>ProductName</th>
                         <th>Quantity</th>
                         <th>TotalPrice</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -213,7 +232,7 @@ header img{
                         <td>${odt.product.name}</td>
                         <td>${odt.quantity}</td>
                         <td>${odt.order.totalPrice}</td>
-                       
+                        <td><a href="#orderdetail" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -222,14 +241,66 @@ header img{
     </div>
 </div>  
     
-
+<div id="orderdetail" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Order Detail #</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                 <div class="col-md-6">
+                               <div class="form-group">
+                                <label>Product Name</label>
+                                <input name="nopage" class="form-control" value="" readonly></input>
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                <input name="image" type="text" class="form-control" value="" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Created Date</label>
+                                <input name="price" type="text" class="form-control" value="" readonly>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label>Brand</label>
+                                <input name="author" class="form-control" value="" readonly></input>
+                            </div>
+                                <div class="form-group">
+                                <label>Quantity</label>
+                                <input name="author" class="form-control" value="" readonly></input>
+                            </div>
+          
+                          
+                            </div>
+                               
+                            <div class="col-md-6">
+                             <div class="form-group right">
+                                <label>Image</label>
+                               <img src="${odt.product.img}">
+                                
+                            </div>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label>Total Price</label>
+                                <h5 style="font-size: 36px"> 1000.000 VNĐ</h5>
+                            </div>
+                        </div>
+                       
+                </div>
+            </div>
+        </div>
     
  
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Additional Scripts -->
