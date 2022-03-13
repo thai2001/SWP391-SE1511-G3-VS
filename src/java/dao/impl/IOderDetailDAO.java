@@ -18,5 +18,5 @@ import java.util.List;
  */
 public interface IOderDetailDAO {
      public List<OrderDetail> getOrderBySellerId(int id) throws Exception;
-     
+      public OrderDetail getOrderByID(int pid) throws Exception;
 }

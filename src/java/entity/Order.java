@@ -33,7 +33,13 @@ public class Order {
         this.buyer = buyer;
     }
 
-    public Order(double totalPrice) {
+    
+public Order( double totalPrice) {
+        this.totalPrice = totalPrice;
+    } 
+
+    public Order(String dateCreated, double totalPrice) {
+        this.dateCreated = dateCreated;
         this.totalPrice = totalPrice;
     }
 

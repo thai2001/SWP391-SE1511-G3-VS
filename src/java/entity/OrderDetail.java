@@ -23,6 +23,8 @@ public class OrderDetail {
     private String start;
     private String end;
     private Order order;
+    private Buyer buyer;
+    private Brand brand;
 
   
 
@@ -40,6 +42,19 @@ public class OrderDetail {
         this.product = product;
         this.quantity = quantity;
         this.order = order;
+    }
+    
+        public OrderDetail(int orderId, Product product,Buyer buyer,  Order order,Brand brand ,int quantity) {
+        this.orderId = orderId;
+        this.product = product;
+        this.buyer = buyer;
+        this.order = order;
+        this.brand = brand;
+        this.quantity = quantity;
+        
+    }
+    public OrderDetail() {
+       
     }
 
     
@@ -74,6 +89,21 @@ public class OrderDetail {
     public void setOrder(Order order) {
         this.order = order;
     }
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
    
     public float getDeliverPrice() {
         return deliverPrice;
@@ -98,6 +128,8 @@ public class OrderDetail {
     public void setEnd(String end) {
         this.end = end;
     }
+
+    
 
     @Override
     public String toString() {

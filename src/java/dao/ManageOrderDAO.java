@@ -11,6 +11,8 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IOderDetailDAO;
+import entity.Brand;
+import entity.Buyer;
 import entity.Order;
 import entity.OrderDetail;
 import entity.Product;
@@ -68,6 +70,48 @@ Connection con = null;
         return list;
       }
        
+    }
+
+    @Override
+    public OrderDetail getOrderByID(int oid) throws Exception {
+        String sql="Select OrderDetail.OrderId,\n" +
+"       Product.ProductName,\n" +
+"	   Buyer.BuyerName,\n" +
+"	   [Order].DateCreated,\n" +
+"          Product.ProductId, \n" +
+"	   Brand.BrandName,\n" +
+"	   OrderDetail.Quantity,\n" +
+"	   Image,\n" +
+"	   [ORDER].TotalPrice\n" +
+"	   from OrderDetail INNER JOIN Product ON OrderDetail.ProductId = Product.ProductId\n" +
+"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
+"						INNER JOIN Buyer On Buyer.BuyerID = [ORDER].BuyerId\n" +
+"						INNER JOIN Brand ON Brand.BrandId = Product.BrandId\n" +
+"	   Where OrderDetail.OrderId = ? ";
+        try{
+            con = getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setInt(1,oid);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                OrderDetail od=new OrderDetail(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
+                                               rs.getString("ProductName")), new Buyer(rs.getString("BuyerName")), new Order(rs.getString("DateCreated"),rs.getDouble("TotalPrice")),
+                                                new Brand(rs.getString("BrandName")),rs.getInt("Quantity"));
+               
+                return od;
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }  finally{
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+            Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
+        
+        return null; 
     }
     
 }

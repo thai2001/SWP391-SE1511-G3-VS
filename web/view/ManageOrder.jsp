@@ -232,7 +232,7 @@ header{
                         <td>${odt.product.name}</td>
                         <td>${odt.quantity}</td>
                         <td>${odt.order.totalPrice}</td>
-                        <td><a href="#orderdetail" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Detail</a></td>
+                        <td><a href="manageorderdetail?oid=${odt.orderId}" type="button" class="btn btn-info" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -241,61 +241,7 @@ header{
     </div>
 </div>  
     
-<div id="orderdetail" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    
-                        <div class="modal-header">						
-                            <h4 class="modal-title">Order Detail #</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                 <div class="col-md-6">
-                               <div class="form-group">
-                                <label>Product Name</label>
-                                <input name="nopage" class="form-control" value="" readonly></input>
-                            </div>
-                            <div class="form-group">
-                                <label>Customer Name</label>
-                                <input name="image" type="text" class="form-control" value="" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Created Date</label>
-                                <input name="price" type="text" class="form-control" value="" readonly>
-                            </div>
-                            
-                             <div class="form-group">
-                                <label>Brand</label>
-                                <input name="author" class="form-control" value="" readonly></input>
-                            </div>
-                                <div class="form-group">
-                                <label>Quantity</label>
-                                <input name="author" class="form-control" value="" readonly></input>
-                            </div>
-          
-                          
-                            </div>
-                               
-                            <div class="col-md-6">
-                             <div class="form-group right">
-                                <label>Image</label>
-                               <img src="${odt.product.img}">
-                                
-                            </div>
-                            </div>
-                            
-                             <div class="form-group">
-                                <label>Total Price</label>
-                                <h5 style="font-size: 36px"> 1000.000 VNĐ</h5>
-                            </div>
-                        </div>
-                       
-                </div>
-            </div>
-        </div>
-    
- 
+
 
 
     <!-- Bootstrap core JavaScript -->

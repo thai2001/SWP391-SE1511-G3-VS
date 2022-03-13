@@ -24,6 +24,12 @@ public class Brand {
         this.img = img;
     }
 
+    public Brand(String name) {
+       this.name = name;
+    }
+
+    
+
     public int getId() {
         return id;
     }

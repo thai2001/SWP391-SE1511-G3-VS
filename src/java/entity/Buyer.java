@@ -43,6 +43,14 @@ public class Buyer {
     public Buyer(int buyerId) {
         this.buyerId = buyerId;
     }
+
+    public Buyer(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    
+
+    
     
     public int getBuyerId() {
         return buyerId;
