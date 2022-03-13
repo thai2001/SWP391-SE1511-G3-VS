@@ -197,7 +197,7 @@ header img{
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="manageorderdetail">Order <b>Detail</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Order <b>Detail</b></a></div>
                     
                 </div>
                 

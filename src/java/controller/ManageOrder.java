@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-11      1.0                 QuanTBA           First Implement
+ * 2018-09-10      1.0                 MinhLH           First Implement
  */
 package controller;
 
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class ManageOrderDetail extends HttpServlet {
+public class ManageOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +50,10 @@ public class ManageOrderDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageOrderDetail</title>");            
+            out.println("<title>Servlet ManageOrder</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageOrderDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ManageOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,9 +79,9 @@ public class ManageOrderDetail extends HttpServlet {
           Seller seller = manageProductDao.getSeller(a.getUsername());
             List<OrderDetail> listorderdetail = iOrderDetailDAO.getOrderBySellerId(seller.getSellerId());
             request.setAttribute("orderdt", listorderdetail);
-            request.getRequestDispatcher("view/OrderDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){
-            Logger.getLogger(ManageOrderDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
