@@ -73,9 +73,6 @@
                     <button onclick="window.location.href = './register'" type="button" class="btn btn-block create-account">Register</button>
                 </div>
                 <div class="form-group">
-                    <button onclick="window.location.href = './changePass'" type="button" class="btn btn-block create-account">Change Password</button>
-                </div>
-                <div class="form-group">
                     <button onclick="window.location.href = './forgotPass'" type="button" class="btn btn-block create-account">Forgot Password</button>
                 </div>
             </form>

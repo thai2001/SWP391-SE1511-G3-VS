@@ -42,7 +42,7 @@
                     </c:if>> Your account or password already exists! Please create another</p>
                 <div class="form-group">
                     <p id="username" style="display: none;">Username must be no more than 20 characters long and not blank</p>
-                    <input type="text" class="form-control item" name="user" placeholder="Username"
+                    <input type="text" class="form-control item" name="user" placeholder="Username (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.username}"
@@ -54,7 +54,7 @@
 
                 <div class="form-group">
                     <p id="password" style="display: none;">Password must be at least 6 characters long and not blank</p>
-                    <input type="password" class="form-control item" name="password"  placeholder="Password"
+                    <input type="password" class="form-control item" name="password"  placeholder="Password (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.password}"
@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <p id="repass" style="display: none;">Repassword must be the same password! </p>
-                    <input type="password" class="form-control item" name="repass" placeholder="RePassword"
+                    <input type="password" class="form-control item" name="repass" placeholder="RePassword (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.password}"
@@ -74,7 +74,7 @@
 
                 <div class="form-group">
                     <p id="name" style="display: none;">Displayname not the blank </p>
-                    <input type="text" class="form-control item" name="name" placeholder="DisplayName"
+                    <input type="text" class="form-control item" name="name" placeholder="DisplayName (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.name}"
@@ -90,7 +90,7 @@
                     <p <c:if test = "${mess ne 'EmailWrong'}">
                             style="display:none;"
                         </c:if>> Your Gmail is not correct! please check it again</p>
-                    <input type="text" class="form-control item" name="gmail" placeholder="Gmail"
+                    <input type="text" class="form-control item" name="gmail" placeholder="Gmail (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.email}"
@@ -100,7 +100,7 @@
 
                 <div class="form-group">
                     <p id="phone" style="display: none;">PhoneNumber invalid! Must be 10 character </p>
-                    <input type="text" class="form-control item" name="phone" placeholder="Phone number"
+                    <input type="text" class="form-control item" name="phone" placeholder="Phone number (Require)"
                            <c:choose>
                                <c:when test="${Account != null}">
                                    value="${Account.phone}"
@@ -112,7 +112,7 @@
                      style="display: none;"
                     </c:if>>
                     <p  id="address" style="display: none;">Address not be blank </p>
-                    <input type="text" class="form-control item" name="address" placeholder="Address"
+                    <input type="text" class="form-control item" name="address" placeholder="Address (Require)"
                            <c:choose>
                                <c:when test="${Account.address != null}">
                                    value="${Account.address}"
@@ -124,7 +124,7 @@
                      style="display: none;"
                     </c:if>>
                     <p id="description" style="display: none;">Description not be blank</p>
-                    <input type="text" class="form-control item" name="description" placeholder="Description"
+                    <input type="text" class="form-control item" name="description" placeholder="Description (Require)"
                            <c:choose>
                                <c:when test="${Account.description != null}">
                                    value="${Account.description}"
