@@ -20,10 +20,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Lớp này có các phương thức thực hiện truy vấn dữ liệu từ bảng Account.Thay
+ * đổi mật khẩu người dùng
  *
- * @author Admin
+ *
+ * @author levan
  */
-public class changePass extends HttpServlet {
+/**
+ *
+ * @author levan
+ */
+public class changePass extends BaseReqAuth {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,9 +51,10 @@ public class changePass extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/changePass.jsp").forward(request, response);
+        //request.getRequestDispatcher("view/changePass.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/profile");
     }
 
     /**
@@ -58,44 +66,40 @@ public class changePass extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String user = request.getParameter("username").trim();
         String pass = request.getParameter("oldpassword").trim();
         String newpass = request.getParameter("newpassword").trim();
+        Account ac = (Account) request.getSession().getAttribute("account");
+        System.out.println(user);
+        System.out.println(pass);
+        System.out.println(newpass);
 
+        System.out.println(ac.getUsername());
+        System.out.println(ac.getPassword());
         AccountDAO adb = new AccountDAO();
         Account a = new Account();
-        a.setUsername(user);
-        a.setPassword(pass);
-
-        Account ac = adb.getAccount(a);
-
-        if (ac == null) {
-            String mess = "InvalidAC";
-            request.setAttribute("mess", mess);
-            request.setAttribute("Account", a);
-            request.setAttribute("newpass", newpass);
-            request.getRequestDispatcher("view/changePass.jsp").forward(request, response);
+        Account a1 = new Account();
+     
+        if (ac.getUsername().equals(user) && ac.getPassword().equals(pass)) {
+            adb.changePass(ac, newpass);
+            request.setAttribute("Account", adb.getProfile(ac));
+            request.setAttribute("mess2", 1);
+            request.setAttribute("role", ac.getRoleId().getRoleId());
+            request.getRequestDispatcher("view/profile.jsp").forward(request, response);
             return;
         }
-
-        if (ac != null) {
-            if (ac.getCode() != 0) {
-                int messcode = 1;
-                String mess = "InValidCode";
-                request.setAttribute("messcode", messcode);
-                request.setAttribute("mess", mess);
-                request.setAttribute("Account", ac);
-                request.getRequestDispatcher("view/login.jsp").forward(request, response);
-                return;
-            }
-            if (ac.getCode() == 0) {
-                adb.changePass(a, newpass);
-                response.sendRedirect("login");
-                return;
-            }
-        }
+   
+        a1.setUsername(user);
+        a1.setPassword(pass);
+        request.setAttribute("mess", "InvalidAC");
+        request.setAttribute("Account", adb.getProfile(ac));
+        request.setAttribute("Account1", a1);
+        request.setAttribute("newpass", newpass);
+        request.setAttribute("role", ac.getRoleId().getRoleId());
+        request.getRequestDispatcher("view/profile.jsp").forward(request, response);
+        //return;
     }
 
     /**
