@@ -19,7 +19,6 @@ public class OrderDetail {
     private int orderId;
     private Product product;
     private int quantity;
-    private float deliverPrice;
     private String start;
     private String end;
     private Order order;
@@ -28,11 +27,10 @@ public class OrderDetail {
 
   
 
-    public OrderDetail(int orderId, Product product, int quantity, float deliverPrice, String start, String end) {
+    public OrderDetail(int orderId, Product product, int quantity, String start, String end) {
         this.orderId = orderId;
         this.product = product;
         this.quantity = quantity;
-        this.deliverPrice = deliverPrice;
         this.start = start;
         this.end = end;
     }
@@ -105,13 +103,7 @@ public class OrderDetail {
         this.brand = brand;
     }
    
-    public float getDeliverPrice() {
-        return deliverPrice;
-    }
-
-    public void setDeliverPrice(float deliverPrice) {
-        this.deliverPrice = deliverPrice;
-    }
+ 
 
     public String getStart() {
         return start;
@@ -133,7 +125,7 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail{" + "orderId=" + orderId + ", product=" + product + ", quantity=" + quantity + ", deliverPrice=" + deliverPrice + ", start=" + start + ", end=" + end + '}';
+        return "OrderDetail{" + "orderId=" + orderId + ", product=" + product + ", quantity=" + quantity + ", deliverPrice="  + ", start=" + start + ", end=" + end + '}';
     }
 
   

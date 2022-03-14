@@ -9,7 +9,6 @@
  */
 package entity;
 
-import java.sql.Date;
 
 /**
  * tạo các trường cho lớp Order
