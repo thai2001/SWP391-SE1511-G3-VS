@@ -19,16 +19,18 @@ public class Report {
     private int reportId;
     private Buyer buyerId;
     private Product productId;
+    private Seller seller;
     private ReportType reportTypeId;
     private String Content;
 
     public Report() {
     }
 
-    public Report(int reportId, Buyer buyerId, Product productId, ReportType reportTypeId, String Content) {
+    public Report(int reportId, Buyer buyerId, Product productId, Seller seller,ReportType reportTypeId, String Content) {
         this.reportId = reportId;
         this.buyerId = buyerId;
         this.productId = productId;
+        this.seller = seller;
         this.reportTypeId = reportTypeId;
         this.Content = Content;
     }

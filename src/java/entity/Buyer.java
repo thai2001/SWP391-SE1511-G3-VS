@@ -40,6 +40,12 @@ public class Buyer {
         this.username = username;
     }
 
+    public Buyer(int buyerId, String buyerName) {
+        this.buyerId = buyerId;
+        this.buyerName = buyerName;
+    }
+    
+    
     public Buyer(int buyerId) {
         this.buyerId = buyerId;
     }

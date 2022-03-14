@@ -15,6 +15,7 @@ import entity.Buyer;
 import entity.Product;
 import entity.Report;
 import entity.ReportType;
+import entity.Seller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,13 +44,17 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                 throw ex;
             }
             String sql = " Select * from Report inner join ReportType on"
-                    + " Report.TypeId = ReportType.TypeId";
+                    + " Report.TypeId = ReportType.TypeId inner join Buyer on"
+                    + " Report.BuyerId = Buyer.BuyerId inner join Product on"
+                    + " Report.ProductId = Product.ProductId inner join Seller on"
+                    + " Seller.SellerId = Product.SellerId WHERE 1=1 ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Report report = new Report(rs.getInt("reportId"), new Buyer(rs.getInt("buyerId")),
-                        new Product(rs.getInt("productid")), new ReportType(rs.getInt("TypeId"),
-                                rs.getString("reportName")), rs.getString("content"));
+                Report report = new Report(rs.getInt("reportId"), new Buyer(rs.getInt("buyerId"), rs.getString("buyername")),
+                        new Product(rs.getInt("productid"), rs.getString("productname")),
+                        new Seller(rs.getInt("sellerId"), rs.getString("sellerName")),
+                        new ReportType(rs.getInt("TypeId"),rs.getString("reportName")), rs.getString("content"));
                 listReport.add(report);
             }
         } catch (Exception ex) {
@@ -67,7 +72,7 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
     }
 
     @Override
-    public List<Report> getReportByFilter( int buyerId, int productId, int typeReportId, String Sort) throws Exception {
+    public List<Report> getReportByFilter(int buyerId, int productId, int typeReportId, String Sort) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -79,7 +84,10 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                 System.out.println("lỗi khi kết nối:" + ex);
             }
             String sql = " Select * from Report inner join ReportType on"
-                    + " Report.TypeId = ReportType.TypeId WHERE 1=1 ";
+                    + " Report.TypeId = ReportType.TypeId inner join Buyer on"
+                    + " Report.BuyerId = Buyer.BuyerId inner join Product on"
+                    + " Report.ProductId = Product.ProductId inner join Seller on"
+                    + " Seller.SellerId = Product.SellerId WHERE 1=1 ";
             if (buyerId > 0) {
                 sql += "and buyerId = " + buyerId + " ";
             }
@@ -95,9 +103,10 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Report report = new Report(rs.getInt("reportId"), new Buyer(rs.getInt("buyerId")),
-                        new Product(rs.getInt("productid")), new ReportType(rs.getInt("TypeId"),
-                                rs.getString("reportName")), rs.getString("content"));
+                Report report = new Report(rs.getInt("reportId"), new Buyer(rs.getInt("buyerId"), rs.getString("buyername")),
+                        new Product(rs.getInt("productid"), rs.getString("productname")),
+                        new Seller(rs.getInt("sellerId"), rs.getString("sellerName")),
+                        new ReportType(rs.getInt("TypeId"),rs.getString("reportName")), rs.getString("content"));
                 listReport.add(report);
             }
         } catch (SQLException ex) {
@@ -147,9 +156,10 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
         }
         return listReportType;
     }
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
         ManageReportDAO m = new ManageReportDAO();
-        List<Report> li = m.getReportByFilter(2, 0, 0, "reportId DESC");
-        System.out.println(li.get(0).getReportId());
+        List<Report> li = m.getAllReport();
+        System.out.println(li.get(4).getReportId());
     }
 }

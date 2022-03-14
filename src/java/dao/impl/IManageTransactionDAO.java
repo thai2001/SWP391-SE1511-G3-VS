@@ -10,6 +10,7 @@
 package dao.impl;
 
 import entity.Order;
+import entity.OrderDetail;
 import java.sql.Date;
 import java.util.List;
 
@@ -22,5 +23,5 @@ import java.util.List;
 public interface IManageTransactionDAO {
     public List<Order> GetAllOrder () throws Exception;
     public List<Order> GetOrderByFilter(int orderId, int sellerId, int buyerId, Date dateFrom, Date dateTo, String sortColunm) throws Exception;
-    public List<Order> GetOrderDetail(int orderId) throws Exception;
+    public List<OrderDetail> GetOrderDetail(int orderId) throws Exception;
 }

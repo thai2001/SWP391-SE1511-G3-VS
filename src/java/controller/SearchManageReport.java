@@ -70,10 +70,10 @@ public class SearchManageReport extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int buyerId = Integer.parseInt(request.getParameter("buyerId"));
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId"));
-            String Sort = request.getParameter("sort");
+            int buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
+            int productId = Integer.parseInt(request.getParameter("productId").trim());
+            int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId").trim());
+            String Sort = request.getParameter("sort").trim();
             IManageReportDAO iManageReportDAO = new ManageReportDAO();
             List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, Sort);
             List<ReportType> listReporttype = iManageReportDAO.getAllReportType();

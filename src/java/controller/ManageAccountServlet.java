@@ -69,12 +69,10 @@ public class ManageAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            IManageAccountDAO manageaccountdao = new ManageAccountDAO();
+            IManageAccountDAO manageaccountdao = new ManageAccountDAO();            
             IRoleDAO iRoleDAO = new RoleDAO();
             List<Role> listRole = iRoleDAO.getAllRole();
             request.setAttribute("role", listRole);
-            if ( request.getAttribute("account") == null){          
-            request.setAttribute("notice", "Search data is missing");}
             request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
         } catch (NullPointerException npt) {
             response.sendRedirect("login");

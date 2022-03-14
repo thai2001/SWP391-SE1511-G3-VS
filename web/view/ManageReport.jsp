@@ -9,122 +9,115 @@
 <html lang="en">
     <!DOCTYPE html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Manage Report</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"/>
-        <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <!-- custom CSS here -->
+        <link href="../css/sidebar.css" rel="stylesheet" type="text/css"/>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <!-- CSS outsource -->
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <!-- Bootstrap core JavaScript -->      
 
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
-            .table-wrapper {
-                width: 1100px;
-                margin: 30px auto;
-                background: #fff;
-                padding: 20px;	
-                box-shadow: 0 1px 1px rgba(0,0,0,.05);
-                padding-top: 150px;
+            .sidebar {
+                position: inherit;
             }
-            .table-title {
-                padding-bottom: 10px;
-                margin: 0 0 10px;
+            .title {
+                margin-top: 30px;
+                margin-bottom: 30px;
+                padding-bottom: 30px;
             }
-            .table-title h2 {
-                margin: 6px 0 0;
-                font-size: 22px;
+            .modal-notify .modal-header {
+                border-radius: 3px 3px 0 0;
             }
-            .table-title .add-new {
-                float: right;
-                height: 30px;
-                font-weight: bold;
-                font-size: 12px;
-                text-shadow: none;
-                min-width: 100px;
-                border-radius: 50px;
-                line-height: 13px;
-            }
-            .table-title .add-new i {
-                margin-right: 4px;
-
-            }
-            table.table {
-                table-layout: fixed;
-
-            }
-            table.table tr th, table.table tr td {
-                border-color: #e9e9e9;
-
-            }
-            table.table th i {
-                font-size: 13px;
-                margin: 0 5px;
-                cursor: pointer;
-
-            }
-            table.table th:last-child {
-                width: 100px;
-
-            }
-            table.table td a {
-                cursor: pointer;
-                display: inline-block;
-                margin: 0 5px;
-                min-width: 24px;
-
+            .modal-notify .modal-content {
+                border-radius: 3px;
             }    
-            table.table td a.add {
-                color: #27C46B;
-            }
-            table.table td a.edit {
-                color: #FFC107;
-            }
-            table.table td a.delete {
-                color: #E34724;
-            }
-            table.table td i {
-                font-size: 19px;
 
-            }
-            table.table td a.add i {
-                font-size: 24px;
-                margin-right: -1px;
-                position: relative;
-                top: 3px;
+            body {
 
-            }    
-            table.table .form-control {
-                height: 32px;
-                line-height: 32px;
-                box-shadow: none;
-                border-radius: 2px;
-            }
-            table.table .form-control.error {
-                border-color: #f50000;
-
-            }
-            table.table td .add {
-                display: none;
+                * { box-sizing: border-box; }
             }
 
-            img{
-                width: 190px;
+            .header {
+                background-color: #398B93;
+                color: black;
+                font-size: 1.5em;
+                padding: 1rem;
+                text-align: center;
+                text-transform: uppercase;
             }
+
+            img {
+                margin: 10px;
+                height:auto;
+                width:100px;
+            }
+
+            .table-users {
+                background-color: lightblue;
+                border: 1px solid darkgoldenrod;
+                border-radius: 10px;
+                box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+                max-width: calc(100% - 2em);
+                margin: 1em auto;
+                overflow: hidden;
+                width: 800px;
+            }
+            .mid{
+                text-align: center;
+            }
+            th{
+                text-align: center;
+            }
+            table {
+                width: 100%;
+                border-collapse:collapse;
+                td, th { 
+                    color: darken(#398B93, 10%);
+                    padding: 10px; 
+                    border: 1px solid black;
+                }
+
+                td {
+                    font-size: 10px;
+                    text-align: center;
+                    vertical-align: middle;
+
+                    &:last-child {
+                        font-size: 0.95em;
+                        line-height: 1.4;
+                        text-align: left;
+                    }
+                }
+
+                th { 
+                    background-color: lighten(#398B93, 50%);
+                    font-weight: 300;
+                }
+
+                tr {     
+                    &:nth-child(2n) { background-color: white; }
+                    &:nth-child(2n+1) { background-color: gainsboro; }
+                }
+            }
+
 
             .fade{
                 padding-top: 80px;
 
             }
             .form-group input{
-                width:180px;
+                width:100%;
                 height: 30px
             }
 
@@ -145,7 +138,6 @@
                 top: 0px;
                 width: 100%;
                 height: auto;
-
             }
             header img{
                 width: 50%;
@@ -169,76 +161,404 @@
 
                 * { box-sizing: border-box; }
             }
-            .list {
+            body {
+                background-color: #eee
+            }
 
+            .nav-link {
+                border-radius: 0px !important;
+                transition: all 0.5s;
+                width: 100px;
+                display: flex;
+                flex-direction: column
+            }
+
+            .nav-link small {
+                font-size: 12px
+            }
+
+            .nav-link:hover {
+                background-color: #52525240 !important
+            }
+
+            .nav-link .fa {
+                transition: all 1s;
+                font-size: 20px
+            }
+
+            .nav-link:hover .fa {
+                transform: rotate(360deg)
+            }
+            .close {
+                margin-right: 5%
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: #fafafa;
+            }
+
+            p {
+                font-family: 'Poppins', sans-serif;
+                font-size: 1.1em;
+                font-weight: 300;
+                line-height: 1.7em;
+                color: #999;
+            }
+
+            a,
+            a:hover,
+            a:focus {
+                color: inherit;
+                text-decoration: none;
+                transition: all 0.3s;
+            }
+
+            .navbar {
+                padding: 15px 10px;
+                background: #fff;
+                border: none;
+                border-radius: 0;
+                margin-bottom: 40px;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar-btn {
+                box-shadow: none;
+                outline: none !important;
+                border: none;
+            }
+
+            .line {
+                width: 100%;
+                height: 1px;
+                border-bottom: 1px dashed #ddd;
+                margin: 40px 0;
+            }
+
+            /* ---------------------------------------------------
+                SIDEBAR STYLE
+            ----------------------------------------------------- */
+
+            .wrapper {
+                display: flex;
+                width: 100%;
+                align-items: stretch;
+            }
+
+            #sidebar {
+                min-width: 250px;
+                max-width: 250px;
+                background: #7386D5;
+                color: #fff;
+                transition: all 0.3s;
+            }
+
+            #sidebar.active {
+                margin-left: -250px;
+            }
+
+            #sidebar .sidebar-header {
+                padding: 20px;
+                background: #bee5eb;
+            }
+
+            #sidebar ul.components {
+                padding: 20px 0;
+                border-bottom: 1px solid #47748b;
+            }
+
+            #sidebar ul p {
+                color: #fff;
+                padding: 10px;
+            }
+
+            #sidebar ul li a {
+                padding: 10px;
+                font-size: 1.1em;
+                display: block;
+            }
+
+            #sidebar ul li a:hover {
+                color: #7386D5;
+                background: #fff;
+            }
+
+            #sidebar ul li.active>a,
+            a[aria-expanded="true"] {
+                color: #fff;
+                background: #6d7fcc;
+            }
+
+            a[data-toggle="collapse"] {
+                position: relative;
+            }
+
+            .dropdown-toggle::after {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 20px;
+                transform: translateY(-50%);
+            }
+
+            ul ul a {
+                font-size: 0.9em !important;
+                padding-left: 30px !important;
+                background: #6d7fcc;
+            }
+
+            ul.CTAs {
+                padding: 20px;
+            }
+
+            ul.CTAs a {
+                text-align: center;
+                font-size: 0.9em !important;
+                display: block;
+                border-radius: 5px;
+                margin-bottom: 5px;
+            }
+
+            a.download {
+                background: #fff;
+                color: #7386D5;
+            }
+
+            a.article,
+            a.article:hover {
+                background: #6d7fcc !important;
+                color: #fff !important;
+            }
+
+            /* ---------------------------------------------------
+                CONTENT STYLE
+            ----------------------------------------------------- */
+
+            #content {
+                width: 100%;
+                padding: 20px;
+                min-height: 100vh;
+                transition: all 0.3s;
+            }
+
+            /* ---------------------------------------------------
+                MEDIAQUERIES
+            ----------------------------------------------------- */
+
+            @media (max-width: 768px) {
+                #sidebar {
+                    margin-left: -250px;
+                }
+                #sidebar.active {
+                    margin-left: 0;
+                }
+                #sidebarCollapse span {
+                    display: none;
+                }
             }
         </style>
     </head> 
     <body>
         <!-- navbar dung chung -->
-        <jsp:include page="navbar.jsp"></jsp:include>
-
-            <div class="container-fluid">
-                <div class="row title">
-                    <div class="col-sm-3"><a class="link-dark" href="manageTransaction">Manage <b>Transaction</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="manageReport">Manage <b>Report</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="manageAccount">Manage <b>Account</b></a></div>
-                    <div class="col-sm-3"><a class="link-dark" href="authorize">Authorize <b>Seller</b></a></div>
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><a href="homePage"> <img class="logo" src="img/onlinelogomaker-011922-2055-7830.png" alt="" style="width: 210px" /></a> </h3> 
                 </div>
-                <div class="row">
-                    <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
-                        <select name="reportTypeId">
-                            <option value="0" > Tất cả các loại</option>
-                        <c:forEach items="${requestScope.reportType}" var="r">
-                            <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
-                        </c:forEach> 
-                    </select>    
-                    <input value="0" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
-                    <input value="0" name="productId" type="text" class="SearchBox" placeholder="Nhập productId">
-                    <select name="sort">                           
-                        <option  value="reportId DESC" > Report Id giảm dần </option>
-                    </select> 
-                    <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
-                </form>
+
+                <ul class="list-unstyled components">
+                    <p style="font-size: 30px; font-family: serif">Admin system</p>
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manage</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="authorize">Authorise Seller</a>
+                            </li>
+                            <li>
+                                <a href="manageAccount">Manage Account</a>
+                            </li>
+                            <li>
+                                <a href="manageTransaction">Manage Transaction</a>
+                            </li>
+                            <li>
+                                <a href="manageReport">Manage Report</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="homepage" class="download">Go to homepage</a>
+                    </li>
+                    <li>
+                        <a href="#" class="article">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+
+                        </button>
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">                 
+
+                                <li class="nav-item">
+                                    <h2>Welcome <b>admin</b></h2>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
+                            <select name="reportTypeId">
+                                <option value="0" > Tất cả các loại</option>
+                                <c:forEach items="${requestScope.reportType}" var="r">
+                                    <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
+                                </c:forEach> 
+                            </select>    
+                            <input value="0" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId" pattern="[0-9]">
+                            <input value="0" name="productId" type="text" class="SearchBox" placeholder="Nhập productId" pattern="[0-9]">
+                            <select name="sort">                           
+                                <option  value="reportId DESC" > Report Id giảm dần </option>
+                                <option  value="reportId ASC" > Report Id tăng dần </option>
+                            </select> 
+                            <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                        </form>
+
+                    </div>
+                    <h4>${requestScope.notice}</h4>
+                        <div class="table-users">
+                            <div class="header">List Report</div>
+
+                            <table border="1px"  >
+                                <tr>
+                                    <th>ReportId</th>
+                                    <th>Reporter</th>
+                                    <th>ProductName</th>
+                                    <th>Report Type</th>
+                                    <th width="120"></th>
+                                </tr>
+                                <c:forEach items="${requestScope.report}" var="r">
+                                    <tr>
+                                        <td class="mid">${r.reportId}</td>
+                                        <td class="mid">${r.buyerId.buyerName}</td>
+                                        <td class="mid"><a href="productDetail?pid=${r.productId.id}">${r.productId.name}</a></td>
+                                        <td class="mid">${r.reportTypeId.reportTypeName}</td>
+                                        <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reportModal${r.reportId}">Detail</button> </td>
+                                    </tr>     
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="reportModal${r.reportId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
+                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Report detail </h5>                                                                                                    
+                                                    <br/>
+                                                </div>
+                                                <div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="buyerId">ReportId</label>
+                                                                <input type="text" class="form-control" id="buyerId" name="buyerId" value="${r.reportId}" readonly >
+                                                            </div>
+
+                                                            <div class="form-group ">
+                                                                <label for="sellerName">Reporter ID</label>
+                                                                <input type="text" class="form-control" id="sellerName" name="sellerName" value="${r.buyerId.buyerId}" readonly >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sellerDes">Reporter Name</label>
+                                                                <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${r.buyerId.buyerName}" readonly>
+                                                            </div>  
+                                                            <div class="form-group ">
+                                                                <label for="sellerAddress">Product ID</label>
+                                                                <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${r.productId.id}" readonly >
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="sellerGmail">Product Name</label>
+                                                                <input type="text" class="form-control" id="sellerGmail" name="sellerGmail" value="${r.productId.name}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sellerPhone">Product's seller ID</label>
+                                                                <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${r.seller.sellerId}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sellern">Product's seller Name</label>
+                                                                <input type="text" class="form-control" id="sellern" name="sellern" value="${r.seller.sellerName}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="sellerGmail">Report type</label>
+                                                                <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${r.reportTypeId.reportTypeName}" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="numProductsOnSale">Content</label>
+                                                                <input type="text"  class="form-control" id="numProductsOnSale" name="numProductsOnSale" value="${r.content}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                            
+                                                        </div>          
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </table>
+                        </div> 
+                </div>
+            </div>
+        </div>        
+        <!-- page-wrapper -->
+
+        <!-- footer  -->
+        <footer class="bg-dark text-light">
+            <div class="tiltle information">
+                <h3  >More information</h3>
+                <button type="button" class="btn btn-outline-secondary"> <a href="#"></a> <i class="bi bi-instagram"></i></button>
+                <button type="button" class="btn btn-outline-success"> <a href="#"></a> <i class="bi bi-instagram"></i></button>
+                <button type="button" class="btn btn-outline-success"> <a href="#"></a> <i class="bi bi-instagram"></i></button>
+                <br>
+            </div>
+            <div class="tiltle address">
+                <h3  >Address</h3>
+                <p>SWP301-SE1511-JS</p>
 
             </div>
+        </footer>
+        <!-- end footer -->
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Report Id</th>
-                        <th>Buyer Id</th>
-                        <th>Product Id</th>
-                        <th>Report Type</th>
-                        <th>Content</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.report}" var="r">
-                        <tr>
-                            <td>                          
-                                ${r.reportId}
-                            </td>
-                            <td>${r.buyerId.buyerId}</td>
-                            <td>${r.productId.id}</td>
-                            <td>                          
-                                ${r.reportTypeId.reportTypeId}
-                            </td>
-                            <td>                          
-                                ${r.content}
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
+        <!-- Bootstrap core JavaScript -->  
+        <script>
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </body>
 </html>
 
