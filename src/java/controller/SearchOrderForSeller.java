@@ -11,14 +11,15 @@ package controller;
 
 import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
-import dao.impl.IManageProductDao;
 import dao.impl.IOderDetailDAO;
 import entity.Account;
 import entity.Order;
 import entity.OrderDetail;
+import entity.Product;
 import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +33,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class ManageOrder extends HttpServlet {
+public class SearchOrderForSeller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,10 +52,10 @@ public class ManageOrder extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageOrder</title>");            
+            out.println("<title>Servlet SearchOrderForSeller</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageOrder at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchOrderForSeller at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,16 +74,39 @@ public class ManageOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            HttpSession sess = request.getSession();
-             Account a = (Account) sess.getAttribute("account"); 
-       IManageProductDao manageProductDao = new ManageProductDAO();
-            IOderDetailDAO iOrderDetailDAO = new ManageOrderDAO();        
-          Seller seller = manageProductDao.getSeller(a.getUsername());
-            List<Order> listorder = iOrderDetailDAO.getOrderBySellerId(seller.getSellerId());
-            request.setAttribute("orderdt", listorder);
-            request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
+       request.setCharacterEncoding("UTF-8");
+     //  int sid = Integer.parseInt(request.getParameter("sid"));
+        HttpSession sess = request.getSession();
+        Account a = (Account) sess.getAttribute("account"); 
+        ManageProductDAO  manageproductdao= new ManageProductDAO();
+            IOderDetailDAO iOrderDetailDAO = new ManageOrderDAO();
+         Seller seller = manageproductdao.getSeller(a.getUsername());
+        Date datecre = Date.valueOf(request.getParameter("datecreated"));
+        
+            
+  List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(), datecre);
+      //   int size= listproduct.size();
+      //  int numperPage=5;
+      //  int numPage=size/numperPage+(size%numperPage== 0?0:1);
+      //  String spage= request.getParameter("page");
+      //  int page;
+      //  if(spage == null){ 
+       //     page= 1;
+        //}else{
+          //  page = Integer.parseInt(spage); 
+        //}
+        //int start, end;
+        //start=(page-1)*numperPage;
+      //  end=Math.min(size, page*numperPage);
+         // List<Product> listprod= manageproductdao.getProductByPage(listproduct, start, end);
+        
+        //request.setAttribute("num", numPage);
+         // request.setAttribute("page", page);
+        request.setAttribute("datecreated", datecre);
+        request.setAttribute("orderdt", listorder);
+        request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){
-            Logger.getLogger(ManageOrder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchProductforSeller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

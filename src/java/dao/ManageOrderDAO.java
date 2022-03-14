@@ -17,6 +17,7 @@ import entity.Order;
 import entity.OrderDetail;
 import entity.Product;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,16 +35,17 @@ Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
     @Override
-    public List<OrderDetail> getOrderBySellerId(int sid) throws Exception {
-         List<OrderDetail> list=new ArrayList<>();
-        String sql="Select OrderDetail.OrderId, \n" +
+    public List<Order> getOrderBySellerId(int sid) throws Exception {
+         List<Order> list=new ArrayList<>();
+        String sql="Select [ORDER].OrderId, \n" +
 "     Product.ProductId, \n" +
 "	   Image,\n" +
 "	   Product.ProductName,\n" +
 "	   OrderDetail.Quantity,\n" +
-"	   [Order].TotalPrice\n" +
-"	   from OrderDetail INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
-"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
+"	   TotalPrice\n" +
+"	   from [ORDER]  INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
+"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
+"	                   \n" +
 "	   Where [ORDER].SellerId = ? ";
         
         try{
@@ -53,8 +55,8 @@ Connection con = null;
             ps.setInt(1,sid);
             rs=ps.executeQuery();
             while(rs.next()){
-                OrderDetail od=new OrderDetail(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")),rs.getInt("Quantity"),new Order(rs.getDouble("TotalPrice")));
+                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
+                                               rs.getString("ProductName")),new OrderDetail(rs.getInt("Quantity")),rs.getDouble("TotalPrice"));
                 list.add(od);
             }
         }catch(Exception e){
@@ -73,7 +75,7 @@ Connection con = null;
     }
 
     @Override
-    public OrderDetail getOrderByID(int oid) throws Exception {
+    public Order getOrderByID(int oid) throws Exception {
         String sql="Select OrderDetail.OrderId,\n" +
 "       Product.ProductName,\n" +
 "	   Buyer.BuyerName,\n" +
@@ -87,16 +89,16 @@ Connection con = null;
 "	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
 "						INNER JOIN Buyer On Buyer.BuyerID = [ORDER].BuyerId\n" +
 "						INNER JOIN Brand ON Brand.BrandId = Product.BrandId\n" +
-"	   Where OrderDetail.OrderId = ? ";
+"	   Where [ORDER].OrderId = ? ";
         try{
             con = getConnection();
             ps=con.prepareStatement(sql);
             ps.setInt(1,oid);
             rs=ps.executeQuery();
             while(rs.next()){
-                OrderDetail od=new OrderDetail(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")), new Buyer(rs.getString("BuyerName")), new Order(rs.getString("DateCreated"),rs.getDouble("TotalPrice")),
-                                                new Brand(rs.getString("BrandName")),rs.getInt("Quantity"));
+                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
+                                               rs.getString("ProductName")), new Buyer(rs.getString("BuyerName")),rs.getString("DateCreated"),rs.getDouble("TotalPrice"),
+                                                new Brand(rs.getString("BrandName")),new OrderDetail(rs.getInt("Quantity")));
                
                 return od;
             }
@@ -113,5 +115,48 @@ Connection con = null;
         
         return null; 
     }
+
+    @Override
+    public List<Order> SearchOrderByDateForSeller(int sid, Date datecre) throws Exception {
+         List<Order> listorder = new ArrayList<>();
+         String sql="Select\n" +
+"    [ORDER].OrderId,\n" +
+"     Product.ProductId, \n" +
+"	   Image,\n" +
+"	   Product.ProductName,\n" +
+"	   OrderDetail.Quantity,\n" +
+"	   [Order].TotalPrice\n" +
+"	   from [ORDER] INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
+"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId	                   \n" +
+"	                 \n" +
+"	   Where  [ORDER].SellerId = ? and\n" +
+"	   [ORDER].DateCreated = ? ";
+         try{
+            con = getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setInt(1,sid);
+            ps.setDate(2, datecre);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
+                                               rs.getString("ProductName")), new OrderDetail(rs.getInt("Quantity")),rs.getDouble("TotalPrice"));
+            
+                listorder.add(od);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        } finally{
+            try {
+                con.close();
+                ps.close();
+                rs.close();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return listorder;
+      }
+
     
+}
 }

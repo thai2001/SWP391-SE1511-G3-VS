@@ -21,7 +21,8 @@ public class Order {
     private String dateCreated;
     private double totalPrice;
     private Buyer buyer;
-
+    private Product product;
+    private OrderDetail orderdetail;
     public Order() {
     }
 
@@ -32,7 +33,12 @@ public class Order {
         this.buyer = buyer;
     }
 
-    
+     public Order(int orderId, Product produc, OrderDetail order, double totalPrice) {
+        this.orderId = orderId;
+        this.product = product;
+        this.orderdetail = orderdetail;
+        this.totalPrice = totalPrice;
+    }
 public Order( double totalPrice) {
         this.totalPrice = totalPrice;
     } 
@@ -40,6 +46,13 @@ public Order( double totalPrice) {
     public Order(String dateCreated, double totalPrice) {
         this.dateCreated = dateCreated;
         this.totalPrice = totalPrice;
+    }
+
+    public Order(int orderId, Product product,Buyer buyer, String datecreated,double totalPrice,Brand brand ,OrderDetail orderdetail) {
+        this.orderId = orderId;
+        this.product = product;
+        this.buyer = buyer;
+        this.dateCreated = datecreated;
     }
 
     public int getOrderId() {

@@ -10,7 +10,9 @@
 package controller;
 
 import dao.ManageProductDAO;
+import entity.Account;
 import entity.Product;
+import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -69,13 +71,16 @@ public class SearchProductforSeller extends HttpServlet {
         try{
        request.setCharacterEncoding("UTF-8");
      //  int sid = Integer.parseInt(request.getParameter("sid"));
-     HttpSession ses = request.getSession();
+        HttpSession sess = request.getSession();
+        Account a = (Account) sess.getAttribute("account"); 
+        ManageProductDAO  manageproductdao= new ManageProductDAO();
+         Seller seller = manageproductdao.getSeller(a.getUsername());
         String name= request.getParameter("productname").trim();
         if(name == null){
             name = "";
         }
-        ManageProductDAO  manageproductdao= new ManageProductDAO();
-        List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(2, name);
+        
+        List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(seller.getSellerId(), name);
          int size= listproduct.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);

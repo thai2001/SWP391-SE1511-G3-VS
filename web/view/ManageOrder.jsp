@@ -138,8 +138,9 @@ header{
 }
 
 .row1{
-    margin-bottom: 30px;
+    margin-bottom: -10px;
     margin-top: 20px;
+    margin-left: 760px;
 }
 .row h2{
     font-size: 30px;
@@ -206,6 +207,20 @@ header{
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Manage <b>Orders</b></a></div>
                     
                 </div>
+                 <div class="row1">
+                    <form class="navbar-form navbar-right" action="searchorderforseller" method="get" >
+                        
+                    
+                        
+                <input value="${datecreated}" type="date" id="date" name="datecreated"
+                              
+                               min="2018-01-01" max="2022-12-31"></li>
+          
+               <input type="submit" class="SearchButton" value="Search"\>  <i class="fa fa-search"></i></li>
+          
+       
+    </form>
+                    </div>
                 
             </div>
             <table class="table table-bordered">
@@ -230,8 +245,8 @@ header{
                             <img src="${odt.product.img}">
                         </td>
                         <td>${odt.product.name}</td>
-                        <td>${odt.quantity}</td>
-                        <td>${odt.order.totalPrice}</td>
+                        <td>${odt.orderdetail.quantity}</td>
+                        <td>${odt.totalPrice}</td>
                         <td><a href="manageorderdetail?oid=${odt.orderId}" type="button" class="btn btn-info" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
                     </c:forEach>
