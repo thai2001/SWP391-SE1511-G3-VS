@@ -10,7 +10,7 @@
 package dao;
 
 import context.DBContext;
-import dao.impl.IOderDetailDAO;
+import dao.impl.IManageOrderDAO;
 import entity.Brand;
 import entity.Buyer;
 import entity.Order;
@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class ManageOrderDAO extends DBContext implements IOderDetailDAO{
+public class ManageOrderDAO extends DBContext implements IManageOrderDAO{
 Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -76,7 +76,7 @@ Connection con = null;
 
     @Override
     public Order getOrderByID(int oid) throws Exception {
-        String sql="Select OrderDetail.OrderId,\n" +
+        String sql="Select [ORDER].OrderId,\n" +
 "       Product.ProductName,\n" +
 "	   Buyer.BuyerName,\n" +
 "	   [Order].DateCreated,\n" +
@@ -117,7 +117,7 @@ Connection con = null;
     }
 
     @Override
-    public List<Order> SearchOrderByDateForSeller(int sid, Date datecre) throws Exception {
+    public List<Order> SearchOrderByDateForSeller(int sid, String datecre) throws Exception {
          List<Order> listorder = new ArrayList<>();
          String sql="Select\n" +
 "    [ORDER].OrderId,\n" +
@@ -135,7 +135,7 @@ Connection con = null;
             con = getConnection();
             ps= con.prepareStatement(sql);
             ps.setInt(1,sid);
-            ps.setDate(2, datecre);
+            ps.setString(2, datecre);
             rs=ps.executeQuery();
             while(rs.next()){
                 Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
@@ -159,4 +159,9 @@ Connection con = null;
 
     
 }
+    
+    public static void main(String[] args) throws Exception {
+        ManageOrderDAO md = new ManageOrderDAO();
+        md.SearchOrderByDateForSeller(2, "2021/07/13");
+    }
 }

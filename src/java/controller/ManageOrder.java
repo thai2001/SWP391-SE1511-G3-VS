@@ -12,7 +12,7 @@ package controller;
 import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
 import dao.impl.IManageProductDao;
-import dao.impl.IOderDetailDAO;
+import dao.impl.IManageOrderDAO;
 import entity.Account;
 import entity.Order;
 import entity.OrderDetail;
@@ -76,7 +76,7 @@ public class ManageOrder extends HttpServlet {
             HttpSession sess = request.getSession();
              Account a = (Account) sess.getAttribute("account"); 
        IManageProductDao manageProductDao = new ManageProductDAO();
-            IOderDetailDAO iOrderDetailDAO = new ManageOrderDAO();        
+            IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();        
           Seller seller = manageProductDao.getSeller(a.getUsername());
             List<Order> listorder = iOrderDetailDAO.getOrderBySellerId(seller.getSellerId());
             request.setAttribute("orderdt", listorder);

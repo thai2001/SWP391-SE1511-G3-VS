@@ -10,7 +10,7 @@
 package controller;
 
 import dao.ManageOrderDAO;
-import dao.impl.IOderDetailDAO;
+import dao.impl.IManageOrderDAO;
 import entity.Order;
 import entity.OrderDetail;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class ManageOrderDetail extends HttpServlet {
             throws ServletException, IOException {
        try{
          int oid = Integer.parseInt(request.getParameter("oid")); //Lấy id của đơn hàng
-            IOderDetailDAO iOrderDetailDAO = new ManageOrderDAO();
+            IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();
             Order order = iOrderDetailDAO.getOrderByID(oid);
         request.setAttribute("odt", order);
         request.getRequestDispatcher("view/OrderDetail.jsp").forward(request, response);

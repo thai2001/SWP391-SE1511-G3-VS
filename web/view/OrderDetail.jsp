@@ -167,7 +167,7 @@ header{
                             
                             
                                 <label>Created Date</label>
-                                <input name="CreateDate" type="text" class="form-control" value="${odt.order.dateCreated}" readonly>
+                                <input name="CreateDate" type="text" class="form-control" value="${odt.dateCreated}" readonly>
                            
                             
                              
@@ -176,7 +176,7 @@ header{
                             
                                 
                                 <label>Quantity</label>
-                                <input name="quantity" class="form-control" value="${odt.quantity}" readonly></input>
+                                <input name="quantity" class="form-control" value="${odt.orderdetail.quantity}" readonly></input>
                             
           
                           
@@ -192,7 +192,7 @@ header{
                             
                              
                                 <label>Total Price</label>
-                                <h5 style="font-size: 36px; margin-left: 230px;"> ${odt.order.totalPrice} VNĐ</h5>
+                                <h5 style="font-size: 36px; margin-left: 230px;"> ${odt.totalPrice} VNĐ</h5>
                            
                         </div>
                        
