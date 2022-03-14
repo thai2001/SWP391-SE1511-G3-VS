@@ -83,10 +83,9 @@ public class SearchOrderForSeller extends HttpServlet {
         IManageProductDao manageproductdao= new ManageProductDAO();
             IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();
          Seller seller = manageproductdao.getSeller(a.getUsername());
-        String datecre = request.getParameter("datecreated");
-        
+        String datecre = request.getParameter("datecreated").trim();
             
-  List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(), datecre);
+  List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(),datecre);
          int size= listorder.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);
@@ -105,7 +104,7 @@ public class SearchOrderForSeller extends HttpServlet {
         request.setAttribute("num", numPage);
         request.setAttribute("page", page);
         request.setAttribute("datecreat", datecre);
-        request.setAttribute("orderdt", listorder);
+        request.setAttribute("orderdt", listord);
         request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){
             Logger.getLogger(SearchProductforSeller.class.getName()).log(Level.SEVERE, null, ex);

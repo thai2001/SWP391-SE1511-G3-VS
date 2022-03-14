@@ -131,13 +131,13 @@ Connection con = null;
 "	   Where  [ORDER].SellerId = ? ";
          
          if(datecre != null){
-                  sql +=" and  [ORDER].DateCreated = ? ";
+                  sql += " and  [ORDER].DateCreated like ? ";
          }
          try{
             con = getConnection();
             ps= con.prepareStatement(sql);
             ps.setInt(1,sid);
-            ps.setString(2, datecre);
+            ps.setString(2,"%"+ datecre +"%");
             rs=ps.executeQuery();
             while(rs.next()){
                 Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
