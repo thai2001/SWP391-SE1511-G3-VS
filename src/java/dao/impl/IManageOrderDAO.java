@@ -20,4 +20,5 @@ public interface IManageOrderDAO {
     public List<Order> getOrderBySellerId(int id) throws Exception;
       public Order getOrderByID(int pid) throws Exception;
        public List<Order> SearchOrderByDateForSeller(int sid,String datecre) throws Exception;
+        public List<Order> getOrderByPage(List<Order> list,int start,int end) throws Exception;
 }

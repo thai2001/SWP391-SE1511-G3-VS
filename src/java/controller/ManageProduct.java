@@ -84,6 +84,7 @@ public class ManageProduct extends HttpServlet {
       
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = manageProductDao.getSeller(a.getUsername());
+          // String name= request.getParameter("productname").trim();
        List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
        List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
        List<Brand> listbrand = brandDao.getAllBrand();

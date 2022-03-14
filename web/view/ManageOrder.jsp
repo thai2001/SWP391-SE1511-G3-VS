@@ -252,6 +252,15 @@ header{
                     </c:forEach>
                 </tbody>
             </table>
+           <c:if test="${num != 0}">
+                        <div class="pagination">
+        <c:forEach begin="1" end="${num}" var="i">
+            <a class="${requestScope.page==i?"active":""}"
+               href="searchorderforseller?page=${i}&datecreated=${datecreat}"> ${i} <a/>
+            </c:forEach>
+                    
+        </div>
+      </c:if>
         </div>
     </div>
 </div>  

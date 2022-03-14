@@ -12,6 +12,7 @@ package controller;
 import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
 import dao.impl.IManageOrderDAO;
+import dao.impl.IManageProductDao;
 import entity.Account;
 import entity.Order;
 import entity.OrderDetail;
@@ -78,31 +79,32 @@ public class SearchOrderForSeller extends HttpServlet {
      //  int sid = Integer.parseInt(request.getParameter("sid"));
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
-        ManageProductDAO  manageproductdao= new ManageProductDAO();
+        IManageOrderDAO iManageOrderDAO = new ManageOrderDAO();
+        IManageProductDao manageproductdao= new ManageProductDAO();
             IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();
          Seller seller = manageproductdao.getSeller(a.getUsername());
         String datecre = request.getParameter("datecreated");
         
             
   List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(), datecre);
-      //   int size= listproduct.size();
-      //  int numperPage=5;
-      //  int numPage=size/numperPage+(size%numperPage== 0?0:1);
-      //  String spage= request.getParameter("page");
-      //  int page;
-      //  if(spage == null){ 
-       //     page= 1;
-        //}else{
-          //  page = Integer.parseInt(spage); 
-        //}
-        //int start, end;
-        //start=(page-1)*numperPage;
-      //  end=Math.min(size, page*numperPage);
-         // List<Product> listprod= manageproductdao.getProductByPage(listproduct, start, end);
+         int size= listorder.size();
+        int numperPage=5;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ 
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); 
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+         List<Order> listord= iManageOrderDAO.getOrderByPage(listorder, start, end);
         
-        //request.setAttribute("num", numPage);
-         // request.setAttribute("page", page);
-        request.setAttribute("datecreated", datecre);
+        request.setAttribute("num", numPage);
+        request.setAttribute("page", page);
+        request.setAttribute("datecreat", datecre);
         request.setAttribute("orderdt", listorder);
         request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){

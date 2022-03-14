@@ -127,10 +127,12 @@ Connection con = null;
 "	   OrderDetail.Quantity,\n" +
 "	   [Order].TotalPrice\n" +
 "	   from [ORDER] INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
-"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId	                   \n" +
-"	                 \n" +
-"	   Where  [ORDER].SellerId = ? and\n" +
-"	   [ORDER].DateCreated = ? ";
+"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +	                 
+"	   Where  [ORDER].SellerId = ? ";
+         
+         if(datecre != null){
+                  sql +=" and  [ORDER].DateCreated = ? ";
+         }
          try{
             con = getConnection();
             ps= con.prepareStatement(sql);
@@ -159,6 +161,15 @@ Connection con = null;
 
     
 }
+    
+@Override
+     public List<Order> getOrderByPage(List<Order> list,int start,int end) throws Exception{
+        List<Order> o=new ArrayList<>();
+        for(int i=start;i<end;i++){
+            o.add(list.get(i));
+        }
+        return o;
+    }
     
     public static void main(String[] args) throws Exception {
         ManageOrderDAO md = new ManageOrderDAO();

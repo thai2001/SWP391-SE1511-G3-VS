@@ -12,7 +12,6 @@ package dao;
 import context.DBContext;
 import dao.impl.IManageProductDao;
 import entity.Account;
-import entity.Brand;
 import entity.Product;
 import entity.Seller;
 import java.sql.Connection;
@@ -244,8 +243,12 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
-                   "where SellerId = ? " +
-                   "and ProductName like ?";
+                   "where SellerId = ? ";
+                if(name != null){
+                    
+                
+                sql  += " and ProductName like ? ";
+    }           
         
         try{
             con = getConnection();

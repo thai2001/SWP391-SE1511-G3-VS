@@ -268,7 +268,7 @@ header img{
                         <div class="pagination">
         <c:forEach begin="1" end="${num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
-               href="manageproduct?page=${i}"> ${i} <a/>
+               href="searchproductforseller?page=${i}&productname=${prodname}"> ${i} <a/>
             </c:forEach>
                     
         </div>

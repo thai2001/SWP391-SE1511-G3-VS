@@ -75,11 +75,27 @@ public class ManageOrder extends HttpServlet {
         try{
             HttpSession sess = request.getSession();
              Account a = (Account) sess.getAttribute("account"); 
-       IManageProductDao manageProductDao = new ManageProductDAO();
-            IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();        
-          Seller seller = manageProductDao.getSeller(a.getUsername());
-            List<Order> listorder = iOrderDetailDAO.getOrderBySellerId(seller.getSellerId());
-            request.setAttribute("orderdt", listorder);
+       IManageProductDao iManageProductDao = new ManageProductDAO();
+            IManageOrderDAO iManageOrderDAO = new ManageOrderDAO();        
+          Seller seller = iManageProductDao.getSeller(a.getUsername());
+            List<Order> listorder = iManageOrderDAO.getOrderBySellerId(seller.getSellerId());
+             int size= listorder.size();
+        int numperPage=5;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ 
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); 
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+          List<Order> listord= iManageOrderDAO.getOrderByPage(listorder, start, end);
+            request.setAttribute("orderdt", listord);
+            request.setAttribute("num", numPage);
+              request.setAttribute("page", page);
             request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){
             Logger.getLogger(ManageOrder.class.getName()).log(Level.SEVERE, null, ex);
