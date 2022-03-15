@@ -73,7 +73,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
         List<Order> listOrder = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        ResultSet rs = null;        
         try {
             try {
                 con = getConnection();
@@ -103,7 +103,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"),
-                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId")));
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId")),GetOrderDetail(rs.getInt("OrderId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
