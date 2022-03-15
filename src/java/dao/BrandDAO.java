@@ -75,6 +75,34 @@ public class BrandDAO extends DBContext implements IBrandDAO {
 
         return vec;
     }
+    
+    public String getBrandById(int brandId) throws Exception{
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String brandName = "";
+        try {
+
+            con = getConnection();
+
+            String sql = "SELECT * \n"
+                    + "  FROM [Brand] WHERE Brandid = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, brandId);
+            rs = ps.executeQuery();
+            if (rs.next()) {                
+               brandName = rs.getString("brandName");
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            ps.close();
+            rs.close();
+            con.close();
+        }
+
+        return brandName;
+    }
 
     public static void main(String[] args) throws Exception {
         BrandDAO dao = new BrandDAO();

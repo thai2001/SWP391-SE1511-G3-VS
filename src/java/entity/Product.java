@@ -26,7 +26,8 @@ public class Product {
     private float price;
     private float discount;
     private int sellerId;
-
+    private Seller seller;
+    private Brand brand;
     public Product() {
     }
 
@@ -55,6 +56,15 @@ public class Product {
         this.price = price;
         this.discount = discount;
         this.sellerId = sellerId;
+    }
+
+    public Product(int id, String name, String img, float price, Seller seller, Brand brand) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+        this.price = price;
+        this.seller = seller;
+        this.brand = brand;
     }
 
     public Product(int id) {
@@ -159,6 +169,22 @@ public class Product {
 
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     @Override
