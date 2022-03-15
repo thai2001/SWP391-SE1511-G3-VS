@@ -13,17 +13,20 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * tạo các trường cho lớp Order
- * thêm contrustor và getter,setter
- * <p>Bugs:
+ * tạo các trường cho lớp Order thêm contrustor và getter,setter
+ * <p>
+ * Bugs:
+ *
  * @author nqt26
  */
 public class Order {
+
     private int orderId;
     private String dateCreated;
     private double totalPrice;
     private Buyer buyer;
     private List<OrderDetail> listOrderDetail;
+
     public Order() {
     }
 
@@ -42,6 +45,12 @@ public class Order {
         this.listOrderDetail = listOrderdetail;
     }
 
+    public Order(int orderId, String dateCreated, double totalPrice) {
+        this.orderId = orderId;
+        this.dateCreated = dateCreated;
+        this.totalPrice = totalPrice;
+    }
+
     public List<OrderDetail> getListOrderdetail() {
         return listOrderDetail;
     }
@@ -49,27 +58,21 @@ public class Order {
     public void setListOrderdetail(List<OrderDetail> listOrderdetail) {
         this.listOrderDetail = listOrderdetail;
     }
-    
+
     public Order(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-public Order( double totalPrice) {
-        this.totalPrice = totalPrice;
-    } 
 
     public Order(String dateCreated, double totalPrice) {
         this.dateCreated = dateCreated;
         this.totalPrice = totalPrice;
     }
 
-    public Order(int orderId, Product product,Buyer buyer, String datecreated,double totalPrice,Brand brand ,OrderDetail orderdetail) {
+    public Order(int orderId, Product product, Buyer buyer, String datecreated, double totalPrice, Brand brand, OrderDetail orderdetail) {
         this.orderId = orderId;
-        this.product = product;
         this.buyer = buyer;
         this.totalPrice = totalPrice;
         this.dateCreated = datecreated;
-        this.brand = brand;
-        this.orderdetail = orderdetail;
     }
 
     public int getOrderId() {
@@ -104,36 +107,9 @@ public Order( double totalPrice) {
         this.buyer = buyer;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public OrderDetail getOrderdetail() {
-        return orderdetail;
-    }
-
-    public void setOrderdetail(OrderDetail orderdetail) {
-        this.orderdetail = orderdetail;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-    
-
     @Override
     public String toString() {
         return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyer=" + buyer + '}';
     }
 
-   
-    
 }

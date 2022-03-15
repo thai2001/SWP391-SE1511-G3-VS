@@ -64,7 +64,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                o = new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3));
+                o = new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3));
             }
         } catch (SQLException ex) {
             throw ex;
@@ -92,7 +92,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             ps.setInt(1, buyerId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3)));
+                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3)));
             }
         } catch (SQLException ex) {
             throw ex;
@@ -158,7 +158,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             ps.setInt(2, (index - 1) * 10);
             rs = ps.executeQuery();
             while (rs.next()) {
-                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3))
+                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3))
                 );
             }
         } catch (SQLException ex) {
