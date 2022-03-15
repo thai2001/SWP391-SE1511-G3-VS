@@ -42,6 +42,10 @@
         <c:if test="${shoppingCart != null && sessionScope.account.roleId.roleId != 3 }" >
         <button type="button" class="btn btn-dark m-2"> <a href="shoppingCart"><i class="bi bi-cart3 text-white"></i></a>  ${shoppingCart.size()} </button>
         </c:if>
+        <c:if test="${not empty history && sessionScope.account.roleId.roleId != 3 }" >
+            <button type="button" class="btn btn-dark m-2"> <a href="history"><i class="bi bi-journal-check text-white"></i></a> ${history.size()}
+            </button>
+        </c:if>
         
 
         <div class="navlink login logout">

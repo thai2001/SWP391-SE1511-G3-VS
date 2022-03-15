@@ -21,9 +21,7 @@ public class Order {
     private String dateCreated;
     private double totalPrice;
     private Buyer buyer;
-    private Product product;
-    private OrderDetail orderdetail;
-    private Brand brand;
+    
     public Order() {
     }
 

@@ -106,7 +106,10 @@
                                     </section>
                                     <div class="mt-auto">
                                         <button type="button" class="btn" > <a class="btn btn-outline-secondary " href="productDetail?pid=${p.id}">Detail</a></button>
-                                        <button type="button" class="btn" > <a class="btn btn-outline-secondary  " href="addShoppingCart?pid=${p.id}" ><i class="bi bi-cart-plus-fill"></i></a></button>
+                                        <c:if test="${p.quantity != 0}">
+                                            <button type="button" class="btn" > <a class="btn btn-outline-secondary  " href="addShoppingCart?pid=${p.id}" ><i class="bi bi-cart-plus-fill"></i></a></button>
+
+                                        </c:if>
                                     </div>
 
                                 </div>
