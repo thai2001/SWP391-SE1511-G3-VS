@@ -11,6 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageOrderDAO;
+import dao.impl.IManageTransactionDAO;
 import entity.Brand;
 import entity.Buyer;
 import entity.Order;
@@ -34,19 +35,24 @@ public class ManageOrderDAO extends DBContext implements IManageOrderDAO{
 Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        
     @Override
     public List<Order> getOrderBySellerId(int sid) throws Exception {
+        IManageTransactionDAO imd = new ManageTransactionDAO();
          List<Order> list=new ArrayList<>();
-        String sql="Select [ORDER].OrderId, \n" +
-"     Product.ProductId, \n" +
-"	   Image,\n" +
-"	   Product.ProductName,\n" +
-"	   OrderDetail.Quantity,\n" +
-"	   TotalPrice\n" +
-"	   from [ORDER]  INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
-"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
-"	                   \n" +
-"	   Where [ORDER].SellerId = ? ";
+         String sql = "Select * from [ORDER]"
+                 + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
+                 + " WHERE SellerId = ? ";
+//        String sql="Select [ORDER].OrderId, \n" +
+//"     Product.ProductId, \n" +
+//"	   Image,\n" +
+//"	   Product.ProductName,\n" +
+//"	   OrderDetail.Quantity,\n" +
+//"	   TotalPrice\n" +
+//"	   from [ORDER]  INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
+//"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
+//"	                   \n" +
+//"	   Where [ORDER].SellerId = ? ";
         
         try{
             
@@ -55,8 +61,7 @@ Connection con = null;
             ps.setInt(1,sid);
             rs=ps.executeQuery();
             while(rs.next()){
-                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")),new OrderDetail(rs.getInt("Quantity")),rs.getDouble("TotalPrice"));
+                Order od=new Order(rs.getInt("OrderId"),rs.getString("DateCreated"),rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("BuyerName")),imd.GetOrderDetail(rs.getInt("OrderId")));
                 list.add(od);
             }
         }catch(Exception e){
@@ -76,29 +81,31 @@ Connection con = null;
 
     @Override
     public Order getOrderByID(int oid) throws Exception {
-        String sql="Select [ORDER].OrderId,\n" +
-"       Product.ProductName,\n" +
-"	   Buyer.BuyerName,\n" +
-"	   [Order].DateCreated,\n" +
-"          Product.ProductId, \n" +
-"	   Brand.BrandName,\n" +
-"	   OrderDetail.Quantity,\n" +
-"	   Image,\n" +
-"	   [ORDER].TotalPrice\n" +
-"	   from OrderDetail INNER JOIN Product ON OrderDetail.ProductId = Product.ProductId\n" +
-"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
-"						INNER JOIN Buyer On Buyer.BuyerID = [ORDER].BuyerId\n" +
-"						INNER JOIN Brand ON Brand.BrandId = Product.BrandId\n" +
-"	   Where [ORDER].OrderId = ? ";
+        IManageTransactionDAO imd = new ManageTransactionDAO();
+        String sql = "Select * from [ORDER]"
+                 + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
+                 + " WHERE OrderId = ? ";
+//        String sql="Select [ORDER].OrderId,\n" +
+//"       Product.ProductName,\n" +
+//"	   Buyer.BuyerName,\n" +
+//"	   [Order].DateCreated,\n" +
+//"          Product.ProductId, \n" +
+//"	   Brand.BrandName,\n" +
+//"	   OrderDetail.Quantity,\n" +
+//"	   Image,\n" +
+//"	   [ORDER].TotalPrice\n" +
+//"	   from OrderDetail INNER JOIN Product ON OrderDetail.ProductId = Product.ProductId\n" +
+//"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
+//"						INNER JOIN Buyer On Buyer.BuyerID = [ORDER].BuyerId\n" +
+//"						INNER JOIN Brand ON Brand.BrandId = Product.BrandId\n" +
+//"	   Where [ORDER].OrderId = ? ";
         try{
             con = getConnection();
             ps=con.prepareStatement(sql);
             ps.setInt(1,oid);
             rs=ps.executeQuery();
             while(rs.next()){
-                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")), new Buyer(rs.getString("BuyerName")),rs.getString("DateCreated"),rs.getDouble("TotalPrice"),
-                                                new Brand(rs.getString("BrandName")),new OrderDetail(rs.getInt("Quantity")));
+                Order od=new Order(rs.getInt("OrderId"),rs.getString("DateCreated"),rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("BuyerName")),imd.GetOrderDetail(rs.getInt("OrderId")));
                
                 return od;
             }
@@ -173,6 +180,8 @@ Connection con = null;
     
     public static void main(String[] args) throws Exception {
         ManageOrderDAO md = new ManageOrderDAO();
-        md.SearchOrderByDateForSeller(2, "2021/07/13");
+        md.getOrderBySellerId(2);
+        System.out.println(md.getOrderBySellerId(2).get(0).getListOrderdetail().get(0).getProduct().getName());
+        
     }
 }

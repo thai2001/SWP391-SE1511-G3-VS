@@ -157,9 +157,9 @@ header{
                         <div class="modal-body">
                             <div class="row">
                                  <div class="col-md-6">
-                               
+                                     <c:forEach items="${requestScope.odt.getListOrderdetail()}" var="ordt">
                                 <label>Product Name</label>
-                                <input name="ProductName" class="form-control" value="${odt.product.name}" readonly></input>
+                                <input name="ProductName" class="form-control" value="${ordt.product.name}" readonly></input>
                             
                             
                                 <label>Customer Name</label>
@@ -172,12 +172,12 @@ header{
                             
                              
                                 <label>Brand</label>
-                                <input name="brand" class="form-control" value="${odt.brand.name}" readonly></input>
+                                <input name="brand" class="form-control" value="${ordt.product.brand.name}" readonly></input>
                             
                                 
                                 <label>Quantity</label>
-                                <input name="quantity" class="form-control" value="${odt.orderdetail.quantity}" readonly></input>
-                            
+                                <input name="quantity" class="form-control" value="${ordt.quantity}" readonly></input>
+                           
           
                           
                             </div>
@@ -185,10 +185,11 @@ header{
                             <div class="col-md-6">
                              <div class="form-group">
                                 <label></label>
-                               <img src="${odt.product.img}">
+                               <img src="${ordt.product.img}">
                                 
                             </div>
                             </div>
+                                </c:forEach>
                             
                              
                                 <label>Total Price</label>

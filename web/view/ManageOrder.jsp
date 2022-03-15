@@ -227,9 +227,8 @@ header{
                 <thead>
                     <tr>
                         <th>OrderID</th>
-                        <th>Image</th>
-                        <th>ProductName</th>
-                        <th>Quantity</th>
+                        <th>Buyer Name</th>
+                        <th>Date Created</th>
                         <th>TotalPrice</th>
                         <th>Action</th>
                     </tr>
@@ -240,12 +239,12 @@ header{
                         <td>                          
                             ${odt.orderId}
                         </td>
-                        
-                        <td>
-                            <img src="${odt.product.img}">
+                        <td>${odt.buyer.buyerName}</td>
+                           <td>                          
+                            ${odt.dateCreated}
                         </td>
-                        <td>${odt.product.name}</td>
-                        <td>${odt.orderdetail.quantity}</td>
+                            
+                       
                         <td>${odt.totalPrice}</td>
                         <td><a href="manageorderdetail?oid=${odt.orderId}" type="button" class="btn btn-info" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
