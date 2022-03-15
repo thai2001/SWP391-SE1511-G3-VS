@@ -80,7 +80,8 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             } catch (Exception e) {
                 System.out.println("lỗi khi kết nối:" + e);
             }
-            String sql = "  SELECT * FROM dbo.[ORDER] WHERE 1=1 ";
+            String sql = "  SELECT * FROM dbo.[ORDER] INNER JOIN BUYER ON"
+                    + " ORDER.BUYERID = BUYER.BUYERID WHERE 1=1 ";
             if (orderId > 0) {
                 sql += "and orderId = " + orderId + " ";
             }
@@ -103,7 +104,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"),
-                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId")),GetOrderDetail(rs.getInt("OrderId")));
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("buyerName")),GetOrderDetail(rs.getInt("OrderId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
@@ -143,7 +144,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()) {
                 OrderDetail orderDetail = new OrderDetail(rs.getInt("orderid"), new Product(rs.getInt("productId"),
-                        rs.getString("productName"), rs.getString("img"), rs.getInt("unitprice"),
+                        rs.getString("productName"), rs.getString("image"), rs.getInt("unitprice"),
                         new Seller(rs.getInt("sellerId"), rs.getString("sellerName")),
                         new Brand(rs.getString("brandname"))), rs.getInt("quantity"));
                 listOrderDetail.add(orderDetail);
