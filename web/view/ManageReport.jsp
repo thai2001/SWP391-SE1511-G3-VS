@@ -429,102 +429,112 @@
                 <div class="container-fluid">
                     <div class="row">
                         <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
-                            <select name="reportTypeId">
-                                <option value="0" > Tất cả các loại</option>
+                            <label id="reportTypeId"> Report type </label>
+                            <select name="reportTypeId" id="reportTypeId" onchange = "this.form.submit()">
+                                <option value="0" > All report type </option>
                                 <c:forEach items="${requestScope.reportType}" var="r">
-                                    <option  value="${r.reportTypeId}" > ${r.reportTypeName} </option>
+                                    <option  value="${r.reportTypeId}" ${ r.reportTypeId == reportTypeId?"selected":""}> ${r.reportTypeName} </option>
                                 </c:forEach> 
-                            </select>    
-                            <input value="0" name="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId" pattern="[0-9]">
-                            <input value="0" name="productId" type="text" class="SearchBox" placeholder="Nhập productId" pattern="[0-9]">
-                            <select name="sort">                           
-                                <option  value="reportId DESC" > Report Id giảm dần </option>
-                                <option  value="reportId ASC" > Report Id tăng dần </option>
                             </select> 
+                            <label id="buyerId"> Buyer ID </label>
+                            <input value="${ buyerId }" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId" pattern="[0-9]{1-100}">
+                            <label id="productId"> Product ID </label>
+                            <input value="${ productId }" name="productId" id="productId" type="text" class="SearchBox" placeholder="Nhập productId" pattern="[0-9]{1-1000}">
                             <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                            <br>
+                            <br>
+                            <label id="sort"> Filter </label>
+                            <select name="sort" id="sort" onchange="this.form.submit()">                           
+                                <option  value="reportId DESC" ${ sort == "reportId DESC"?"selected":""} > Report Id giảm dần </option>
+                                <option  value="reportId ASC" ${ sort == "reportId ASC"?"selected":""} > Report Id tăng dần </option>
+                            </select> 
+                            
                         </form>
 
                     </div>
-                    <h4>${requestScope.notice}</h4>
-                        <div class="table-users">
-                            <div class="header">List Report</div>
+                    <div class="table-users">
+                        <div class="header">List Report</div>
 
-                            <table border="1px"  >
+                        <table border="1px"  >
+                            <tr>
+                                <th>ReportId</th>
+                                <th>Reporter</th>
+                                <th>ProductName</th>
+                                <th>Report Type</th>
+                                <th width="120"></th>
+                            </tr>
+                            <c:forEach items="${requestScope.report}" var="r">
                                 <tr>
-                                    <th>ReportId</th>
-                                    <th>Reporter</th>
-                                    <th>ProductName</th>
-                                    <th>Report Type</th>
-                                    <th width="120"></th>
-                                </tr>
-                                <c:forEach items="${requestScope.report}" var="r">
-                                    <tr>
-                                        <td class="mid">${r.reportId}</td>
-                                        <td class="mid">${r.buyerId.buyerName}</td>
-                                        <td class="mid"><a href="productDetail?pid=${r.productId.id}">${r.productId.name}</a></td>
-                                        <td class="mid">${r.reportTypeId.reportTypeName}</td>
-                                        <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reportModal${r.reportId}">Detail</button> </td>
-                                    </tr>     
+                                    <td class="mid">${r.reportId}</td>
+                                    <td class="mid">${r.buyerId.buyerName}</td>
+                                    <td class="mid"><a href="productDetail?pid=${r.productId.id}" style="color: #007bff;text-decoration: underline">${r.productId.name}</a></td>
+                                    <td class="mid">${r.reportTypeId.reportTypeName}</td>
+                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reportModal${r.reportId}" style="font-size: 10px;height: 75%">Detail</button> </td>
+                                </tr>     
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="reportModal${r.reportId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
-                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Report detail </h5>                                                                                                    
-                                                    <br/>
-                                                </div>
-                                                <div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="buyerId">ReportId</label>
-                                                                <input type="text" class="form-control" id="buyerId" name="buyerId" value="${r.reportId}" readonly >
-                                                            </div>
-
-                                                            <div class="form-group ">
-                                                                <label for="sellerName">Reporter ID</label>
-                                                                <input type="text" class="form-control" id="sellerName" name="sellerName" value="${r.buyerId.buyerId}" readonly >
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerDes">Reporter Name</label>
-                                                                <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${r.buyerId.buyerName}" readonly>
-                                                            </div>  
-                                                            <div class="form-group ">
-                                                                <label for="sellerAddress">Product ID</label>
-                                                                <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${r.productId.id}" readonly >
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="sellerGmail">Product Name</label>
-                                                                <input type="text" class="form-control" id="sellerGmail" name="sellerGmail" value="${r.productId.name}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerPhone">Product's seller ID</label>
-                                                                <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${r.seller.sellerId}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellern">Product's seller Name</label>
-                                                                <input type="text" class="form-control" id="sellern" name="sellern" value="${r.seller.sellerName}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerGmail">Report type</label>
-                                                                <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${r.reportTypeId.reportTypeName}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="numProductsOnSale">Content</label>
-                                                                <input type="text"  class="form-control" id="numProductsOnSale" name="numProductsOnSale" value="${r.content}" readonly>
-                                                            </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="reportModal${r.reportId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Report detail </h5>                                                                                                    
+                                                <br/>
+                                            </div>
+                                            <div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="buyerId">ReportId</label>
+                                                        <input type="text" class="form-control" id="buyerId" name="buyerId" value="${r.reportId}" readonly >
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-3">
+                                                            <label for="sellerName">Reporter ID</label>
+                                                            <input type="text" class="form-control" id="sellerName" name="sellerName" value="${r.buyerId.buyerId}" readonly >
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                            
-                                                        </div>          
+                                                        <div class="form-group col-md-9">
+                                                            <label for="sellerDes">Reporter Name</label>
+                                                            <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${r.buyerId.buyerName}" readonly>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-3 ">
+                                                            <label for="sellerAddress">Product ID</label>
+                                                            <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${r.productId.id}" readonly >
+                                                        </div>
+                                                        <div class="form-group col-md-9">
+                                                            <label for="sellerGmail">Product Name</label>
+                                                            <input type="text" class="form-control" id="sellerGmail" name="sellerGmail" value="${r.productId.name}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" >
+                                                        <div class="form-group col-md-3">
+                                                            <label for="sellerPhone">Seller ID</label>
+                                                            <input type="text" class="form-control" id="sellerPhone" name="sellerPhone" value="${r.seller.sellerId}" readonly>
+                                                        </div>
+                                                        <div class="form-group col-md-9">
+                                                            <label for="sellern">Seller Name</label>
+                                                            <input type="text" class="form-control" id="sellern" name="sellern" value="${r.seller.sellerName}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sellerGmail">Report type</label>
+                                                        <input type="text" class="form-control" id="sellerGmail" name="sellerGmail" value="${r.reportTypeId.reportTypeName}" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="numProductsOnSale">Content</label>
+                                                        <textarea  class="form-control" id="numProductsOnSale" name="numProductsOnSale"  readonly>${r.content}</textarea>
+                                                    </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                                            
+                                                </div>          
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
-                            </table>
-                        </div> 
+                                </div>
+                            </c:forEach>
+                        </table>
+                    </div> 
                 </div>
             </div>
         </div>        

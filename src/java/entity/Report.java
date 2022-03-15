@@ -35,6 +35,15 @@ public class Report {
         this.Content = Content;
     }
 
+    public Report(int reportId, Buyer buyerId, Product productId, ReportType reportTypeId, String Content) {
+        this.reportId = reportId;
+        this.buyerId = buyerId;
+        this.productId = productId;
+        this.reportTypeId = reportTypeId;
+        this.Content = Content;
+    }
+    
+
     public int getReportId() {
         return reportId;
     }
@@ -73,6 +82,14 @@ public class Report {
 
     public void setContent(String Content) {
         this.Content = Content;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
     
 }

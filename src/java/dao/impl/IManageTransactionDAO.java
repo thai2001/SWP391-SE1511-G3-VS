@@ -22,6 +22,6 @@ import java.util.List;
  */
 public interface IManageTransactionDAO {
     public List<Order> GetAllOrder () throws Exception;
-    public List<Order> GetOrderByFilter(int orderId, int sellerId, int buyerId, Date dateFrom, Date dateTo, String sortColunm) throws Exception;
+    public List<Order> GetOrderByFilter(int orderId, int buyerId,int sellerid, Date dateFrom, Date dateTo, String sortColunm) throws Exception;
     public List<OrderDetail> GetOrderDetail(int orderId) throws Exception;
 }

@@ -89,13 +89,13 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
                     + " Report.ProductId = Product.ProductId inner join Seller on"
                     + " Seller.SellerId = Product.SellerId WHERE 1=1 ";
             if (buyerId > 0) {
-                sql += "and buyerId = " + buyerId + " ";
+                sql += "and Report.buyerId = " + buyerId + " ";
             }
             if (productId > 0) {
-                sql += "and productId = " + productId + " ";
+                sql += "and Report.productId = " + productId + " ";
             }
             if (typeReportId > 0) {
-                sql += "and ReportTypeId = " + typeReportId + " ";
+                sql += "and Report.TypeId = " + typeReportId + " ";
             }
             if (Sort != null) {
                 sql += "order by " + Sort + " ";
@@ -159,7 +159,9 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
 
     public static void main(String[] args) throws Exception {
         ManageReportDAO m = new ManageReportDAO();
-        List<Report> li = m.getAllReport();
-        System.out.println(li.get(4).getReportId());
+        List<Report> li = m.getReportByFilter(2, 0, 0, "reportId Desc");
+        List<Report> lis = m.getAllReport();
+        System.out.println(li.size());
+        System.out.println(lis.size());
     }
 }

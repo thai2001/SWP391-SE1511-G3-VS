@@ -70,13 +70,23 @@ public class SearchManageReport extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
-            int productId = Integer.parseInt(request.getParameter("productId").trim());
+            int buyerId = 0;
+            int productId = 0;
+            if (request.getParameter("buyerId").trim().length() > 0) {
+                buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
+            }
+            if (request.getParameter("productId").trim().length() > 0) {
+                productId = Integer.parseInt(request.getParameter("productId").trim());
+            }
             int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId").trim());
-            String Sort = request.getParameter("sort").trim();
+            String sort = request.getParameter("sort").trim();
             IManageReportDAO iManageReportDAO = new ManageReportDAO();
-            List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, Sort);
+            List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, sort);
             List<ReportType> listReporttype = iManageReportDAO.getAllReportType();
+            request.setAttribute("buyerId", buyerId);
+            request.setAttribute("productId", productId);
+            request.setAttribute("sort", sort);
+            request.setAttribute("reportTypeId", reportTypeId);
             request.setAttribute("reportType", listReporttype);
             request.setAttribute("report", listReport);
             request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);

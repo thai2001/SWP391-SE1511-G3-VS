@@ -9,6 +9,8 @@
  */
 package entity;
 
+import java.sql.Date;
+import java.util.List;
 
 /**
  * tạo các trường cho lớp Order
@@ -21,7 +23,7 @@ public class Order {
     private String dateCreated;
     private double totalPrice;
     private Buyer buyer;
-    
+    private List<OrderDetail> listOrderDetail;
     public Order() {
     }
 
@@ -32,10 +34,23 @@ public class Order {
         this.buyer = buyer;
     }
 
-     public Order(int orderId, Product product, OrderDetail orderdetail, double totalPrice) {
+    public Order(int orderId, String dateCreated, double totalPrice, Buyer buyer, List<OrderDetail> listOrderdetail) {
         this.orderId = orderId;
-        this.product = product;
-        this.orderdetail = orderdetail;
+        this.dateCreated = dateCreated;
+        this.totalPrice = totalPrice;
+        this.buyer = buyer;
+        this.listOrderDetail = listOrderdetail;
+    }
+
+    public List<OrderDetail> getListOrderdetail() {
+        return listOrderDetail;
+    }
+
+    public void setListOrderdetail(List<OrderDetail> listOrderdetail) {
+        this.listOrderDetail = listOrderdetail;
+    }
+    
+    public Order(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 public Order( double totalPrice) {
