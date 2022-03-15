@@ -125,17 +125,21 @@ Connection con = null;
 
     @Override
     public List<Order> SearchOrderByDateForSeller(int sid, String datecre) throws Exception {
+         IManageTransactionDAO imd = new ManageTransactionDAO();
          List<Order> listorder = new ArrayList<>();
-         String sql="Select\n" +
-"    [ORDER].OrderId,\n" +
-"     Product.ProductId, \n" +
-"	   Image,\n" +
-"	   Product.ProductName,\n" +
-"	   OrderDetail.Quantity,\n" +
-"	   [Order].TotalPrice\n" +
-"	   from [ORDER] INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
-"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +	                 
-"	   Where  [ORDER].SellerId = ? ";
+         String sql ="Select * from [ORDER]"
+                 + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
+                 + " WHERE SellerId = ? ";
+//         String sql="Select\n" +
+//"    [ORDER].OrderId,\n" +
+//"     Product.ProductId, \n" +
+//"	   Image,\n" +
+//"	   Product.ProductName,\n" +
+//"	   OrderDetail.Quantity,\n" +
+//"	   [Order].TotalPrice\n" +
+//"	   from [ORDER] INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
+//"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +	                 
+//"	   Where  [ORDER].SellerId = ? ";
          
          if(datecre != null){
                   sql += " and  [ORDER].DateCreated like ? ";
@@ -147,8 +151,7 @@ Connection con = null;
             ps.setString(2,"%"+ datecre +"%");
             rs=ps.executeQuery();
             while(rs.next()){
-                Order od=new Order(rs.getInt("OrderId"),new Product(rs.getInt("ProductId"),rs.getString("Image"),
-                                               rs.getString("ProductName")), new OrderDetail(rs.getInt("Quantity")),rs.getDouble("TotalPrice"));
+                 Order od=new Order(rs.getInt("OrderId"),rs.getString("DateCreated"),rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("BuyerName")),imd.GetOrderDetail(rs.getInt("OrderId")));
             
                 listorder.add(od);
             }
