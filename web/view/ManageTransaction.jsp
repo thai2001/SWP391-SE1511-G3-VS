@@ -427,18 +427,19 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
+                    <div class="alert alert-${alert}">
+                        ${message} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                    </div>
                     <div class="row">
-                        <div class="alert alert-${alert}">
-                            ${message} 
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                        </div>
+
                         <form class="navbar-form navbar-right" action="searchManageTransaction" method="get" >  
                             <label for="orderId">OrderId:</label>
-                            <input value="${orderId}" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Input orderId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                            <input value="<c:if test="${orderId > 0}" >${ orderId }</c:if>" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Input orderId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
                             <label for="buyerId">BuyerId:</label>
-                            <input value="${buyerId}" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Input buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                            <input value="<c:if test="${buyerId > 0}" >${ buyerId }</c:if>" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Input buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
                             <label for="sellerId">SellerId:</label>
-                            <input value="${sellerId}" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Input sellerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                            <input value="<c:if test="${sellerId > 0}">${ sellerId }</c:if>" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Input sellerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
                             <br>
                             <label for="start">Start date:</label>
                             <input type="date" id="start" name="dateFrom"value="${dateFrom}">
@@ -459,80 +460,88 @@
                         </form>
 
                     </div>
-                    <div class="table-users">
-                        <div class="header">List Order</div>
+                    <c:if test="${order.isEmpty()}"> 
+                        <div class="alert alert-info">
+                            Không có kết quả tìm kiếm 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                        </div>
+                    </c:if>
+                    <c:if test="${!order.isEmpty()}">             
+                        <div class="table-users">
+                            <div class="header">List Order</div>
 
-                        <table border="1px"  >
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Buyer Name</th>
-                                <th>Date Created</th>
-                                <th>Total Price</th>
-
-                                <th width="120"></th>
-                            </tr>
-                            <c:forEach items="${requestScope.order}" var="o">
+                            <table border="1px"  >
                                 <tr>
-                                    <td class="mid">${o.orderId}</td>
-                                    <td class="mid">${o.buyer.buyerName}</td>
-                                    <td class="mid">${o.dateCreated}</td>
-                                    <td class="mid">$${o.totalPrice}</td>                                 
-                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${o.orderId}">Detail</button> </td>
-                                </tr>     
+                                    <th>Order ID</th>
+                                    <th>Buyer Name</th>
+                                    <th>Date Created</th>
+                                    <th>Total Price</th>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal${o.orderId}">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Order Detail</h4> <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div> <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <div class="container">
-                                                    <h5>Item Details</h5>                                                   
-                                                    <c:forEach items="${o.getListOrderdetail()}" var = "l">
+                                    <th width="120"></th>
+                                </tr>
+                                <c:forEach items="${requestScope.order}" var="o">
+                                    <tr>
+                                        <td class="mid">${o.orderId}</td>
+                                        <td class="mid">${o.buyer.buyerName}</td>
+                                        <td class="mid">${o.dateCreated}</td>
+                                        <td class="mid">$${o.totalPrice}</td>                                 
+                                        <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${o.orderId}">Detail</button> </td>
+                                    </tr>     
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal${o.orderId}">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Order Detail</h4> <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div> <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <h5>Item Details</h5>                                                   
+                                                        <c:forEach items="${o.getListOrderdetail()}" var = "l">
+                                                            <div class="row">
+                                                                <div class="col-md-4"> <img class="img-fluid" src="${l.product.img}"> </div>
+                                                                <div class="mid col-md-4" style="padding-top: 2vh;"> <a href="productDetail?pid=${l.product.id}" style="color: #007bff;text-decoration: underline;font-size: 15px">${l.product.name}</a></div>
+                                                                <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${l.quantity}</p></div>
+                                                                <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${l.product.price}</p></div>                                                            
+                                                            </div>
+                                                        </c:forEach>
+                                                        <h5>Order Details</h5>
                                                         <div class="row">
-                                                            <div class="col-md-4"> <img class="img-fluid" src="${l.product.img}"> </div>
-                                                            <div class="mid col-md-4" style="padding-top: 2vh;"> <a href="productDetail?pid=${l.product.id}" style="color: #007bff;text-decoration: underline;font-size: 15px">${l.product.name}</a></div>
-                                                            <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${l.quantity}</p></div>
-                                                            <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${l.product.price}</p></div>                                                            
-                                                        </div>
-                                                    </c:forEach>
-                                                    <h5>Order Details</h5>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <ul type="none">
-                                                                <li class="left">Order ID:</li>
-                                                                <li class="left">Date Created:</li>
-                                                                <li class="left">Buyer ID:</li>
-                                                                <li class="left">Buyer Name:</li>
-                                                                <li class="left">Seller ID:</li>
-                                                                <li class="left">Seller Name:</li>
-                                                                <li class="left" style="color: red;">Total Price:</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <ul class="right" type="none">
-                                                                <li class="right">${o.orderId}</li>
-                                                                <li class="right">${o.dateCreated}</li>
-                                                                <li class="right">${o.buyer.buyerId}</li>
-                                                                <li class="right">${o.buyer.buyerName}</li>
-                                                                <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerId}
-                                                                <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerName}</li>
-                                                                <li class="right" style="color: red;">$${o.totalPrice}</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>                        
-                                                </div>
-                                            </div> <!-- Modal footer -->
-                                            <div class="modal-footer"> <button type="button" class="btn" data-dismiss="modal" >Close</button> </div>
+                                                            <div class="col-md-6">
+                                                                <ul type="none">
+                                                                    <li class="left">Order ID:</li>
+                                                                    <li class="left">Date Created:</li>
+                                                                    <li class="left">Buyer ID:</li>
+                                                                    <li class="left">Buyer Name:</li>
+                                                                    <li class="left">Seller ID:</li>
+                                                                    <li class="left">Seller Name:</li>
+                                                                    <li class="left" style="color: red;">Total Price:</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <ul class="right" type="none">
+                                                                    <li class="right">${o.orderId}</li>
+                                                                    <li class="right">${o.dateCreated}</li>
+                                                                    <li class="right">${o.buyer.buyerId}</li>
+                                                                    <li class="right">${o.buyer.buyerName}</li>
+                                                                    <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerId}
+                                                                    <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerName}</li>
+                                                                    <li class="right" style="color: red;">$${o.totalPrice}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>                        
+                                                    </div>
+                                                </div> <!-- Modal footer -->
+                                                <div class="modal-footer"> <button type="button" class="btn" data-dismiss="modal" >Close</button> </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                        </table>
-                    </div> 
+                                </c:forEach>
+                            </table>
+                        </div> 
+                    </c:if> 
                 </div>
             </div>
         </div>        
