@@ -204,7 +204,7 @@ header{
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Manage <b>Orders</b></a></div>
+                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
                     
                 </div>
                  <div class="row1">
@@ -245,7 +245,7 @@ header{
                         </td>
                             
                        
-                        <td>${odt.totalPrice}</td>
+                        <td>${odt.totalPrice} VNĐ</td>
                         <td><a href="manageorderdetail?oid=${odt.orderId}" type="button" class="btn btn-info" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
                     </c:forEach>
