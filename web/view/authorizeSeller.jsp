@@ -430,7 +430,11 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <div class="row">          
+                    <div class="row">  
+                        <div class="alert alert-${alert}">
+                            ${message} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                        </div>
                         <div class="table-users">
                             <div class="header">Waiting list </div>
 
@@ -458,38 +462,38 @@
                                                     <br/>
                                                 </div>
                                                 <div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="sellerId"> ID</label>
-                                                                <input type="text" class="form-control" id="buyerId" name="sellerId" value="${s.sellerId}" readonly >
-                                                            </div>
-                                                            <div class="form-group ">
-                                                                <label for="sellerName">Name</label>
-                                                                <input type="text" class="form-control" id="sellerName" name="sellerName" value="${s.sellerName}" readonly >
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerDes">Description</label>
-                                                                <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${s.description}" readonly>
-                                                            </div>  
-                                                            <div class="form-group ">
-                                                                <label for="sellerAddress">Address</label>
-                                                                <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${s.address}" readonly >
-                                                            </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="sellerId"> ID</label>
+                                                            <input type="text" class="form-control" id="buyerId" name="sellerId" value="${s.sellerId}" readonly >
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="sellerName">Name</label>
+                                                            <input type="text" class="form-control" id="sellerName" name="sellerName" value="${s.sellerName}" readonly >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerDes">Description</label>
+                                                            <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${s.description}" readonly>
+                                                        </div>  
+                                                        <div class="form-group ">
+                                                            <label for="sellerAddress">Address</label>
+                                                            <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${s.address}" readonly >
+                                                        </div>
 
-                                                            <div class="form-group">
-                                                                <label for="sellerGmail">Gmail</label>
-                                                                <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${s.gmail}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerPhone">Phone</label>
-                                                                <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${s.phone}" readonly>
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerGmail">Gmail</label>
+                                                            <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${s.gmail}" readonly>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?username=${s.username.username}&status=${s.username.status}" style="font-size: 15px;color: white">Accept</a></button>
-                                                            <button type="button" class="btn btn-secondary"><a href="denySellerAccount?username=${s.username.username}" style="font-size: 15px;color: white">Deny</a></button>
+                                                        <div class="form-group">
+                                                            <label for="sellerPhone">Phone</label>
+                                                            <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${s.phone}" readonly>
                                                         </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${s.sellerId}&roleId=3&status=${s.username.status}" style="font-size: 15px;color: white">Accept</a></button>
+                                                        <button type="button" class="btn btn-secondary"><a href="denySellerAccount?username=${s.username.username}" style="font-size: 15px;color: white">Deny</a></button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

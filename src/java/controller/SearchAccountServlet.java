@@ -78,38 +78,66 @@ public class SearchAccountServlet extends HttpServlet {
             throws ServletException, IOException {
 //        try {
         int roleId = Integer.parseInt(request.getParameter("roleId").trim());
+        IRoleDAO iRoleDAO = new RoleDAO();
+        List<Role> listRole = iRoleDAO.getAllRole();
         int id = 0;
-        try {
-        id = Integer.parseInt(request.getParameter("uid").trim()); }
-        catch (NumberFormatException nfe){
-            request.setAttribute("notice", "Number required !");
-            request.getRequestDispatcher("manageAccount").forward(request, response);
+        
+        if (request.getParameter("id").trim().length() > 9) {
+            request.setAttribute("alert", "warning");
+            request.setAttribute("message", "Number of characters not excess 10 !");
+            request.setAttribute("role", listRole);
+            request.setAttribute("roleId", roleId);
+            request.setAttribute("id", request.getParameter("id").trim());
+            request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
         }
+        if (request.getParameter("id").trim().length() > 0) {
+            try{
+            id = Integer.parseInt(request.getParameter("id").trim());
+            } catch(NumberFormatException nfe){
+           request.setAttribute("alert", "warning");
+            request.setAttribute("message", "Input number required !");
+            request.setAttribute("role", listRole);
+            request.setAttribute("roleId", roleId);
+            request.setAttribute("id", request.getParameter("id").trim());
+            request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
+            }
+        }
+        if ( id < 0) {
+           request.setAttribute("alert", "danger");
+            request.setAttribute("message", "Must be positive number !");
+            request.setAttribute("role", listRole);
+            request.setAttribute("roleId", roleId);
+            request.setAttribute("id", request.getParameter("id").trim());
+            request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
+            }       
         IManageAccountDAO manageaccountdao = new ManageAccountDAO();
         IBuyerDAO iBuyerDAO = new BuyerDAO();
         ISellerDAO iSellerDAO = new SellerDAO();
-        List<Account> account = null;
+        Account account = null;
         Buyer buyer = null;
         Seller seller = null;
         try {
             account = manageaccountdao.searchAccount(roleId, id);
             if (roleId == 2) {
-                buyer = iBuyerDAO.getBuyer(account.get(0).getUsername());
+                buyer = iBuyerDAO.getBuyer(account.getUsername());
             }
             if (roleId == 3) {
-                seller = iSellerDAO.getSeller(account.get(0).getUsername());
+                seller = iSellerDAO.getSeller(account.getUsername());
                 int numberProductSale = iSellerDAO.getNumberOfProductOnSale(seller.getSellerId());
                 request.setAttribute("numberProduct", numberProductSale);
             }
         } catch (Exception ex) {
             Logger.getLogger(SearchAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        request.setAttribute("alert", request.getAttribute("alert"));
+        request.setAttribute("message", request.getAttribute("message"));
         request.setAttribute("roleId", roleId);
         request.setAttribute("id", id);
+        request.setAttribute("role", listRole);
         request.setAttribute("account", account);
         request.setAttribute("seller", seller);
         request.setAttribute("buyer", buyer);
-        request.getRequestDispatcher("manageAccount").forward(request, response);
+        request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
 //        } catch (NullPointerException npt) {
 //            response.sendRedirect("login");
 //        }

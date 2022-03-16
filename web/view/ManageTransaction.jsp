@@ -11,7 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Manage Account</title>
+        <title>Manage Transaction</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -397,7 +397,7 @@
                         <a href="homepage" class="download">Go to homepage</a>
                     </li>
                     <li>
-                        <a href="#" class="article">Logout</a>
+                        <a href="logout" class="article">Logout</a>
                     </li>
                 </ul>
             </nav>
@@ -428,111 +428,111 @@
                 </nav>
                 <div class="container-fluid">
                     <div class="row">
+                        <div class="alert alert-${alert}">
+                            ${message} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                        </div>
                         <form class="navbar-form navbar-right" action="searchManageTransaction" method="get" >  
                             <label for="orderId">OrderId:</label>
-                            <input value="0" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Nhập orderId">
+                            <input value="${orderId}" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Input orderId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
                             <label for="buyerId">BuyerId:</label>
-                            <input value="0" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId">
+                            <input value="${buyerId}" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Input buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
                             <label for="sellerId">SellerId:</label>
-                            <input value="0" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Nhập sellerId">
+                            <input value="${sellerId}" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Input sellerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                            <br>
                             <label for="start">Start date:</label>
-                            <input type="date" id="start" name="dateFrom"
-                                   value="2018-01-01"
-                                   min="2018-01-01" max="2030-12-31">
+                            <input type="date" id="start" name="dateFrom"value="${dateFrom}">
                             <label for="end">End date:</label>
-                            <input type="date" id="end" name="dateTo"
-                                   value="2030-12-31"
-                                   min="2018-01-01" max="2030-12-31">
+                            <input type="date" id="end" name="dateTo"value="${dateTo}">
+                            <select name="sort" id="sort" onchange="this.form.submit()">  
+                                <option  value="OrderId ASC" ${ sort == "OrderId ASC"?"selected":""} > Order Id ascending </option>
+                                <option  value="OrderId DESC" ${ sort == "OrderId DESC"?"selected":""} > Order Id descending </option>
+                                <option  value="BuyerId ASC" ${ sort == "BuyerId ASC"?"selected":""} > Buyer oldest </option>
+                                <option  value="BuyerId DESC" ${ sort == "BuyerId DESC"?"selected":""} > Buyer newest </option>
+                                <option  value="DateCreated ASC" ${ sort == "DateCreated ASC"?"selected":""} > Oldest </option>
+                                <option  value="DateCreated DESC" ${ sort == "DateCreated DESC"?"selected":""} > Newest </option>
+                                <option  value="TotalPrice ASC" ${ sort == "TotalPrice ASC"?"selected":""} > Lowest value </option>
+                                <option  value="TotalPrice DESC" ${ sort == "TotalPrice DESC"?"selected":""} > Highest value </option>
+
+                            </select> 
                             <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
                         </form>
 
                     </div>
-                    <h4>${requestScope.notice}</h4>
-                    <c:if test="${ account != null}">
-                        <div class="table-users">
-                            <div class="header">List Account</div>
+                    <div class="table-users">
+                        <div class="header">List Order</div>
 
-                            <table border="1px"  >
+                        <table border="1px"  >
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Buyer Name</th>
+                                <th>Date Created</th>
+                                <th>Total Price</th>
+
+                                <th width="120"></th>
+                            </tr>
+                            <c:forEach items="${requestScope.order}" var="o">
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Buyer Name</th>
-                                    <th>Product Name</th>
-                                    <th>Date Created</th>
-                                    <th width="120"></th>
-                                </tr>
-                                <c:forEach items="${requestScope.order}" var="o">
-                                    <tr>
-                                        <td class="mid">${o.orderId}</td>
-                                        <td class="mid">${o.buyer.buyerName}</td>
-                                        <td class="mid">${o.product.productName}</td>
-                                        <td class="mid">${o.dateCreated}</td>
-                                        <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${o.orderId}">Detail</button> </td>
-                                    </tr>     
+                                    <td class="mid">${o.orderId}</td>
+                                    <td class="mid">${o.buyer.buyerName}</td>
+                                    <td class="mid">${o.dateCreated}</td>
+                                    <td class="mid">$${o.totalPrice}</td>                                 
+                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal${o.orderId}">Detail</button> </td>
+                                </tr>     
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <!-- Modal Header -->
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Order Detail</h4> <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                </div> <!-- Modal body -->
-                                                <div class="modal-body">
-                                                    <div class="container">
-                                                        <h6>Item Details</h6>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal${o.orderId}">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Order Detail</h4> <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div> <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <h5>Item Details</h5>                                                   
+                                                    <c:forEach items="${o.getListOrderdetail()}" var = "l">
                                                         <div class="row">
-                                                            <div class="col"> <img class="img-fluid" src="https://i.imgur.com/iItpzRh.jpg"> </div>
-                                                            <div class="col-xs-6" style="padding-top: 2vh;">
-                                                                <ul type="none">
-                                                                    <li>Size: 11</li>
-                                                                    <li>Color: Desert Sage</li>
-                                                                </ul>
-                                                            </div>
+                                                            <div class="col-md-4"> <img class="img-fluid" src="${l.product.img}"> </div>
+                                                            <div class="mid col-md-4" style="padding-top: 2vh;"> <a href="productDetail?pid=${l.product.id}" style="color: #007bff;text-decoration: underline;font-size: 15px">${l.product.name}</a></div>
+                                                            <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${l.quantity}</p></div>
+                                                            <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${l.product.price}</p></div>                                                            
                                                         </div>
-                                                        <h6>Order Details</h6>
-                                                        <div class="row">
-                                                            <div class="col-xs-6">
-                                                                <ul type="none">
-                                                                    <li class="left">Order number:</li>
-                                                                    <li class="left">Date:</li>
-                                                                    <li class="left">Price:</li>
-                                                                    <li class="left">Shipping:</li>
-                                                                    <li class="left">Total Price:</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <ul class="right" type="none">
-                                                                    <li class="right">#BBRT-3456981</li>
-                                                                    <li class="right">19-03-2020</li>
-                                                                    <li class="right">$690</li>
-                                                                    <li class="right">$30</li>
-                                                                    <li class="right">$720</li>
-                                                                </ul>
-                                                            </div>
+                                                    </c:forEach>
+                                                    <h5>Order Details</h5>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ul type="none">
+                                                                <li class="left">Order ID:</li>
+                                                                <li class="left">Date Created:</li>
+                                                                <li class="left">Buyer ID:</li>
+                                                                <li class="left">Buyer Name:</li>
+                                                                <li class="left">Seller ID:</li>
+                                                                <li class="left">Seller Name:</li>
+                                                                <li class="left" style="color: red;">Total Price:</li>
+                                                            </ul>
                                                         </div>
-                                                        <h6>Shipment</h6>
-                                                        <div class="row" style="border-bottom: none">
-                                                            <div class="col-xs-6">
-                                                                <ul type="none">
-                                                                    <li class="left">Estimated arrival</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-xs-6">
-                                                                <ul type="none">
-                                                                    <li class="right">25-03-2020</li>
-                                                                </ul>
-                                                            </div>
+                                                        <div class="col-md-6">
+                                                            <ul class="right" type="none">
+                                                                <li class="right">${o.orderId}</li>
+                                                                <li class="right">${o.dateCreated}</li>
+                                                                <li class="right">${o.buyer.buyerId}</li>
+                                                                <li class="right">${o.buyer.buyerName}</li>
+                                                                <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerId}
+                                                                <li class="right">${o.getListOrderdetail().get(0).product.seller.sellerName}</li>
+                                                                <li class="right" style="color: red;">$${o.totalPrice}</li>
+                                                            </ul>
                                                         </div>
-                                                    </div>
-                                                </div> <!-- Modal footer -->
-                                                <div class="modal-footer"> <button type="button" class="btn">Track order</button> </div>
-                                            </div>
+                                                    </div>                        
+                                                </div>
+                                            </div> <!-- Modal footer -->
+                                            <div class="modal-footer"> <button type="button" class="btn" data-dismiss="modal" >Close</button> </div>
                                         </div>
                                     </div>
-                                </c:forEach>
-                            </table>
-                        </div> 
-                    </c:if>
+                                </div>
+                            </c:forEach>
+                        </table>
+                    </div> 
                 </div>
             </div>
         </div>        

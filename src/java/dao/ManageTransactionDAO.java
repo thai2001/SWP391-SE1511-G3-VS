@@ -46,12 +46,13 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             } catch (Exception e) {
                 System.out.println("lỗi khi kết nối:" + e);
             }
-            String sql = "  SELECT * FROM dbo.[ORDER] ";
+            String sql = "  SELECT * FROM dbo.[ORDER] INNER JOIN BUYER ON"
+                    + " [ORDER].BUYERID = BUYER.BUYERID ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"), rs.getDouble("TotalPrice"),
-                         new Buyer(rs.getInt("BuyerId")));
+                Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"),
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("buyerName")),GetOrderDetail(rs.getInt("OrderId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
@@ -81,7 +82,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
                 System.out.println("lỗi khi kết nối:" + e);
             }
             String sql = "  SELECT * FROM dbo.[ORDER] INNER JOIN BUYER ON"
-                    + " ORDER.BUYERID = BUYER.BUYERID WHERE 1=1 ";
+                    + " [ORDER].BUYERID = BUYER.BUYERID WHERE 1=1 ";
             if (orderId > 0) {
                 sql += "and orderId = " + orderId + " ";
             }
@@ -97,7 +98,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             if (dateTo != null) {
                 sql += "and DateCreated <= '" + dateTo + "' ";
             }
-            if (sortColumn != null) {
+            if (!sortColumn.equals("")) {
                 sql += " order by " + sortColumn + " ";
             }
             ps = con.prepareStatement(sql);
@@ -165,7 +166,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
     public static void main(String[] args) {
         IManageTransactionDAO i = new ManageTransactionDAO();
         try {
-            System.out.println(i.GetOrderDetail(1).get(0).getProduct().getSeller().getSellerName());
+            System.out.println(i.GetAllOrder().get(0).getListOrderdetail().get(0).getProduct().getName());
         } catch (Exception ex) {
             Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

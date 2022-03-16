@@ -426,21 +426,32 @@
                         </div>
                     </div>
                 </nav>
-                <div class="container-fluid">
+                <div class="container-fluid">            
+                    <div class="alert alert-${alert}">
+                       ${message} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                    </div>
                     <div class="row">
                         <form class="navbar-form navbar-right" action="searchAccount" method="get" >
-                            <select name="roleId">
+                            <label id="roleId">Role</label>
+                                   <select name="roleId" id="roleId">                                       
                                 <c:forEach items="${requestScope.role}" var="r">
                                     <option  value="${r.roleId}" ${r.roleId == roleId?"selected":""} > ${r.roleName} </option>
                                 </c:forEach> 
-                            </select>    
-                            <input value="${id}" id="uid" name="uid" type="text" class="SearchBox" placeholder="Id"  title="Number is required, not over 15 character" required>
+                            </select> 
+                            <label id="id">User ID</label>
+                            <input value="${id}" id="id" name="id" type="text" class="SearchBox" placeholder="Id" pattern="\s*[0-9]\s*{1,1000}" title="Number is required" required>
 
                             <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
                         </form>
 
                     </div>
-                    <h4>${requestScope.notice}</h4>
+                            <c:if test="${ account == null}"> 
+                               <div class="alert alert-info">
+                                   Dữ liệu tìm kiếm không có kết quả !
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                    </div> 
+                            </c:if>       
                     <c:if test="${ account != null}">
                         <div class="table-users">
                             <div class="header">List Account</div>
@@ -451,12 +462,11 @@
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th width="120"></th>
-                                </tr>
-                                <c:forEach items="${requestScope.account}" var="a">
+                                </tr>                                
                                     <tr>
-                                        <td class="mid">${a.username}</td>
-                                        <td class="mid">${a.roleId.roleName}</td>
-                                        <td class="mid">${a.status}</td>
+                                        <td class="mid">${account.username}</td>
+                                        <td class="mid">${account.roleId.roleName}</td>
+                                        <td class="mid">${account.status}</td>
                                         <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Detail</button> </td>
                                     </tr>     
 
@@ -469,7 +479,7 @@
                                                     <br/>
                                                 </div>
                                                 <div>
-                                                    <c:if test="${ a.roleId.roleId == 2 }">
+                                                    <c:if test="${ account.roleId.roleId == 2 }">
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="buyerId">Buyer ID</label>
@@ -500,10 +510,10 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?username=${a.username}&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${buyer.buyerId}&roleId=2&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
                                                         </div>
                                                     </c:if>
-                                                    <c:if test="${ a.roleId.roleId == 3 }">
+                                                    <c:if test="${ account.roleId.roleId == 3 }">
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="buyerId">Seller ID</label>
@@ -539,14 +549,13 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?username=${a.username}&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${seller.sellerId}&roleId=3&status=${account.status}" style="font-size: 15px;color: white">Change status</a></button>
                                                         </div>
                                                     </c:if>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
                             </table>
                         </div> 
                     </c:if>

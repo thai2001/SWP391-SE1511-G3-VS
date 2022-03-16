@@ -37,8 +37,8 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
      * @throws Exception if any error occurs
      */
     @Override
-    public List<Account> searchAccount(int roleId, int id) throws Exception{
-        List<Account> listAccount = new ArrayList<>();
+    public Account searchAccount(int roleId, int id) throws Exception{   
+        Account account = null;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -68,9 +68,9 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
             ps.setInt(2, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Account account = new Account(rs.getString("username"), rs.getString("password"), rs.getString("status"),
+                 account = new Account(rs.getString("username"), rs.getString("password"), rs.getString("status"),
                         new Role(rs.getInt("roleId"), rs.getString("roleName")));
-                listAccount.add(account);
+                
             }
         } catch (SQLException e) {
             System.out.println("" + e);
@@ -83,9 +83,9 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
                 Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return listAccount;
+        return account;
     }
-
+    
     /**
      * Handles the <code>activeAccount</code> method.
      *
@@ -153,7 +153,45 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
     public static void main(String[] args) throws Exception {
         ManageAccountDAO m = new ManageAccountDAO();        
         m.deactiveAccount("buyer1");
-        List<Account> account = m.searchAccount(2, 2);
-        System.out.println(account.get(0).getStatus());
+       Account account = m.searchAccount(2, 2);
+        System.out.println(account.getStatus());
+    }
+
+    @Override
+    public String getUsernameById(int roleId, int id) throws Exception {
+        String username = "";
+        String sql = "";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            if ( roleId == 2){
+           sql = "Select * from Buyer where buyerid = ?";
+            }
+            if ( roleId == 3){
+           sql = "Select * from Seller where sellerid = ?";
+            }
+            try {
+                con = getConnection();
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                username = rs.getString("username");
+            }
+        } catch (SQLException e) {
+            System.out.println("" + e);
+        } finally {
+            try {
+                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageAccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return username;
     }
 }

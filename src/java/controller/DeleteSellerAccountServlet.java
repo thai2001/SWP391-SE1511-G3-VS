@@ -71,13 +71,12 @@ public class DeleteSellerAccountServlet extends HttpServlet {
         int roleId = Integer.parseInt(request.getParameter("roleId")); // vai trò khách hàng
         int cusId = Integer.parseInt(request.getParameter("cusId"));// Id khách hàng
         IManageAccountDAO iManageAccountDao = new ManageAccountDAO();
-        List<Account> listAccount = null;
+        Account account = null;
         try {
-            listAccount = iManageAccountDao.searchAccount(roleId, cusId);
+            account = iManageAccountDao.searchAccount(roleId, cusId);
         } catch (Exception ex) {
             Logger.getLogger(DeleteSellerAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Account account = listAccount.get(0);
+        }        
         IAuthorizeSellerDAO iAuthorizeSellerDAO = new AuthorizeSellerDAO();
         iAuthorizeSellerDAO.denySellerAccount(account.getUsername());
         response.sendRedirect("authorize");

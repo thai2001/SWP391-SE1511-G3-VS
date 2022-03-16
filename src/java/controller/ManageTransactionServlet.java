@@ -71,8 +71,12 @@ public class ManageTransactionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
+            Date dateFrom = Date.valueOf("2018-01-01");
+            Date dateTo=new Date(System.currentTimeMillis());
             IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
             List<Order> listOrder = iManageTransactionDAO.GetAllOrder();
+            request.setAttribute("dateTo", dateTo);
+            request.setAttribute("dateFrom", dateFrom);
             request.setAttribute("order", listOrder);
             request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
         } catch(Exception ex){

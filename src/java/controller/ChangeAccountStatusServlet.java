@@ -66,25 +66,30 @@ public class ChangeAccountStatusServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String status = request.getParameter("status");// lấy thông tin trạng thái của tài khoản
-        String username = request.getParameter("username"); // lấy username của tài khoản
+        int id = Integer.parseInt(request.getParameter("id"));
+        int roleId = Integer.parseInt(request.getParameter("roleId"));// lấy username của tài khoản
         IManageAccountDAO manageAccountDAO = new ManageAccountDAO();
         if (status.equalsIgnoreCase("active")) {
             try {
-                manageAccountDAO.deactiveAccount(username);
+                manageAccountDAO.deactiveAccount(manageAccountDAO.getUsernameById(roleId, id));
             } catch (Exception ex) {
                 Logger.getLogger(ChangeAccountStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("note", "Hủy kích hoạt tài khoản thành công");
-            request.getRequestDispatcher("manageAccount").forward(request, response);            
+            request.setAttribute("alert", "success");
+            request.setAttribute("message", "De-active account successfully !");
+                      
         } else if (status.equalsIgnoreCase("inactive")) {
             try {
-                manageAccountDAO.activeAccount(username);
+                manageAccountDAO.activeAccount(manageAccountDAO.getUsernameById(roleId, id));
             } catch (Exception ex) {
                 Logger.getLogger(ChangeAccountStatusServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("note", "Kích hoạt tài khoản thành công");
-            request.getRequestDispatcher("manageAccount").forward(request, response);
+            request.setAttribute("alert", "success");
+            request.setAttribute("message", "Active account successfully !");
         }
+        request.setAttribute("id", id);
+        request.setAttribute("roleId", roleId);
+        request.getRequestDispatcher("searchAccount").forward(request, response);  
     }
 
     /**

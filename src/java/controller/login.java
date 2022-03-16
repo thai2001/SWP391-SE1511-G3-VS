@@ -89,14 +89,14 @@ public class login extends HttpServlet {
 
         if (acdb.getCode() == 0) {
             request.getSession().setAttribute("account", acdb);
-            response.sendRedirect(contextPath + pathConnect(ac));
+            response.sendRedirect(contextPath + pathConnect(acdb));
             return;
         }
 
         if (acdb.getCode() == code && acdb.getCode() != 0) {
             adb.updateCode(ac);
             request.getSession().setAttribute("account", acdb);
-            response.sendRedirect(contextPath + pathConnect(ac));   
+            response.sendRedirect(contextPath + pathConnect(acdb));   
             return;
         }
         
@@ -114,7 +114,11 @@ public class login extends HttpServlet {
     }
 
     String pathConnect(Account ac) {
-        return "/homePage";
+        String s = "";   
+        if( ac.getRoleId().getRoleId() == 1 ){ s = "/authorize"; } 
+        if( ac.getRoleId().getRoleId() == 2 ){ s = "/homePage"; } 
+        if( ac.getRoleId().getRoleId() == 3 ){ s = "/homePage"; } 
+        return s;
     }
 
 }

@@ -69,44 +69,117 @@ public class SearchManageTransaction extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-        int orderId = Integer.parseInt(request.getParameter("orderId"));
-        int sellerId = Integer.parseInt(request.getParameter("sellerId"));
-        int buyerId = Integer.parseInt(request.getParameter("buyerId"));
-        Date dateFrom = Date.valueOf(request.getParameter("dateFrom"));
-        Date dateTo = Date.valueOf(request.getParameter("dateTo"));
-        String sortColumn = request.getParameter("sort");
-        IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
-        List<Order> listOrder = iManageTransactionDAO.GetOrderByFilter(orderId, sellerId, buyerId, dateFrom, dateTo, sortColumn);
-        request.setAttribute("order", listOrder);
-        request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
-        } catch (Exception ex) {
-             Logger.getLogger(SearchManageTransaction.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-    }
+        try {
+            int orderId = 0;
+            int sellerId = 0;
+            int buyerId = 0;
+            Date dateFrom = Date.valueOf("2018-01-01");
+            Date dateTo = new Date(System.currentTimeMillis());
+            Date change = null;
+            String sortColumn = request.getParameter("sort").trim();
+            if (request.getParameter("orderId").trim().length() > 9 || request.getParameter("sellerId").trim().length() > 9
+                    || request.getParameter("buyerId").trim().length() > 9) {
+                request.setAttribute("alert", "warning");
+                request.setAttribute("message", "number of characters not excess 9 !");
+                request.setAttribute("orderId", request.getParameter("orderId").trim());
+                request.setAttribute("sellerId", request.getParameter("sellerId").trim());
+                request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+                request.setAttribute("dateFrom", dateFrom);
+                request.setAttribute("dateTo", dateTo);
+                request.setAttribute("sort", sortColumn);
+                 request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
+            }
+            try {
+                if (request.getParameter("orderId").trim().length() > 0) {
+                    orderId = Integer.parseInt(request.getParameter("orderId").trim());
+                    request.setAttribute("orderId", orderId);
+                }
+                if (request.getParameter("sellerId").trim().length() > 0) {
+                    sellerId = Integer.parseInt(request.getParameter("sellerId").trim());
+                    request.setAttribute("sellerId", sellerId);
+                }
+                if (request.getParameter("buyerId").trim().length() > 0) {
+                    buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
+                    request.setAttribute("buyerId", buyerId);
+                }
+            } catch (NumberFormatException nfe) {
+                request.setAttribute("alert", "warning");
+                request.setAttribute("message", "Input number is required !");
+                request.setAttribute("orderId", request.getParameter("orderId").trim());
+                request.setAttribute("sellerId", request.getParameter("sellerId").trim());
+                request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+                request.setAttribute("dateFrom", dateFrom);
+                request.setAttribute("dateTo", dateTo);
+                request.setAttribute("sort", sortColumn);
+                request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
+            }
+            if ( orderId < 0|| sellerId < 0 || buyerId < 0){
+                request.setAttribute("alert", "warning");
+                request.setAttribute("message", "Must input positive number !");
+                request.setAttribute("orderId", request.getParameter("orderId").trim());
+                request.setAttribute("sellerId", request.getParameter("sellerId").trim());
+                request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+                request.setAttribute("dateFrom", dateFrom);
+                request.setAttribute("dateTo", dateTo);
+                request.setAttribute("sort", sortColumn);
+                request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
+            }
+                if (request.getParameter("dateFrom").trim().length() > 0) {
+                    Date dateFromfa = Date.valueOf(request.getParameter("dateFrom").trim());
+                    if (dateFrom.before(dateFromfa)) {
+                        dateFrom = dateFromfa;
+                    }
+                }
+                if (request.getParameter("dateTo").trim().length() > 0) {
+                    Date dateTofa = Date.valueOf(request.getParameter("dateTo").trim());
+                    if (dateTo.after(dateTofa)) {
+                        dateTo = dateTofa;
+                    }
+                }
+                if (dateFrom.after(dateTo)) {
+                    change = dateFrom;
+                    dateFrom = dateTo;
+                    dateTo = change;
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                }
+
+                IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
+                List<Order> listOrder = iManageTransactionDAO.GetOrderByFilter(orderId, sellerId, buyerId, dateFrom, dateTo, sortColumn);
+                request.setAttribute("dateFrom", dateFrom);
+                request.setAttribute("dateTo", dateTo);
+                request.setAttribute("sort", sortColumn);
+                request.setAttribute("order", listOrder);
+                request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(SearchManageTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

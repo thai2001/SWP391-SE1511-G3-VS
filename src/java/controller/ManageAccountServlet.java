@@ -72,6 +72,8 @@ public class ManageAccountServlet extends HttpServlet {
             IManageAccountDAO manageaccountdao = new ManageAccountDAO();            
             IRoleDAO iRoleDAO = new RoleDAO();
             List<Role> listRole = iRoleDAO.getAllRole();
+            request.setAttribute("alert", "warning");
+            request.setAttribute("message", "Input search data first to keep security of user account ");
             request.setAttribute("role", listRole);
             request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);
         } catch (NullPointerException npt) {

@@ -25,7 +25,7 @@ public interface IManageAccountDAO {
      * @param id servlet response
      * @throws Exception if any error occurs
      */
-    public List<Account> searchAccount(int roleId,int id) throws Exception;
+    public Account searchAccount(int roleId,int id) throws Exception;
     /**
      * Handles the <code>activeAccount</code> method.
      *
@@ -40,4 +40,12 @@ public interface IManageAccountDAO {
      * @throws Exception if any error occurs
      */
     public void deactiveAccount(String username) throws Exception;
+    /**
+     * Handles the <code>deactiveAccount</code> method.
+     *
+     * @param username username of account
+     * @throws Exception if any error occurs
+     */
+    public String getUsernameById(int roleId,int id) throws Exception;
+    
 }

@@ -72,17 +72,49 @@ public class SearchManageReport extends HttpServlet {
         try {
             int buyerId = 0;
             int productId = 0;
-            if (request.getParameter("buyerId").trim().length() > 0) {
-                buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
+            String sort = request.getParameter("sort").trim();
+            int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId").trim());
+            IManageReportDAO iManageReportDAO = new ManageReportDAO();
+            List<ReportType> listReporttype = iManageReportDAO.getAllReportType();
+            if (request.getParameter("buyerId").trim().length() > 9 || request.getParameter("productId").trim().length() > 9 ){
+            request.setAttribute("alert", "warning");
+            request.setAttribute("message", "Not excess 9 character!");
+            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+            request.setAttribute("productId", request.getParameter("productId").trim());
+            request.setAttribute("sort", sort);
+            request.setAttribute("reportTypeId", reportTypeId);
+            request.setAttribute("reportType", listReporttype);
+            }
+            try{
+            if (request.getParameter("buyerId").trim().length() > 0 ) {               
+                buyerId = Integer.parseInt(request.getParameter("buyerId").trim());              
             }
             if (request.getParameter("productId").trim().length() > 0) {
                 productId = Integer.parseInt(request.getParameter("productId").trim());
             }
-            int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId").trim());
-            String sort = request.getParameter("sort").trim();
-            IManageReportDAO iManageReportDAO = new ManageReportDAO();
+              } catch (NumberFormatException nfe){
+            request.setAttribute("alert", "danger");
+            request.setAttribute("message", "Number is required !");
+            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+            request.setAttribute("productId", request.getParameter("productId").trim());
+            request.setAttribute("sort", sort);
+            request.setAttribute("reportTypeId", reportTypeId);
+            request.setAttribute("reportType", listReporttype);
+            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
+            }
+            if ( buyerId < 0 || productId < 0) {
+            request.setAttribute("alert", "danger");
+            request.setAttribute("message", "Number must be positive !");
+            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+            request.setAttribute("productId", request.getParameter("productId").trim());
+            request.setAttribute("sort", sort);
+            request.setAttribute("reportTypeId", reportTypeId);
+            request.setAttribute("reportType", listReporttype);
+            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
+            }
+            
             List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, sort);
-            List<ReportType> listReporttype = iManageReportDAO.getAllReportType();
+            
             request.setAttribute("buyerId", buyerId);
             request.setAttribute("productId", productId);
             request.setAttribute("sort", sort);
