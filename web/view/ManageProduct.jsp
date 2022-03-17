@@ -161,20 +161,24 @@ header img{
  .pagination {
                  display: inline-block;
               }
-             .pagination a {
-                color: black;
-                font-size: 15px;
-                float: left;
-                padding: 8px 16px;
-                text-decoration: none;
-              }
-            .pagination a.active {
-                background-color: red;
-                color: white;
-              }
-            .pagination a:hover:not(.active) {
-                background-color: red;
-            }
+.pagination a {
+  color: black;
+  font-size: 15px;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+ }
+ .pagination a.active {
+  background-color: red;
+  color: white;
+}
+ .pagination a:hover:not(.active) {
+  background-color: red;
+  }
+            
+  .table-wrapper{
+      width: 1290px;
+  }
     </style>
 <!--
 
@@ -237,6 +241,7 @@ header img{
                         <th>Product Name</th>
                         <th>Image</th>
                         <th>MadeIn</th>
+                        <th>Status</th>
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
@@ -254,6 +259,12 @@ header img{
                             <img src="${o.img}">
                         </td>
                         <td>${o.madeIn}</td>
+                        <c:if test="${o.quantity > 0 }" >
+                            <td>   <p style="color:green">Stocking</p> </td>
+                        </c:if>
+                        <c:if test="${o.quantity == 0 }" >
+                             <td>   <p style="color:red">Out of Stock</p> </td>
+                        </c:if>
                         <td>$${o.price}</td>
                         <td>
                         
