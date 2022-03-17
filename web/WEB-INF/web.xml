@@ -97,10 +97,6 @@
         <servlet-class>controller.profile</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManageOrderDetail</servlet-name>
-        <servlet-class>controller.ManageOrderDetail</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SearchOrderForSeller</servlet-name>
         <servlet-class>controller.SearchOrderForSeller</servlet-class>
     </servlet>
@@ -199,10 +195,6 @@
     <servlet-mapping>
         <servlet-name>profile</servlet-name>
         <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ManageOrderDetail</servlet-name>
-        <url-pattern>/manageorderdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchOrderForSeller</servlet-name>
