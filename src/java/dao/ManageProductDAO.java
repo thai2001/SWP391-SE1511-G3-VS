@@ -71,7 +71,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
        List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
                    "where SellerId = ? \n" +
-                   "ORDER BY ProductId desc";
+                   "and Quantity >= 0\n" +
+                   "ORDER BY ProductId desc ";
         
         try{
             con = getConnection();
@@ -165,8 +166,10 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      */
     @Override
     public void deleteProduct(String pid) throws Exception {
-            String sql="delete from Product\n" +
-                    "where ProductId = ?";
+        String sql = "Update Product set Quantity = -1\n" +
+                     "where ProductId = ? ";
+          //  String sql="delete from Product\n" +
+          //          "where ProductId = ?";
          try{
              con = getConnection();
             ps=con.prepareStatement(sql);
@@ -243,7 +246,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
-                   "where SellerId = ? ";
+                   "where SellerId = ? " +
+                   "and Quantity >= 0\n";
                 if(name != null){
                     
                 
@@ -427,6 +431,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         String sql="Select *\n" +
 "       from Product \n" +
 "	   where BrandId = ? \n" +
+           "and Quantity >= 0\n" +
 "	   and SellerId = ? ";
                 
         try{
