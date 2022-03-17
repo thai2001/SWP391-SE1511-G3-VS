@@ -254,7 +254,7 @@ header{
                         </td>
                             
                        
-                        <td>${odt.totalPrice} VNĐ</td>
+                        <td>$${odt.totalPrice}</td>
                         <td><a href="#orderdetail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
                       <div id="orderdetail${odt.orderId}" class="modal fade">
@@ -300,7 +300,7 @@ header{
      
                                  <div class="form-group">
                                <label>Total Price</label>
-                                <h5 style="font-size: 36px;"> ${odt.totalPrice} VNĐ</h5>
+                                <h5 style="font-size: 36px;"> $${odt.totalPrice} </h5>
                                  </div>
                                   
                         </div>

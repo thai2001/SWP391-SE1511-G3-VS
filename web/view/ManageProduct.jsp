@@ -254,7 +254,7 @@ header img{
                             <img src="${o.img}">
                         </td>
                         <td>${o.madeIn}</td>
-                        <td>${o.price}Đ</td>
+                        <td>$${o.price}</td>
                         <td>
                         
                             <a href="loadeditproduct?pid=${o.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i></a>
