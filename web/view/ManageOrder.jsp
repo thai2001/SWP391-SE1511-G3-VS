@@ -269,7 +269,7 @@ header{
                                  <div class="row">
                                      
                                       <div class="col-md-4"> <img class="img-fluid" src="${ordt.product.img}"> </div>
-                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input href="productDetail?pid=${ordt.product.id}" type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333;text-decoration: underline;font-size: 15px; width:100px;" readonly>  </div>
+                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333; width:100px;" readonly>  </div>
                                       <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${ordt.quantity}</p></div>
                                       <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${ordt.product.price}</p></div>                                                            
                                                           
