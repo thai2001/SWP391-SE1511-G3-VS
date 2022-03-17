@@ -54,6 +54,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
         try {
             con = getConnection();
             String sql = "SELECT * from Product"
+                    + "where Quantity > 0"
                     + " order by ManufactureYear desc ";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -96,6 +97,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
             con = getConnection();
             String sql = "SELECT * from Product"
                     + " where vehicleTypeId = ? "
+                    + "and Quantity > 0"
                     + "order by ManufactureYear desc";
             ps = con.prepareStatement(sql);
             ps.setInt(1, vtid);
@@ -145,7 +147,8 @@ public class ProductDAO extends DBContext implements IProductDAO {
             con = getConnection();
 
             String sql = "select * from Product \n"
-                    + "where vehicleTypeId = ? \n";
+                    + "where vehicleTypeId = ? \n"
+                    + "and Quantity > 0";
             if (brandId != 0) {
                 sql += " and BrandId = " + brandId;
             }
@@ -236,7 +239,8 @@ public class ProductDAO extends DBContext implements IProductDAO {
             con = getConnection();
 
             String sql = "select COUNT(*) from Product \n"
-                    + "where vehicleTypeId = ? \n";
+                    + "where vehicleTypeId = ? \n"
+                    + "and Quantity > 0";
             if (brandId != 0) {
                 sql += " and BrandId = " + brandId;
             }
@@ -275,7 +279,8 @@ public class ProductDAO extends DBContext implements IProductDAO {
             con = getConnection();
 
             String sql = "select * from Product \n"
-                    + "where vehicleTypeId = ? \n";
+                    + "where vehicleTypeId = ? \n"
+                      + "and Quantity > 0";;
             if (brandId != 0) {
                 sql += " and BrandId = " + brandId;
             }
