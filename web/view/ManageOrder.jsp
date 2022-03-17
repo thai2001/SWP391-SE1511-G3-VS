@@ -14,6 +14,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    
     <style>
         .table-wrapper {
     width: 1100px;
@@ -172,7 +174,14 @@ header{
               }
             .pagination a:hover:not(.active) {
                 background-color: red;
+ 
             }
+            #orderdetail{
+    width: 750px;
+}
+.modal-content{
+    width: 1000px;
+}
     </style>
 <!--
 
@@ -246,8 +255,59 @@ header{
                             
                        
                         <td>${odt.totalPrice} VNĐ</td>
-                        <td><a href="manageorderdetail?oid=${odt.orderId}" type="button" class="btn btn-info" style="background-color: #ff6666"> Detail</a></td>
+                        <td><a href="#orderdetail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Detail</a></td>
                     </tr>
+                      <div id="orderdetail${odt.orderId}" class="modal fade">
+            <div class="modal-dialog">
+                 <div class="modal-content">                   
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Order #${odt.orderId}</h4>
+                            
+                        </div>
+                        <div class="modal-body">
+                             <c:forEach items="${odt.getListOrderdetail()}" var="ordt">
+                                 <div class="row">
+                                     
+                                      <div class="col-md-4"> <img class="img-fluid" src="${ordt.product.img}"> </div>
+                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input href="productDetail?pid=${ordt.product.id}" type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333;text-decoration: underline;font-size: 15px; width:100px;" readonly>  </div>
+                                      <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${ordt.quantity}</p></div>
+                                      <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${ordt.product.price}</p></div>                                                            
+                                                          
+                                 </div>
+                             </c:forEach>
+                            
+                            <div class="row">
+                                       <div class="col-md-6">
+                                     <div class="form-group">
+                                <label>Customer Name</label>
+                                <input name="CusName" type="text" class="form-control" value="${odt.buyer.buyerName}" readonly>
+                                     </div>
+                                      <div class="form-group">
+                                <label>Created Date</label>
+                                <input name="CreateDate" type="text" class="form-control" value="${odt.dateCreated}" readonly>
+                                      </div>
+                            
+                              <div class="form-group">
+                                <label>Brand</label>
+                                <input name="brand" class="form-control" value="${odt.getListOrderdetail().get(0).product.brand.name}" readonly></input>
+                              </div>
+                                 <div class="form-group">
+                                <label>Quantity</label>
+                                <input name="quantity" class="form-control" value="${odt.getListOrderdetail().get(0).quantity}" readonly></input>
+                                 </div>
+          
+                          
+                            </div>
+                        
+                               <label>Total Price</label>
+                                <h5 style="font-size: 36px; margin-left: 230px;"> ${odt.totalPrice} VNĐ</h5>
+                           
+                        </div>
+                       
+                </div>
+            </div>
+            </div>
+        </div>
                     </c:forEach>
                 </tbody>
             </table>
@@ -262,7 +322,9 @@ header{
       </c:if>
         </div>
     </div>
-</div>  
+</div>
+       
+    
     
 
 

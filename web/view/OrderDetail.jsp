@@ -148,8 +148,7 @@ header{
            
 <div id="orderdetail" >
             <div class="modal-dialog">
-                <div class="modal-content">
-                    
+                <div class="modal-content">                   
                         <div class="modal-header">						
                             <h4 class="modal-title">Order #${odt.orderId}</h4>
                             

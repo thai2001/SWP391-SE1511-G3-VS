@@ -70,7 +70,7 @@ public class ManageOrderDetail extends HttpServlet {
          int oid = Integer.parseInt(request.getParameter("oid")); //Lấy id của đơn hàng
             IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();
             Order order = iOrderDetailDAO.getOrderByID(oid);
-        request.setAttribute("odt", order);
+   //     request.setAttribute("odt", order);
         request.getRequestDispatcher("view/OrderDetail.jsp").forward(request, response);
     
     }catch(Exception ex){

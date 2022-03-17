@@ -92,6 +92,7 @@ public class ManageOrder extends HttpServlet {
         int start, end;
         start=(page-1)*numperPage;
         end=Math.min(size, page*numperPage);
+        
           List<Order> listord= iManageOrderDAO.getOrderByPage(listorder, start, end);
             request.setAttribute("orderdt", listord);
             request.setAttribute("num", numPage);
