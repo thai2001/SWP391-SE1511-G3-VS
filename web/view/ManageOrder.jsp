@@ -268,8 +268,8 @@ header{
                              <c:forEach items="${odt.getListOrderdetail()}" var="ordt">
                                  <div class="row">
                                      
-                                      <div class="col-md-4"> <img class="img-fluid" src="${ordt.product.img}"> </div>
-                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333; width:100px;" readonly>  </div>
+                                      <div class="col-md-4"> <img class="img-fluid" src="${ordt.product.img}">  </div>
+                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333; width:100px;" readonly> </div>
                                       <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${ordt.quantity}</p></div>
                                       <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${ordt.product.price}</p></div>                                                            
                                                           
@@ -278,6 +278,10 @@ header{
                             
                             <div class="row">
                                        <div class="col-md-6">
+                                     <div class="form-group">
+                                <label>Customer ID</label>
+                                <input name="CusID" type="text" class="form-control" value="${odt.buyer.buyerId}" readonly>
+                                     </div>
                                      <div class="form-group">
                                 <label>Customer Name</label>
                                 <input name="CusName" type="text" class="form-control" value="${odt.buyer.buyerName}" readonly>
@@ -291,17 +295,14 @@ header{
                                 <label>Brand</label>
                                 <input name="brand" class="form-control" value="${odt.getListOrderdetail().get(0).product.brand.name}" readonly></input>
                               </div>
+                                
+          </div>
+     
                                  <div class="form-group">
-                                <label>Quantity</label>
-                                <input name="quantity" class="form-control" value="${odt.getListOrderdetail().get(0).quantity}" readonly></input>
-                                 </div>
-          
-                          
-                            </div>
-                        
                                <label>Total Price</label>
-                                <h5 style="font-size: 36px; margin-left: 230px;"> ${odt.totalPrice} VNĐ</h5>
-                           
+                                <h5 style="font-size: 36px;"> ${odt.totalPrice} VNĐ</h5>
+                                 </div>
+                                  
                         </div>
                        
                 </div>
