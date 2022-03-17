@@ -142,14 +142,14 @@ header{
 .row1{
     margin-bottom: -10px;
     margin-top: 20px;
-    margin-left: 760px;
+    margin-left: 1000px;
 }
 .row h2{
     font-size: 30px;
 
 }
 .row a{
-    font-size: 30px;
+    font-size: 35px;
 }
 .row0 select{
     width: 100px;
@@ -176,12 +176,19 @@ header{
                 background-color: red;
  
             }
-            #orderdetail{
+ #orderdetail{
     width: 750px;
 }
 .modal-content{
     width: 1000px;
 }
+.table-wrapper{
+      width: 1290px;
+      
+  }
+  .table-title{
+      margin-top: -80px;
+  }
     </style>
 <!--
 

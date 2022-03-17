@@ -165,13 +165,15 @@ header{
                             <div class ="col-md-6">
                             <div class="form-group">
                                 <label>Product Name</label>
+                                </div>
                                 <input name="productname" class="form-control" required></input>
-                            </div>
+                            
                     
                                  <div class="form-group">
                                 <label>Discount</label>
+                                </div>
                                 <input name="discount" type="text" class="form-control" required placeholder="%">
-                            </div>
+                            
                                 <div class="form-group">
                                 <label>Price</label>
                                 </div>
@@ -179,7 +181,7 @@ header{
                                  
                                 <input name="price" type="text" class="form-control" required>
                                 <div class="input-group-prepend">
-                                   <span class="input-group-text">VNĐ</span>
+                                   <span class="input-group-text">$</span>
                                   </div>
                             </div>
                             

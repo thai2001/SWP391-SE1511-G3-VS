@@ -149,7 +149,7 @@ header img{
 
 }
 .row a{
-    font-size: 30px;
+    font-size: 35px;
 }
 .row0 select{
     width: 100px;
@@ -178,6 +178,10 @@ header img{
             
   .table-wrapper{
       width: 1290px;
+      
+  }
+  .table-title{
+      margin-top: -80px;
   }
     </style>
 <!--
@@ -210,7 +214,7 @@ header img{
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Manage <b>Orders</b></a></div>               
+                    <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>               
                 </div>
                 <div class = "row0">
                  <select name="brandid" onchange="location = this.value;">
