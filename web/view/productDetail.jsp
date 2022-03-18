@@ -28,7 +28,7 @@
         <jsp:include page="navbar.jsp"></jsp:include>
 
             <div class="container">
-<!--                product detail tiltle-->
+                <!--                product detail tiltle-->
                 <div class="row">
                     <div class="col-10">
                         <section class="vehicle-detail-header">
@@ -39,27 +39,39 @@
                         </section>
                         <h2 class="">${product.name}</h2>
                         <h2 class="">${product.price} $ </h2>
+                        <button type="button" class="btn" > <a class="btn btn-outline-secondary  " href="addShoppingCart?pid=${product.id}" ><i class="bi bi-cart-plus-fill"></i></a></button>
+
                     </section>
-                    
-                    
+
+
                 </div>
-                <div class="col">
+
+            </div>
+            <!--                    product detail information-->
+            <div class="row mt-3">
+                <div class="col-10">
+                    <section>
+                        <img class="w-100" src="${product.img}" alt="">    
+                    </section>
                 </div>
             </div>
-<!--                    product detail information-->
-                        <div class="row">
-                    <div class="col-10">
-                    <section>
-                    <img class="w-100" src="${product.img}" alt="">    
-                    </section>
-                </div>
-                <div class="col">
-                    <div class="space"></div>
-                    <div>
-                        <p class="descript">${product.descript}</p>
-                        <button type="button" class="btn" > <a class="btn btn-outline-secondary  " ><i class="bi bi-cart-plus-fill"></i></a></button>
-                    </div>
-                </div>
+            <div class="row mt-3">
+                <div class=" col"></div>
+                <h2>Characters</h2>
+                <p class=" w-75">Vehicle name : ${product.name}</p>
+                <c:forEach items="${allBrand}" var="b">
+                    <c:if test="${b.id==product.brandId}">
+                        <p class=" w-75">Brand : ${b.name}</p>
+                    </c:if>
+                </c:forEach>
+                <p class=" w-75">Made in : ${product.madeIn}</p>
+                <p class=" w-75">Manufacture year : ${product.manufactureYear}</p>
+
+            </div>
+            <div class="row mt-3">
+                <div class="col"></div>
+                <h2>Description</h2>
+                <p class="descript w-75">${product.descript}</p>
             </div>
         </div>
         <!-- end container part -->
