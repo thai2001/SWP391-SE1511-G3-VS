@@ -56,6 +56,13 @@ function updateCardPrice(element) {
 
 // total selected product and total price have to pay
 function checkedCard(element) {
+    let cardRow = element.parentElement.parentElement;
+    if (element.checked) {
+        cardRow.getElementsByClassName('quantity')[0].setAttribute('name', 'quantity');
+    }
+    if (!element.checked) {
+        cardRow.getElementsByClassName('quantity')[0].removeAttribute('name', 'quantity');
+    }
     updateTotalPrice()
 }
 
