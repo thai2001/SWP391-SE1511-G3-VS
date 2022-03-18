@@ -72,7 +72,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         String sql="select * from Product\n" +
                    "where SellerId = ? \n" +
                    "and Quantity >= 0\n" +
-                   "ORDER BY ProductId desc ";
+                   "ORDER BY ProductId DESC ";
         
         try{
             con = getConnection();
@@ -197,7 +197,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     @Override
     public Product getProductByID(int pid) throws Exception{
         String sql="select * from Product\n" 
-        +"where ProductId= ?";
+        +"where ProductId= ? ";
         try{
             con = getConnection();
             ps=con.prepareStatement(sql);

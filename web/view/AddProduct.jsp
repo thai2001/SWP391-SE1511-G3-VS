@@ -169,7 +169,7 @@ header{
                                 <input name="productname" class="form-control" required></input>
                             
                     
-                                 <div class="form-group">
+                                 <div class="form">
                                 <label>Discount</label>
                                 </div>
                                 <input name="discount" type="text" class="form-control" required placeholder="%">
@@ -205,24 +205,29 @@ header{
        
                             
                                 <div class="col-md-6">
-                            <div class="form-group right">
+                            <div class="form-group right">                   
                                 <label>Made In</label>
-                                <input name="madeIn" class="form-control" required></input>
                             </div>
+                                <input name="madeIn" class="form-control" required style="width:270px;"></input>
+                            
                             <div class="form-group right">
                                 <label>Manufacture Year</label>
-                                <input name="Myear" class="form-control" required></input>
                             </div>
+                                <input name="Myear" class="form-control" required style="width:270px;"></input>
+                            
                             
                             <div class="form-group right">
                                 <label>Image</label>
-                                <input name="img" class="form-control" required></input>
-                                
+                                </div>
+                               <div class="vehicle-img" style="width:270px;">
+                        <input type="file" name ="img" class="form-control" id="vehicle-img">
+ 
                             </div>
                                  <div class="form-group right">
                                 <label>Quantity</label>
-                                <input name="quantity" class="form-control" required></input>
-                            </div>   
+                                 </div>
+                                <input name="quantity" class="form-control" required style="width:270px;"></input>
+                               
                             </div>
                             </div>
                                 
@@ -257,8 +262,8 @@ header{
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
  
 
     

@@ -138,11 +138,14 @@ header{
     height: auto;
 
 }
+header img{
+    width: 50%;
+}
 
 .row1{
     margin-bottom: -10px;
     margin-top: 20px;
-    margin-left: 1000px;
+    margin-left: 900px;
 }
 .row h2{
     font-size: 30px;
@@ -179,11 +182,9 @@ header{
  #orderdetail{
     width: 750px;
 }
-.modal-content{
-    width: 1000px;
-}
+
 .table-wrapper{
-      width: 1290px;
+      width: 1200px;
       
   }
   .table-title{
@@ -268,7 +269,7 @@ header{
             <div class="modal-dialog">
                  <div class="modal-content">                   
                         <div class="modal-header">						
-                            <h4 class="modal-title">Order #${odt.orderId}</h4>
+                            <h4 class="modal-title" style="font-size:35px; ">Order #${odt.orderId}</h4>
                             
                         </div>
                         <div class="modal-body">
@@ -285,27 +286,27 @@ header{
                             
                             <div class="row">
                                        <div class="col-md-6">
-                                     <div class="form-group">
+                                     <div class="form-group-7">
                                 <label>Customer ID</label>
                                 <input name="CusID" type="text" class="form-control" value="${odt.buyer.buyerId}" readonly>
                                      </div>
-                                     <div class="form-group">
+                                     <div class="form-group-7">
                                 <label>Customer Name</label>
                                 <input name="CusName" type="text" class="form-control" value="${odt.buyer.buyerName}" readonly>
                                      </div>
-                                      <div class="form-group">
+                                      <div class="form-group-7">
                                 <label>Created Date</label>
                                 <input name="CreateDate" type="text" class="form-control" value="${odt.dateCreated}" readonly>
                                       </div>
                             
-                              <div class="form-group">
+                              <div class="form-group-7">
                                 <label>Brand</label>
                                 <input name="brand" class="form-control" value="${odt.getListOrderdetail().get(0).product.brand.name}" readonly></input>
                               </div>
                                 
           </div>
      
-                                 <div class="form-group">
+                                 <div class="form-group-7">
                                <label>Total Price</label>
                                 <h5 style="font-size: 36px;"> $${odt.totalPrice} </h5>
                                  </div>
