@@ -492,7 +492,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${s.sellerId}&roleId=3&status=${s.username.status}" style="font-size: 15px;color: white">Accept</a></button>
-                                                        <button type="button" class="btn btn-secondary"><a href="denySellerAccount?username=${s.username.username}" style="font-size: 15px;color: white">Deny</a></button>
+                                                        <button type="button" class="btn btn-secondary"><a href="deleteSellerAccount?id=${s.sellerId}&roleId=3" style="font-size: 15px;color: white">Deny</a></button>
                                                     </div>
                                                 </div>
                                             </div>

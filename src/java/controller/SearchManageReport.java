@@ -84,19 +84,20 @@ public class SearchManageReport extends HttpServlet {
             request.setAttribute("sort", sort);
             request.setAttribute("reportTypeId", reportTypeId);
             request.setAttribute("reportType", listReporttype);
+            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
             }
             try{
             if (request.getParameter("buyerId").trim().length() > 0 ) {               
-                buyerId = Integer.parseInt(request.getParameter("buyerId").trim());              
+                buyerId = Integer.parseInt(request.getParameter("buyerId").trim()); 
+                request.setAttribute("buyerId", request.getParameter("buyerId").trim());
             }
             if (request.getParameter("productId").trim().length() > 0) {
                 productId = Integer.parseInt(request.getParameter("productId").trim());
+                request.setAttribute("productId", request.getParameter("productId").trim());
             }
               } catch (NumberFormatException nfe){
             request.setAttribute("alert", "danger");
-            request.setAttribute("message", "Number is required !");
-            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
-            request.setAttribute("productId", request.getParameter("productId").trim());
+            request.setAttribute("message", "Number is required !");            
             request.setAttribute("sort", sort);
             request.setAttribute("reportTypeId", reportTypeId);
             request.setAttribute("reportType", listReporttype);
