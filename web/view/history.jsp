@@ -34,12 +34,12 @@
             </div>
             <div class="container">
                 <div class="row  text-center">
-                    <p class="col">No</p>
-                    <p class="col">Order ID</p>
-                    <p class="col">Date</p>
-                    <p class="col">Total Price</p>
-                    <p class="col">Total product</p>
-                    <p class="col">Detail</p>
+                    <h4 class="col">No</h4>
+                    <h4 class="col">Order ID</h4>
+                    <h4 class="col">Date</h4>
+                    <h4 class="col">Total Price</h4>
+                    <h4 class="col">Total product</h4>
+                    <h4 class="col">Detail</h4>
                 </div>
             <c:if test="${history == null}">
                 <div class="nothing d-flex justify-content-center">
