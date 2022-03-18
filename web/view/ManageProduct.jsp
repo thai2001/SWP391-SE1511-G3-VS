@@ -151,12 +151,7 @@ header img{
 .row a{
     font-size: 35px;
 }
-.row0 select{
-    width: 100px;
-    height: 30px;
-    margin-bottom: -10px;
-    margin-top: 10px;
-}
+
 
  .pagination {
                  display: inline-block;
@@ -216,13 +211,7 @@ header img{
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>               
                 </div>
-                <div class = "row0">
-                 <select name="brandid" onchange="location = this.value;">
-                <option value="0">Brand</option>
-                <c:forEach items="${requestScope.brand}" var="o">
-                    <option  value="searchbrandforseller?brandid=${o.id}"> ${o.name} </option>
-                </c:forEach> </select>
-                </div>
+               
                 <div class="row1">
                     <form class="navbar-form navbar-right" action="searchproductforseller" method="get" >
                         
