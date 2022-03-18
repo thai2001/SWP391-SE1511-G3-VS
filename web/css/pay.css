@@ -8,7 +8,7 @@
  * 2018-09-10      1.0                 Thainv           First Implement
  */
 /* 
-    Created on : Feb 27, 2022, 7:59:33 AM
+    Created on : Mar 13, 2022, 2:45:02 PM
     Author     : taola
 */
 
@@ -79,6 +79,15 @@ header {
   padding-bottom: 122px;
 }
 
-.shopping-card-row{
+.shopping-card-row {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
+.message {
+  min-height: 29px;
+  max-height: 100px;
+}
+
+
+
+
