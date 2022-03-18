@@ -463,7 +463,7 @@
                         </div>
 
                     </c:if>
-                    <c:if test="${!report.isEmpty()}">
+                    <c:if test="${report.size() > 0}">
                         <div class="table-users">
                             <div class="header">List Report</div>
 

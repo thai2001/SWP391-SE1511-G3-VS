@@ -446,7 +446,7 @@
                         </form>
 
                     </div>
-                            <c:if test="${ account == null}"> 
+                    <c:if test="${ account == null}"> 
                                <div class="alert alert-info">
                                    Dữ liệu tìm kiếm không có kết quả !
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>

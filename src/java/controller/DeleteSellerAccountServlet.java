@@ -69,7 +69,7 @@ public class DeleteSellerAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int roleId = Integer.parseInt(request.getParameter("roleId")); // vai trò khách hàng
-        int cusId = Integer.parseInt(request.getParameter("cusId"));// Id khách hàng
+        int cusId = Integer.parseInt(request.getParameter("id"));// Id khách hàng
         IManageAccountDAO iManageAccountDao = new ManageAccountDAO();
         Account account = null;
         try {
