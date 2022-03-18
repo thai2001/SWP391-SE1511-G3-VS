@@ -297,60 +297,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @return
      * @throws Exception
      */
-    @Override
-    public List<Product> getProductByUsername(String name) throws Exception {
-       List<Product> list=new ArrayList<>();
-        String sql="Select \n" +
-                   "ProductId,\n" +
-                   "VehicleTypeId,\n" +
-                   "ProductName,\n" +
-                   "BrandId,\n" +
-                   "MadeIn,\n" +
-                   "ManufactureYear,\n" +
-                   "Product.[Description],\n" +
-                   "Image,\n" +
-                   "Quantity,\n" +
-                   "UnitPrice,\n" +
-                   "Discount,\n" +
-                   "Product.SellerId\n" +
-                   "FROM Product INNER JOIN Seller On Product.SellerId = Seller.SellerID\n" +
-"                      INNER JOIN ACCOUNT ON ACCOUNT.Username = Seller.Username\n" +
-"					  Where ACCOUNT.Username like ? ";
-        
-        try{
-            con = getConnection();
-            ps= con.prepareStatement(sql);
-            ps.setString(1,"%" +name+ "%");
-            rs=ps.executeQuery();
-            while(rs.next()){
-                Product p=new Product();
-                p.setId(rs.getInt("ProductId"));
-                p.setBrandId(rs.getInt("BrandId"));
-                p.setVehicleTypeId(rs.getInt("vehicleTypeId"));
-                p.setName(rs.getString("ProductName"));
-                p.setMadeIn(rs.getString("MadeIn"));
-                p.setManufactureYear(rs.getString("ManufactureYear"));
-                p.setDescript(rs.getString("Description"));
-                p.setImg(rs.getString("Image"));
-                p.setQuantity(rs.getInt("Quantity"));
-                p.setPrice(rs.getFloat("UnitPrice"));
-                p.setDiscount(rs.getFloat("Discount"));               
-                p.setSellerId(rs.getInt("SellerId"));
-                list.add(p);
-            }
-        }catch(Exception e){
-            System.out.println(e);
-        } finally{
-            try {
-                ps.close();
-                rs.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        return list;
-      }
-    }
+    
     
     //Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
     /**
@@ -410,6 +357,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
     }
     
+       @Override
     public List<Product> getProductByPage(List<Product> list,int start,int end) throws Exception{
         List<Product> t=new ArrayList<>();
         for(int i=start;i<end;i++){
@@ -418,55 +366,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         return t;
     }
     
-    /**
-     *
-     * @param sellid
-     * @param brandid
-     * @return
-     * @throws Exception
-     */
-    @Override
-     public List<Product> getProductByBrandId(int sellid,int brandid) throws Exception{
-        List<Product> list=new ArrayList<>();
-        String sql="Select *\n" +
-"       from Product \n" +
-"	   where BrandId = ? \n" +
-           "and Quantity >= 0\n" +
-"	   and SellerId = ? ";
-                
-        try{
-            con = getConnection();
-            ps= con.prepareStatement(sql);
-            ps.setInt(1,brandid);
-            ps.setInt(2,sellid);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                Product p=new Product();
-                p.setVehicleTypeId(rs.getInt("VehicleTypeId"));
-                p.setName(rs.getString("ProductName"));
-                p.setBrandId(rs.getInt("Brandid"));
-                p.setMadeIn(rs.getString("MadeIn"));
-                p.setManufactureYear(rs.getString("ManufactureYear"));   
-                p.setDescript(rs.getString("Description"));
-                p.setImg(rs.getString("Image"));
-                p.setQuantity(rs.getInt("Quantity"));
-                p.setPrice(rs.getFloat("UnitPrice"));
-                p.setDiscount(rs.getInt("Discount"));
-                p.setSellerId(rs.getInt("SellerId"));
-                list.add(p);
-            }
-        }catch(Exception e){
-            System.out.println(e);
-        }   finally{
-            try {
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ManageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-      }
-        return list;
-}
+    
+    
     public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
          bd.getSeller("Nguyen A");

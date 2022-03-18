@@ -31,7 +31,7 @@ public interface IManageProductDao  {
                               String MadeIn,String manufactureYear,String description,
                               String image,int quantity,float price ,float discount,int id) throws Exception;
        public List<Product> SearchProductByNameForSeller(int sid,String name) throws Exception;
-       public List<Product> getProductByUsername(String name)throws Exception;
+       
         public List<Product> getProductByPage(List<Product> list,int start,int end) throws Exception;
-     public List<Product> getProductByBrandId(int sellid,int brandid)throws Exception;
+    
 }
