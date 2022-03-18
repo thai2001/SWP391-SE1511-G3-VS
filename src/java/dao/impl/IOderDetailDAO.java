@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-11      1.0                 Thainv           First Implement
+ * 2022-03-11      1.0                 QuanTBA           First Implement
  */
 package dao.impl;
 
@@ -22,12 +22,12 @@ public interface IOderDetailDAO {
     public List<OrderDetail> getOrderBySellerId(int id) throws Exception;
 
     //create a new order detail
-    public void createOrderDetail(int oid, int pid, int quantity, String from, String to) throws Exception;
+    public void createOrderDetail(int oid, int pid, int quantity, String from, String to,boolean isCancle) throws Exception;
 
     // get order detail with order id
     public Vector<OrderDetail> getOrderDetailByOderId(int oid) throws Exception;
     
     //delete order detail with order id and product id
-    public void deleteOrderDetail(int oid, int pid) throws Exception;
+    public void cancelOrderDetail(int oid, int pid) throws Exception;
 
 }

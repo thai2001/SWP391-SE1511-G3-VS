@@ -39,7 +39,7 @@
                     <div class="p-5">
                         <div class="row">
                             <c:forEach items="${allBrand}" var="b" >
-                            <div class="col-sm-6 col-md-3 ">
+                            <div class="col-sm-6 col-md-3 mt-3">
 
                                 <div class="box rounded brand bg-dark d-flex flex-column text-light p-4 h-100">
                                     <div class="card-img">
@@ -51,7 +51,7 @@
                                     </div>
 
                                 </div>
-                                123</div>
+                                </div>
                         </c:forEach>
 
 

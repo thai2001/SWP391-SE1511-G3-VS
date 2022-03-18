@@ -28,19 +28,18 @@ import java.util.logging.Logger;
  * @author taola
  */
 public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
-    
+
     @Override
     public List<OrderDetail> getOrderBySellerId(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-        // get order detail with order id
+
+    // get order detail with order id
     @Override
-    public void createOrderDetail(int oid, int pid, int quantity, String from, String to) throws Exception {
+    public void createOrderDetail(int oid, int pid, int quantity, String from, String to, boolean isCancle) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
-        
+
         try {
             con = getConnection();
             String sql = "INSERT INTO [dbo].[OrderDetail]\n"
@@ -48,17 +47,19 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
                     + "           ,[ProductId]\n"
                     + "           ,[Quantity]\n"
                     + "           ,[dateFrom]\n"
-                    + "           ,[dateTo])\n"
+                    + "           ,[dateTo]\n"
+                    + "           ,[isCancle])\n"
                     + "     VALUES\n"
-                    + "           (?,?, ?, ?, ?) ";
+                    + "           ( ?, ?, ?, ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, oid);
             ps.setInt(2, pid);
             ps.setInt(3, quantity);
             ps.setString(4, from);
             ps.setString(5, to);
+            ps.setBoolean(6, isCancle);
             ps.execute();
-            
+
         } catch (SQLException ex) {
             throw ex;
         } finally {
@@ -66,10 +67,8 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             con.close();
         }
     }
-    
-    
-        //delete order detail with order id and product id
 
+    //delete order detail with order id and product id
     @Override
     public Vector<OrderDetail> getOrderDetailByOderId(int oid) throws Exception {
         Connection con = null;
@@ -78,11 +77,13 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
         Vector vec = new Vector();
         try {
             con = getConnection();
-            String sql = "select OrderId, b.ProductId,b.BrandId,b.vehicleTypeId,b.ProductName,b.MadeIn,\n"
-                    + "b.ManufactureYear,b.[Description],b.[Image],b.Quantity,b.UnitPrice,b.Discount,b.SellerId,a.Quantity,a.dateFrom,a.dateTo\n"
-                    + "from OrderDetail as a\n"
-                    + "join Product as b on a.ProductId = b.ProductId\n"
-                    + "where a.OrderId = ? ";
+            String sql = "SELECT  OrderId, b.ProductId,b.BrandId,b.vehicleTypeId,b.ProductName,b.MadeIn,\n"
+                    + "b.ManufactureYear,b.[Description],b.[Image],b.Quantity,b.UnitPrice,b.Discount,\n"
+                    + "b.SellerId,a.Quantity,a.dateFrom,a.dateTo,a.[isCancle]\n"
+                    + "  FROM OrderDetail as a\n"
+                    + "  join Product as b on a.ProductId = b.ProductId\n"
+                    + "  	  where [OrderId] = ?\n"
+                    + "	  order by [isCancle]";
             ps = con.prepareStatement(sql);
             ps.setInt(1, oid);
             rs = ps.executeQuery();
@@ -98,7 +99,11 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
                         rs.getInt(10),
                         rs.getFloat(11),
                         rs.getFloat(12),
-                        rs.getInt(13)), rs.getInt(14), rs.getString("dateFrom"), rs.getString("dateTo")
+                        rs.getInt(13)),
+                        rs.getInt(14),
+                        rs.getString("dateFrom"),
+                        rs.getString("dateTo"),
+                        rs.getBoolean("isCancle")
                 ));
             }
         } catch (SQLException ex) {
@@ -110,23 +115,23 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
         }
         return vec;
     }
-    
-   
 
     @Override
-    public void deleteOrderDetail(int oid, int pid) throws Exception {
-         Connection con = null;
+    public void cancelOrderDetail(int oid, int pid) throws Exception {
+        Connection con = null;
         PreparedStatement ps = null;
-        
+
         try {
             con = getConnection();
-            String sql = "DELETE FROM [dbo].[OrderDetail]\n" +
-"      WHERE ProductId = ? and OrderId = ?";
+            String sql = "UPDATE [dbo].[OrderDetail]\n"
+                    + "   SET \n"
+                    + "      [isCancle] = '1' \n"
+                    + "  WHERE OrderId = ? and ProductId = ? ";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, pid);
-            ps.setInt(2, oid);
+            ps.setInt(1, oid);
+            ps.setInt(2, pid);
             ps.execute();
-            
+
         } catch (SQLException ex) {
             throw ex;
         } finally {
@@ -134,11 +139,8 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             con.close();
         }
     }
-    
-    
-    
-    
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         try {
             OrderDetailDAO dao = new OrderDetailDAO();
             Vector<OrderDetail> vec = dao.getOrderDetailByOderId(3);

@@ -24,10 +24,25 @@ public class Order {
     private int orderId;
     private String dateCreated;
     private double totalPrice;
+    private int totalProduct;
     private Buyer buyer;
     private List<OrderDetail> listOrderDetail;
 
     public Order() {
+    }
+    
+      public Order(int orderId, String dateCreated, double totalPrice, int totalProduct) {
+        this.orderId = orderId;
+        this.dateCreated = dateCreated;
+        this.totalPrice = totalPrice;
+        this.totalProduct = totalProduct;
+    }
+    
+    
+    public Order(int orderId, String dateCreated, double totalPrice) {
+        this.orderId = orderId;
+        this.dateCreated = dateCreated;
+        this.totalPrice = totalPrice;
     }
 
     public Order(int orderId, String dateCreated, double totalPrice, Buyer buyer) {
@@ -45,11 +60,6 @@ public class Order {
         this.listOrderDetail = listOrderdetail;
     }
 
-    public Order(int orderId, String dateCreated, double totalPrice) {
-        this.orderId = orderId;
-        this.dateCreated = dateCreated;
-        this.totalPrice = totalPrice;
-    }
 
     public List<OrderDetail> getListOrderdetail() {
         return listOrderDetail;
@@ -109,7 +119,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyer=" + buyer + '}';
+        return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyer=" + buyer + totalProduct + '}';
     }
 
 }

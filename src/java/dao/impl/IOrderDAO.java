@@ -20,7 +20,7 @@ import java.util.Vector;
 public interface IOrderDAO {
 //    creat a new order
 
-    public void createOrder(String date, int buyerId) throws Exception;
+    public void createOrder(String date,float total, int buyerId) throws Exception;
 
     //get the last orderid 
     public Order getTheLastOrder() throws Exception;

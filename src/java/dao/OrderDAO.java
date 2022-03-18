@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class OrderDAO extends DBContext implements IOrderDAO {
 
     @Override
-    public void createOrder(String date, int buyerId) throws Exception {
+    public void createOrder(String date,float total, int buyerId) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
 
@@ -35,11 +35,15 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             con = getConnection();
             String sql = "INSERT INTO [dbo].[ORDER]\n"
                     + "           ([DateCreated]\n"
+                    + "           ,[TotalPrice]\n"
                     + "           ,[BuyerId])\n"
-                    + "     VALUES (? ,? ) ";
+                    + "     VALUES\n"
+                    + "           ( ?, ?, ?)";
             ps = con.prepareStatement(sql);
             ps.setString(1, date);
-            ps.setInt(2, buyerId);
+            ps.setFloat(2, total);
+            ps.setInt(3, buyerId);
+            
             ps.execute();
 
         } catch (SQLException ex) {
@@ -64,7 +68,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                o = new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3));
+                o = new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3));
             }
         } catch (SQLException ex) {
             throw ex;
@@ -84,15 +88,17 @@ public class OrderDAO extends DBContext implements IOrderDAO {
         Vector<Order> vec = new Vector<>();
         try {
             con = getConnection();
-            String sql = "SELECT * \n"
-                    + "  FROM [VehicleShop].[dbo].[ORDER]\n"
-                    + "    where BuyerId = ? \n"
-                    + "  order by OrderId desc";
+            String sql = "SELECT a.[OrderId],b.DateCreated,b.TotalPrice, COUNT(a.OrderId) as 'Total product'\n"
+                    + "  FROM [VehicleShop].[dbo].[OrderDetail] as a\n"
+                    + "  join [ORDER] as b on a.OrderId = b.OrderId\n"
+                    + "  where b.BuyerId = ?\n"
+                    + "  group by a.OrderId,b.DateCreated,b.TotalPrice\n"
+                    + "  order by a.OrderId desc";
             ps = con.prepareStatement(sql);
             ps.setInt(1, buyerId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3)));
+                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getInt(4)));
             }
         } catch (SQLException ex) {
             throw ex;
@@ -146,11 +152,14 @@ public class OrderDAO extends DBContext implements IOrderDAO {
         try {
             con = getConnection();
 
-            String sql = "select * from [ORDER] \n"
-                    + "where BuyerId = ?\n"
-                    + "order by OrderId desc\n"
-                    + "OFFSET ? rows\n"
-                    + "fetch first 10 rows only";
+            String sql = "SELECT a.[OrderId],b.DateCreated,b.TotalPrice, COUNT(a.OrderId) as 'Total product'\n"
+                    + "  FROM [VehicleShop].[dbo].[OrderDetail] as a\n"
+                    + "  join [ORDER] as b on a.OrderId = b.OrderId\n"
+                    + "  where b.BuyerId = ?\n"
+                    + "  group by a.OrderId,b.DateCreated,b.TotalPrice\n"
+                    + "  order by a.OrderId desc\n"
+                    + "  OFFSET ? rows\n"
+                    + "  fetch first 10 rows only";
 
             ps = con.prepareStatement(sql);
 
@@ -158,7 +167,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
             ps.setInt(2, (index - 1) * 10);
             rs = ps.executeQuery();
             while (rs.next()) {
-                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getDouble(3))
+                vec.add(new Order(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getInt(4))
                 );
             }
         } catch (SQLException ex) {
@@ -176,7 +185,7 @@ public class OrderDAO extends DBContext implements IOrderDAO {
     public static void main(String[] args) {
         try {
             OrderDAO dao = new OrderDAO();
-            Vector<Order> vec = dao.getOrderInPage(1,1);
+            Vector<Order> vec = dao.getOrderInPage(1, 1);
             for (Order order : vec) {
                 System.out.println(order);
             }
