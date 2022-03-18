@@ -117,6 +117,24 @@ public class Order {
         this.buyer = buyer;
     }
 
+    public int getTotalProduct() {
+        return totalProduct;
+    }
+
+    public void setTotalProduct(int totalProduct) {
+        this.totalProduct = totalProduct;
+    }
+
+    public List<OrderDetail> getListOrderDetail() {
+        return listOrderDetail;
+    }
+
+    public void setListOrderDetail(List<OrderDetail> listOrderDetail) {
+        this.listOrderDetail = listOrderDetail;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Order{" + "orderId=" + orderId + ", dateCreated=" + dateCreated + ", totalPrice=" + totalPrice + ", buyer=" + buyer + totalProduct + '}';
