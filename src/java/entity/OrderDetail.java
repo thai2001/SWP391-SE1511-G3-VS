@@ -37,6 +37,12 @@ public class OrderDetail {
         this.isCancel = isCancel;
     }
 
+    public OrderDetail(int orderId, Product product, int quantity) {
+        this.orderId = orderId;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     
     public OrderDetail(int orderId, Product product, int quantity, String start, String end) {
         this.orderId = orderId;
