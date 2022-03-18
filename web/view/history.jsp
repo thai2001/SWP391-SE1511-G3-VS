@@ -37,6 +37,8 @@
                     <p class="col">No</p>
                     <p class="col">Order ID</p>
                     <p class="col">Date</p>
+                    <p class="col">Total Price</p>
+                    <p class="col">Total product</p>
                     <p class="col">Detail</p>
                 </div>
             <c:if test="${history == null}">
@@ -62,6 +64,12 @@
                             </div>
                             <div class="col">
                                 <p class="date">${o.dateCreated}</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-danger">${o.totalPrice} $</p>
+                            </div>
+                            <div class="col">
+                                <p class="">${o.totalProduct}</p>
                             </div>
                             <div class="col">
                                 <a href="orderDetail?oid=${o.orderId}" class="btn btn-primary"> View</a>

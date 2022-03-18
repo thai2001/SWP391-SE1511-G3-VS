@@ -23,6 +23,10 @@
             crossorigin="anonymous"
             />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <!-- script link -->
+        <script src="js/shoppingCard.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     </head>
     <body>
@@ -46,12 +50,12 @@
                 <p class="col">Total</p>
                 <p class="col">Activity</p>
             </div>
-            <form action="">
+            <form method="post" action="pay">
                 <c:forEach items="${shoppingCart}" var="cart">
                     <div class="mt-3">
                         <div class="row shopping-card-row border-top border-secondary rounded text-center">
                             <div class="col-4 d-flex">
-                                <input class="selectedProduct" type="checkbox" name="selectedProduct"  value="${cart.product.id}" onclick="checkedCard(this)"> 
+                                <input class="selectedProduct" type="checkbox" name="pid"  value="${cart.product.id}" onclick="checkedCard(this)"> 
                                 <img class="add-img" src="${cart.product.img}" alt="">
                                 <p class="add-name ms-2">${cart.product.name}</p>
                             </div>
@@ -84,9 +88,6 @@
 
 
         </div>
-        <!-- script link -->
-        <script src="js/shoppingCard.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        
     </body>
 </html>
