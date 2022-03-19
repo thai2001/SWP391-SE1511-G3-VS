@@ -267,58 +267,7 @@ header img{
                        
                         <td><a href="#sendmail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Send email</a></td>
                     </tr>
-                      <div id="sendmail${odt.orderId}" class="modal fade">
-            <div class="modal-dialog">
-                 <div class="modal-content">                   
-                        <div class="modal-header">						
-                            <h4 class="modal-title" style="font-size:35px; ">Order #${odt.orderId}</h4>
-                            
-                        </div>
-                        <div class="modal-body">
-                             <c:forEach items="${odt.getListOrderdetail()}" var="ordt">
-                                 <div class="row">
-                                     
-                                      <div class="col-md-4"> <img class="img-fluid" src="${ordt.product.img}">  </div>
-                                      <div class="mid col-md-4" style="padding-top: 2vh;"> <input type="text" class="form-control"  value="${ordt.product.name}" style="color:#333333; width:100px;" readonly> </div>
-                                      <div class="mid col-md-1" style="padding-top: 2vh;"> <p>x${ordt.quantity}</p></div>
-                                      <div class="mid col-md-3" style="padding-top: 2vh;"> <p>$${ordt.product.price}</p></div>                                                            
-                                                          
-                                 </div>
-                             </c:forEach>
-                            
-                            <div class="row">
-                                       <div class="col-md-6">
-                                     <div class="form-group-7">
-                                <label>Customer ID</label>
-                                <input name="CusID" type="text" class="form-control" value="${odt.buyer.buyerId}" readonly>
-                                     </div>
-                                     <div class="form-group-7">
-                                <label>Customer Name</label>
-                                <input name="CusName" type="text" class="form-control" value="${odt.buyer.buyerName}" readonly>
-                                     </div>
-                                      <div class="form-group-7">
-                                <label>Created Date</label>
-                                <input name="CreateDate" type="text" class="form-control" value="${odt.dateCreated}" readonly>
-                                      </div>
-                            
-                              <div class="form-group-7">
-                                <label>Brand</label>
-                                <input name="brand" class="form-control" value="${odt.getListOrderdetail().get(0).product.brand.name}" readonly></input>
-                              </div>
-                                
-          </div>
-     
-                                 <div class="form-group-7">
-                               <label>Total Price</label>
-                                <h5 style="font-size: 36px;"> $${odt.totalPrice} </h5>
-                                 </div>
-                                  
-                        </div>
-                       
-                </div>
-            </div>
-            </div>
-        </div>
+                      
                     </c:forEach>
                 </tbody>
             </table>

@@ -97,7 +97,7 @@ public class ManageCustomer extends HttpServlet {
           
        
        request.setAttribute("num", numPage); 
-       request.setAttribute("buyer", listbuyer);
+       request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
        request.getRequestDispatcher("view/ManageCustomer.jsp").forward(request, response);
     }catch(Exception ex){
