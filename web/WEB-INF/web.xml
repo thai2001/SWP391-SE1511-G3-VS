@@ -100,6 +100,10 @@
         <servlet-name>ManageCustomer</servlet-name>
         <servlet-class>controller.ManageCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMail</servlet-name>
+        <servlet-class>controller.SendMail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>ManageCustomer</servlet-name>
         <url-pattern>/managecustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMail</servlet-name>
+        <url-pattern>/sendmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
