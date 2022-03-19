@@ -29,7 +29,7 @@
 <body>
      <jsp:include page="navbar.jsp"></jsp:include>
     <div class="text-center p-3">
-        <h2>Payment</h2>
+        <h2>Create Order</h2>
     </div>
     <div class="container">
         <div class="row  text-center">
@@ -120,7 +120,7 @@
                         </div>
                                                     <input type="number" value="" name="total"  hidden>
 
-                        <input class="btn btn-danger pay-button" type="submit" value="Pay"></input>
+                        <input class="btn btn-danger pay-button" type="submit" value="Order"></input>
                     </div>
         </form>
 
