@@ -50,6 +50,7 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomer {
             rs=ps.executeQuery();
             while(rs.next()){
                 Buyer br=new Buyer(rs.getInt("BuyerID"),rs.getString("BuyerName"),rs.getString("Gmail"),rs.getString("Phone"));
+                list.add(br);
             }
         }catch(Exception e){
             System.out.println(e);
@@ -75,4 +76,9 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomer {
         return o;
     }
     
+    public static void main(String[] args) throws Exception {
+        ManageCustomerDAO mc = new ManageCustomerDAO();
+        mc.getBuyerBySellerId(2);
+        System.out.println(mc.getBuyerBySellerId(2).get(0).getBuyerName());
+    }
 }

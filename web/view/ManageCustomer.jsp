@@ -265,7 +265,7 @@ header img{
                         </td>
                             
                        
-                        <td><a href="#sendmail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Send email</a></td>
+                        <td><a href="#sendmail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #9fcdff"> <i class="fa fa-envelope" aria-hidden="true"></i></a></td>
                     </tr>
                       
                     </c:forEach>
