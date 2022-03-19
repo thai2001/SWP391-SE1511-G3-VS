@@ -117,7 +117,7 @@ public class login extends HttpServlet {
         String s = "";   
         if( ac.getRoleId().getRoleId() == 1 ){ s = "/authorize"; } 
         if( ac.getRoleId().getRoleId() == 2 ){ s = "/homePage"; } 
-        if( ac.getRoleId().getRoleId() == 3 ){ s = "/homePage"; } 
+        if( ac.getRoleId().getRoleId() == 3 ){ s = "/manageproduct"; } 
         return s;
     }
 

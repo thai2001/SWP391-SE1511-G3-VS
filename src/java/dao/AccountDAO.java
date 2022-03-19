@@ -116,7 +116,7 @@ public class AccountDAO extends DBContext {
             ps.executeUpdate();
 
             k = 1;
-            if (a.getRoleId().getRoleId() == 1) {
+            if (a.getRoleId().getRoleId() == 2) {
                 sql = "INSERT INTO [dbo].[Buyer]\n"
                         + "           ([BuyerName]\n"
                         + "           ,[Gmail]\n"

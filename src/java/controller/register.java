@@ -92,7 +92,7 @@ public class register extends HttpServlet {
         a.setName(name);
         a.setEmail(gmail);
         a.setPhone(phone);
-        if (rol == 1) {
+        if (rol == 2) {
             a.setStatus("active");
         } else {
             a.setStatus("inactive");
@@ -136,11 +136,11 @@ public class register extends HttpServlet {
             request.getRequestDispatcher("view/login.jsp").forward(request, response);
         } else {
             int messradio;
-            if (rol == 1) {
-                messradio = 1;
+            if (rol == 2) {
+                messradio = 2;
                 
             } else {
-                messradio = 2;
+                messradio = 3;
             }
             request.setAttribute("messradio", messradio);
             request.setAttribute("mess", mess);

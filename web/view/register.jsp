@@ -25,13 +25,13 @@
                 </div>
                 <div style="margin-bottom: 40px;">
                     <div style="float: left; margin-left: 40px; font-size: 20px">
-                        <input type="radio" id="buyer" name="role" value="1" <c:if test = "${messradio == 1}">
+                        <input type="radio" id="buyer" name="role" value="2" <c:if test = "${messradio == 2}">
                                checked="checked"
                             </c:if>>
                         <label style="color: #1e7e34">Buyer</label>
                     </div>
                     <div style="float: right; margin-right: 40px; font-size: 20px" >
-                        <input type="radio" id="seller" name="role" value="2" <c:if test = "${messradio == 2}">
+                        <input type="radio" id="seller" name="role" value="3" <c:if test = "${messradio == 3}">
                                checked="checked"
                             </c:if>>
                         <label style="color: #1e7e34">Seller</label><br>
