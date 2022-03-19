@@ -54,6 +54,13 @@ public class Buyer {
         this.buyerName = buyerName;
     }
 
+    public Buyer(int BuyerID, String name, String gmail, String phone) {
+        this.buyerId = BuyerID;
+        this.buyerName = name;
+        this.gmail = gmail;
+        this.phone = phone;
+    }
+
     
 
     

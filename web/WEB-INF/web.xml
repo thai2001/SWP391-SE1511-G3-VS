@@ -96,6 +96,10 @@
         <servlet-name>SearchOrderForSeller</servlet-name>
         <servlet-class>controller.SearchOrderForSeller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageCustomer</servlet-name>
+        <servlet-class>controller.ManageCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>SearchOrderForSeller</servlet-name>
         <url-pattern>/searchorderforseller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageCustomer</servlet-name>
+        <url-pattern>/managecustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

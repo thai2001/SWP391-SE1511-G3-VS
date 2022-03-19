@@ -42,7 +42,8 @@ Connection con = null;
          List<Order> list=new ArrayList<>();
          String sql = "Select * from [ORDER]"
                  + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
-                 + " WHERE SellerId = ? ";
+                 + " WHERE SellerId = ? "
+                 + " ORDER BY OrderId DESC ";
 //        String sql="Select [ORDER].OrderId, \n" +
 //"     Product.ProductId, \n" +
 //"	   Image,\n" +

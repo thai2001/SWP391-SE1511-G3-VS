@@ -222,7 +222,7 @@ header img{
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
-                    <div class="col-sm-4"><a class="link-dark" href="managecustomer"> <b>Customer</b></a></div>
+                     <div class="col-sm-4"><a class="link-dark" href="managecustomer"> <b>Customer</b></a></div>
                 </div>
                  <div class="row1">
                     <form class="navbar-form navbar-right" action="searchorderforseller" method="get" >
@@ -243,29 +243,31 @@ header img{
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>OrderID</th>
+                        <th>BuyerID</th>
                         <th>Buyer Name</th>
-                        <th>Date Created</th>
-                        <th>TotalPrice</th>
+                        <th>Gmail</th>
+                        <th>Phone</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${requestScope.orderdt}" var="odt">
+                    <c:forEach items="${requestScope.buyer}" var="by">
                     <tr>
                         <td>                          
-                            ${odt.orderId}
+                            ${by.buyerId}
                         </td>
-                        <td>${odt.buyer.buyerName}</td>
+                        <td>${by.buyerName}</td>
                            <td>                          
-                            ${odt.dateCreated}
+                            ${by.gmail}
+                        </td>
+                         <td>                          
+                            ${by.phone}
                         </td>
                             
                        
-                        <td>$${odt.totalPrice}</td>
-                        <td><a href="#orderdetail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Detail</a></td>
+                        <td><a href="#sendmail${odt.orderId}" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #ff6666"> Send email</a></td>
                     </tr>
-                      <div id="orderdetail${odt.orderId}" class="modal fade">
+                      <div id="sendmail${odt.orderId}" class="modal fade">
             <div class="modal-dialog">
                  <div class="modal-content">                   
                         <div class="modal-header">						
@@ -376,3 +378,4 @@ header img{
   </body>
 
 </html>
+
