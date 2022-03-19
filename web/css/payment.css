@@ -20,7 +20,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif
 }
-
+.logo {
+  width: 50%;
+}
 .container {
     margin: 30px auto
 }

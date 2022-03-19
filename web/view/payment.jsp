@@ -81,7 +81,7 @@
                                 <form action="" class="form">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">Card Number</label> </div>
+                                            <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="[0-9]{10}" title="only 9 number" required> <label for="" class="form__label">Card Number</label> </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">MM / yy</label> </div>
@@ -93,7 +93,7 @@
                                             <div class="form__div"> <input type="text" class="form-control" placeholder=" "> <label for="" class="form__label">name on the card</label> </div>
                                         </div>
                                         <div class="col-12">
-                                            <div class="btn btn-primary w-100">Sumbit</div>
+                                            <input type="submit" value="Pay" class="btn btn-primary w-100"></div>
                                         </div>
                                     </div>
                                 </form>
