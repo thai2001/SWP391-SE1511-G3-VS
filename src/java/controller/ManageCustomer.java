@@ -98,7 +98,9 @@ public class ManageCustomer extends HttpServlet {
        
        request.setAttribute("num", numPage); 
        request.setAttribute("buyer", listbuy);
+       request.setAttribute("buyerall", listbuy);
         request.setAttribute("page", page);
+       
        request.getRequestDispatcher("view/ManageCustomer.jsp").forward(request, response);
     }catch(Exception ex){
     Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);

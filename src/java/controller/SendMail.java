@@ -9,16 +9,24 @@
  */
 package controller;
 
+import dao.ManageCustomerDAO;
+import dao.ManageProductDAO;
+import dao.impl.IManageCustomer;
+import dao.impl.IManageProductDao;
 import entity.Account;
+import entity.Buyer;
 import entity.JavaMail;
 import entity.Role;
+import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -79,17 +87,47 @@ public class SendMail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String resultMessage = "";
+        try {
         String to = request.getParameter("to").trim();
         String sub = request.getParameter("subject").trim();
         String mess =request.getParameter("message").trim();
-       String resultMessage = "";
-            try {
+       HttpSession sess = request.getSession();
+            IManageCustomer iManageCustomer = new ManageCustomerDAO();
+            IManageProductDao manageProductDao = new ManageProductDAO();
+          Account a = (Account) sess.getAttribute("account"); 
+          Seller seller = manageProductDao.getSeller(a.getUsername());
+          // String name= request.getParameter("productname").trim();
+       
+       List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
+        int size= listbuyer.size();
+        int numperPage=5;
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);
+        String spage= request.getParameter("page");
+        int page;
+        if(spage == null){ 
+            page= 1;
+        }else{
+            page = Integer.parseInt(spage); 
+        }
+        int start, end;
+        start=(page-1)*numperPage;
+        end=Math.min(size, page*numperPage);
+          List<Buyer> listbuy= iManageCustomer.getCusByPage(listbuyer, start, end);
+          
+       
+       request.setAttribute("num", numPage); 
+       request.setAttribute("buyer", listbuy);
+       request.setAttribute("buyerall", listbuy);
+        request.setAttribute("page", page);
+            
                 JavaMail.send(to, sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");
             }catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "There were an error: " + ex.getMessage();
         } finally {
             request.setAttribute("Message", resultMessage);
+             request.setAttribute("alert","Email sent successfully !");
            request.getRequestDispatcher("view/ManageCustomer.jsp").forward(
                     request, response);
         }

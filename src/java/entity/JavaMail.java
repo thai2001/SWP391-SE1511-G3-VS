@@ -9,9 +9,11 @@
  */
 package entity;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Address;
 import javax.mail.Session;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -75,4 +77,5 @@ public class JavaMail {
             e.printStackTrace();
         }
     }
+    
 }

@@ -190,6 +190,7 @@ header img{
   .table-title{
       margin-top: -80px;
   }
+ 
     </style>
 <!--
 
@@ -238,22 +239,25 @@ header img{
        
     </form>
                     </div>
-            <a href="loadaddproduct" type="button" class="btn btn-info" style="margin-left: 1020px;border-radius: 20px;margin-bottom: -10px;height: 35px;"><i class="fa fa-send" aria-hidden="true"></i> Send Email</a>
-                
+               <p style="color:green">${alert}</p>
+              <a href="#sendmail" type="button" class="btn btn-info" data-toggle="modal" style="margin-left: 1020px;border-radius: 20px;margin-bottom: -10px;height: 35px;"><i class="fa fa-send" aria-hidden="true"></i> Send Email</a>  
             </div>
+          
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                     
                         <th>BuyerID</th>
                         <th>Buyer Name</th>
                         <th>Gmail</th>
                         <th>Phone</th>
-                        <th>Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${requestScope.buyer}" var="by">
                     <tr>
+                        
                         <td>                          
                             ${by.buyerId}
                         </td>
@@ -266,7 +270,7 @@ header img{
                         </td>
                             
                        
-                        <td><a href="#sendmail" type="button" class="btn btn-info" data-toggle="modal" style="background-color: #9fcdff"> <i class="fa fa-envelope" aria-hidden="true"></i></a></td>
+                        
                     </tr>
                    
                     </c:forEach>
@@ -287,7 +291,9 @@ header img{
      
                                      <div class="form-group">
                                 <label>To :</label>
+                                
                                 <input name="to" type="text" class="form-control" value="${by.gmail} " style="width:400px;">
+                                
                                      </div>
                                       
                             
@@ -368,8 +374,16 @@ header img{
           }
       }
     </script>
+    <script> window.onscroll = function() {scrollFunction()};
 
-
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("navbar").style.top = "0";
+  } else {
+    document.getElementById("navbar").style.top = "-50px";
+  }
+}
+</script>
   </body>
 
 </html>
