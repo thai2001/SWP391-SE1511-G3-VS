@@ -29,5 +29,8 @@ public interface IOderDetailDAO {
     
     //delete order detail with order id and product id
     public void cancelOrderDetail(int oid, int pid) throws Exception;
+    
+    // get order detail with order id
+    public OrderDetail getOrderDetailByOP(int oid,int pid) throws Exception;
 
 }

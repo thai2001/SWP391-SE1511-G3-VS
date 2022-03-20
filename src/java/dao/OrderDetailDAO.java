@@ -79,7 +79,7 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             con = getConnection();
             String sql = "SELECT  OrderId, b.ProductId,b.BrandId,b.vehicleTypeId,b.ProductName,b.MadeIn,\n"
                     + "b.ManufactureYear,b.[Description],b.[Image],b.Quantity,b.UnitPrice,b.Discount,\n"
-                    + "b.SellerId,a.Quantity,a.dateFrom,a.dateTo,a.[isCancle]\n"
+                    + "b.SellerId,a.Quantity,a.dateFrom,a.dateTo,a.[isCancle],a.isPaid\n"
                     + "  FROM OrderDetail as a\n"
                     + "  join Product as b on a.ProductId = b.ProductId\n"
                     + "  	  where [OrderId] = ?\n"
@@ -103,7 +103,8 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
                         rs.getInt(14),
                         rs.getString("dateFrom"),
                         rs.getString("dateTo"),
-                        rs.getBoolean("isCancle")
+                        rs.getBoolean("isCancle"),
+                        rs.getBoolean("isPaid")
                 ));
             }
         } catch (SQLException ex) {
@@ -140,10 +141,63 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
         }
     }
 
-    public static void main(String[] args) {
+   
+
+    @Override
+    public OrderDetail getOrderDetailByOP(int oid, int pid) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        OrderDetail o = new OrderDetail();
+        try {
+            con = getConnection();
+            String sql = "SELECT  OrderId, b.ProductId,b.BrandId,b.vehicleTypeId,b.ProductName,\n"
+                    + "b.MadeIn,\n"
+                    + "b.ManufactureYear,b.[Description],b.[Image],b.Quantity,b.UnitPrice,b.Discount,\n"
+                    + "b.SellerId,a.Quantity,a.dateFrom,a.dateTo,a.[isCancle],a.isPaid\n"
+                    + "  FROM OrderDetail as a\n"
+                    + "  join Product as b on a.ProductId = b.ProductId\n"
+                    + "  	  where [OrderId] = ? and a.productId = ?\n"
+                    + "	  order by [isCancle] ";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, oid);
+            ps.setInt(2, pid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               o = new OrderDetail(rs.getInt("OrderId"), new Product(rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getInt(10),
+                        rs.getFloat(11),
+                        rs.getFloat(12),
+                        rs.getInt(13)),
+                        rs.getInt(14),
+                        rs.getString("dateFrom"),
+                        rs.getString("dateTo"),
+                        rs.getBoolean("isCancle"),
+                        rs.getBoolean("isPaid")
+                );
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
+        }
+        return o;
+    }
+    
+    
+     public static void main(String[] args) {
         try {
             OrderDetailDAO dao = new OrderDetailDAO();
-            Vector<OrderDetail> vec = dao.getOrderDetailByOderId(3);
+            Vector<OrderDetail> vec = dao.getOrderDetailByOderId(11);
             for (OrderDetail orderDetail : vec) {
                 System.out.println(orderDetail);
             }

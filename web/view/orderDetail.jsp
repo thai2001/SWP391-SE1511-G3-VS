@@ -52,7 +52,7 @@
             <c:forEach items="${orderDetails}" var="o">
                 <!-- new order detail card -->
                 <div class="mt-3">
-                    <div class="row detail-card-row border-top border-secondary rounded text-center ${o.isCancel?"canceled":""}">
+                    <div class="row detail-card-row border-top border-secondary rounded text-center ${o.isCancel?"canceled":""}  ${o.isPaid?"bg-success":""}">
                         <div class="row mt-3">
                             <div class="col-4 d-flex">
 
@@ -100,6 +100,7 @@
                                 <p class="deliver-price text-center">500 $ </p>
                             </div>
                             <div class="col">
+                                <button  class="btn btn-primary period-btn" onclick="showPeriod(this)" ${o.isCancel?"hidden":""}> Period</button>
 
                             </div>
 
@@ -119,8 +120,12 @@
                             <div class="col">
                                 <p class=" text-center text-danger card-total">${o.product.price * o.quantity + 500} $ </p>
                             </div>
-                            <div class="col">
-                                <button  class="btn btn-primary period-btn" onclick="showPeriod(this)" ${o.isCancel?"hidden":""}> Period</button>
+                            <div class="col">                                
+                                <a href="payment?oid=${o.orderId}&pid=${o.product.id}" class="btn btn-success pay-btn" hidden data-paid="${o.isPaid?true:false}" data-cancel="${o.isCancel?true:false}"  >Pay</a>
+                                <c:if test="${o.isPaid}">
+                                    <button  class="btn btn-success" disabled> Paid</button>
+                                </c:if>
+
                             </div>
                         </div>
                         <div class="row mt-3 period ">
@@ -138,8 +143,8 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="period-indicator">
-                                    <span class="blink"></span>
+                                <div class="period-indicator ${o.isPaid?"active":""}">
+                                    <span class="blink ${o.isPaid?"active":""} "></span>
                                     <h4>Finished</h4>
                                 </div>
                             </div>

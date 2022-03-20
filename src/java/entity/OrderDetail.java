@@ -24,8 +24,19 @@ public class OrderDetail {
     private String start;
     private String end;
     private boolean isCancel;
+    private boolean isPaid;
 
     public OrderDetail() {
+    }
+
+    public OrderDetail(int orderId, Product product, int quantity, String start, String end, boolean isCancel, boolean isPaid) {
+        this.orderId = orderId;
+        this.product = product;
+        this.quantity = quantity;
+        this.start = start;
+        this.end = end;
+        this.isCancel = isCancel;
+        this.isPaid = isPaid;
     }
 
     public OrderDetail(int orderId, Product product, int quantity, String start, String end, boolean isCancel) {
@@ -100,9 +111,17 @@ public class OrderDetail {
         this.isCancel = isCancel;
     }
 
+    public boolean isIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
     @Override
     public String toString() {
-        return "OrderDetail{" + "orderId=" + orderId + ", product=" + product + ", quantity=" + quantity + ", start=" + start + ", end=" + end + ", isCancle=" + isCancel + '}';
+        return "OrderDetail{" + "orderId=" + orderId + ", product=" + product + ", quantity=" + quantity + ", start=" + start + ", end=" + end + ", isCancle=" + isCancel +isPaid +  '}';
     }
 
 

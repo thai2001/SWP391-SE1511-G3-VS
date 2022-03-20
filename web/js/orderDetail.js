@@ -27,12 +27,15 @@ cardRows.forEach(element => {
     cardRow.getElementsByClassName('from')[0].textContent = fromDate.toDateString();
     cardRow.getElementsByClassName('to')[0].textContent = toDate.toDateString();
 });
-if (today >= fromDate) {
+if (today >= fromDate && today < toDate) {
     try {
         cardRows.forEach(cardRow => {
+            if (cardRow.getElementsByClassName('pay-btn')[0].dataset.paid === "false" && cardRow.getElementsByClassName('pay-btn')[0].dataset.cancel === "false") {
+                cardRow.getElementsByClassName('pay-btn')[0].removeAttribute('hidden')
+            }
             cardRow.getElementsByClassName('period-indicator')[1].classList.add('active')
             cardRow.getElementsByClassName('blink')[1].classList.add('active')
-            cardRow.getElementsByClassName('delete')[0].setAttribute('hidden','')
+            cardRow.getElementsByClassName('cancel-btn')[0].setAttribute('hidden', '')
         });
     } catch (error) {
         console.error(error)
@@ -42,8 +45,11 @@ if (today >= fromDate) {
 if (today >= toDate) {
     try {
         cardRows.forEach(cardRow => {
+            cardRow.getElementsByClassName('period-indicator')[1].classList.add('active')
+            cardRow.getElementsByClassName('blink')[1].classList.add('active')
             cardRow.getElementsByClassName('period-indicator')[2].classList.add('active');
             cardRow.getElementsByClassName('blink')[2].classList.add('active');
+                        cardRow.getElementsByClassName('cancel-btn')[0].setAttribute('hidden', '')
         });
     } catch (error) {
         console.error(error)
