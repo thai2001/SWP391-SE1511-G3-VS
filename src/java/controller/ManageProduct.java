@@ -79,15 +79,14 @@ public class ManageProduct extends HttpServlet {
        try{
        HttpSession sess = request.getSession();
        IManageProductDao manageProductDao = new ManageProductDAO();
-       BrandDAO brandDao = new BrandDAO();
-       VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+      
       
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = manageProductDao.getSeller(a.getUsername());
           // String name= request.getParameter("productname").trim();
-       List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
+      
        List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
-       List<Brand> listbrand = brandDao.getAllBrand();
+    
         int size= listproduct.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);
@@ -103,8 +102,7 @@ public class ManageProduct extends HttpServlet {
         end=Math.min(size, page*numperPage);
           List<Product> listprod= manageProductDao.getProductByPage(listproduct, start, end);
           
-       request.setAttribute("vehicleType", listvehicleType);
-       request.setAttribute("brand", listbrand);
+       
        request.setAttribute("num", numPage); 
        request.setAttribute("product", listprod);
         request.setAttribute("page", page);

@@ -10,7 +10,7 @@
 package dao;
 
 import context.DBContext;
-import dao.impl.IManageCustomer;
+import dao.impl.IManageCustomerDAO;
 import entity.Buyer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class ManageCustomerDAO extends DBContext implements IManageCustomer {
+public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -67,6 +67,51 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomer {
        
     }
 
+        @Override
+    public List<Buyer> SearchBuyerName(int sid,String name) throws Exception {
+       
+         List<Buyer> list=new ArrayList<>();
+         String sql = "Select Buyer.BuyerID,\n" +
+                      "       Buyer.BuyerName,\n" +
+                      "	      Gmail,\n" +
+                      "	   Phone\n" +
+                      "FROM Buyer INNER JOIN [ORDER] on [ORDER].BuyerId = Buyer.BuyerID\n" +
+                      "WHERE SellerId = ?\n";
+               if(name != null){
+                    
+                
+                sql  += "AND BuyerName like ? \n" +
+                         "GROUP BY Buyer.BuyerID, BuyerName, Gmail,Phone ";
+    }  
+                      
+                     
+
+        
+        try{
+            
+            con = getConnection();
+            ps= con.prepareStatement(sql);
+            ps.setInt(1,sid);
+            ps.setString(2, "%"+ name +"%");
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Buyer br=new Buyer(rs.getInt("BuyerID"),rs.getString("BuyerName"),rs.getString("Gmail"),rs.getString("Phone"));
+                list.add(br);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        } finally{
+            try {
+                ps.close();
+                rs.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return list;
+      }
+       
+    }
     @Override
     public List<Buyer> getCusByPage(List<Buyer> list, int start, int end) throws Exception {
         List<Buyer> o=new ArrayList<>();

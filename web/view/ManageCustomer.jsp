@@ -143,9 +143,8 @@ header img{
 }
 
 .row1{
-    margin-bottom: -10px;
+    margin-bottom: 5px;
     margin-top: 20px;
-    margin-left: 900px;
 }
 .row h2{
     font-size: 30px;
@@ -225,23 +224,70 @@ header img{
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
                      <div class="col-sm-4"><a class="link-dark" href="managecustomer">Customer <b>Notification</b></a></div>
                 </div>
-                 <div class="row1">
-                    <form class="navbar-form navbar-right" action="searchorderforseller" method="get" >
+                <div class="row1">
+                         <form class="navbar-form navbar-right" action="searchbuyername" method="get" >
                         
                     
                         
-                <input value="${datecreated}" type="date" id="date" name="datecreated"
-                              
-                               min="2018-01-01" max="2022-12-31"></li>
+                <input value="${buyname}" name="buyername" type="text" class="SearchBox" placeholder="Buyer Name"></li>
           
-               <input type="submit" class="SearchButton" value="Search"\>  <i class="fa fa-search"></i></li>
+                <button type="submit" style="background-color: #80bdff; height: 30px;width: 35px;"><i class="fa fa-search"></i></button>
           
        
     </form>
-                    </div>
-               <p style="color:green">${alert}</p>
-              <a href="#sendmail" type="button" class="btn btn-info" data-toggle="modal" style="margin-left: 1020px;border-radius: 20px;margin-bottom: -10px;height: 35px;"><i class="fa fa-send" aria-hidden="true"></i> Send Email</a>  
+              
+               <p style="color:green; margin-left: 990px;margin-bottom: 10px;">${alert}</p>
+              <a href="#sendall" type="button" class="btn btn-info" data-toggle="modal" style="margin-left: 1020px;border-radius: 20px;margin-bottom: -10px;height: 35px;"><i class="fa fa-send" aria-hidden="true"></i> Send Email</a> 
+             
+        </div>
             </div>
+              <div id="sendall" class="modal fade">
+            <div class="modal-dialog">
+                 <div class="modal-content">  
+                     <form action="sendmail" method="post">
+                        <div class="modal-header">						
+                            <h4 class="modal-title" style="font-size:35px; ">Contact</h4>
+                            
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div class="row">
+                                       <div class="col-md-6">
+     
+                                     <div class="form-group">
+                                <label>To :</label>
+                                 <c:forEach items="${requestScope.buyer}" var="by">
+                                     <p name="to" style="display: inline">${by.gmail},</p>
+                               </c:forEach>
+                                     </div>
+                                      
+                            
+                              <div class="form-group">
+                                <label>Subject :</label>
+                                <input name="subject" class="form-control"  style="width:400px;">
+                              </div>
+                                
+          </div>
+     
+                                 <div class="form-group">
+                                <label>Message</label>
+                                <textarea name="message" class="form-control" required style="height: 200px;"></textarea>
+                                
+                            </div>
+                                  
+                        </div>
+                       
+                </div>
+                              <div class="modal-footer">
+                                   
+                      <input type="submit" class="btn btn-danger" value="Add">
+                            <a type="button" class="btn btn-default" data-dismiss="modal" >Cancel</a>
+                           
+                        </div>
+                     </form>                
+            </div>                
+            </div>
+        </div>
           
             <table class="table table-bordered">
                 <thead>
@@ -251,7 +297,7 @@ header img{
                         <th>Buyer Name</th>
                         <th>Gmail</th>
                         <th>Phone</th>
-                        
+                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -268,7 +314,7 @@ header img{
                          <td>                          
                             ${by.phone}
                         </td>
-                            
+                           <td><a href="#sendmail" type="button" class="btn btn-info" data-toggle="modal"><i class="fa fa-envelope" aria-hidden="true"></i></a></td> 
                        
                         
                     </tr>
@@ -327,7 +373,7 @@ header img{
                         <div class="pagination">
         <c:forEach begin="1" end="${num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
-               href="searchorderforseller?page=${i}&datecreated=${datecreat}"> ${i} <a/>
+               href="searchbuyername?page=${i}&buyername=${bname}"> ${i} <a/>
             </c:forEach>
                     
         </div>

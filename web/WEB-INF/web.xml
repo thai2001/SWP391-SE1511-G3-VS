@@ -104,6 +104,10 @@
         <servlet-name>SendMail</servlet-name>
         <servlet-class>controller.SendMail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchBuyerName</servlet-name>
+        <servlet-class>controller.SearchBuyerName</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>SendMail</servlet-name>
         <url-pattern>/sendmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBuyerName</servlet-name>
+        <url-pattern>/searchbuyername</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

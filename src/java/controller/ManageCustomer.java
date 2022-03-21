@@ -11,7 +11,7 @@ package controller;
 
 import dao.ManageCustomerDAO;
 import dao.ManageProductDAO;
-import dao.impl.IManageCustomer;
+import dao.impl.IManageCustomerDAO;
 import dao.impl.IManageProductDao;
 import entity.Account;
 import entity.Buyer;
@@ -73,7 +73,7 @@ public class ManageCustomer extends HttpServlet {
             throws ServletException, IOException {
         try{
        HttpSession sess = request.getSession();
-            IManageCustomer iManageCustomer = new ManageCustomerDAO();
+            IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
             IManageProductDao manageProductDao = new ManageProductDAO();
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = manageProductDao.getSeller(a.getUsername());
