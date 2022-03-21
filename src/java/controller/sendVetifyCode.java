@@ -9,9 +9,11 @@
  */
 package controller;
 
+import entity.Buyer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -65,9 +67,12 @@ public class sendVetifyCode extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         HttpSession ses = request.getSession();
-        
-         String toEmail = user.getEmail();
-        String fromEmail = "thainvhe153793@fpt.edu.vn";
+        Buyer buyer = (Buyer) ses.getAttribute("buyer");
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        String code =  String.format("%06d", number);
+         String toEmail = buyer.getGmail();
+        String fromEmail = "taolanhuthedo562@gmail.com";
         String password = "vietthai2001";
 
         try {
@@ -95,13 +100,13 @@ public class sendVetifyCode extends HttpServlet {
     		//set from email address
             mess.setFrom(new InternetAddress(fromEmail));
     		//set to email address or destination email address
-            mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            mess.setRecipient(Message.RecipientType.TO,new InternetAddress(toEmail));
     		
     		//set email subject
             mess.setSubject("User Email Verification");
             
     		//set message text
-            mess.setText("Registered successfully.Please verify your account using this code: " + user.getCode());
+            mess.setText("Please verify your Payment using this code: " + code );
             //send the message
             Transport.send(mess);
             
@@ -109,6 +114,7 @@ public class sendVetifyCode extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        response.sendRedirect("vetify");
     }
     
 

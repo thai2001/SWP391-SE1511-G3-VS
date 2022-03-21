@@ -68,7 +68,7 @@
                             </div>
                             <p class="col cardPrice">${o.product.price * o.quantity} $</p>
                             <div class="col">
-                                <button  class="btn btn-danger cancel-btn" onclick="confirmCancel(this)"  ${o.isCancel?"hidden":""} > Cancel</button>
+                                <button  class="btn btn-danger cancel-btn" onclick="confirmCancel(this)"  ${o.isCancel?"hidden":""} ${o.isPaid?"hidden":""} > Cancel</button>
                                 <c:if test="${o.isCancel}">
                                     <button  class="btn btn-danger cancel-btn" disabled> Canceled</button>
                                 </c:if>

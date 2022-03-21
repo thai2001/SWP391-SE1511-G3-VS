@@ -18,7 +18,7 @@ showPeriod = (element) => {
 
 let fromDateString = document.getElementsByName('from')[0].value
 let toDateString = document.getElementsByName('to')[0].value
-let today = new Date();
+let today = new Date('2022-03-28');
 let fromDate = new Date(fromDateString);
 let toDate = new Date(toDateString)
 console.log(toDate)

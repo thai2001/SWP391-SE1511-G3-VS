@@ -78,7 +78,7 @@
                                         <p class="mb-0">${o.product.descript}</p>
                                     </div>
                                     <div class="col-lg-7">
-                                        <form action="vetify" class="form">
+                                        <form action="sendVetifyCode" class="form">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="[0-9]{10}" title="only 10 number" required> <label for="" class="form__label">Card Number</label> </div>
