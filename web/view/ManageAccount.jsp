@@ -426,15 +426,20 @@
                         </div>
                     </div>
                 </nav>
-                <div class="container-fluid">            
-                    <div class="alert alert-${alert}">
-                       ${message} 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                    </div>
+                <div class="container-fluid">  
+                    <h1 style="text-align: center">Manage Account</h1>
+                    <c:if test="${ message != null }">
+                        <div class="alert alert-${alert}">
+                            ${message} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                        </div>
+                    </c:if>
+
                     <div class="row">
+
                         <form class="navbar-form navbar-right" action="searchAccount" method="get" >
                             <label id="roleId">Role</label>
-                                   <select name="roleId" id="roleId">                                       
+                            <select name="roleId" id="roleId">                                       
                                 <c:forEach items="${requestScope.role}" var="r">
                                     <option  value="${r.roleId}" ${r.roleId == roleId?"selected":""} > ${r.roleName} </option>
                                 </c:forEach> 
@@ -446,15 +451,15 @@
                         </form>
 
                     </div>
-                    <c:if test="${ account == null}"> 
-                               <div class="alert alert-info">
-                                   Dữ liệu tìm kiếm không có kết quả !
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                    </div> 
-                            </c:if>       
-                    <c:if test="${ account != null}">
+                    <c:if test="${ searchAccount == null}"> 
+                        <div class="alert alert-info">
+                            Have not entered search data yet or no search result found !
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                        </div> 
+                    </c:if>       
+                    <c:if test="${ searchAccount != null}">
                         <div class="table-users">
-                            <div class="header">List Account</div>
+                            <div class="header"> Account detail</div>
 
                             <table border="1px"  >
                                 <tr>
@@ -462,100 +467,100 @@
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th width="120"></th>
-                                </tr>                                
-                                    <tr>
-                                        <td class="mid">${account.username}</td>
-                                        <td class="mid">${account.roleId.roleName}</td>
-                                        <td class="mid">${account.status}</td>
-                                        <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Detail</button> </td>
-                                    </tr>     
+                                </tr>                                  
+                                <tr>
+                                    <td class="mid">${searchAccount.username}</td>
+                                    <td class="mid">${searchAccount.roleId.roleName}</td>
+                                    <td class="mid" style="color:${searchAccount.status == "active" ?"green":"red"};">${searchAccount.status}</td>
+                                    <td class="mid"><button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Detail</button> </td>
+                                </tr>     
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
-                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Account detail </h5>                                                                                                    
-                                                    <br/>
-                                                </div>
-                                                <div>
-                                                    <c:if test="${ account.roleId.roleId == 2 }">
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="buyerId">Buyer ID</label>
-                                                                <input type="text" class="form-control" id="buyerId" name="buyerId" value="${buyer.buyerId}" readonly >
-                                                            </div>
-
-                                                            <div class="form-group ">
-                                                                <label for="buyerName">Name</label>
-                                                                <input type="text" class="form-control" id="buyerName" name="buyerName" value="${buyer.buyerName}" readonly >
-                                                            </div>
-                                                            <div class="form-group ">
-                                                                <label for="buyerAddress">Address</label>
-                                                                <input type="text" class="form-control" id="buyerAddress" name="buyerAddress" value=" ${buyer.address}" readonly >
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="buyerGmail">Gmail</label>
-                                                                <input type="text" class="form-control" id="buyerGmail" name="buyerGmail" value="${buyer.gmail}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="buyerPhone">Phone</label>
-                                                                <input type="text" class="form-control" id="buyerPhone" name="buyerPhone" value="${buyer.phone}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="buyerBirthday">Birthday</label>
-                                                                <input type="text"  class="form-control" id="buyerBirthday" name="buyerBirthday" value="${buyer.birthday}" readonly>
-                                                            </div>                                                 
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"> 
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle" style="font-size: 30px;margin: 0 auto">Account detail </h5>                                                                                                    
+                                                <br/>
+                                            </div>
+                                            <div>
+                                                <c:if test="${ searchAccount.roleId.roleId == 2 }">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="buyerId">Buyer ID</label>
+                                                            <input type="text" class="form-control" id="buyerId" name="buyerId" value="${buyer.buyerId}" readonly >
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${buyer.buyerId}&roleId=2&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
-                                                        </div>
-                                                    </c:if>
-                                                    <c:if test="${ account.roleId.roleId == 3 }">
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="buyerId">Seller ID</label>
-                                                                <input type="text" class="form-control" id="buyerId" name="buyerId" value="${seller.sellerId}" readonly >
-                                                            </div>
 
-                                                            <div class="form-group ">
-                                                                <label for="sellerName">Name</label>
-                                                                <input type="text" class="form-control" id="sellerName" name="sellerName" value="${seller.sellerName}" readonly >
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerDes">Description</label>
-                                                                <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${seller.description}" readonly>
-                                                            </div>  
-                                                            <div class="form-group ">
-                                                                <label for="sellerAddress">Address</label>
-                                                                <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${seller.address}" readonly >
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="sellerGmail">Gmail</label>
-                                                                <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${seller.gmail}" readonly>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sellerPhone">Phone</label>
-                                                                <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${seller.phone}" readonly>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="numProductsOnSale">Number of products on sale</label>
-                                                                <input type="number"  class="form-control" id="numProductsOnSale" name="numProductsOnSale" value="${requestScope.numberProduct}" readonly>
-                                                            </div>
+                                                        <div class="form-group ">
+                                                            <label for="buyerName">Name</label>
+                                                            <input type="text" class="form-control" id="buyerName" name="buyerName" value="${buyer.buyerName}" readonly >
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${seller.sellerId}&roleId=3&status=${account.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                        <div class="form-group ">
+                                                            <label for="buyerAddress">Address</label>
+                                                            <input type="text" class="form-control" id="buyerAddress" name="buyerAddress" value=" ${buyer.address}" readonly >
                                                         </div>
-                                                    </c:if>
-                                                </div>
+
+                                                        <div class="form-group">
+                                                            <label for="buyerGmail">Gmail</label>
+                                                            <input type="text" class="form-control" id="buyerGmail" name="buyerGmail" value="${buyer.gmail}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="buyerPhone">Phone</label>
+                                                            <input type="text" class="form-control" id="buyerPhone" name="buyerPhone" value="${buyer.phone}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="buyerBirthday">Birthday</label>
+                                                            <input type="text"  class="form-control" id="buyerBirthday" name="buyerBirthday" value="${buyer.birthday}" readonly>
+                                                        </div>                                                 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${buyer.buyerId}&roleId=2&status=${a.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${ searchAccount.roleId.roleId == 3 }">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="buyerId">Seller ID</label>
+                                                            <input type="text" class="form-control" id="buyerId" name="buyerId" value="${seller.sellerId}" readonly >
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <label for="sellerName">Name</label>
+                                                            <input type="text" class="form-control" id="sellerName" name="sellerName" value="${seller.sellerName}" readonly >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerDes">Description</label>
+                                                            <input type="text"  class="form-control" id="sellerDes" name="sellerDes" value="${seller.description}" readonly>
+                                                        </div>  
+                                                        <div class="form-group ">
+                                                            <label for="sellerAddress">Address</label>
+                                                            <input type="text" class="form-control" id="sellerAddress" name="sellerAddress" value=" ${seller.address}" readonly >
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="sellerGmail">Gmail</label>
+                                                            <input type="text" class="form-control" id="buyerGmail" name="sellerGmail" value="${seller.gmail}" readonly>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="sellerPhone">Phone</label>
+                                                            <input type="text" class="form-control" id="buyerPhone" name="sellerPhone" value="${seller.phone}" readonly>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="numProductsOnSale">Number of products on sale</label>
+                                                            <input type="number"  class="form-control" id="numProductsOnSale" name="numProductsOnSale" value="${requestScope.numberProduct}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"><a href="changeAccountStatus?id=${seller.sellerId}&roleId=3&status=${searchAccount.status}" style="font-size: 15px;color: white">Change status</a></button>
+                                                    </div>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </table>
                         </div> 
                     </c:if>

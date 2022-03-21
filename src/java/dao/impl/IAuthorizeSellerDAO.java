@@ -9,6 +9,7 @@
  */
 package dao.impl;
 
+import entity.Order;
 import entity.Seller;
 import java.util.List;
 
@@ -20,4 +21,5 @@ import java.util.List;
 public interface IAuthorizeSellerDAO {
     public List<Seller> getInactiveSellerAccount();
     public void denySellerAccount(String username);
+    public List<Seller> GetSellerAccountByPage(List<Seller> list, int start, int end);
 }

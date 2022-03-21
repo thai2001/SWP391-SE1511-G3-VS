@@ -150,13 +150,6 @@ public class ManageAccountDAO extends DBContext implements IManageAccountDAO {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        ManageAccountDAO m = new ManageAccountDAO();        
-        m.deactiveAccount("buyer1");
-       Account account = m.searchAccount(2, 2);
-        System.out.println(account.getStatus());
-    }
-
     @Override
     public String getUsernameById(int roleId, int id) throws Exception {
         String username = "";

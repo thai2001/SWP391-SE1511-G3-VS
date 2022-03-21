@@ -52,7 +52,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"),
-                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("buyerName")),GetOrderDetail(rs.getInt("OrderId")));
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"), rs.getString("buyerName")), GetOrderDetail(rs.getInt("OrderId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
@@ -74,7 +74,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
         List<Order> listOrder = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;        
+        ResultSet rs = null;
         try {
             try {
                 con = getConnection();
@@ -105,7 +105,7 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
             rs = ps.executeQuery();
             while (rs.next()) {
                 Order order = new Order(rs.getInt("OrderId"), rs.getString("DateCreated"),
-                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"),rs.getString("buyerName")),GetOrderDetail(rs.getInt("OrderId")));
+                        rs.getDouble("TotalPrice"), new Buyer(rs.getInt("BuyerId"), rs.getString("buyerName")), GetOrderDetail(rs.getInt("OrderId")));
                 listOrder.add(order);
             }
         } catch (SQLException se) {
@@ -163,12 +163,14 @@ public class ManageTransactionDAO extends DBContext implements IManageTransactio
         }
         return listOrderDetail;
     }
-    public static void main(String[] args) {
-        IManageTransactionDAO i = new ManageTransactionDAO();
-        try {
-            System.out.println(i.GetAllOrder().get(0).getListOrderdetail().get(0).getProduct().getName());
-        } catch (Exception ex) {
-            Logger.getLogger(ManageTransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+    @Override
+    public List<Order> GetOrderByPage(List<Order> list, int start, int end) {
+        List<Order> order = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            order.add(list.get(i));
         }
+        return order;
     }
+
 }

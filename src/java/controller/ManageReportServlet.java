@@ -11,6 +11,7 @@ package controller;
 
 import dao.ManageReportDAO;
 import dao.impl.IManageReportDAO;
+import entity.Account;
 import entity.Report;
 import entity.ReportType;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -48,7 +50,7 @@ public class ManageReportServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageReportServlet</title>");            
+            out.println("<title>Servlet ManageReportServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ManageReportServlet at " + request.getContextPath() + "</h1>");
@@ -69,17 +71,53 @@ public class ManageReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-            
-            IManageReportDAO iManageReportDAO = new ManageReportDAO();
-            List<Report> listReport = iManageReportDAO.getAllReport();
-            List<ReportType> listReportType = iManageReportDAO.getAllReportType();
-            request.setAttribute("report", listReport);
-            request.setAttribute("reportType", listReportType);
-            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
-        } catch (Exception ex){
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account.getRoleId().getRoleId() != 1) {
+            response.sendRedirect("view/forbiddenPage.jsp");
+        }
+        IManageReportDAO iManageReportDAO = new ManageReportDAO();
+        List<Report> list = null;
+        try {
+            list = iManageReportDAO.getAllReport();
+        } catch (Exception ex) {
             Logger.getLogger(ManageReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        List<ReportType> listReportType = null;
+        try {
+            listReportType = iManageReportDAO.getAllReportType();
+        } catch (Exception ex) {
+            Logger.getLogger(ManageReportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int size = list.size();
+        String sNumPerPage = request.getParameter("numPerPage");
+        int numPerPage;
+        if (sNumPerPage == null) {
+            numPerPage = 5;
+        } else {
+            numPerPage = Integer.parseInt(sNumPerPage);
+        }
+
+        int numPage = size / numPerPage + (size % numPerPage == 0 ? 0 : 1);
+        String spage = request.getParameter("page");
+        int page;
+        if (spage == null) {
+            page = 1;
+        } else {
+            page = Integer.parseInt(spage);
+        }
+        int start, end;
+        start = (page - 1) * numPerPage;
+        end = Math.min(size, page * numPerPage);
+        List<Report> listReport = iManageReportDAO.GetreportByPage(list, start, end);
+        request.setAttribute("listSize", size);
+        request.setAttribute("url", "manageReport?");
+        request.setAttribute("numPerPage", numPerPage);
+        request.setAttribute("num", numPage);
+        request.setAttribute("page", page);
+        request.setAttribute("report", listReport);
+        request.setAttribute("reportType", listReportType);
+        request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
     }
 
     /**

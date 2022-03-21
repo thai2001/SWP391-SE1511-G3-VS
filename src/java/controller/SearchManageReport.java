@@ -76,46 +76,72 @@ public class SearchManageReport extends HttpServlet {
             int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId").trim());
             IManageReportDAO iManageReportDAO = new ManageReportDAO();
             List<ReportType> listReporttype = iManageReportDAO.getAllReportType();
-            if (request.getParameter("buyerId").trim().length() > 9 || request.getParameter("productId").trim().length() > 9 ){
-            request.setAttribute("alert", "warning");
-            request.setAttribute("message", "Not excess 9 character!");
-            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
-            request.setAttribute("productId", request.getParameter("productId").trim());
-            request.setAttribute("sort", sort);
-            request.setAttribute("reportTypeId", reportTypeId);
-            request.setAttribute("reportType", listReporttype);
-            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
-            }
-            try{
-            if (request.getParameter("buyerId").trim().length() > 0 ) {               
-                buyerId = Integer.parseInt(request.getParameter("buyerId").trim()); 
+            if (request.getParameter("buyerId").trim().length() > 9 || request.getParameter("productId").trim().length() > 9) {
+                request.setAttribute("alert", "warning");
+                request.setAttribute("message", "Not excess 9 character!");
                 request.setAttribute("buyerId", request.getParameter("buyerId").trim());
-            }
-            if (request.getParameter("productId").trim().length() > 0) {
-                productId = Integer.parseInt(request.getParameter("productId").trim());
                 request.setAttribute("productId", request.getParameter("productId").trim());
+                request.setAttribute("sort", sort);
+                request.setAttribute("reportTypeId", reportTypeId);
+                request.setAttribute("reportType", listReporttype);
+                request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
             }
-              } catch (NumberFormatException nfe){
-            request.setAttribute("alert", "danger");
-            request.setAttribute("message", "Number is required !");            
-            request.setAttribute("sort", sort);
-            request.setAttribute("reportTypeId", reportTypeId);
-            request.setAttribute("reportType", listReporttype);
-            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
+            try {
+                if (request.getParameter("buyerId").trim().length() > 0) {
+                    buyerId = Integer.parseInt(request.getParameter("buyerId").trim());
+                    request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+                }
+                if (request.getParameter("productId").trim().length() > 0) {
+                    productId = Integer.parseInt(request.getParameter("productId").trim());
+                    request.setAttribute("productId", request.getParameter("productId").trim());
+                }
+            } catch (NumberFormatException nfe) {
+                request.setAttribute("alert", "danger");
+                request.setAttribute("message", "Number is required !");
+                request.setAttribute("sort", sort);
+                request.setAttribute("reportTypeId", reportTypeId);
+                request.setAttribute("reportType", listReporttype);
+                request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
             }
-            if ( buyerId < 0 || productId < 0) {
-            request.setAttribute("alert", "danger");
-            request.setAttribute("message", "Number must be positive !");
-            request.setAttribute("buyerId", request.getParameter("buyerId").trim());
-            request.setAttribute("productId", request.getParameter("productId").trim());
-            request.setAttribute("sort", sort);
-            request.setAttribute("reportTypeId", reportTypeId);
-            request.setAttribute("reportType", listReporttype);
-            request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
+            if (buyerId < 0 || productId < 0) {
+                request.setAttribute("alert", "danger");
+                request.setAttribute("message", "Number must be positive !");
+                request.setAttribute("buyerId", request.getParameter("buyerId").trim());
+                request.setAttribute("productId", request.getParameter("productId").trim());
+                request.setAttribute("sort", sort);
+                request.setAttribute("reportTypeId", reportTypeId);
+                request.setAttribute("reportType", listReporttype);
+                request.getRequestDispatcher("view/ManageReport.jsp").forward(request, response);
             }
-            
-            List<Report> listReport = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, sort);
-            
+
+            List<Report> list = iManageReportDAO.getReportByFilter(buyerId, productId, reportTypeId, sort);
+            int size = list.size();
+            String sNumPerPage = request.getParameter("numPerPage");
+            int numPerPage;
+            if (sNumPerPage == null) {
+                numPerPage = 5;
+            } else {
+                numPerPage = Integer.parseInt(sNumPerPage);
+            }
+
+            int numPage = size / numPerPage + (size % numPerPage == 0 ? 0 : 1);
+            String spage = request.getParameter("page");
+            int page;
+            if (spage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(spage);
+            }
+            int start, end;
+            start = (page - 1) * numPerPage;
+            end = Math.min(size, page * numPerPage);
+            List<Report> listReport = iManageReportDAO.GetreportByPage(list, start, end);
+            request.setAttribute("url", "searchManageReport?productId=" + productId + "&buyerId=" + buyerId + "&"
+                    + "reportTypeId=" + reportTypeId + "&sort=" + sort + "&");
+            request.setAttribute("numPerPage", numPerPage);
+            request.setAttribute("num", numPage);
+            request.setAttribute("page", page);
+            request.setAttribute("listSize", size);
             request.setAttribute("buyerId", buyerId);
             request.setAttribute("productId", productId);
             request.setAttribute("sort", sort);

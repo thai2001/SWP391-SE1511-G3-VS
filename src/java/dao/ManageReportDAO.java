@@ -157,11 +157,12 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
         return listReportType;
     }
 
-    public static void main(String[] args) throws Exception {
-        ManageReportDAO m = new ManageReportDAO();
-        List<Report> li = m.getReportByFilter(2, 0, 0, "reportId Desc");
-        List<Report> lis = m.getAllReport();
-        System.out.println(li.size());
-        System.out.println(lis.size());
-    }
+    @Override
+    public List<Report> GetreportByPage(List<Report> list, int start, int end) {
+        List<Report> report = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            report.add(list.get(i));
+        }
+        return report;
+        }
 }

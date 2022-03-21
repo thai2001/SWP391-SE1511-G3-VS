@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.impl.IAuthorizeSellerDAO;
 import dao.impl.IManageAccountDAO;
 import entity.Account;
+import entity.Order;
+import javax.servlet.http.HttpSession;
 
 /**
  * cập nhật dữ liệu từ trong database đến bảng seller chưa được đăng kí Trong
@@ -73,16 +75,42 @@ public class AuthorizeSellerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        try {
+        
+            HttpSession session = request.getSession();
+            Account account = (Account)session.getAttribute("account");
+            if ( account.getRoleId().getRoleId() != 1 ){
+                response.sendRedirect("view/forbiddenPage.jsp");
+            }
             request.setCharacterEncoding("UTF-8"); // hiển thị tiếng việt
             IAuthorizeSellerDAO iauthorizeSellerdao = new AuthorizeSellerDAO();
-            List<Seller> listSeller = iauthorizeSellerdao.getInactiveSellerAccount();
+            List<Seller> list = iauthorizeSellerdao.getInactiveSellerAccount();
+            int size = list.size();
+            String sNumPerPage = request.getParameter("numPerPage");
+            int numPerPage;
+            if ( sNumPerPage == null ){
+                numPerPage = 2;
+            } else {
+                numPerPage = Integer.parseInt(sNumPerPage);
+            }
+            
+            int numPage = size / numPerPage + (size % numPerPage == 0 ? 0 : 1);
+            String spage = request.getParameter("page");
+            int page;
+            if (spage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(spage);
+            }
+            int start, end;
+            start = (page - 1) * numPerPage;
+            end = Math.min(size, page * numPerPage);
+            List<Seller> listSeller = iauthorizeSellerdao.GetSellerAccountByPage(list, start, end);
+            request.setAttribute("url", "authorize?");
+            request.setAttribute("numPerPage", numPerPage);
+            request.setAttribute("num", numPage);
+            request.setAttribute("page", page);
             request.setAttribute("seller", listSeller);
             request.getRequestDispatcher("view/authorizeSeller.jsp").forward(request, response);
-        } catch (NullPointerException e) {
-            response.sendRedirect("login");
-        }
-
     }
 
     /**

@@ -104,12 +104,12 @@ public class AuthorizeSellerDAO extends DBContext implements IAuthorizeSellerDAO
         }
     }
 
-    public static void main(String[] args) {
-        AuthorizeSellerDAO a = new AuthorizeSellerDAO();
-        a.denySellerAccount("seller3");
-        List<Seller> l = a.getInactiveSellerAccount();
-        for (Seller s : l) {
-            System.out.println(s.getSellerName() + "\n");
+    @Override
+    public List<Seller> GetSellerAccountByPage(List<Seller> list, int start, int end) {
+        List<Seller> seller = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            seller.add(list.get(i));
         }
+        return seller;
     }
 }

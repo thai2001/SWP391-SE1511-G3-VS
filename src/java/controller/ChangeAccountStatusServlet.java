@@ -11,6 +11,7 @@ package controller;
 
 import dao.ManageAccountDAO;
 import dao.impl.IManageAccountDAO;
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Thay đổi status của account
@@ -44,7 +46,7 @@ public class ChangeAccountStatusServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangeAccountStatusServlet</title>");            
+            out.println("<title>Servlet ChangeAccountStatusServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ChangeAccountStatusServlet at " + request.getContextPath() + "</h1>");
@@ -65,6 +67,11 @@ public class ChangeAccountStatusServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        if (account.getRoleId().getRoleId() != 1) {
+            response.sendRedirect("view/forbiddenPage.jsp");
+        }
         String status = request.getParameter("status");// lấy thông tin trạng thái của tài khoản
         int id = Integer.parseInt(request.getParameter("id"));
         int roleId = Integer.parseInt(request.getParameter("roleId"));// lấy username của tài khoản
@@ -77,7 +84,7 @@ public class ChangeAccountStatusServlet extends HttpServlet {
             }
             request.setAttribute("alert", "success");
             request.setAttribute("message", "De-active account successfully !");
-                      
+
         } else if (status.equalsIgnoreCase("inactive")) {
             try {
                 manageAccountDAO.activeAccount(manageAccountDAO.getUsernameById(roleId, id));
@@ -89,7 +96,7 @@ public class ChangeAccountStatusServlet extends HttpServlet {
         }
         request.setAttribute("id", id);
         request.setAttribute("roleId", roleId);
-        request.getRequestDispatcher("searchAccount").forward(request, response);  
+        request.getRequestDispatcher("searchAccount").forward(request, response);
     }
 
     /**

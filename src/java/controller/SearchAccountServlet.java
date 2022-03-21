@@ -134,7 +134,7 @@ public class SearchAccountServlet extends HttpServlet {
         request.setAttribute("roleId", roleId);
         request.setAttribute("id", id);
         request.setAttribute("role", listRole);
-        request.setAttribute("account", account);
+        request.setAttribute("searchAccount", account);
         request.setAttribute("seller", seller);
         request.setAttribute("buyer", buyer);
         request.getRequestDispatcher("view/ManageAccount.jsp").forward(request, response);

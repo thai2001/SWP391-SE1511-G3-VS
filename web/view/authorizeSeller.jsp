@@ -31,6 +31,25 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
+            .pagination {
+                display: inline-block;
+                margin-left: 40%;
+            }
+            .pagination a {
+                color: black;
+                font-size: 22px;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .pagination a:hover:not(.active) {
+                background-color: chocolate;
+            }
+            /* Paging */
             .sidebar {
                 position: inherit;
             }
@@ -430,11 +449,15 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
+                    <h1 style="text-align: center">Authorize seller</h1>
+
                     <div class="row">  
-                        <div class="alert alert-${alert}">
-                            ${message} 
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                        </div>
+                        <c:if test="${message != null}">
+                            <div class="alert alert-${alert}">
+                                ${message} 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                            </div>
+                        </c:if>
                         <div class="table-users">
                             <div class="header">Waiting list </div>
 
@@ -501,6 +524,12 @@
                                 </c:forEach>
                             </table>
                         </div> 
+                    </div>
+                    <div class="pagination ">
+                        <c:forEach begin="1" end="${requestScope.num}" var="i">
+                            <a class="${requestScope.page==i?"active":""}" href="${url}page=${i}&numPage=${numperPage}"> 
+                                ${i}</a>
+                            </c:forEach>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,7 @@ import dao.impl.IManageAccountDAO;
 import dao.impl.IRoleDAO;
 import entity.Role;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  * hiển thị màn hình tìm kiếm account
@@ -69,6 +70,11 @@ public class ManageAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
+            Account account = (Account)session.getAttribute("account");
+            if ( account.getRoleId().getRoleId() != 1 ){
+                response.sendRedirect("view/forbiddenPage.jsp");
+            }
             IManageAccountDAO manageaccountdao = new ManageAccountDAO();            
             IRoleDAO iRoleDAO = new RoleDAO();
             List<Role> listRole = iRoleDAO.getAllRole();

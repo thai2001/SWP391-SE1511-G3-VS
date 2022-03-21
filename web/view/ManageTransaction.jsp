@@ -28,6 +28,25 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
+            .pagination {
+                display: inline-block;
+                margin: 0 auto;
+            }
+            .pagination a {
+                color: black;
+                font-size: 22px;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .pagination a:hover:not(.active) {
+                background-color: chocolate;
+            }
+            /* Paging */
             .sidebar {
                 position: inherit;
             }
@@ -426,30 +445,34 @@
                         </div>
                     </div>
                 </nav>
-                <div class="container-fluid">
-                    <div class="alert alert-${alert}">
-                        ${message} 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                    </div>
+
+                <div class="container-fluid"> 
+                    <h1 style="text-align: center">Manage Transaction</h1>
+
                     <div class="row">
+                        <c:if test="${ message != null }">
+                            <div class="alert alert-${alert}">
+                                ${message} 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                            </div>
+                        </c:if>
 
                         <form class="navbar-form navbar-right" action="searchManageTransaction" method="get" >  
                             <label for="orderId">OrderId:</label>
                             <input value="<c:if test="${orderId > 0}" >${ orderId }</c:if>" name="orderId" id="orderId" type="text" class="SearchBox" placeholder="Input orderId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
-                            <label for="buyerId">BuyerId:</label>
-                            <input value="<c:if test="${buyerId > 0}" >${ buyerId }</c:if>" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Input buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
-                            <label for="sellerId">SellerId:</label>
-                            <input value="<c:if test="${sellerId > 0}">${ sellerId }</c:if>" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Input sellerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
-                            <br>
-                            <label for="start">Start date:</label>
-                            <input type="date" id="start" name="dateFrom"value="${dateFrom}">
+                                <label for="buyerId">BuyerId:</label>
+                                <input value="<c:if test="${buyerId > 0}" >${ buyerId }</c:if>" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Input buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                                <label for="sellerId">SellerId:</label>
+                                <input value="<c:if test="${sellerId > 0}">${ sellerId }</c:if>" name="sellerId" id="sellerId" type="text" class="SearchBox" placeholder="Input sellerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                                <br>
+                                <label for="start">Start date:</label>
+                                <input type="date" id="start" name="dateFrom"value="${dateFrom}">
                             <label for="end">End date:</label>
                             <input type="date" id="end" name="dateTo"value="${dateTo}">
+                            <label for="sort">Sort</label>
                             <select name="sort" id="sort" onchange="this.form.submit()">  
                                 <option  value="OrderId ASC" ${ sort == "OrderId ASC"?"selected":""} > Order Id ascending </option>
                                 <option  value="OrderId DESC" ${ sort == "OrderId DESC"?"selected":""} > Order Id descending </option>
-                                <option  value="BuyerId ASC" ${ sort == "BuyerId ASC"?"selected":""} > Buyer oldest </option>
-                                <option  value="BuyerId DESC" ${ sort == "BuyerId DESC"?"selected":""} > Buyer newest </option>
                                 <option  value="DateCreated ASC" ${ sort == "DateCreated ASC"?"selected":""} > Oldest </option>
                                 <option  value="DateCreated DESC" ${ sort == "DateCreated DESC"?"selected":""} > Newest </option>
                                 <option  value="TotalPrice ASC" ${ sort == "TotalPrice ASC"?"selected":""} > Lowest value </option>
@@ -457,6 +480,15 @@
 
                             </select> 
                             <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                            <br>
+                            <p> Show 
+                            <select name="numPerPage" id="numPerPage" onchange="this.form.submit()">
+                                <option  value="2" ${ numPerPage == 2?"selected":""} >2</option>
+                                <option  value="3" ${ numPerPage == 3?"selected":""} >3</option>
+                                <option  value="5" ${ numPerPage == 5?"selected":""} >5</option>
+                            </select>
+                             of  ${listSize} entries 
+                            </p>
                         </form>
 
                     </div>
@@ -541,6 +573,12 @@
                                 </c:forEach>
                             </table>
                         </div> 
+                        <div class="pagination ">
+                            <c:forEach begin="1" end="${requestScope.num}" var="i">
+                                <a class="${requestScope.page==i?"active":""}" href="${url}page=${i}&numPerPage=${numPerPage}"> 
+                                    ${i}</a>
+                                </c:forEach>
+                        </div>
                     </c:if> 
                 </div>
             </div>

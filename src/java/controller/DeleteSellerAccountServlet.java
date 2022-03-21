@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -68,12 +69,17 @@ public class DeleteSellerAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+            Account account = (Account)session.getAttribute("account");
+            if ( account.getRoleId().getRoleId() != 1 ){
+                response.sendRedirect("view/forbiddenPage.jsp");
+            }
         int roleId = Integer.parseInt(request.getParameter("roleId")); // vai trò khách hàng
         int cusId = Integer.parseInt(request.getParameter("id"));// Id khách hàng
         IManageAccountDAO iManageAccountDao = new ManageAccountDAO();
-        Account account = null;
+        Account delAccount = null;
         try {
-            account = iManageAccountDao.searchAccount(roleId, cusId);
+            delAccount = iManageAccountDao.searchAccount(roleId, cusId);
         } catch (Exception ex) {
             Logger.getLogger(DeleteSellerAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }        

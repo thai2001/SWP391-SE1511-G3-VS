@@ -24,4 +24,5 @@ public interface IManageTransactionDAO {
     public List<Order> GetAllOrder () throws Exception;
     public List<Order> GetOrderByFilter(int orderId, int buyerId,int sellerid, Date dateFrom, Date dateTo, String sortColunm) throws Exception;
     public List<OrderDetail> GetOrderDetail(int orderId) throws Exception;
+    public List<Order>  GetOrderByPage (List<Order> list,int start,int end);
 }

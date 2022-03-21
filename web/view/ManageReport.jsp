@@ -28,6 +28,25 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
+             .pagination {
+                display: inline-block;
+                margin: 0 auto;
+            }
+            .pagination a {
+                color: black;
+                font-size: 22px;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .pagination a:hover:not(.active) {
+                background-color: chocolate;
+            }
+            /* Paging */
             .sidebar {
                 position: inherit;
             }
@@ -427,11 +446,14 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
+                    <h1 style="text-align: center">Manage Report</h1>
                     <div class="row">
-                        <div class="alert alert-${alert}">
-                            ${message} 
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
-                        </div>
+                        <c:if test="${ message != null }">
+                            <div class="alert alert-${alert}">
+                                ${message} 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
+                            </div>
+                        </c:if>
                         <form class="navbar-form navbar-right" action="searchManageReport" method="get" >
                             <label id="reportTypeId"> Report type </label>
                             <select name="reportTypeId" id="reportTypeId" onchange = "this.form.submit()">
@@ -442,16 +464,25 @@
                             </select> 
                             <label id="buyerId"> Buyer ID </label>
                             <input value="<c:if test="${buyerId > 0}" >${ buyerId }</c:if>" name="buyerId" id="buyerId" type="text" class="SearchBox" placeholder="Nhập buyerId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
-                            <label id="productId"> Product ID </label>
-                            <input value="<c:if test="${productId > 0}" >${ productId }</c:if>" name="productId" id="productId" type="text" class="SearchBox" placeholder="Nhập productId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
-                            <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
-                            <br>
-                            <br>
-                            <label id="sort"> Filter </label>
-                            <select name="sort" id="sort" onchange="this.form.submit()">                                                
-                                <option  value="reportId ASC" ${ sort == "reportId ASC"?"selected":""} > Report Id tăng dần </option>
+                                <label id="productId"> Product ID </label>
+                                <input value="<c:if test="${productId > 0}" >${ productId }</c:if>" name="productId" id="productId" type="text" class="SearchBox" placeholder="Nhập productId" pattern="\s*[0-9]\s*{1,1000}" title="Please input number">
+                                <input type="submit" class="SearchButton" />  <i class="fa fa-search"></i>
+                                <br>
+                                <br>
+                                <label id="sort"> Sort </label>
+                                <select name="sort" id="sort" onchange="this.form.submit()">                                                
+                                    <option  value="reportId ASC" ${ sort == "reportId ASC"?"selected":""} > Report Id tăng dần </option>
                                 <option  value="reportId DESC" ${ sort == "reportId DESC"?"selected":""} > Report Id giảm dần </option>
                             </select> 
+                            <br>
+                            <p> Show 
+                            <select name="numPerPage" id="numPerPage" onchange="this.form.submit()">
+                                <option  value="2" ${ numPerPage == 2?"selected":""} >2</option>
+                                <option  value="3" ${ numPerPage == 3?"selected":""} >3</option>
+                                <option  value="5" ${ numPerPage == 5?"selected":""} >5</option>
+                            </select>
+                             of  ${listSize} entries 
+                            </p>
 
                         </form>
 
@@ -547,6 +578,12 @@
                                 </c:forEach>
                             </table>
                         </div> 
+                        <div class="pagination ">
+                            <c:forEach begin="1" end="${requestScope.num}" var="i">
+                                <a class="${requestScope.page==i?"active":""}" href="${url}page=${i}&numPerPage=${numPerPage}"> 
+                                    ${i}</a>
+                                </c:forEach>
+                        </div>
                     </c:if>
                 </div>
             </div>

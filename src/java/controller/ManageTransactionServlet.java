@@ -9,9 +9,9 @@ package controller;
  * DATE            Version             AUTHOR           DESCRIPTION
  * 2018-09-10      1.0                 MinhLH           First Implement
  */
-
 import dao.ManageTransactionDAO;
 import dao.impl.IManageTransactionDAO;
+import entity.Account;
 import entity.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,12 +24,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nqt26
  */
-@WebServlet( name = "ManageTransactionServlet", urlPatterns = {"/manageTransaction"})
+@WebServlet(name = "ManageTransactionServlet", urlPatterns = {"/manageTransaction"})
 public class ManageTransactionServlet extends HttpServlet {
 
     /**
@@ -49,7 +50,7 @@ public class ManageTransactionServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageTransactionServlet</title>");            
+            out.println("<title>Servlet ManageTransactionServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ManageTransactionServlet at " + request.getContextPath() + "</h1>");
@@ -70,16 +71,47 @@ public class ManageTransactionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
+            HttpSession session = request.getSession();
+            Account account = (Account)session.getAttribute("account");
+            if ( account.getRoleId().getRoleId() != 1 ){
+                response.sendRedirect("view/forbiddenPage.jsp");
+            }
             Date dateFrom = Date.valueOf("2018-01-01");
-            Date dateTo=new Date(System.currentTimeMillis());
+            Date dateTo = new Date(System.currentTimeMillis());
             IManageTransactionDAO iManageTransactionDAO = new ManageTransactionDAO();
-            List<Order> listOrder = iManageTransactionDAO.GetAllOrder();
+            List<Order> list = iManageTransactionDAO.GetAllOrder();
+            int size = list.size();
+            String sNumPerPage = request.getParameter("numPerPage");
+            int numPerPage;
+            if ( sNumPerPage == null ){
+                numPerPage = 5;
+            } else {
+                numPerPage = Integer.parseInt(sNumPerPage);
+            }
+            
+            int numPage = size / numPerPage + (size % numPerPage == 0 ? 0 : 1);
+            String spage = request.getParameter("page");
+            int page;
+            if (spage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(spage);
+            }
+            int start, end;
+            start = (page - 1) * numPerPage;
+            end = Math.min(size, page * numPerPage);
+            List<Order> listOrder = iManageTransactionDAO.GetOrderByPage(list, start, end);
+            request.setAttribute("listSize", size);
+            request.setAttribute("url", "manageTransaction?");
+            request.setAttribute("numPerPage", numPerPage);
+            request.setAttribute("num", numPage);
+            request.setAttribute("page", page);
             request.setAttribute("dateTo", dateTo);
             request.setAttribute("dateFrom", dateFrom);
             request.setAttribute("order", listOrder);
             request.getRequestDispatcher("view/ManageTransaction.jsp").forward(request, response);
-        } catch(Exception ex){
+        } catch (Exception ex) {
             Logger.getLogger(ManageTransactionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
