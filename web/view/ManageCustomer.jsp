@@ -229,9 +229,9 @@ header img{
                         
                     
                         
-                <input value="${buyname}" name="buyername" type="text" class="SearchBox" placeholder="Buyer Name"></li>
+                <input value="${buyname}" name="buyername" type="text" class="SearchBox" placeholder="Buyer Name" style="border-radius: 5px;"></li>
           
-                <button type="submit" style="background-color: #80bdff; height: 30px;width: 35px;"><i class="fa fa-search"></i></button>
+                <button type="submit" style="background-color: #80bdff; height: 30px;width: 35px;border-radius: 5px;"><i class="fa fa-search"></i></button>
           
        
     </form>
@@ -257,7 +257,7 @@ header img{
                                      <div class="form-group">
                                 <label>To :</label>
                                  <c:forEach items="${requestScope.buyer}" var="by">
-                                     <p name="to" style="display: inline">${by.gmail},</p>
+                                     <p name="to" >${by.gmail},</p>
                                </c:forEach>
                                      </div>
                                       
@@ -280,7 +280,7 @@ header img{
                 </div>
                               <div class="modal-footer">
                                    
-                      <input type="submit" class="btn btn-danger" value="Add">
+                                  <button type="submit" class="btn btn-info" value="Send" style="margin-right: 300px;width: 70px;"><i class="fa fa-send" aria-hidden="true"></i></button>
                             <a type="button" class="btn btn-default" data-dismiss="modal" >Cancel</a>
                            
                         </div>
@@ -333,19 +333,32 @@ header img{
                         <div class="modal-body">
                             
                             <div class="row">
-                                       <div class="col-md-6">
+                                       <div class="col-md-10">
      
                                      <div class="form-group">
                                 <label>To :</label>
                                 
-                                <input name="to" type="text" class="form-control" value="${by.gmail} " style="width:400px;">
+                                <div class="input-group mb-1">
+    
+                                <div class="input-group-prepend" >
+                                   <span class="input-group-text" ><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                  </div>
+                                     <input name="to" type="text" class="form-control" required >
+                            </div>
                                 
                                      </div>
                                       
                             
                               <div class="form-group">
                                 <label>Subject :</label>
-                                <input name="subject" class="form-control"  style="width:400px;">
+                                
+                           <div class="input-group mb-1">
+    
+                                <div class="input-group-prepend" >
+                                   <span class="input-group-text" ><i class="fa fa-question" aria-hidden="true"></i></span>
+                                  </div>
+                                     <input name="subject" type="text" class="form-control" required >
+                            </div>
                               </div>
                                 
           </div>
@@ -361,7 +374,7 @@ header img{
                 </div>
                               <div class="modal-footer">
                                    
-                      <input type="submit" class="btn btn-danger" value="Add">
+                        <button type="submit" class="btn btn-info" value="Send" style="margin-right: 300px;width: 70px;"><i class="fa fa-send" aria-hidden="true"></i></button>
                             <a type="button" class="btn btn-default" data-dismiss="modal" >Cancel</a>
                            
                         </div>

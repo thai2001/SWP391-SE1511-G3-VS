@@ -218,9 +218,9 @@ header img{
                         
                     
                         
-                <input value="${prodname}" name="productname" type="text" class="SearchBox" placeholder="Product Name"></li>
+                <input value="${prodname}" name="productname" type="text" class="SearchBox" placeholder="Product Name" style="border-radius: 5px;"></li>
           
-               <input type="submit" class="SearchButton" value="Search"\>  <i class="fa fa-search"></i></li>
+               <input type="submit" class="SearchButton" value="Search" style="border-radius: 5px;">  <i class="fa fa-search"></i></li>
           
        
     </form>

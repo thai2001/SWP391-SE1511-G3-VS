@@ -231,9 +231,9 @@ header img{
                         
                 <input value="${datecreated}" type="date" id="date" name="datecreated"
                               
-                               min="2018-01-01" max="2022-12-31"></li>
+                               min="2018-01-01" max="2022-12-31" style="border-radius: 5px;"></li>
           
-               <input type="submit" class="SearchButton" value="Search"\>  <i class="fa fa-search"></i></li>
+               <input type="submit" class="SearchButton" value="Search" style="border-radius: 5px;">  <i class="fa fa-search"></i></li>
           
        
     </form>
