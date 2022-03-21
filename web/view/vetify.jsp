@@ -28,15 +28,18 @@
         <form action="vetify" method="POST">
 
             <div class="container">
+            <c:if test="${wrong != null}">
+                <p class="text-danger text-center">${wrong}</p>
+            </c:if>
                 <h2>Verify Your Payment</h2>
-                <p>We emailed you the six digit code to fantacydesignss@gmail.com <br/> Enter the code below to confirm your email address.</p>
+                <p>We send you the six digit code to ${buyer.gmail} <br/> Enter the code below to confirm your email address.</p>
                 <div class="code-container">
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
-                    <input type="number" class="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
+                    <input type="number" class="code" name="code" placeholder="0" min="0" max="9" required>
                 </div>
                 <small class="info">
                     <input type="submit" class="btn btn-outline-success"  value="Confirm" required>

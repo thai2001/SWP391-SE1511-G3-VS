@@ -81,16 +81,16 @@
                                         <form action="sendVetifyCode" class="form">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="[0-9]{10}" title="only 10 number" required> <label for="" class="form__label">Card Number</label> </div>
+                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="[0-9]{10}" title="only 10 number" required> <label for="" class="form__label">Card Number <span class="text-danger"> * </span></label> </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="^(0[1-9]|1[012])/((19|2[0-9])[0-9]{2})$" title="MM/YY" required > <label for="" class="form__label">MM / yy</label> </div>
+                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="^(0[1-9]|1[012])/((19|2[0-9])[0-9]{2})$" title="MM/YY" required > <label for="" class="form__label">MM / yy <span class="text-danger"> * </span></label> </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="form__div"> <input type="password" class="form-control" placeholder=" " pattern="\d{3}" title="3 number" required> <label for="" class="form__label">cvv code</label> </div>
+                                                    <div class="form__div"> <input type="password" class="form-control" placeholder=" " pattern="\d{3}" title="3 number" required> <label for="" class="form__label">cvv code <span class="text-danger"> * </span></label> </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="[a-zA-Z]+" title="Full Name" required> <label for="" class="form__label">name on the card</label> </div>
+                                                    <div class="form__div"> <input type="text" class="form-control" placeholder=" " pattern="^[a-zA-Z]+[a-zA-Z ]+$" title="Full Name" required> <label for="" class="form__label">name on the card <span class="text-danger"> * </span></label> </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <input type="submit" value="Pay" class="btn btn-primary w-100"></div>

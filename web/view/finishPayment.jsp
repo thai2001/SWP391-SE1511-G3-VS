@@ -26,14 +26,28 @@
         <jsp:include page="navbar.jsp"></jsp:include>
 
             <div class="container">
-                <h2>Verify Your Payment</h2>
-                <p>We emailed you the six digit code to fantacydesignss@gmail.com <br/> Enter the code below to confirm your email address.</p>
+                <h2>Vertify Notice</h2>
+            <c:if test="${done}">
+                 <p class="text-center text-success"> Thank you ! your order is success</p>
+            
+                <div class="status-img">
+                    <img src="img/—Pngtree—mobile payment successful payment_5420564.png" alt=""/>
+                </div>
+                <small class="info">
+                    <a href="history" class="btn btn-outline-success" >back to history</a>
+                </small>   
+            </c:if>
+                 <c:if test="${!done}">
+                 <p class="text-center text-danger"> Oh no ! Wrong to much, your vertification fail !</p>
+            
                 <div class="status-img">
                     <img src="img/—Pngtree—error application denied server alert_4481725.png" alt=""/>
                 </div>
                 <small class="info">
-                    <a type="submit" class="btn btn-outline-success" >back to history</a>
-                </small>      
+                    <a href="history" class="btn btn-outline-danger" >back to history</a>
+                </small>   
+            </c:if>
+                  
 
             </div>
         </form>

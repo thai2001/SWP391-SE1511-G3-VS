@@ -115,7 +115,8 @@ public class sendVetifyCode extends HttpServlet {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("vetify");
+       ses.setAttribute("code", code);
+       request.getRequestDispatcher("vetify").forward(request, response);
     }
     
 

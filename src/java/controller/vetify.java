@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -38,15 +39,7 @@ public class vetify extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet vetify</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet vetify at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -78,6 +71,34 @@ public class vetify extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        HttpSession ses = request.getSession();
+        int count = 0;
+        if (ses.getAttribute("count") != null) {
+            count = (Integer) ses.getAttribute("count");
+        }
+        String code[] = request.getParameterValues("code");
+        String vetifyCode = (String) ses.getAttribute("code");
+        String codeTake = "";
+        for (String string : code) {
+            codeTake += string;
+        }
+        if (vetifyCode.endsWith(codeTake)) {
+            ses.setAttribute("done", true);
+            response.sendRedirect("finishPayment");
+        }
+
+        if (!vetifyCode.equals(codeTake)) {
+            count++;
+            if (count == 3) {
+                ses.setAttribute("done", false);
+                response.sendRedirect("finishPayment");
+            }
+            ses.setAttribute("count", count);
+            String wrong = "Wrong Code ! Try again";
+            ses.setAttribute("wrong", wrong);
+            request.getRequestDispatcher("view/vetify.jsp").forward(request, response);
+        }
+
     }
 
     /**

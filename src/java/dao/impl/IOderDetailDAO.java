@@ -32,5 +32,7 @@ public interface IOderDetailDAO {
     
     // get order detail with order id
     public OrderDetail getOrderDetailByOP(int oid,int pid) throws Exception;
+    
+     public void PayOrderDetail(int oid, int pid) throws Exception;
 
 }

@@ -141,8 +141,6 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
         }
     }
 
-   
-
     @Override
     public OrderDetail getOrderDetailByOP(int oid, int pid) throws Exception {
         Connection con = null;
@@ -164,7 +162,7 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             ps.setInt(2, pid);
             rs = ps.executeQuery();
             while (rs.next()) {
-               o = new OrderDetail(rs.getInt("OrderId"), new Product(rs.getInt(2),
+                o = new OrderDetail(rs.getInt("OrderId"), new Product(rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
                         rs.getString(5),
@@ -192,9 +190,8 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
         }
         return o;
     }
-    
-    
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         try {
             OrderDetailDAO dao = new OrderDetailDAO();
             Vector<OrderDetail> vec = dao.getOrderDetailByOderId(11);
@@ -203,6 +200,29 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             }
         } catch (Exception ex) {
             Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void PayOrderDetail(int oid, int pid) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+            String sql = "UPDATE [dbo].[OrderDetail]\n"
+                    + "   SET [isPaid] = '1'\n"
+                    + " WHERE OrderId = ? and ProductId = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, oid);
+            ps.setInt(2, pid);
+            ps.execute();
+
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            ps.close();
+            con.close();
         }
     }
 }
