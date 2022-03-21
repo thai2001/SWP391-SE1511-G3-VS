@@ -84,7 +84,7 @@
                                     </div>
 
                                 </div>
-                                123</div>
+                                </div>
                             </c:forEach>
 
 
@@ -127,7 +127,7 @@
                                     </div>
 
                                 </div>
-                                123</div>
+                                </div>
                             </c:forEach>
 
 
@@ -170,7 +170,7 @@
                                     </div>
 
                                 </div>
-                                123</div>
+                                </div>
                             </c:forEach>
 
 

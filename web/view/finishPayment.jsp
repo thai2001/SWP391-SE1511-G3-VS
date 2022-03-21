@@ -34,7 +34,7 @@
                     <img src="img/—Pngtree—mobile payment successful payment_5420564.png" alt=""/>
                 </div>
                 <small class="info">
-                    <a href="history" class="btn btn-outline-success" >back to history</a>
+                    <a href="orderDetail?oid=${o.orderId}" class="btn btn-outline-success" >back to detail</a>
                 </small>   
             </c:if>
                  <c:if test="${!done}">
@@ -44,7 +44,7 @@
                     <img src="img/—Pngtree—error application denied server alert_4481725.png" alt=""/>
                 </div>
                 <small class="info">
-                    <a href="history" class="btn btn-outline-danger" >back to history</a>
+                    <a href="orderDetail?oid=${o.orderId}" class="btn btn-outline-danger" >back to detail</a>
                 </small>   
             </c:if>
                   
