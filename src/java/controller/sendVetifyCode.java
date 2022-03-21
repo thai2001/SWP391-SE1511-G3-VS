@@ -16,6 +16,7 @@ import java.util.Properties;
 import java.util.Random;
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -79,7 +80,7 @@ public class sendVetifyCode extends HttpServlet {
 
             // your host email smtp server details
             Properties pr = new Properties();
-            pr.setProperty("mail.smtp.host", "smtp.mail.com");
+            pr.setProperty("mail.smtp.host", "smtp.gmail.com");
             pr.setProperty("mail.smtp.port", "587");
             pr.setProperty("mail.smtp.auth", "true");
             pr.setProperty("mail.smtp.starttls.enable", "true");
@@ -111,7 +112,7 @@ public class sendVetifyCode extends HttpServlet {
             Transport.send(mess);
             
             
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
         response.sendRedirect("vetify");
