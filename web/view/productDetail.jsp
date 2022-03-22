@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,12 @@
             crossorigin="anonymous"
             />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+         <!-- script link -->
+        <script src="js/productDetail.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
 
     </head>
     <body>
@@ -86,34 +93,37 @@
                                     <div class="col-sm-3 col-lg-2 hidden-xs">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                        <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                                        <textarea class="form-control" id="message" placeholder="Your message" maxlength="1000" title="Not over 1000 word" ${account == null?"disabled":""}  required ></textarea>
                                     </div>
                                 </div>  	
                                   
                             </fieldset>
                             <button type="" class="btn btn-normal btn-outline-success pull-right">Comment</button>
 
-                        <h3>4 Comments</h3>
+                        <h3>${comments.size()} Comments</h3>
 
                         <!-- COMMENT 1 - START -->
+                        <c:forEach items="${comments}" var="c" >
                         <div class="media">
                             <div class="media-body">
-                                <h4 class="media-heading">John Doe</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h4 class="media-heading">${c.buyer.buyerName}</h4>
+                                <p>${c.content}</p>
                                 <ul class="list-unstyled list-inline media-detail pull-left">
-                                    <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                    <li><i class="fa fa-calendar"></i>${c.date}</li>
                                 </ul>
                                 <ul class="list-unstyled list-inline media-detail pull-right">
                                 </ul>
                             </div>
-                        </div>
+                        </div>    
+                        </c:forEach>
+                        
                         <!-- COMMENT 1 - END -->
 
                        
 
                     </div>
                 </div>
-                                            <button type="" class="btn btn-normal btn-outline-primary pull-right">More</button>
+                        <button onclick="loadMore()" class="btn btn-normal btn-outline-primary pull-right">More</button>
 
             </div>
         </section>
@@ -135,12 +145,7 @@
         </footer>
         <!-- end footer -->
 
-        <!-- script link -->
-        <script src="myjs.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
+       
     </body>
 </html>
 

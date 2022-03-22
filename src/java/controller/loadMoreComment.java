@@ -5,30 +5,30 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-15      1.0                 ThaiNV           First Implement
+ * 2018-09-10      1.0                 MinhLH           First Implement
  */
 package controller;
 
 import dao.CommentDAO;
-import dao.ProductDAO;
-import dao.impl.IProductDAO;
 import entity.Comment;
-import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ThaiNV
+ * @author taola
  */
-public class productDetail extends HttpServlet {
+@WebServlet(name = "loadMoreComment", urlPatterns = {"/loadMoreComment"})
+public class loadMoreComment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,25 @@ public class productDetail extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-
+        HttpSession ses = request.getSession();
+        int pid = (Integer) ses.getAttribute("");
+        PrintWriter out = response.getWriter();
+        CommentDAO commentDAO = new CommentDAO();
+        Vector<Comment> list = commentDAO.getAllCommnetByPid(pid);
+        for (Comment comment : list) {
+            out.println("<div class=\"media\">\n"
+                    + "                            <div class=\"media-body\">\n"
+                    + "                                <h4 class=\"media-heading\">John Doe</h4>\n"
+                    + "                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>\n"
+                    + "                                <ul class=\"list-unstyled list-inline media-detail pull-left\">\n"
+                    + "                                    <li><i class=\"fa fa-calendar\"></i>27/02/2014</li>\n"
+                    + "                                </ul>\n"
+                    + "                                <ul class=\"list-unstyled list-inline media-detail pull-right\">\n"
+                    + "                                </ul>\n"
+                    + "                            </div>\n"
+                    + "                        </div>");
         }
     }
 
@@ -60,18 +75,9 @@ public class productDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            //        processRequest(request, response);
-            int pid = Integer.parseInt(request.getParameter("pid"));
-            IProductDAO productDAO = new ProductDAO();
-            Product p = productDAO.getProductById(pid);
-            request.setAttribute("product", p);
-            CommentDAO commentDAO = new CommentDAO();
-        Vector<Comment> comments = commentDAO.getAllCommnetByPid(pid);
-                    request.setAttribute("comments", comments);
-
-            request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);
+            processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(productDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(loadMoreComment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -86,7 +92,11 @@ public class productDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(loadMoreComment.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
