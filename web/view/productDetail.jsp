@@ -74,6 +74,49 @@
                 <p class="descript w-75">${product.descript}</p>
             </div>
         </div>
+
+
+        <section class="content-item" id="comments">
+            <div class="container">   
+                <div class="row">
+                    <div class="col-sm-8">   
+                            <h3 class="pull-left">New Comment</h3>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-3 col-lg-2 hidden-xs">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                        <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                                    </div>
+                                </div>  	
+                                  
+                            </fieldset>
+                            <button type="" class="btn btn-normal btn-outline-success pull-right">Comment</button>
+
+                        <h3>4 Comments</h3>
+
+                        <!-- COMMENT 1 - START -->
+                        <div class="media">
+                            <div class="media-body">
+                                <h4 class="media-heading">John Doe</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <ul class="list-unstyled list-inline media-detail pull-left">
+                                    <li><i class="fa fa-calendar"></i>27/02/2014</li>
+                                </ul>
+                                <ul class="list-unstyled list-inline media-detail pull-right">
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- COMMENT 1 - END -->
+
+                       
+
+                    </div>
+                </div>
+                                            <button type="" class="btn btn-normal btn-outline-primary pull-right">More</button>
+
+            </div>
+        </section>
         <!-- end container part -->
         <!-- footer  -->
         <footer class="bg-dark text-light">
