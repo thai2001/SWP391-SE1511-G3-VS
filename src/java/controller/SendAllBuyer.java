@@ -16,12 +16,10 @@ import dao.impl.IManageProductDao;
 import entity.Account;
 import entity.Buyer;
 import entity.JavaMail;
-import entity.Role;
 import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class SendMail extends HttpServlet {
+public class SendAllBuyer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,10 +49,10 @@ public class SendMail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SendMail</title>");            
+            out.println("<title>Servlet SendAllBuyer</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SendMail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SendAllBuyer at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -83,13 +81,11 @@ public class SendMail extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String resultMessage = "";
+         String resultMessage = "";
         try {
-        String to = request.getParameter("to").trim();
         String sub = request.getParameter("subject").trim();
         String mess =request.getParameter("message").trim();
        HttpSession sess = request.getSession();
@@ -97,7 +93,7 @@ public class SendMail extends HttpServlet {
             IManageProductDao manageProductDao = new ManageProductDAO();
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = manageProductDao.getSeller(a.getUsername());
-         
+          // String name= request.getParameter("productname").trim();
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
         int size= listbuyer.size();
@@ -121,7 +117,7 @@ public class SendMail extends HttpServlet {
        request.setAttribute("buyerall", listbuy);
         request.setAttribute("page", page);
             
-                JavaMail.send(to,sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");
+                JavaMail.sendall(sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");
             }catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "There were an error: " + ex.getMessage();
@@ -131,7 +127,6 @@ public class SendMail extends HttpServlet {
            request.getRequestDispatcher("view/ManageCustomer.jsp").forward(
                     request, response);
         }
-        
     }
 
     /**

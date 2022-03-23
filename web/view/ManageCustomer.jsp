@@ -244,7 +244,7 @@ header img{
               <div id="sendall" class="modal fade">
             <div class="modal-dialog">
                  <div class="modal-content">  
-                     <form action="sendmail" method="post">
+                     <form action="sendallbuyer" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title" style="font-size:35px; ">Contact</h4>
                             
@@ -257,7 +257,7 @@ header img{
                                      <div class="form-group">
                                 <label>To :</label>
                                  <c:forEach items="${requestScope.buyer}" var="by">
-                                     <p name="to" >${by.gmail},</p>
+                                     <p>${by.gmail},</p>
                                </c:forEach>
                                      </div>
                                       

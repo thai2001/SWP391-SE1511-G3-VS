@@ -122,8 +122,13 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
     }
     
     public static void main(String[] args) throws Exception {
+        IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
+        List<Buyer> listbu = iManageCustomer.getBuyerBySellerId(2);
         ManageCustomerDAO mc = new ManageCustomerDAO();
         mc.getBuyerBySellerId(2);
-        System.out.println(mc.getBuyerBySellerId(2).get(0).getBuyerName());
+        for(int i =0; i < listbu.size();i++){
+            System.out.println(listbu.get(i).getBuyerName());
+        }
+        
     }
 }

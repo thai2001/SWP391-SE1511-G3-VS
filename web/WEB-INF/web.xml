@@ -108,6 +108,10 @@
         <servlet-name>SearchBuyerName</servlet-name>
         <servlet-class>controller.SearchBuyerName</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendAllBuyer</servlet-name>
+        <servlet-class>controller.SendAllBuyer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>SearchBuyerName</servlet-name>
         <url-pattern>/searchbuyername</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendAllBuyer</servlet-name>
+        <url-pattern>/sendallbuyer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
