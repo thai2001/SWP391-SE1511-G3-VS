@@ -28,4 +28,7 @@ public interface ICommentDAO {
     // get newest comments
     public Comment getNewestComment(int pid) throws Exception;
     
+    // get newest comments
+    public void insertNewestComment(int pid,int buyerId,String text,String date) throws Exception;
+    
 }

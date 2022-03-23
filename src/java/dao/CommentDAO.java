@@ -39,7 +39,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
                     + "  join Product as b on a.productId = b.ProductId\n"
                     + "  join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "  where a.productId = ?\n"
-                    + "  order by CreatedDate desc";
+                    + "  order by [commentId] desc";
             ps = con.prepareStatement(sql);
             ps.setInt(1, pid);
             rs = ps.executeQuery();
@@ -80,7 +80,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
                     + "join Product as b on a.productId = b.ProductId\n"
                     + "join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "where a.productId =  ? \n"
-                    + "order by CreatedDate desc\n"
+                    + "order by [commentId] desc\n"
                     + "OFFSET ? ROWS \n"
                     + "FETCH NEXT 2 ROWS ONLY";
             ps = con.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
                     + "join Product as b on a.productId = b.ProductId\n"
                     + "join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "where a.productId = ? \n"
-                    + "order by CreatedDate desc";
+                    + "order by [commentId] desc";
             ps = con.prepareStatement(sql);
             ps.setInt(1, pid);
             rs = ps.executeQuery();
@@ -129,5 +129,34 @@ public class CommentDAO extends DBContext implements ICommentDAO {
             con.close();
         }
         return comment;
+    }
+
+    @Override
+    public void insertNewestComment(int pid, int buyerId, String text, String date) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = getConnection();
+            String sql = "INSERT INTO [dbo].[Comment]\n"
+                    + "           ([productId]\n"
+                    + "           ,[buyerId]\n"
+                    + "           ,[content]\n"
+                    + "           ,[CreatedDate])\n"
+                    + "     VALUES\n"
+                    + "           ( ?, ?, ?, ?)";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, pid);
+            ps.setInt(2, buyerId);
+            ps.setString(3, text);
+            ps.setString(4, date);
+            ps.execute();
+
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            ps.close();
+            con.close();
+        }
     }
 }

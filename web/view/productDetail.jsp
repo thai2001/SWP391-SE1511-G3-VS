@@ -93,12 +93,13 @@
                                     <div class="col-sm-3 col-lg-2 hidden-xs">
                                     </div>
                                     <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                        <textarea class="form-control" id="message" placeholder="Your message" maxlength="1000" title="Not over 1000 word" ${account == null?"disabled":""}  required ></textarea>
+                                        <textarea class="form-control" id="message" onchange="checkChange()" placeholder="Your message"
+                                                  maxlength="1000" title="Not over 1000 word" ${account == null?"disabled":""}  required  ></textarea>
                                     </div>
                                 </div>  	
                                   
                             </fieldset>
-                                    <button onclick="insertNewComment()" class="btn btn-normal btn-outline-success pull-right">Comment</button>
+                                    <button onclick="insertNewComment()" id="comment-btn" class="btn btn-normal  btn-outline-success pull-right" disabled >Comment</button>
 
                         <h3> Comments</h3>
                         <div id="mediaes">

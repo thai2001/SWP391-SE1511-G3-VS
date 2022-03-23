@@ -10,6 +10,7 @@
 package controller;
 
 import dao.CommentDAO;
+import entity.Buyer;
 import entity.Comment;
 import entity.Product;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class insertNewComment extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
+
         }
     }
 
@@ -64,20 +65,24 @@ public class insertNewComment extends HttpServlet {
         //processRequest(request, response);
         try {
             //processRequest(request, response);
-             response.setContentType("text/html;charset=UTF-8");
-        HttpSession ses = request.getSession();
-        Product p = (Product) ses.getAttribute("product");
-        int pid = p.getId();
-        int index = Integer.parseInt(request.getParameter("total"));
-        PrintWriter out = response.getWriter();
-        CommentDAO commentDAO = new CommentDAO();
-        Comment comment = commentDAO.getNewestComment(pid);
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession ses = request.getSession();
+            Product p = (Product) ses.getAttribute("product");
+            Buyer buyer = (Buyer) ses.getAttribute("buyer");
+            int buyerId = buyer.getBuyerId();
+            int pid = p.getId();
+            String text = request.getParameter("text");
+            String today = request.getParameter("today");
+            PrintWriter out = response.getWriter();
+            CommentDAO commentDAO = new CommentDAO();
+            commentDAO.insertNewestComment(pid, buyerId, text, today);
+            Comment comment = commentDAO.getNewestComment(pid);
             out.println(" <div class=\"media\">\n"
                     + "                            <div class=\"media-body\">\n"
-                    + "                                <h4 class=\"media-heading\">"+comment.getBuyer().getBuyerName()+"</h4>\n"
-                    + "                                <p>"+comment.getContent()+"</p>\n"
+                    + "                                <h4 class=\"media-heading\">" + comment.getBuyer().getBuyerName() + "</h4>\n"
+                    + "                                <p>" + comment.getContent() + "</p>\n"
                     + "                                <ul class=\"list-unstyled list-inline media-detail pull-left\">\n"
-                    + "                                    <li><i class=\"fa fa-calendar\"></i>"+comment.getDate()+"</li>\n"
+                    + "                                    <li><i class=\"fa fa-calendar\"></i>" + comment.getDate() + "</li>\n"
                     + "                                </ul>\n"
                     + "                                <ul class=\"list-unstyled list-inline media-detail pull-right\">\n"
                     + "                                </ul>\n"
