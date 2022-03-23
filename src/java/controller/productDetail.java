@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -61,12 +62,13 @@ public class productDetail extends HttpServlet {
             throws ServletException, IOException {
         try {
             //        processRequest(request, response);
+            HttpSession ses = request.getSession();
             int pid = Integer.parseInt(request.getParameter("pid"));
             IProductDAO productDAO = new ProductDAO();
             Product p = productDAO.getProductById(pid);
-            request.setAttribute("product", p);
+            ses.setAttribute("product", p);
             CommentDAO commentDAO = new CommentDAO();
-        Vector<Comment> comments = commentDAO.getAllCommnetByPid(pid);
+        Vector<Comment> comments = commentDAO.getNext2CommnetByPid(pid,0);
                     request.setAttribute("comments", comments);
 
             request.getRequestDispatcher("view/productDetail.jsp").forward(request, response);

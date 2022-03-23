@@ -66,4 +66,68 @@ public class CommentDAO extends DBContext implements ICommentDAO {
         }
 //        dao.addToShoppingCart(1, 15);
     }
+
+    @Override
+    public Vector<Comment> getNext2CommnetByPid(int pid, int index) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Vector vec = new Vector();
+        try {
+            con = getConnection();
+            String sql = "SELECT a.commentId,a.productId,b.ProductName,c.BuyerID,c.Username,a.content,a.CreatedDate\n"
+                    + "FROM [Comment] as a\n"
+                    + "join Product as b on a.productId = b.ProductId\n"
+                    + "join Buyer as c on a.buyerId = c.BuyerID\n"
+                    + "where a.productId =  ? \n"
+                    + "order by CreatedDate desc\n"
+                    + "OFFSET ? ROWS \n"
+                    + "FETCH NEXT 2 ROWS ONLY";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, pid);
+            ps.setInt(2, index);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                vec.add(new Comment(rs.getInt(1), new Product(rs.getInt(2), rs.getString(3)), new Buyer(rs.getInt(4), rs.getString(5)), rs.getString(6), rs.getString(7))
+                );
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
+        }
+        return vec;
+    }
+
+    @Override
+    public Comment getNewestComment(int pid) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Comment comment = new Comment();
+        try {
+            con = getConnection();
+            String sql = "SELECT top(1) a.commentId,a.productId,b.ProductName,c.BuyerID,c.Username,a.content,a.CreatedDate\n"
+                    + "FROM [Comment] as a\n"
+                    + "join Product as b on a.productId = b.ProductId\n"
+                    + "join Buyer as c on a.buyerId = c.BuyerID\n"
+                    + "where a.productId = ? \n"
+                    + "order by CreatedDate desc";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, pid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                comment = new Comment(rs.getInt(1), new Product(rs.getInt(2), rs.getString(3)), new Buyer(rs.getInt(4), rs.getString(5)), rs.getString(6), rs.getString(7));
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            rs.close();
+            ps.close();
+            con.close();
+        }
+        return comment;
+    }
 }

@@ -20,4 +20,12 @@ public interface ICommentDAO {
     // load all comment of product
     
     public Vector<Comment> getAllCommnetByPid(int pid) throws Exception;
+    
+    
+   // get next 2 comments
+    public Vector<Comment> getNext2CommnetByPid(int pid,int index) throws Exception;
+    
+    // get newest comments
+    public Comment getNewestComment(int pid) throws Exception;
+    
 }

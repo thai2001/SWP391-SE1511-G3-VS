@@ -86,7 +86,7 @@
         <section class="content-item" id="comments">
             <div class="container">   
                 <div class="row">
-                    <div class="col-sm-8">   
+                    <div class="col-sm-8" id="comments-body">   
                             <h3 class="pull-left">New Comment</h3>
                             <fieldset>
                                 <div class="row">
@@ -98,11 +98,11 @@
                                 </div>  	
                                   
                             </fieldset>
-                            <button type="" class="btn btn-normal btn-outline-success pull-right">Comment</button>
+                                    <button onclick="insertNewComment()" class="btn btn-normal btn-outline-success pull-right">Comment</button>
 
-                        <h3>${comments.size()} Comments</h3>
-
-                        <!-- COMMENT 1 - START -->
+                        <h3> Comments</h3>
+                        <div id="mediaes">
+                            <!-- COMMENT 1 - START -->
                         <c:forEach items="${comments}" var="c" >
                         <div class="media">
                             <div class="media-body">
@@ -118,6 +118,9 @@
                         </c:forEach>
                         
                         <!-- COMMENT 1 - END -->
+                        </div>
+
+                        
 
                        
 

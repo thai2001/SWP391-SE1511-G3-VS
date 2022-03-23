@@ -28,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author taola
  */
-@WebServlet(name = "loadMoreComment", urlPatterns = {"/loadMoreComment"})
-public class loadMoreComment extends HttpServlet {
+@WebServlet(name = "insertNewComment", urlPatterns = {"/insertNewComment"})
+public class insertNewComment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,8 +41,12 @@ public class loadMoreComment extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-       
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+           
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,6 +61,7 @@ public class loadMoreComment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //processRequest(request, response);
         try {
             //processRequest(request, response);
              response.setContentType("text/html;charset=UTF-8");
@@ -66,8 +71,7 @@ public class loadMoreComment extends HttpServlet {
         int index = Integer.parseInt(request.getParameter("total"));
         PrintWriter out = response.getWriter();
         CommentDAO commentDAO = new CommentDAO();
-        Vector<Comment> list = commentDAO.getNext2CommnetByPid(pid,index);
-        for (Comment comment : list) {
+        Comment comment = commentDAO.getNewestComment(pid);
             out.println(" <div class=\"media\">\n"
                     + "                            <div class=\"media-body\">\n"
                     + "                                <h4 class=\"media-heading\">"+comment.getBuyer().getBuyerName()+"</h4>\n"
@@ -79,7 +83,6 @@ public class loadMoreComment extends HttpServlet {
                     + "                                </ul>\n"
                     + "                            </div>\n"
                     + "                        </div>    ");
-        }
         } catch (Exception ex) {
             Logger.getLogger(loadMoreComment.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,11 +99,7 @@ public class loadMoreComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(loadMoreComment.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

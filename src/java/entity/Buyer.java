@@ -45,7 +45,7 @@ public class Buyer {
         this.buyerName = buyerName;
     }
     
-    
+
     public Buyer(int buyerId) {
         this.buyerId = buyerId;
     }
