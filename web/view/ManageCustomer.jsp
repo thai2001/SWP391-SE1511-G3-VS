@@ -208,17 +208,17 @@ header img{
     />
   </head>
 
-  <body>
+  <body style="background-color: #fffdf9">
 
 
     <!-- Header -->
        <jsp:include page="navbar.jsp"></jsp:include>
 
     <!-- Page Content -->
-    <div class="container-lg">
-    <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
+    <div class="container-lg" >
+    <div class="table-responsive" >
+        <div class="table-wrapper" style="border-radius: 15px;">
+            <div class="table-title" >
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
@@ -252,7 +252,7 @@ header img{
                         <div class="modal-body">
                             
                             <div class="row">
-                                       <div class="col-md-6">
+                                      
      
                                      <div class="form-group">
                                 <label>To :</label>
@@ -267,7 +267,7 @@ header img{
                                 <input name="subject" class="form-control"  style="width:400px;">
                               </div>
                                 
-          </div>
+        
      
                                  <div class="form-group">
                                 <label>Message</label>
@@ -289,9 +289,9 @@ header img{
             </div>
         </div>
           
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
+              <table class="table table-bordered" >
+                <thead >
+                    <tr style="background-color: #cccccc">
                      
                         <th>BuyerID</th>
                         <th>Buyer Name</th>

@@ -196,7 +196,7 @@ header img{
     />
   </head>
 
-  <body>
+  <body style="background-color: #fffdf9">
 
 
     <!-- Header -->
@@ -205,8 +205,8 @@ header img{
     <!-- Page Content -->
     <div class="container-lg">
     <div class="table-responsive">
-        <div class="table-wrapper">
-            <div class="table-title">
+        <div class="table-wrapper" style="border-radius: 15px;">
+            <div class="table-title" >
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div> 
@@ -230,7 +230,7 @@ header img{
             
             <table class="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr style="background-color: #cccccc">
                         <th>Product ID</th>
                         <th>Product Name</th>
                         <th>Image</th>

@@ -208,16 +208,16 @@ header img{
     />
   </head>
 
-  <body>
+  <body style="background-color: #fffdf9">
 
 
     <!-- Header -->
        <jsp:include page="navbar.jsp"></jsp:include>
 
     <!-- Page Content -->
-    <div class="container-lg">
-    <div class="table-responsive">
-        <div class="table-wrapper">
+    <div class="container-lg" >
+    <div class="table-responsive" >
+        <div class="table-wrapper" style="border-radius: 15px;">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
@@ -240,17 +240,17 @@ header img{
                     </div>
                 
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" >
                 <thead>
-                    <tr>
-                        <th>OrderID</th>
+                    <tr style="background-color: #cccccc">
+                        <th >OrderID</th>
                         <th>Buyer Name</th>
                         <th>Date Created</th>
                         <th>TotalPrice</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     <c:forEach items="${requestScope.orderdt}" var="odt">
                     <tr>
                         <td>                          

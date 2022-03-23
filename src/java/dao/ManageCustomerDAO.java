@@ -127,8 +127,9 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
         ManageCustomerDAO mc = new ManageCustomerDAO();
         mc.getBuyerBySellerId(2);
         for(int i =0; i < listbu.size();i++){
-            System.out.println(listbu.get(i).getBuyerName());
+            System.out.print(listbu.get(i).getGmail());
         }
         
     }
+  
 }

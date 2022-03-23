@@ -125,7 +125,7 @@ header{
 </style>
   </head>
 
-  <body>
+  <body style="background-color: #fffdf9">
 
 
     <!-- Header -->
@@ -135,13 +135,11 @@ header{
      
     <div class="container">
 
-        <div class="table-wrapper">
-                <div class="table-title">
+        <div class="table-wrapper" style="border-radius: 15px;">
+                <div class="table-title" style="border-radius: 15px; width: 1000px;margin-left: 120px;">
                     <div class="row">
                         <div class="col-sm-6">
                             <h2>Edit <b>Product</b></h2>
-                        </div>
-                        <div class="col-sm-6">
                         </div>
                     </div>
                 </div>
@@ -149,7 +147,7 @@ header{
            
 <div id="editProduct">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="border-radius: 15px;">
                     <form action="editproduct" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Product's<b> Info</b></h4>

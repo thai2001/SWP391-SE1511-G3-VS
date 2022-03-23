@@ -74,9 +74,9 @@ public class ManageCustomer extends HttpServlet {
         try{
        HttpSession sess = request.getSession();
             IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
-            IManageProductDao manageProductDao = new ManageProductDAO();
+            IManageProductDao iManageProductDao = new ManageProductDAO();
           Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = manageProductDao.getSeller(a.getUsername());
+          Seller seller = iManageProductDao.getSeller(a.getUsername());
           // String name= request.getParameter("productname").trim();
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
@@ -98,7 +98,6 @@ public class ManageCustomer extends HttpServlet {
        
        request.setAttribute("num", numPage); 
        request.setAttribute("buyer", listbuy);
-       request.setAttribute("buyerall", listbuy);
         request.setAttribute("page", page);
        
        request.getRequestDispatcher("view/ManageCustomer.jsp").forward(request, response);
