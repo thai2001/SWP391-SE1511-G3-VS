@@ -165,20 +165,20 @@ header{
                             <div class="form-group">
                                 <label>Product Name</label>
                                 </div>
-                                <input name="productname" class="form-control" required></input>
+                                <input minlength="5" maxlength="60" pattern="^[a-zA-Z0-9]*$" name="productname" class="form-control" required></input>
                             
                     
                                  <div class="form">
                                 <label>Discount</label>
                                 </div>
-                                <input name="discount" type="text" class="form-control" required placeholder="%">
+                                <input min="0" max="90" name="discount" type="number" class="form-control" required placeholder="%">
                             
                                 <div class="form-group">
                                 <label>Price</label>
                                 </div>
                             <div class="input-group mb-1">
                                  
-                                <input name="price" type="text" class="form-control" required>
+                                <input min="100000" max="9000000" name="price" type="number" class="form-control" required>
                                 <div class="input-group-prepend">
                                    <span class="input-group-text">$</span>
                                   </div>
@@ -207,12 +207,12 @@ header{
                             <div class="form-group right">                   
                                 <label>Made In</label>
                             </div>
-                                <input name="madeIn" class="form-control" required style="width:270px;"></input>
+                                    <input minlength="3" maxlength="20" pattern="^[a-zA-Z]*$" type="text" name="madeIn" class="form-control" required style="width:270px;"></input>
                             
                             <div class="form-group right">
                                 <label>Manufacture Year</label>
                             </div>
-                                <input name="Myear" class="form-control" required style="width:270px;"></input>
+                                    <input min="1990" max="2022" name="Myear" type="number"  class="form-control" required style="width:270px;"></input>
                             
                             
                             <div class="form-group right">
@@ -225,7 +225,7 @@ header{
                                  <div class="form-group right">
                                 <label>Quantity</label>
                                  </div>
-                                <input name="quantity" class="form-control" required style="width:270px;"></input>
+                                <input min="1" max="200" name="quantity" type="number" class="form-control" required style="width:270px;"></input>
                                
                             </div>
                             </div>
@@ -235,7 +235,7 @@ header{
                             
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
+                                <textarea minlength="10" maxlength="300" name="description" class="form-control" required></textarea>
                                 
                             </div>
                             

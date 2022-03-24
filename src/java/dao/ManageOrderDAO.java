@@ -86,20 +86,7 @@ Connection con = null;
         String sql = "Select * from [ORDER]"
                  + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
                  + " WHERE OrderId = ? ";
-//        String sql="Select [ORDER].OrderId,\n" +
-//"       Product.ProductName,\n" +
-//"	   Buyer.BuyerName,\n" +
-//"	   [Order].DateCreated,\n" +
-//"          Product.ProductId, \n" +
-//"	   Brand.BrandName,\n" +
-//"	   OrderDetail.Quantity,\n" +
-//"	   Image,\n" +
-//"	   [ORDER].TotalPrice\n" +
-//"	   from OrderDetail INNER JOIN Product ON OrderDetail.ProductId = Product.ProductId\n" +
-//"	                    INNER JOIN [ORDER] On [ORDER].OrderId = OrderDetail.OrderId\n" +
-//"						INNER JOIN Buyer On Buyer.BuyerID = [ORDER].BuyerId\n" +
-//"						INNER JOIN Brand ON Brand.BrandId = Product.BrandId\n" +
-//"	   Where [ORDER].OrderId = ? ";
+
         try{
             con = getConnection();
             ps=con.prepareStatement(sql);
@@ -131,20 +118,12 @@ Connection con = null;
          String sql ="Select * from [ORDER]"
                  + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
                  + " WHERE SellerId = ? ";
-//         String sql="Select\n" +
-//"    [ORDER].OrderId,\n" +
-//"     Product.ProductId, \n" +
-//"	   Image,\n" +
-//"	   Product.ProductName,\n" +
-//"	   OrderDetail.Quantity,\n" +
-//"	   [Order].TotalPrice\n" +
-//"	   from [ORDER] INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
-//"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +	                 
-//"	   Where  [ORDER].SellerId = ? ";
+
          
          if(datecre != null){
                   sql += " and  [ORDER].DateCreated like ? ";
          }
+            sql+= " ORDER BY OrderId DESC ";
          try{
             con = getConnection();
             ps= con.prepareStatement(sql);

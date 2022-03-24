@@ -103,7 +103,8 @@ public class SearchOrderForSeller extends HttpServlet {
         
         request.setAttribute("num", numPage);
         request.setAttribute("page", page);
-        request.setAttribute("datecreat", datecre);
+        request.setAttribute("url", "searchorderforseller?");
+        request.setAttribute("datecreated", datecre);
         request.setAttribute("orderdt", listord);
         request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);
         }catch(Exception ex){

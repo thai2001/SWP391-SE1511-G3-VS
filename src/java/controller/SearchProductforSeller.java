@@ -70,7 +70,7 @@ public class SearchProductforSeller extends HttpServlet {
             throws ServletException, IOException {
         try{
        request.setCharacterEncoding("UTF-8");
-     //  int sid = Integer.parseInt(request.getParameter("sid"));
+     
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
         ManageProductDAO  manageproductdao= new ManageProductDAO();
@@ -79,7 +79,6 @@ public class SearchProductforSeller extends HttpServlet {
         if(name == null){
             name = "";
         }
-        
         List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(seller.getSellerId(), name);
          int size= listproduct.size();
         int numperPage=5;
@@ -97,6 +96,7 @@ public class SearchProductforSeller extends HttpServlet {
           List<Product> listprod= manageproductdao.getProductByPage(listproduct, start, end);
         request.setAttribute("product", listprod);
         request.setAttribute("num", numPage);
+        request.setAttribute("url", "searchproductforseller?");
           request.setAttribute("page", page);
         request.setAttribute("prodname", name);
         request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);

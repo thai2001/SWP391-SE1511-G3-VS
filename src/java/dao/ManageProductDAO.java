@@ -246,13 +246,16 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
-                   "where SellerId = ? " +
+                   "where SellerId = ? \n" +
                    "and Quantity >= 0\n";
-                if(name != null){
+                            if(name != null){
                     
                 
                 sql  += " and ProductName like ? ";
-    }           
+    }  
+                                sql+= " ORDER BY ProductId DESC ";
+                            
+                
         
         try{
             con = getConnection();
@@ -370,7 +373,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     
     public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
-         bd.getSeller("Nguyen A");
+  
+        List <Product> lp = bd.SearchProductByNameForSeller(2,"");
+        for(int i =0; i < lp.size();i++){
+            System.out.print(lp.get(i).getName());
+        }
            
     }
     

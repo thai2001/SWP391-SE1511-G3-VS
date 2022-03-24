@@ -95,6 +95,7 @@ public class ManageOrder extends HttpServlet {
         
           List<Order> listord= iManageOrderDAO.getOrderByPage(listorder, start, end);
             request.setAttribute("orderdt", listord);
+            request.setAttribute("url", "manageorder?");
             request.setAttribute("num", numPage);
               request.setAttribute("page", page);
             request.getRequestDispatcher("view/ManageOrder.jsp").forward(request, response);

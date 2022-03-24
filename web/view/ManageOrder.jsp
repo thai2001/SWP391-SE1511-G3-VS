@@ -324,7 +324,7 @@ header img{
                         <div class="pagination">
         <c:forEach begin="1" end="${num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
-               href="searchorderforseller?page=${i}&datecreated=${datecreat}"> ${i} <a/>
+               href="${url}page=${i}&datecreated=${datecreat}"> ${i} </a>
             </c:forEach>
                     
         </div>

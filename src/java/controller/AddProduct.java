@@ -93,10 +93,10 @@ public class AddProduct extends HttpServlet {
         String description = request.getParameter("description").trim();
         int brand =Integer.parseInt( request.getParameter("brand"));
         int vehicletype =Integer.parseInt( request.getParameter("type"));
-        float discount = Float.parseFloat( request.getParameter("discount"));
+        float discount = Float.parseFloat( request.getParameter("discount").trim());
         String ManufactureYear = request.getParameter("Myear").trim();
         String MadeIn = request.getParameter("madeIn").trim();
-        int quantity = Integer.parseInt( request.getParameter("quantity"));
+        int quantity = Integer.parseInt( request.getParameter("quantity").trim());
 //        HttpSession sess = request.getSession();
   //     Account a = (Account) sess.getAttribute("acc");
  //      int sid = a.getRoleId().getRoleId();

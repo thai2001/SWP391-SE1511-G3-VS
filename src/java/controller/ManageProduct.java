@@ -106,6 +106,7 @@ public class ManageProduct extends HttpServlet {
        request.setAttribute("num", numPage); 
        request.setAttribute("product", listprod);
         request.setAttribute("page", page);
+        request.setAttribute("url", "manageproduct?"); 
        request.getRequestDispatcher("view/ManageProduct.jsp").forward(request, response);
     }catch(Exception ex){
     Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);
