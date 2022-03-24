@@ -75,7 +75,7 @@ public class SearchProductforSeller extends HttpServlet {
         Account a = (Account) sess.getAttribute("account"); 
         ManageProductDAO  manageproductdao= new ManageProductDAO();
          Seller seller = manageproductdao.getSeller(a.getUsername());
-        String name= request.getParameter("productname").trim();
+        String name= request.getParameter("productname").trim().replaceAll("\\s\\s+"," ");
         if(name == null){
             name = "";
         }

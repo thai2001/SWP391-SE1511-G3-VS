@@ -78,7 +78,7 @@ public class SearchBuyerName extends HttpServlet {
              IManageCustomerDAO  imanageCustomerDAO= new ManageCustomerDAO();
               ManageProductDAO  manageproductdao= new ManageProductDAO();
          Seller seller = manageproductdao.getSeller(a.getUsername());
-        String name= request.getParameter("buyername").trim();
+        String name= request.getParameter("buyername").trim().replaceAll("\\s\\s+"," ");
         if(name == null){
             name = "";
         }

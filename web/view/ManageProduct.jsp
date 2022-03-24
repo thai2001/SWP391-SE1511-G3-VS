@@ -218,7 +218,7 @@ header img{
                         
                     
                         
-                <input value="${prodname}" name="productname" type="text" class="SearchBox" placeholder="Product Name" style="border-radius: 5px;"></li>
+                        <input value="${prodname}" pattern=".{0,30}" title="Can not over 30 char" name="productname" type="text" placeholder="Product Name" style="border-radius: 5px;"></li>
           
                <input type="submit" class="SearchButton" value="Search" style="border-radius: 5px;">  <i class="fa fa-search"></i></li>
           
