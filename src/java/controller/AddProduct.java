@@ -86,17 +86,17 @@ public class AddProduct extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-        String name = request.getParameter("productname").trim();
+        String name = request.getParameter("productname").trim().replaceAll("\\s\\s+"," ");
         String  image =  request.getParameter("img").trim();
        
-        float price = Float.parseFloat( request.getParameter("price"));
-        String description = request.getParameter("description").trim();
+        float price = Float.parseFloat( request.getParameter("price").trim());
+        String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
         int brand =Integer.parseInt( request.getParameter("brand"));
         int vehicletype =Integer.parseInt( request.getParameter("type"));
-        float discount = Float.parseFloat( request.getParameter("discount").trim());
-        String ManufactureYear = request.getParameter("Myear").trim();
-        String MadeIn = request.getParameter("madeIn").trim();
-        int quantity = Integer.parseInt( request.getParameter("quantity").trim());
+        float discount = Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+",""));
+        String ManufactureYear = request.getParameter("Myear").trim().replaceAll("\\s\\s+","");
+        String MadeIn = request.getParameter("madeIn").trim().replaceAll("\\s\\s+","");
+        int quantity = Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+",""));
 //        HttpSession sess = request.getSession();
   //     Account a = (Account) sess.getAttribute("acc");
  //      int sid = a.getRoleId().getRoleId();

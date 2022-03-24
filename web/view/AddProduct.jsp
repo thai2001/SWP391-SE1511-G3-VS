@@ -165,20 +165,21 @@ header{
                             <div class="form-group">
                                 <label>Product Name</label>
                                 </div>
-                                <input minlength="5" maxlength="60" pattern="^[a-zA-Z0-9]*$" name="productname" class="form-control" required></input>
-                            
-                    
+                                 
+                                <input minlength="5" maxlength="60" value="${proname}" pattern="^(?!\s*$).+" title=" Product name not allow null or space" name="productname" class="form-control" required></input>
+                                  <p style="color:green">${alert1}</p>
+                                
                                  <div class="form">
                                 <label>Discount</label>
                                 </div>
-                                <input min="0" max="90" name="discount" type="number" class="form-control" required placeholder="%">
+                                <input min="0" max="90" name="discount" pattern="^[0-9 ]*$"  type="number" class="form-control" required placeholder="%">
                             
                                 <div class="form-group">
                                 <label>Price</label>
                                 </div>
                             <div class="input-group mb-1">
                                  
-                                <input min="100000" max="9000000" name="price" type="number" class="form-control" required>
+                                <input min="100000" max="9000000" name="price" pattern="^[0-9 ]*$"  type="number" class="form-control" required>
                                 <div class="input-group-prepend">
                                    <span class="input-group-text">$</span>
                                   </div>
@@ -207,12 +208,12 @@ header{
                             <div class="form-group right">                   
                                 <label>Made In</label>
                             </div>
-                                    <input minlength="3" maxlength="20" pattern="^[a-zA-Z]*$" type="text" name="madeIn" class="form-control" required style="width:270px;"></input>
+                                    <input minlength="3" maxlength="20" pattern="^(?!\s*$).+" title="Not allow null or spaces" type="text" name="madeIn" class="form-control" required style="width:270px;"></input>
                             
                             <div class="form-group right">
                                 <label>Manufacture Year</label>
                             </div>
-                                    <input min="1990" max="2022" name="Myear" type="number"  class="form-control" required style="width:270px;"></input>
+                                    <input min="1990" max="2022" name="Myear" pattern="^[0-9 ]*$"  type="number"  class="form-control" required style="width:270px;"></input>
                             
                             
                             <div class="form-group right">
@@ -232,13 +233,15 @@ header{
                                 
                             
                             
-                            
+                                 
                             <div class="form-group">
+                               
                                 <label>Description</label>
-                                <textarea minlength="10" maxlength="300" name="description" class="form-control" required></textarea>
-                                
+                               
+                                <textarea minlength="10" maxlength="300"  pattern="^(?!\s*$).+" type="text"name="description" class="form-control" required></textarea>
+                               
                             </div>
-                            
+                             
 
                         </div>
                         
