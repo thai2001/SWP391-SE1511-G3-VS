@@ -39,8 +39,9 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                       "	   Phone\n" +
                       "FROM Buyer INNER JOIN [ORDER] on [ORDER].BuyerId = Buyer.BuyerID\n" +
                       "WHERE SellerId = ?\n" +
-                      "GROUP BY Buyer.BuyerID, BuyerName, Gmail,Phone ";
-
+                      "GROUP BY Buyer.BuyerID, BuyerName, Gmail,Phone "+
+                      " Order By BuyerID DESC ";
+                    
         
         try{
             
@@ -82,7 +83,8 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                 
                 sql  += "AND BuyerName like ? \n" +
                          "GROUP BY Buyer.BuyerID, BuyerName, Gmail,Phone ";
-    }  
+    }           
+               sql += " Order By BuyerID DESC ";
                       
                      
 
