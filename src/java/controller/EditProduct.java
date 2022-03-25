@@ -117,7 +117,7 @@ public class EditProduct extends HttpServlet {
          
        
         String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
-         if( description.isEmpty()){
+          if( description.isEmpty()){
              Product prod = manageProductDao.getProductByID(pid);
     request.setAttribute("product", prod);
          request.setAttribute("vehicleType", listvehicleType);

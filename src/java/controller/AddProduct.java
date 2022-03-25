@@ -143,7 +143,7 @@ public class AddProduct extends HttpServlet {
          request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
            
              }
-         String  image =  request.getParameter("img").trim();
+        String  image =  request.getParameter("img").trim();
      float price = Float.parseFloat( request.getParameter("price").trim());
      int brand =Integer.parseInt( request.getParameter("brand"));
      int vehicletype =Integer.parseInt( request.getParameter("type"));

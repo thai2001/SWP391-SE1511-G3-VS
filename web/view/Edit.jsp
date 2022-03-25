@@ -197,7 +197,7 @@ header{
                                 <div class="col-md-4">
                                 
                             
-                            <div class="form-group right">
+                            <div class="form-group right" >
                                 <label>Manufacture Year</label>
                                 <input min="1990" max="2022" value="${product.manufactureYear}" name="Myear"  type="number" class="form-control" required></input>
                             </div>

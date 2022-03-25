@@ -162,7 +162,7 @@ header{
                             <div class="row">
                              
                             <div class ="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label>Product Name</label><p style="color:red">${alert1}</p>
                                 </div>
                                  
