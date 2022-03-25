@@ -14,6 +14,7 @@ import dao.ManageProductDAO;
 import dao.VehicleTypeDAO;
 import entity.Account;
 import entity.Brand;
+import entity.Seller;
 import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,7 +72,7 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response);
     }
 
     /**
@@ -85,36 +86,93 @@ public class AddProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-        String name = request.getParameter("productname").trim().replaceAll("\\s\\s+"," ");
-        String  image =  request.getParameter("img").trim();
+ 
+  try{
+   
+     BrandDAO brandDao = new BrandDAO();
+     VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+     
+     List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
+     List<Brand> listbrand;
+     listbrand = brandDao.getAllBrand();
+     
+      
+     
+     //Validate
+     String name =request.getParameter("productname").trim().replaceAll("\\s\\s+"," ");
+     if(name.isEmpty()){
+         name = "";
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+          request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
+         request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("alert1", "Product name not allow space or not null !");
+         request.setAttribute("proname", request.getParameter("productname").trim());
+         request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+     }
+   
+     String description =request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
+     if( description.isEmpty()){
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+          request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
+          request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
+         request.setAttribute("proname", request.getParameter("productname").trim());
+          request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("alert2", "Description not allow space or not null !");
+        
+         request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+     }
+      
+     
+     String MadeIn = request.getParameter("madeIn").trim().replaceAll("\\s\\s+","");
+             if(MadeIn.isEmpty()){  
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+          request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
+          request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
+         request.setAttribute("proname", request.getParameter("productname").trim());
+         request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
+         request.setAttribute("alert3", "MadeIn not allow space or not null !");
+         request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
+         request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+           
+             }
+         String  image =  request.getParameter("img").trim();
+     float price = Float.parseFloat( request.getParameter("price").trim());
+     int brand =Integer.parseInt( request.getParameter("brand"));
+     int vehicletype =Integer.parseInt( request.getParameter("type"));
+     float discount = Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+",""));
+     String ManufactureYear = request.getParameter("Myear").trim().replaceAll("\\s\\s+","");
+     int quantity = Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+",""));
        
-        float price = Float.parseFloat( request.getParameter("price").trim());
-        String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
-        int brand =Integer.parseInt( request.getParameter("brand"));
-        int vehicletype =Integer.parseInt( request.getParameter("type"));
-        float discount = Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+",""));
-        String ManufactureYear = request.getParameter("Myear").trim().replaceAll("\\s\\s+","");
-        String MadeIn = request.getParameter("madeIn").trim().replaceAll("\\s\\s+","");
-        int quantity = Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+",""));
-//        HttpSession sess = request.getSession();
-  //     Account a = (Account) sess.getAttribute("acc");
- //      int sid = a.getRoleId().getRoleId();
-  ManageProductDAO manageProductDao = new ManageProductDAO();
-       BrandDAO brandDao = new BrandDAO();
-       VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-       
-       List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-       List<Brand> listbrand = brandDao.getAllBrand();
-       manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, 2);
-        request.setAttribute("vehicleType", listvehicleType);
-       request.setAttribute("brand", listbrand);
-       request.setAttribute("alert", "Add succefully !");
-       request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
-       response.sendRedirect("manageproduct");
-    } catch(Exception ex) {
+      
+
+     HttpSession sess = request.getSession();
+     ManageProductDAO manageProductDao = new ManageProductDAO();
+     Account a = (Account) sess.getAttribute("account");
+     Seller seller = manageProductDao.getSeller(a.getUsername());
+
+    if(name.length() != 0 && description.length() != 0 && MadeIn.length() != 0){
+    manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, seller.getSellerId());
+    } 
+   
+ 
+    request.setAttribute("vehicleType", listvehicleType);
+    request.setAttribute("brand", listbrand);
+    request.setAttribute("alert", "Add succefully !");
+    request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+ } catch(Exception ex) {
           Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
     }
+        
+ 
     }
 
     /**

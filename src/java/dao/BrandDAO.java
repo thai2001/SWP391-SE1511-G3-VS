@@ -45,6 +45,14 @@ public class BrandDAO extends DBContext implements IBrandDAO {
     /*
     take all brand ==>  will return a list of brand contain : brandID, brandName
      */
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+
+    @Override
     public Vector<Brand> getAllBrand() throws Exception {
         Connection con = null;
         PreparedStatement ps = null;

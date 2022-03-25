@@ -47,6 +47,7 @@ public class VehicleTypeDAO extends DBContext implements IVehicleTypeDAO {
     /*
     take all vehicleType from dâtbase ==>  will return a list of VehicleType contain : vehicleTypeID, cehicleTypeName
      */
+    
     @Override
     public Vector<VehicleType> getAllVehicleType() throws Exception {
         Connection con = null;

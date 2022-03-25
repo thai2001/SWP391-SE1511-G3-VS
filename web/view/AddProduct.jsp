@@ -155,31 +155,31 @@ header{
                 <div class="modal-content" style="border-radius: 15px;">
                     <form action="addproduct" method="post">
                         <div class="modal-header">						
-                            <h4 class="modal-title">Add New Product</h4>
-                            <p style="color:green">${alert}</p>
+                            <h4 class="modal-title" style="font-size: 30px;">Add New Product</h4>
+                            <p style="color:green;font-size: 25px;">${alert}</p>
                         </div>
                         <div class="modal-body">
                             <div class="row">
                              
                             <div class ="col-md-6">
                             <div class="form-group">
-                                <label>Product Name</label>
+                                <label>Product Name</label><p style="color:red">${alert1}</p>
                                 </div>
                                  
-                                <input minlength="5" maxlength="60" value="${proname}" pattern="^(?!\s*$).+" title=" Product name not allow null or space" name="productname" class="form-control" required></input>
-                                  <p style="color:green">${alert1}</p>
+                                <input minlength="5" maxlength="60" value="${proname}"  title=" Product name not allow null or space" name="productname" class="form-control" required></input>
+                                  
                                 
                                  <div class="form">
                                 <label>Discount</label>
                                 </div>
-                                <input min="0" max="90" name="discount" pattern="^[0-9 ]*$"  type="number" class="form-control" required placeholder="%">
+                                <input min="0" max="90" value="${discount}" name="discount" pattern="^[0-9 ]*$"  type="number" class="form-control" required placeholder="%">
                             
                                 <div class="form-group">
                                 <label>Price</label>
                                 </div>
                             <div class="input-group mb-1">
                                  
-                                <input min="100000" max="9000000" name="price" pattern="^[0-9 ]*$"  type="number" class="form-control" required>
+                                <input value="${price}" min="100000" max="9000000" name="price"  type="number" class="form-control" required>
                                 <div class="input-group-prepend">
                                    <span class="input-group-text">$</span>
                                   </div>
@@ -205,28 +205,28 @@ header{
        
                             
                                 <div class="col-md-6">
-                            <div class="form-group right">                   
-                                <label>Made In</label>
+                            <div class="form-group">                   
+                                <label>Made In</label><p style="color:red">${alert3}</p>
                             </div>
-                                    <input minlength="3" maxlength="20" pattern="^(?!\s*$).+" title="Not allow null or spaces" type="text" name="madeIn" class="form-control" required style="width:270px;"></input>
+                                    <input value="${madein}" minlength="3" maxlength="20" type="text" name="madeIn" class="form-control" required style="width:270px;"></input>
                             
-                            <div class="form-group right">
+                            <div class="form-group">
                                 <label>Manufacture Year</label>
                             </div>
-                                    <input min="1990" max="2022" name="Myear" pattern="^[0-9 ]*$"  type="number"  class="form-control" required style="width:270px;"></input>
+                                    <input min="1990" max="2022" value="${myear}" name="Myear" pattern="^[0-9 ]*$"  type="number"  class="form-control" required style="width:270px;"></input>
                             
                             
-                            <div class="form-group right">
+                            <div class="form-group">
                                 <label>Image</label>
                                 </div>
                                <div class="vehicle-img" style="width:270px;">
                         <input type="file" name ="img" class="form-control" id="vehicle-img">
  
                             </div>
-                                 <div class="form-group right">
+                                 <div class="form-group">
                                 <label>Quantity</label>
                                  </div>
-                                <input min="1" max="200" name="quantity" type="number" class="form-control" required style="width:270px;"></input>
+                                <input min="1" max="200" value="${quant}" name="quantity" type="number" class="form-control" required style="width:270px;"></input>
                                
                             </div>
                             </div>
@@ -236,9 +236,9 @@ header{
                                  
                             <div class="form-group">
                                
-                                <label>Description</label>
+                                <label>Description</label><p style="color:red">${alert2}</p>
                                
-                                <textarea minlength="10" maxlength="300"  pattern="^(?!\s*$).+" type="text"name="description" class="form-control" required></textarea>
+                                <textarea  minlength="10" maxlength="300" type="text"name="description" id ="des"   class="form-control" required></textarea>
                                
                             </div>
                              
@@ -257,9 +257,7 @@ header{
         </div>
 
     </div>
-    
-
-    
+            
    
 
 

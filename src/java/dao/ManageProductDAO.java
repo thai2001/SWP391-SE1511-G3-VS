@@ -37,7 +37,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @return
      * @throws Exception
      */
-    @Override
+    
+       @Override
         public Seller getSeller(String username) throws Exception {
         Seller seller = new Seller();
         try {
