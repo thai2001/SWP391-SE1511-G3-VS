@@ -42,7 +42,7 @@ public class loadMoreComment extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,27 +59,28 @@ public class loadMoreComment extends HttpServlet {
             throws ServletException, IOException {
         try {
             //processRequest(request, response);
-             response.setContentType("text/html;charset=UTF-8");
-        HttpSession ses = request.getSession();
-        Product p = (Product) ses.getAttribute("product");
-        int pid = p.getId();
-        int index = Integer.parseInt(request.getParameter("total"));
-        PrintWriter out = response.getWriter();
-        CommentDAO commentDAO = new CommentDAO();
-        Vector<Comment> list = commentDAO.getNext2CommnetByPid(pid,index);
-        for (Comment comment : list) {
-            out.println(" <div class=\"media\">\n"
-                    + "                            <div class=\"media-body\">\n"
-                    + "                                <h4 class=\"media-heading\">"+comment.getBuyer().getBuyerName()+"</h4>\n"
-                    + "                                <p>"+comment.getContent()+"</p>\n"
-                    + "                                <ul class=\"list-unstyled list-inline media-detail pull-left\">\n"
-                    + "                                    <li><i class=\"fa fa-calendar\"></i>"+comment.getDate()+"</li>\n"
-                    + "                                </ul>\n"
-                    + "                                <ul class=\"list-unstyled list-inline media-detail pull-right\">\n"
-                    + "                                </ul>\n"
-                    + "                            </div>\n"
-                    + "                        </div>    ");
-        }
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession ses = request.getSession();
+            Product p = (Product) ses.getAttribute("product");
+            int pid = p.getId();
+            int index = Integer.parseInt(request.getParameter("total"));
+            PrintWriter out = response.getWriter();
+            CommentDAO commentDAO = new CommentDAO();
+            Vector<Comment> list = commentDAO.getNext2CommnetByPid(pid, index);
+            for (Comment comment : list) {
+                out.println(" <div class=\"media\">\n"
+                        + "                            <div class=\"media-body\">\n"
+                        + "                                <h4 class=\"media-heading\">" + comment.getBuyer().getBuyerName() + "</h4>\n"
+                        + "                                <p>" + comment.getContent() + "</p>\n"
+                        + "                                <ul class=\"list-unstyled list-inline media-detail pull-left\">\n"
+                        + "                                    <li><i class=\"fa fa-calendar\"></i>" + comment.getDate() + "</li>\n"
+                        + "                                </ul>\n"
+                        + "                                <ul class=\"list-unstyled list-inline media-detail pull-right\">\n"
+                        + "                                </ul>\n"
+                        + "                            </div>\n"
+                        + "                        </div>    ");
+            }
         } catch (Exception ex) {
             Logger.getLogger(loadMoreComment.class.getName()).log(Level.SEVERE, null, ex);
         }

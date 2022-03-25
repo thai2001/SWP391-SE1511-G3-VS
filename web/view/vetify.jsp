@@ -29,7 +29,7 @@
 
             <div class="container">
             <c:if test="${wrong != null}">
-                <p class="text-danger text-center">${wrong}</p>
+                <p class="text-danger text-center">${wrong} ${3 - count} times</p>
             </c:if>
                 <h2>Verify Your Payment</h2>
                 <p>We send you the six digit code to ${buyer.gmail} <br/> Enter the code below to confirm your email address.</p>

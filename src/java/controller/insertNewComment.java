@@ -66,6 +66,7 @@ public class insertNewComment extends HttpServlet {
         try {
             //processRequest(request, response);
             response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
             HttpSession ses = request.getSession();
             Product p = (Product) ses.getAttribute("product");
             Buyer buyer = (Buyer) ses.getAttribute("buyer");
