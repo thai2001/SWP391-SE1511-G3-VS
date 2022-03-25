@@ -264,14 +264,14 @@ header img{
                             
                               <div class="form-group">
                                 <label>Subject :</label>
-                                <input name="subject" class="form-control"  style="width:400px;">
+                                <input minlength="5" maxlength="1000" name="subject1" pattern="^(?!\s*$).+" title="Not allow space or null" class="form-control"  style="width:400px;">
                               </div>
                                 
         
      
                                  <div class="form-group">
                                 <label>Message</label>
-                                <textarea name="message" class="form-control" required style="height: 200px;"></textarea>
+                                <textarea name="message1" class="form-control" required style="height: 200px;"></textarea>
                                 
                             </div>
                                   
@@ -347,13 +347,13 @@ header img{
                             
                               <div class="form-group">
                                 <label>Subject :</label>
-                                
+                                <p style="color:red;">${alert1}</p>
                            <div class="input-group mb-1">
     
                                 <div class="input-group-prepend" >
                                    <span class="input-group-text" ><i class="fa fa-question" aria-hidden="true"></i></span>
                                   </div>
-                                     <input name="subject" type="text" class="form-control" required >
+                               <input minlength="5" maxlength="1000" name="subject2" pattern="^(?!\s*$).+" title="Not allow space or null" type="text" class="form-control" required >
                             </div>
                               </div>
                                 
@@ -361,7 +361,7 @@ header img{
      
                                  <div class="form-group">
                                 <label>Message</label>
-                                <textarea name="message" class="form-control" required style="height: 200px;"></textarea>
+                                <textarea  class="form-control" name="message2" required style="height: 200px;"></textarea>
                                 
                             </div>
                                   

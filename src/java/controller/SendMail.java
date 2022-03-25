@@ -89,9 +89,9 @@ public class SendMail extends HttpServlet {
             throws ServletException, IOException {
         String resultMessage = "";
         try {
-        String to = request.getParameter("to").trim();
-        String sub = request.getParameter("subject").trim();
-        String mess =request.getParameter("message").trim();
+        String to = request.getParameter("to").trim().replaceAll("\\s\\s+"," ");
+        String sub = request.getParameter("subject2").trim().replaceAll("\\s\\s+"," ");
+        String mess =request.getParameter("message2").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
             IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
             IManageProductDao manageProductDao = new ManageProductDAO();

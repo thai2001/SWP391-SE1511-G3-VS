@@ -86,14 +86,14 @@ public class SendAllBuyer extends HttpServlet {
             throws ServletException, IOException {
          String resultMessage = "";
         try {
-        String sub = request.getParameter("subject").trim();
-        String mess =request.getParameter("message").trim();
+        String sub = request.getParameter("subject1").trim().replaceAll("\\s\\s+"," ");
+        String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
             IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
             IManageProductDao manageProductDao = new ManageProductDAO();
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = manageProductDao.getSeller(a.getUsername());
-          // String name= request.getParameter("productname").trim();
+         
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
         int size= listbuyer.size();
