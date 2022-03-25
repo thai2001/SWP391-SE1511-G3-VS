@@ -102,7 +102,8 @@ public class SearchBuyerName extends HttpServlet {
         request.setAttribute("num", numPage);
           request.setAttribute("page", page);
         request.setAttribute("buyname", name);
-        request.getRequestDispatcher("view/ManageCustomer.jsp").forward(request, response);
+         request.setAttribute("url","searchbuyername?");
+        request.getRequestDispatcher("view/customerNotification.jsp").forward(request, response);
         }catch(Exception ex){
             Logger.getLogger(SearchProductforSeller.class.getName()).log(Level.SEVERE, null, ex);
         }

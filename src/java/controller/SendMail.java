@@ -128,7 +128,7 @@ public class SendMail extends HttpServlet {
         } finally {
             request.setAttribute("Message", resultMessage);
              request.setAttribute("alert","Email sent successfully !");
-           request.getRequestDispatcher("view/ManageCustomer.jsp").forward(
+           request.getRequestDispatcher("view/customerNotification.jsp").forward(
                     request, response);
         }
         

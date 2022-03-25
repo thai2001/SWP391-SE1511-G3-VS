@@ -222,7 +222,7 @@ header img{
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
-                     <div class="col-sm-4"><a class="link-dark" href="managecustomer">Customer <b>Notification</b></a></div>
+                     <div class="col-sm-4"><a class="link-dark" href="customernotification">Customer <b>Notification</b></a></div>
                 </div>
                 <div class="row1">
                          <form class="navbar-form navbar-right" action="searchbuyername" method="get" >
@@ -314,15 +314,11 @@ header img{
                          <td>                          
                             ${by.phone}
                         </td>
-                           <td><a href="#sendmail" type="button" class="btn btn-info" data-toggle="modal"><i class="fa fa-envelope" aria-hidden="true"></i></a></td> 
+                           <td><a href="#sendmail${by.buyerId}" type="button" class="btn btn-info" data-toggle="modal"><i class="fa fa-envelope" aria-hidden="true"></i></a></td> 
                        
                         
                     </tr>
-                   
-                    </c:forEach>
-                </tbody>
-            </table>
-           <div id="sendmail" class="modal fade">
+                        <div id="sendmail${by.buyerId}" class="modal fade">
             <div class="modal-dialog">
                  <div class="modal-content">  
                      <form action="sendmail" method="post">
@@ -343,7 +339,7 @@ header img{
                                 <div class="input-group-prepend" >
                                    <span class="input-group-text" ><i class="fa fa-envelope" aria-hidden="true"></i></span>
                                   </div>
-                                     <input name="to" type="text" class="form-control" required >
+                                    <input name="to" value="${by.gmail}" type="text" class="form-control" readonly >
                             </div>
                                 
                                      </div>
@@ -382,11 +378,16 @@ header img{
             </div>                
             </div>
         </div>
+                    </c:forEach>
+               
+                </tbody>
+            </table>
+           
            <c:if test="${num != 0}">
                         <div class="pagination">
         <c:forEach begin="1" end="${num}" var="i">
             <a class="${requestScope.page==i?"active":""}"
-               href="searchbuyername?page=${i}&buyername=${bname}"> ${i} </a>
+               href="${url}page=${i}&buyername=${bname}"> ${i} </a>
             </c:forEach>
                     
         </div>
@@ -433,17 +434,9 @@ header img{
           }
       }
     </script>
-    <script> window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("navbar").style.top = "0";
-  } else {
-    document.getElementById("navbar").style.top = "-50px";
-  }
-}
-</script>
+  
   </body>
 
 </html>
+
 

@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QuanTBA <your.name at your.org>
  */
-public class ManageCustomer extends HttpServlet {
+public class CustomerNotification extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,10 +50,10 @@ public class ManageCustomer extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ManageCustomer</title>");            
+            out.println("<title>Servlet CustomerNotification</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ManageCustomer at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomerNotification at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -99,8 +99,8 @@ public class ManageCustomer extends HttpServlet {
        request.setAttribute("num", numPage); 
        request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
-       
-       request.getRequestDispatcher("view/ManageCustomer.jsp").forward(request, response);
+        request.setAttribute("url", "customernotification?");
+       request.getRequestDispatcher("view/customerNotification.jsp").forward(request, response);
     }catch(Exception ex){
     Logger.getLogger(ManageProduct.class.getName()).log(Level.SEVERE, null, ex);
 }

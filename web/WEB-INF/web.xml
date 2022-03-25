@@ -97,10 +97,6 @@
         <servlet-class>controller.SearchOrderForSeller</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManageCustomer</servlet-name>
-        <servlet-class>controller.ManageCustomer</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SendMail</servlet-name>
         <servlet-class>controller.SendMail</servlet-class>
     </servlet>
@@ -111,6 +107,10 @@
     <servlet>
         <servlet-name>SendAllBuyer</servlet-name>
         <servlet-class>controller.SendAllBuyer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerNotification</servlet-name>
+        <servlet-class>controller.CustomerNotification</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
@@ -209,10 +209,6 @@
         <url-pattern>/searchorderforseller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ManageCustomer</servlet-name>
-        <url-pattern>/managecustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SendMail</servlet-name>
         <url-pattern>/sendmail</url-pattern>
     </servlet-mapping>
@@ -223,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>SendAllBuyer</servlet-name>
         <url-pattern>/sendallbuyer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerNotification</servlet-name>
+        <url-pattern>/customernotification</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
