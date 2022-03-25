@@ -10,6 +10,7 @@
   <header>
       <nav class="navbar bg-dark navbar-dark text-light">
         <a href="homePage"> <img class="logo" src="img/onlinelogomaker-011922-2055-7830.png" alt="" /></a>
+        <a class="navbar-brand" href=""><h2>Hello <em style="font-style: normal;color: #6dcf7f;">${sessionScope.account.username}</em></h2></a>
         <div class="option-link d-flex">
           <div class="dropdown mx-2">
             <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

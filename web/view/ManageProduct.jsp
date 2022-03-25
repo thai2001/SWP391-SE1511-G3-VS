@@ -178,6 +178,10 @@ header img{
   .table-title{
       margin-top: -80px;
   }
+  .navbar .navbar-brand h2 em {
+	font-style: normal;
+	color: #6dcf7f;
+}
     </style>
 <!--
 
@@ -203,6 +207,7 @@ header img{
       <jsp:include page="navbar.jsp"></jsp:include>
 
     <!-- Page Content -->
+    
     <div class="container-lg">
     <div class="table-responsive">
         <div class="table-wrapper" style="border-radius: 15px;">
@@ -220,7 +225,7 @@ header img{
                         
                         <input value="${prodname}" pattern=".{0,30}" title="Can not over 30 char" name="productname" type="text" placeholder="Product Name" style="border-radius: 5px;"></li>
           
-               <input type="submit" class="SearchButton" value="Search" style="border-radius: 5px;">  <i class="fa fa-search"></i></li>
+               <input type="submit" class="SearchButton" value="Search" style="border-radius: 5px;background-color: #9fcdff">  <i class="fa fa-search"></i></li>
           
        
     </form>
