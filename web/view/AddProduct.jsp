@@ -238,7 +238,7 @@ header{
                                
                                 <label>Description</label><p style="color:red">${alert2}</p>
                                
-                                <textarea  minlength="10" maxlength="300" type="text"name="description" id ="des"   class="form-control" required></textarea>
+                                <textarea  minlength="10" maxlength="3000" type="text"name="description" class="form-control" required></textarea>
                                
                             </div>
                              

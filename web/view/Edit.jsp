@@ -151,7 +151,7 @@ header{
                     <form action="editproduct" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Product's<b> Info</b></h4>
-                            <p style="color:green">${alert}</p>
+                            <p style="color:green;font-size: 25px;">${alert}</p>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -162,17 +162,17 @@ header{
                                 <input value="${product.id}" name="productid" class="form-control" readonly="" required></input>
                             </div>
                             <div class="form-group">
-                                <label>Product Name</label>
-                                <input value="${product.name}" name="name" class="form-control" required></input>
+                                <label>Product Name</label><p style="color:red">${alert1}</p>
+                                <input minlength="5" maxlength="60" value="${product.name}" name="proname" class="form-control" required></input>
                             </div>
                             
                             <div class="form-group">
                                 <label>Price</label>
-                                <input value="${product.price}" name="price" type="text" class="form-control" required placeholder="VNĐ">
+                                <input min="100000" max="9000000" value="${product.price}" name="price" type="number" class="form-control" required placeholder="VNĐ">
                             </div>
                             <div class="form-group">
                                 <label>Discount</label>
-                                <input value="${product.discount}" name="discount" type="text" class="form-control" required placeholder="%">
+                                <input  min="0" max="90" value="${product.discount}" name="discount" type="number" class="form-control" required placeholder="%">
                             </div>
                            
                                 <div class="form-group">
@@ -199,15 +199,15 @@ header{
                             
                             <div class="form-group right">
                                 <label>Manufacture Year</label>
-                                <input value="${product.manufactureYear}" name="Myear" class="form-control" required></input>
+                                <input min="1990" max="2022" value="${product.manufactureYear}" name="Myear"  type="number" class="form-control" required></input>
                             </div>
                             <div class="form-group right">
-                                <label>Made In</label>
-                                <input value="${product.madeIn}"name="MadeIn" class="form-control" required></input>
+                                <label>Made In</label><p style="color:red">${alert3}</p>
+                                <input minlength="3" maxlength="20" value="${product.madeIn}"name="MadeIn" pattern="^[a-zA-Z]*$" title="Number not allowed" type="text" class="form-control" required></input>
                             </div>
                             <div class="form-group right">
                                 <label>Quantity</label>
-                                <input value="${product.quantity}" name="quantity" class="form-control" required></input>
+                                <input value="${product.quantity}" min="1" max="200" name="quantity" type="number" class="form-control" required></input>
                             </div>
                             </div>
                             
@@ -223,8 +223,8 @@ header{
                             
                             
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea name="description" class="form-control" required>${product.descript}</textarea>
+                                <label>Description</label><p style="color:red">${alert2}</p>
+                                <textarea minlength="10" maxlength="3000" name="description" class="form-control" required>${product.descript}</textarea>
                             </div>
                             
 

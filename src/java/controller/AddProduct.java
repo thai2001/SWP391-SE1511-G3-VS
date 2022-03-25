@@ -88,13 +88,12 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
  
   try{
-   
+     request.setCharacterEncoding("UTF-8"); // Hiển thị Tiêng Việt
      BrandDAO brandDao = new BrandDAO();
      VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
      
      List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-     List<Brand> listbrand;
-     listbrand = brandDao.getAllBrand();
+     List<Brand> listbrand = brandDao.getAllBrand();
      
       
      

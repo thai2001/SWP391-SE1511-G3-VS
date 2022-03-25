@@ -87,30 +87,67 @@ public class EditProduct extends HttpServlet {
             throws ServletException, IOException {
         try{
          request.setCharacterEncoding("UTF-8"); // Hiển thị Tiêng Việt
-        String name = request.getParameter("name"); 
-        String image = request.getParameter("image");
-        float price = Float.parseFloat(request.getParameter("price"));
-        String description = request.getParameter("description");
-        String category = request.getParameter("category");
-        float discount =Float.parseFloat(request.getParameter("discount"));
-        int brand =Integer.parseInt(request.getParameter("brand"));
-        int type =Integer.parseInt(request.getParameter("type"));
-        String manufactureyear = request.getParameter("Myear");
-        String madein = request.getParameter("MadeIn");
-         int pid = Integer.parseInt(request.getParameter("productid"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
+          ManageProductDAO manageProductDao = new ManageProductDAO();
          BrandDAO brandDao = new BrandDAO();
          VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
-    
-        ManageProductDAO manageProductDao = new ManageProductDAO();
-        manageProductDao.EditProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
-        Product prod = manageProductDao.getProductByID(pid);
-        List<Brand> listbrand = brandDao.getAllBrand();
+         List<Brand> listbrand = brandDao.getAllBrand();
         List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
-   
+         
+        String image = request.getParameter("image").trim().replaceAll("\\s\\s+"," ");
+        float price = Float.parseFloat(request.getParameter("price").trim().replaceAll("\\s\\s+"," "));
+        float discount =Float.parseFloat(request.getParameter("discount").trim().replaceAll("\\s\\s+"," "));
+        int brand =Integer.parseInt(request.getParameter("brand"));
+        int type =Integer.parseInt(request.getParameter("type"));
+        String manufactureyear = request.getParameter("Myear").trim().replaceAll("\\s\\s+"," ");
+         int pid = Integer.parseInt(request.getParameter("productid"));
+        int quantity = Integer.parseInt(request.getParameter("quantity").trim().replaceAll("\\s\\s+"," "));
+        
+        
+        //Validate
+        String name = request.getParameter("proname").trim().replaceAll("\\s\\s+"," "); 
+         if(name.isEmpty()){
+         name = "";
+          Product prod = manageProductDao.getProductByID(pid);
+    request.setAttribute("product", prod);
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
-        request.setAttribute("product", prod);
+         request.setAttribute("alert1", "Product name not allow space or not null !");    
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
+     }
+         
+       
+        String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
+         if( description.isEmpty()){
+             Product prod = manageProductDao.getProductByID(pid);
+    request.setAttribute("product", prod);
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+         request.setAttribute("alert2", "Description not allow space or not null !");
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
+     }
+         
+           String madein = request.getParameter("MadeIn").trim().replaceAll("\\s\\s+"," ");
+             if(madein.isEmpty()){  
+                 Product prod = manageProductDao.getProductByID(pid);
+    request.setAttribute("product", prod);
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+         request.setAttribute("alert3", "MadeIn not allow space or not null !");
+         request.getRequestDispatcher("view/view/Edit.jsp").forward(request, response);
+           
+             }
+          
+         
+    
+       
+        if(name.length() != 0 && description.length() != 0 && madein.length() != 0){
+        manageProductDao.EditProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
+        }
+    Product prod = manageProductDao.getProductByID(pid);
+    request.setAttribute("product", prod);
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+        
         request.setAttribute("alert", "Edit successfully!");
          request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
         }catch(Exception ex){
