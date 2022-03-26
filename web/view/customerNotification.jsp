@@ -229,7 +229,7 @@ header img{
                         
                     
                         
-                <input value="${buyname}" pattern=".{0,30}" title="Can not over 30 char" name="buyername" type="text" placeholder="Buyer Name" style="border-radius: 5px;"></li>
+                <input value="${buyname}" pattern=".{0,30}" title="Can not over 30 char" name="buyername" type="text" placeholder="Customer Name" style="border-radius: 5px;"></li>
           
                 <button type="submit" style="background-color: #80bdff; height: 30px;width: 35px;border-radius: 5px;"><i class="fa fa-search"></i></button>
           
@@ -293,8 +293,8 @@ header img{
                 <thead >
                     <tr style="background-color: #cccccc">
                      
-                        <th>BuyerID</th>
-                        <th>Buyer Name</th>
+                        <th>CustomerID</th>
+                        <th>Customer Name</th>
                         <th>Gmail</th>
                         <th>Phone</th>
                          <th>Action</th>

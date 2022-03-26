@@ -166,7 +166,7 @@ header{
                                 <label>Product Name</label><p style="color:red">${alert1}</p>
                                 </div>
                                  
-                                <input minlength="5" maxlength="60" value="${proname}"  title=" Product name not allow null or space" name="productname" class="form-control" required></input>
+                                <input minlength="5" maxlength="80" value="${proname}"  title=" Product name not allow null or space" name="productname" class="form-control" required></input>
                                   
                                 
                                  <div class="form">
@@ -220,7 +220,7 @@ header{
                                 <label>Image</label>
                                 </div>
                                <div class="vehicle-img" style="width:270px;">
-                        <input type="file" name ="img" class="form-control" id="vehicle-img">
+                        <input minlength="10" maxlength="1000" type="text" name ="img" class="form-control" id="vehicle-img">
  
                             </div>
                                  <div class="form-group">

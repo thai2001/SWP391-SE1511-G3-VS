@@ -163,7 +163,7 @@ header{
                             </div>
                             <div class="form-group">
                                 <label>Product Name</label><p style="color:red">${alert1}</p>
-                                <input minlength="5" maxlength="60" value="${product.name}" name="proname" class="form-control" required></input>
+                                <input minlength="5" maxlength="100" value="${product.name}" name="proname" class="form-control" required></input>
                             </div>
                             
                             <div class="form-group">
@@ -214,7 +214,7 @@ header{
                             <div class="col-md-4">
                                 <div class="form-group">
                                 <label>Image</label>
-                                <input value="${product.img}" name="image" class="form-control" required></input>
+                                <input minlength="10" maxlength="1000 value="${product.img}" name="image" class="form-control" required></input>
                             </div>
                             </div>
                             </div>
