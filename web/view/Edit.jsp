@@ -214,7 +214,7 @@ header{
                             <div class="col-md-4">
                                 <div class="form-group">
                                 <label>Image</label>
-                                <input minlength="10" maxlength="1000" value="${product.img}" name="image" class="form-control" required></input>
+                                <input minlength="10" maxlength="1000" pattern="\s\https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" type="text" value="${product.img}" name="image" class="form-control" required></input>
                             </div>
                             </div>
                             </div>
@@ -224,7 +224,7 @@ header{
                             
                             <div class="form-group">
                                 <label>Description</label><p style="color:red">${alert2}</p>
-                                <textarea minlength="10" maxlength="3000" name="description" class="form-control" required>${product.descript}</textarea>
+                                <textarea  minlength="10" maxlength="3000" name="description" class="form-control" required>${product.descript}</textarea>
                             </div>
                             
 
@@ -253,7 +253,7 @@ header{
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
  
 
-    
+   
 
 
     <script language = "text/Javascript"> 
