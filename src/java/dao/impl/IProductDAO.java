@@ -16,7 +16,7 @@ import java.util.Vector;
  *  
  * @author Thainv
  */
-public interface IProductDAO {
+public interface IProductDAO{
     /* get all product from database ==> return a list ò product coitain : int id, int brandId, int vehicleTypeId, 
     *String name, String madeIn, String ManufactureYear, String descript, String img, int quatity, float price, float discount, int sellerId
      */

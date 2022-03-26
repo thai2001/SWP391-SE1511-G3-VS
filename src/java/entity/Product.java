@@ -28,6 +28,8 @@ public class Product {
     private int sellerId;
     private Seller seller;
     private Brand brand;
+    
+    
     public Product() {
     }
 
