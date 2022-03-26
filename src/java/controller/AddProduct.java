@@ -11,7 +11,9 @@ package controller;
 
 import dao.BrandDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.VehicleTypeDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Brand;
 import entity.Seller;
@@ -156,7 +158,8 @@ public class AddProduct extends HttpServlet {
      HttpSession sess = request.getSession();
      ManageProductDAO manageProductDao = new ManageProductDAO();
      Account a = (Account) sess.getAttribute("account");
-     Seller seller = manageProductDao.getSeller(a.getUsername());
+      ISellerDAO isellerDAO = new SellerDAO();
+     Seller seller = isellerDAO.getSeller(a.getUsername());
 
     if(name.length() != 0 && description.length() != 0 && MadeIn.length() != 0){
     manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, seller.getSellerId());

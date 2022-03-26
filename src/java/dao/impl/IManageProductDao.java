@@ -20,7 +20,7 @@ import java.util.List;
  */
 public interface IManageProductDao  {
      public List<Product> getProductBySellerid(int sid) throws Exception;
-     public Seller getSeller(String username) throws Exception;
+     
      public void AddProduct (int vehicleTypeid,String name,int brandid,
                              String madein,String manufactureYear,String descript,
                               String img,int quatity,float price,float discount,

@@ -11,8 +11,10 @@ package controller;
 
 import dao.BrandDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.VehicleTypeDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Brand;
 import entity.Product;
@@ -79,11 +81,11 @@ public class ManageProduct extends HttpServlet {
        try{
        HttpSession sess = request.getSession();
        IManageProductDao manageProductDao = new ManageProductDAO();
-      
+           ISellerDAO isellerDAO = new SellerDAO();
       
           Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = manageProductDao.getSeller(a.getUsername());
-          // String name= request.getParameter("productname").trim();
+          Seller seller = isellerDAO.getSeller(a.getUsername());
+          
       
        List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
     

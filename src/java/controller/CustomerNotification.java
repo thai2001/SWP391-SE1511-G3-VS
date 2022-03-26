@@ -11,8 +11,10 @@ package controller;
 
 import dao.ManageCustomerDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
 import entity.Seller;
@@ -74,9 +76,9 @@ public class CustomerNotification extends HttpServlet {
         try{
        HttpSession sess = request.getSession();
             IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
-            IManageProductDao iManageProductDao = new ManageProductDAO();
           Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = iManageProductDao.getSeller(a.getUsername());
+            ISellerDAO isellerDAO = new SellerDAO();
+          Seller seller = isellerDAO.getSeller(a.getUsername());
           // String name= request.getParameter("productname").trim();
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());

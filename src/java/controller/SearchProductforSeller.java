@@ -10,6 +10,8 @@
 package controller;
 
 import dao.ManageProductDAO;
+import dao.SellerDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Product;
 import entity.Seller;
@@ -74,7 +76,8 @@ public class SearchProductforSeller extends HttpServlet {
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
         ManageProductDAO  manageproductdao= new ManageProductDAO();
-         Seller seller = manageproductdao.getSeller(a.getUsername());
+            ISellerDAO isellerDAO = new SellerDAO();
+         Seller seller =isellerDAO.getSeller(a.getUsername());
         String name= request.getParameter("productname").trim().replaceAll("\\s\\s+"," ");
         if(name == null){
             name = "";

@@ -11,8 +11,10 @@ package controller;
 
 import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.impl.IManageOrderDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Order;
 import entity.OrderDetail;
@@ -80,9 +82,9 @@ public class SearchOrderForSeller extends HttpServlet {
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
         IManageOrderDAO iManageOrderDAO = new ManageOrderDAO();
-        IManageProductDao manageproductdao= new ManageProductDAO();
+            ISellerDAO isellerDAO = new SellerDAO();
             IManageOrderDAO iOrderDetailDAO = new ManageOrderDAO();
-         Seller seller = manageproductdao.getSeller(a.getUsername());
+         Seller seller = isellerDAO.getSeller(a.getUsername());
         String datecre = request.getParameter("datecreated").trim();
             
   List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(),datecre);

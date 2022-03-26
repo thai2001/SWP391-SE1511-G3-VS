@@ -11,8 +11,10 @@ package controller;
 
 import dao.ManageOrderDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.impl.IManageProductDao;
 import dao.impl.IManageOrderDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Order;
 import entity.OrderDetail;
@@ -75,9 +77,9 @@ public class ManageOrder extends HttpServlet {
         try{
             HttpSession sess = request.getSession();
              Account a = (Account) sess.getAttribute("account"); 
-       IManageProductDao iManageProductDao = new ManageProductDAO();
-            IManageOrderDAO iManageOrderDAO = new ManageOrderDAO();        
-          Seller seller = iManageProductDao.getSeller(a.getUsername());
+            IManageOrderDAO iManageOrderDAO = new ManageOrderDAO(); 
+            ISellerDAO isellerDAO = new SellerDAO();
+          Seller seller = isellerDAO.getSeller(a.getUsername());
             List<Order> listorder = iManageOrderDAO.getOrderBySellerId(seller.getSellerId());
              int size= listorder.size();
         int numperPage=5;
