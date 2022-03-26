@@ -44,17 +44,7 @@ Connection con = null;
                  + "INNER JOIN Buyer ON [ORDER].BuyerId = Buyer.BuyerId "
                  + " WHERE SellerId = ? "
                  + " ORDER BY OrderId DESC ";
-//        String sql="Select [ORDER].OrderId, \n" +
-//"     Product.ProductId, \n" +
-//"	   Image,\n" +
-//"	   Product.ProductName,\n" +
-//"	   OrderDetail.Quantity,\n" +
-//"	   TotalPrice\n" +
-//"	   from [ORDER]  INNER JOIN OrderDetail On [ORDER].OrderId = OrderDetail.OrderId\n" +
-//"	                INNER JOIN Product On Product.ProductId = OrderDetail.ProductId\n" +
-//"	                   \n" +
-//"	   Where [ORDER].SellerId = ? ";
-        
+
         try{
             
             con = getConnection();
