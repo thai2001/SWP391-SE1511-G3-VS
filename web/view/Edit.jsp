@@ -214,7 +214,7 @@ header{
                             <div class="col-md-4">
                                 <div class="form-group">
                                 <label>Image</label>
-                                <input minlength="10" maxlength="1000 value="${product.img}" name="image" class="form-control" required></input>
+                                <input minlength="10" maxlength="1000" value="${product.img}" name="image" class="form-control" required></input>
                             </div>
                             </div>
                             </div>
