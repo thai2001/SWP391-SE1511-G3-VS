@@ -35,7 +35,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
         try {
             con = getConnection();
             String sql = "SELECT a.commentId,a.productId,b.ProductName,c.BuyerID,c.Username,a.content,a.CreatedDate\n"
-                    + "  FROM [Comment] as a\n"
+                    + "  FROM [ProductComment] as a\n"
                     + "  join Product as b on a.productId = b.ProductId\n"
                     + "  join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "  where a.productId = ?\n"
@@ -76,7 +76,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
         try {
             con = getConnection();
             String sql = "SELECT a.commentId,a.productId,b.ProductName,c.BuyerID,c.Username,a.content,a.CreatedDate\n"
-                    + "FROM [Comment] as a\n"
+                    + "FROM [ProductComment] as a\n"
                     + "join Product as b on a.productId = b.ProductId\n"
                     + "join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "where a.productId =  ? \n"
@@ -110,7 +110,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
         try {
             con = getConnection();
             String sql = "SELECT top(1) a.commentId,a.productId,b.ProductName,c.BuyerID,c.Username,a.content,a.CreatedDate\n"
-                    + "FROM [Comment] as a\n"
+                    + "FROM [ProductComment] as a\n"
                     + "join Product as b on a.productId = b.ProductId\n"
                     + "join Buyer as c on a.buyerId = c.BuyerID\n"
                     + "where a.productId = ? \n"
@@ -138,7 +138,7 @@ public class CommentDAO extends DBContext implements ICommentDAO {
 
         try {
             con = getConnection();
-            String sql = "INSERT INTO [dbo].[Comment]\n"
+            String sql = "INSERT INTO [dbo].[ProductComment]\n"
                     + "           ([productId]\n"
                     + "           ,[buyerId]\n"
                     + "           ,[content]\n"
