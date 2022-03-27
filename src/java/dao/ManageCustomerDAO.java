@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-19      1.0                 QuanTBA           First Implement
  */
 package dao;
 
@@ -29,8 +29,17 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        
+  
+     /**
+     *Hiển thị thông tin người mua dựa trên id của seller
+     *Kết quả bao gồm 1 list đối tượng <code>Buyer</code> với BuyerID,BuyerName,Gmail,Phone.
+     *@param sid   id của seller
+     *@return list các đối tượng <code>Buyer</code>
+     *@throws Exception
+     */
     @Override
-    public List<Buyer> getBuyerBySellerId(int cid) throws Exception {
+    public List<Buyer> getBuyerBySellerId(int sid) throws Exception {
        
          List<Buyer> list=new ArrayList<>();
          String sql = "Select Buyer.BuyerID,\n" +
@@ -47,11 +56,11 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
             
             con = getConnection();
             ps= con.prepareStatement(sql);
-            ps.setInt(1,cid);
+            ps.setInt(1,sid);
             rs=ps.executeQuery();
             while(rs.next()){
-                Buyer br=new Buyer(rs.getInt("BuyerID"),rs.getString("BuyerName"),rs.getString("Gmail"),rs.getString("Phone"));
-                list.add(br);
+                Buyer buyer=new Buyer(rs.getInt("BuyerID"),rs.getString("BuyerName"),rs.getString("Gmail"),rs.getString("Phone"));
+                list.add(buyer);
             }
         }catch(Exception e){
             System.out.println(e);
@@ -60,14 +69,23 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                 ps.close();
                 rs.close();
                 con.close();
-            } catch (SQLException ex) {
+          } catch (SQLException ex) {
                 Logger.getLogger(ManageCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return list;
       }
-       
+            return list;
     }
+    
+    //====================================================================================================================================================================//
 
+     /**
+     *Tìm kiếm người mua theo tên và id của seller 
+     * Kết quả bao gồm 1 list đối tượng <code>Buyer</code> với BuyerID,BuyerName,Gmail,Phone.
+     * @param sid      id của seller
+     * @param name     tên người mua
+     * @return list các đối tượng <code>Buyer</code>
+     * @throws Exception
+     */
         @Override
     public List<Buyer> SearchBuyerName(int sid,String name) throws Exception {
        
@@ -107,13 +125,14 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                 ps.close();
                 rs.close();
                 con.close();
-            } catch (SQLException ex) {
+          } catch (SQLException ex) {
                 Logger.getLogger(ManageCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return list;
       }
-       
+            return list;
     }
+    
+    //====================================================================================================================================================================//
     @Override
     public List<Buyer> getCusByPage(List<Buyer> list, int start, int end) throws Exception {
         List<Buyer> o=new ArrayList<>();

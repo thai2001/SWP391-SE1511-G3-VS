@@ -12,13 +12,9 @@ package dao;
 import context.DBContext;
 import dao.impl.IManageOrderDAO;
 import dao.impl.IManageTransactionDAO;
-import entity.Brand;
 import entity.Buyer;
 import entity.Order;
-import entity.OrderDetail;
-import entity.Product;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,6 +32,13 @@ Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         
+  /**
+     *Hiển thị thông tin đơn hàng dựa trên id của seller
+     *Kết quả bao gồm 1 list đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName
+     *@param sid   id của seller
+     *@return list các đối tượng <code>Order</code>
+     *@throws Exception
+     */
     @Override
     public List<Order> getOrderBySellerId(int sid) throws Exception {
         IManageTransactionDAO imd = new ManageTransactionDAO();
@@ -62,14 +65,23 @@ Connection con = null;
                 ps.close();
                 rs.close();
                 con.close();
-            } catch (SQLException ex) {
+          } catch (SQLException ex) {
                 Logger.getLogger(ManageOrderDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return list;
+        
       }
-       
+            return list;
     }
-
+    
+    //====================================================================================================================================================================//
+    
+    /**
+     *Hiển thị thông tin đơn hàng dựa trên id đơn hàng
+     * Kết quả bao gồm đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName.
+     * @param oid id của đơn hàng.
+     * @return đối tượng <code>Order</code>
+     * @throws Exception
+     */
     @Override
     public Order getOrderByID(int oid) throws Exception {
         IManageTransactionDAO imd = new ManageTransactionDAO();
@@ -100,7 +112,17 @@ Connection con = null;
         
         return null; 
     }
-
+    
+//====================================================================================================================================================================//
+    
+  /**
+     *Tìm kiếm đơn hàng theo ngày tạo và id của seller 
+     * Kết quả bao gồm 1 list đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName.
+     * @param sid      id của seller
+     * @param datecre  Ngày tạo đơn hàng
+     * @return list các đối tượng <code>Order</code>
+     * @throws Exception
+     */
     @Override
     public List<Order> SearchOrderByDateForSeller(int sid, String datecre) throws Exception {
          IManageTransactionDAO imd = new ManageTransactionDAO();
@@ -133,14 +155,15 @@ Connection con = null;
                 ps.close();
                 rs.close();
                 
-            } catch (SQLException ex) {
+           }catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return listorder;
+       
       }
-
-    
+            return listorder; 
 }
+    
+//====================================================================================================================================================================//
     
 @Override
      public List<Order> getOrderByPage(List<Order> list,int start,int end) throws Exception{
