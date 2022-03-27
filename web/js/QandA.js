@@ -18,7 +18,7 @@ function PostComment(obj)
     }
     document.getElementById("commentcontent").value = "";
     $.ajax({
-        url: "/SWP391_G3_VS(2)/QandA",
+        url: "/SWP391_G3_VS/QandA",
         type: "post", //send it through get method
         data: {
             account: con,
@@ -41,7 +41,7 @@ async  function LoadMoreRely(obj, obj1)
 {
     var exist = document.getElementsByClassName("blockrely" + obj).length;
     await $.ajax({
-        url: "/SWP391_G3_VS(2)/LoadMoreRely",
+        url: "/SWP391_G3_VS/LoadMoreRely",
         type: "post", //send it through get method
         data: {
             id: obj,
@@ -78,7 +78,7 @@ function Rely(id, obj, obj1)
     document.getElementById("t" + idcom).value = "";
     $.ajax({
         async: false,
-        url: "/SWP391_G3_VS(2)/AddRely",
+        url: "/SWP391_G3_VS/AddRely",
         type: "post", //send it through get method
         data: {
             account: con,
@@ -133,7 +133,7 @@ function Confirm(title, msg, $true, $false, id) { /*change*/
     $('body').prepend($content);
     $('.doAction').click(function () {
         $.ajax({
-            url: "/SWP391_G3_VS(2)/DeleteEditRelyComment",
+            url: "/SWP391_G3_VS/DeleteEditRelyComment",
             type: "get", //send it through get method
             data: {
                 id: id,
@@ -212,7 +212,7 @@ function edit(obj1, obj2, id, id1, obj)
             return;
         }
         $.ajax({
-            url: "/SWP391_G3_VS(2)/DeleteEditRelyComment",
+            url: "/SWP391_G3_VS/DeleteEditRelyComment",
             type: "post", //send it through get method
             data: {
                 id: id1,
@@ -277,7 +277,7 @@ function LoadMoreComment(obj)
 {
     var exist = document.getElementsByClassName("blockcomment").length;
     $.ajax({
-        url: "/SWP391_G3_VS(2)/LoadMoreComment",
+        url: "/SWP391_G3_VS/LoadMoreComment",
         type: "post", //send it through get method
         data: {
             exist: exist,
