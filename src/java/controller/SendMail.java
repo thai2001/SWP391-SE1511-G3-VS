@@ -120,7 +120,7 @@ public class SendMail extends HttpServlet {
         request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
         
-        
+        //Validate message
           if( mess.isEmpty()){     
         request.setAttribute("alert2", "Message not allow space or not null !");
         request.setAttribute("alert3", "Fail to send!");
