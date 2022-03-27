@@ -11,8 +11,10 @@ package controller;
 
 import dao.ManageCustomerDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
 import entity.JavaMail;
@@ -90,9 +92,9 @@ public class SendAllBuyer extends HttpServlet {
         String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
             IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
-            IManageProductDao manageProductDao = new ManageProductDAO();
+            ISellerDAO isellerDAO = new SellerDAO();
           Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = manageProductDao.getSeller(a.getUsername());
+          Seller seller = isellerDAO.getSeller(a.getUsername());
          
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());

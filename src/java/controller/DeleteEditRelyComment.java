@@ -9,21 +9,19 @@
  */
 package controller;
 
-import dao.AccountDAO;
+import dao.CommentandRelyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import entity.Account;
-import entity.Role;
 
 /**
  *
  * @author Admin
  */
-public class profile extends BaseReqAuth {
+public class DeleteEditRelyComment extends BaseReqAuth {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,6 +32,7 @@ public class profile extends BaseReqAuth {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -46,20 +45,19 @@ public class profile extends BaseReqAuth {
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String servletPath = request.getContextPath();
-        Account ac = (Account) request.getSession().getAttribute("account");
-        Account a = new Account();
-        AccountDAO adb = new AccountDAO();
-        a = adb.getProfile(ac);
-        int role;
-        if (ac.getRoleId().getRoleId() == 2) {
-            role = 2;
-        } else {
-            role = 3;
+        String id = request.getParameter("id");
+        String[] output = id.split("\\.");
+        CommentandRelyDAO cdb = new  CommentandRelyDAO();
+        if (output[0].equalsIgnoreCase("com"))
+        {
+            cdb.deleteComment(Integer.parseInt(output[1]));
         }
-        request.setAttribute("role", role);
-        request.setAttribute("Account", a);
-        request.getRequestDispatcher("view/profile.jsp").forward(request, response);
+        
+        if (output[0].equalsIgnoreCase("rel"))
+        {
+            cdb.deleteRely(Integer.parseInt(output[1]));
+        }
+        response.getWriter().write(id);
     }
 
     /**
@@ -73,38 +71,12 @@ public class profile extends BaseReqAuth {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        String name = request.getParameter("fullname").trim();
-        String gmail = request.getParameter("gmail").trim();
-        String phone = request.getParameter("phone").trim();
-        String address = request.getParameter("address").trim();
-        String contextPath = request.getContextPath();
-        Account ac = (Account) request.getSession().getAttribute("account");
-        String description = null;
-        if (ac.getRoleId().getRoleId() == 3) {
-            description = request.getParameter("description").trim();
-        }
-        AccountDAO adb = new AccountDAO();
-        Account a = new Account();
-        a.setName(name);
-        a.setEmail(gmail);
-        a.setPhone(phone);
-        a.setAddress(address);
-        a.setDescription(description);
-        a.setUsername(ac.getUsername());
-        a.setRoleId(new Role(ac.getRoleId().getRoleId()));
-        adb.updateProfile(a);
-        //response.sendRedirect(contextPath + "/profile");
-        int role;
-        if (ac.getRoleId().getRoleId() == 2) {
-            role = 2;
-        } else {
-            role = 3;
-        }
-        request.setAttribute("mess1", 1);
-        request.setAttribute("role", role);
-        request.setAttribute("Account", a);
-        request.getRequestDispatcher("view/profile.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        String content = request.getParameter("content");
+        String[] output = id.split("\\.");
+        CommentandRelyDAO cdb = new  CommentandRelyDAO();
+        cdb.EditComAndRel(output[0],Integer.parseInt(output[1]), content);
+        response.getWriter().write(id);
     }
 
     /**

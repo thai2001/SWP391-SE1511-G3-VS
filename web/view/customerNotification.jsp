@@ -271,7 +271,7 @@ header img{
      
                                  <div class="form-group">
                                 <label>Message</label>
-                                <textarea name="message1" class="form-control" required style="height: 200px;"></textarea>
+                                <textarea id="mess1" name="message1" class="form-control" required style="height: 200px;"></textarea>
                                 
                             </div>
                                   
@@ -361,8 +361,8 @@ header img{
      
                                  <div class="form-group">
                                 <label>Message</label>
-                                <textarea  class="form-control" name="message2" required style="height: 200px;"></textarea>
-                                
+                                <textarea id="mess2" minlength="10" maxlength="3000"  class="form-control" name="message2" title="Not null or spaces" required style="height: 200px;"></textarea>
+              
                             </div>
                                   
                         </div>
@@ -423,6 +423,13 @@ header img{
       crossorigin="anonymous"
     ></script>
 
+    <script type="text/javascript">
+                        
+                             
+         document.getElementById("mess2").pattern = /^(?!\s*$).+/ ;
+                    
+       
+    </script>
 
     <script language = "text/Javascript"> 
       cleared[0] = cleared[1] = cleared[2] = 0; 

@@ -11,7 +11,9 @@ package controller;
 
 import dao.ManageCustomerDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
 import entity.Seller;
@@ -76,8 +78,8 @@ public class SearchBuyerName extends HttpServlet {
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
              IManageCustomerDAO  imanageCustomerDAO= new ManageCustomerDAO();
-              ManageProductDAO  manageproductdao= new ManageProductDAO();
-         Seller seller = manageproductdao.getSeller(a.getUsername());
+              ISellerDAO isellerDAO = new SellerDAO();
+         Seller seller = isellerDAO.getSeller(a.getUsername());
         String name= request.getParameter("buyername").trim().replaceAll("\\s\\s+"," ");
         if(name == null){
             name = "";

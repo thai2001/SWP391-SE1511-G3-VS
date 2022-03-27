@@ -215,6 +215,7 @@ public class AccountDAO extends DBContext {
         }
     }
 
+
     /* Change password user from database"
      */
     public void changePass(Account a, String newpass) {
@@ -352,7 +353,7 @@ public class AccountDAO extends DBContext {
             } catch (Exception e) {
                 System.out.println("Co loi khi ket noi " + e.getMessage());
             }
-            if (ac.getRoleId().getRoleId() == 1) {
+            if (ac.getRoleId().getRoleId() == 2) {
                 String sql = " select * from Buyer\n"
                         + "  where Username = ? ";
                 ps = con.prepareStatement(sql);
@@ -366,7 +367,7 @@ public class AccountDAO extends DBContext {
                 }
             }
 
-            if (ac.getRoleId().getRoleId() == 2) {
+            if (ac.getRoleId().getRoleId() == 3) {
                 String sql = " select * from Seller\n"
                         + "  where Username = ? ";
                 ps = con.prepareStatement(sql);
@@ -412,7 +413,7 @@ public class AccountDAO extends DBContext {
                 System.out.println("Co loi khi ket noi " + e.getMessage());
             }
             System.out.println(a.getRoleId().getRoleId());
-            if (a.getRoleId().getRoleId() == 1) {
+            if (a.getRoleId().getRoleId() == 2) {
                 String sql = " UPDATE [dbo].[Buyer]\n"
                         + "   SET [BuyerName] = ?\n"
                         + "      ,[Address] = ?\n"
@@ -428,7 +429,7 @@ public class AccountDAO extends DBContext {
                 ps.executeUpdate();
             }
 
-            if (a.getRoleId().getRoleId() == 2) {
+            if (a.getRoleId().getRoleId() == 3) {
                 String sql = " UPDATE [dbo].[Seller]\n"
                         + "   SET [SellerName] = ?\n"
                         + "      ,[Description] = ?\n"
@@ -448,6 +449,60 @@ public class AccountDAO extends DBContext {
 
         } catch (Exception ex) {
             System.out.println("Error ");
+        }
+    }
+
+    /* get name from database ==> return a string : name or null
+     */
+    public Account getName(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Account a = new Account();
+        try {
+            con = getConnection();
+            try {
+                System.out.println("Ket noi Thanh cong");
+            } catch (Exception e) {
+                System.out.println("Co loi khi ket noi " + e.getMessage());
+            }
+
+            String sql = "  select b.BuyerName, a.Role from Buyer as b\n"
+                    + "  inner join ACCOUNT as a\n"
+                    + "  on b.Username = a.Username\n"
+                    + "  where b.Username = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                a.setName(rs.getString("BuyerName"));
+                a.setRoleId(new Role(rs.getInt("Role")));
+            }
+
+            sql = "  select s.SellerName, a.Role from Seller as s\n"
+                    + "  inner join ACCOUNT as a\n"
+                    + "  on s.Username = a.Username\n"
+                    + "  where s.Username = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                a.setName(rs.getString("SellerName"));
+                a.setRoleId(new Role(rs.getInt("Role")));
+            }
+            return a;
+        } catch (Exception ex) {
+            System.out.println("Error ");
+            return null;
+        } finally {
+            try {
+//                rs.close();
+//                ps.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
         }
     }
 

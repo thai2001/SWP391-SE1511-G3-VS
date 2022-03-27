@@ -141,7 +141,7 @@ public class EditProduct extends HttpServlet {
     
        
         if(name.length() != 0 && description.length() != 0 && madein.length() != 0){
-        manageProductDao.EditProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
+        manageProductDao.editProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
         }
     Product prod = manageProductDao.getProductByID(pid);
     request.setAttribute("product", prod);

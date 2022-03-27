@@ -9,18 +9,15 @@
  */
 package controller;
 
-import dao.BrandDAO;
 import dao.ManageProductDAO;
-import dao.VehicleTypeDAO;
+import dao.SellerDAO;
 import dao.impl.IManageProductDao;
+import dao.impl.ISellerDAO;
 import entity.Account;
-import entity.Brand;
 import entity.Product;
 import entity.Seller;
-import entity.VehicleType;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,30 +71,28 @@ public class ManageProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String uname = a.getUsername();
-       // int sid = Integer.parseInt(request.getParameter("sid"));
        try{
        HttpSession sess = request.getSession();
        IManageProductDao manageProductDao = new ManageProductDAO();
-      
+           ISellerDAO isellerDAO = new SellerDAO();
       
           Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = manageProductDao.getSeller(a.getUsername());
-          // String name= request.getParameter("productname").trim();
+          Seller seller = isellerDAO.getSeller(a.getUsername());
+          
       
        List<Product> listproduct = manageProductDao.getProductBySellerid(seller.getSellerId());
     
-        int size= listproduct.size();
-        int numperPage=5;
-        int numPage=size/numperPage+(size%numperPage== 0?0:1);
-        String spage= request.getParameter("page");
-        int page;
+        int size= listproduct.size();                               //size of product
+        int numperPage=5;                                           //number of product per page
+        int numPage=size/numperPage+(size%numperPage== 0?0:1);      //number of page
+        String spage= request.getParameter("page");                 //get name "page" and set to spage
+        int page;                                                   // declared to set value
         if(spage == null){ 
             page= 1;
         }else{
             page = Integer.parseInt(spage); 
         }
-        int start, end;
+        int start, end;                                             //start and end of pagination
         start=(page-1)*numperPage;
         end=Math.min(size, page*numperPage);
           List<Product> listprod= manageProductDao.getProductByPage(listproduct, start, end);

@@ -11,7 +11,9 @@ package controller;
 
 import dao.BrandDAO;
 import dao.ManageProductDAO;
+import dao.SellerDAO;
 import dao.VehicleTypeDAO;
+import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Brand;
 import entity.Seller;
@@ -103,13 +105,15 @@ public class AddProduct extends HttpServlet {
          name = "";
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
+          request.setAttribute("image",request.getParameter("img").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("descript",request.getParameter("description").trim().replaceAll("\\s\\s+"," "));
           request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
           request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
          request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
           request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
          request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
          request.setAttribute("alert1", "Product name not allow space or not null !");
-         request.setAttribute("proname", request.getParameter("productname").trim());
+         request.setAttribute("proname", request.getParameter("productname").trim().replaceAll("\\s\\s+"," "));
          request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
      }
    
@@ -117,11 +121,13 @@ public class AddProduct extends HttpServlet {
      if( description.isEmpty()){
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
+          request.setAttribute("image",request.getParameter("img").trim().replaceAll("\\s\\s+",""));
+          request.setAttribute("descript",request.getParameter("description").trim().replaceAll("\\s\\s+"," "));
           request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
           request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
           request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
           request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
-         request.setAttribute("proname", request.getParameter("productname").trim());
+         request.setAttribute("proname", request.getParameter("productname").trim().replaceAll("\\s\\s+"," "));
           request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
          request.setAttribute("alert2", "Description not allow space or not null !");
         
@@ -133,17 +139,36 @@ public class AddProduct extends HttpServlet {
              if(MadeIn.isEmpty()){  
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
+          request.setAttribute("image",request.getParameter("img").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("descript",request.getParameter("description").trim().replaceAll("\\s\\s+"," "));
           request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
           request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
           request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
-         request.setAttribute("proname", request.getParameter("productname").trim());
+         request.setAttribute("proname", request.getParameter("productname").trim().replaceAll("\\s\\s+"," "));
          request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
          request.setAttribute("alert3", "MadeIn not allow space or not null !");
          request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
          request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
            
              }
-        String  image =  request.getParameter("img").trim();
+             
+             
+        String  image =  request.getParameter("img").trim().replaceAll("\\s\\s+","");
+          if(image.isEmpty()){  
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+         request.setAttribute("image",request.getParameter("img").trim().replaceAll("\\s\\s+",""));
+         request.setAttribute("descript",request.getParameter("description").trim().replaceAll("\\s\\s+"," "));
+          request.setAttribute("quant",Integer.parseInt( request.getParameter("quantity").trim().replaceAll("\\s\\s+","")));
+          request.setAttribute("myear",request.getParameter("Myear").trim().replaceAll("\\s\\s+",""));
+          request.setAttribute("discount",Float.parseFloat( request.getParameter("discount").trim().replaceAll("\\s\\s+","")));
+         request.setAttribute("proname", request.getParameter("productname").trim().replaceAll("\\s\\s+"," "));
+         request.setAttribute("price",Float.parseFloat( request.getParameter("price").trim()));
+         request.setAttribute("alert4", "Image not allow space or not null !");
+         request.setAttribute("madein", request.getParameter("madeIn").trim().replaceAll("\\s\\s+",""));
+         request.getRequestDispatcher("view/AddProduct.jsp").forward(request, response);
+           
+             }
      float price = Float.parseFloat( request.getParameter("price").trim());
      int brand =Integer.parseInt( request.getParameter("brand"));
      int vehicletype =Integer.parseInt( request.getParameter("type"));
@@ -156,10 +181,12 @@ public class AddProduct extends HttpServlet {
      HttpSession sess = request.getSession();
      ManageProductDAO manageProductDao = new ManageProductDAO();
      Account a = (Account) sess.getAttribute("account");
-     Seller seller = manageProductDao.getSeller(a.getUsername());
+      ISellerDAO isellerDAO = new SellerDAO();
+     Seller seller = isellerDAO.getSeller(a.getUsername());
 
     if(name.length() != 0 && description.length() != 0 && MadeIn.length() != 0){
-    manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, seller.getSellerId());
+    manageProductDao.addProduct(vehicletype, name,brand, MadeIn, ManufactureYear, 
+                                description, image, quantity, price, discount, seller.getSellerId());
     } 
    
  

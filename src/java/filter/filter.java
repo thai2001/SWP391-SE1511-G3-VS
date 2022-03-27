@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author taola
  */
-@WebFilter(filterName = "filter", urlPatterns = {"/*"})
+@WebFilter(filterName = "filter", urlPatterns = {""})
 public class filter implements Filter {
 
     private static final boolean debug = true;

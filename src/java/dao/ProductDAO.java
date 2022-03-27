@@ -280,7 +280,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
 
             String sql = "select * from Product \n"
                     + "where vehicleTypeId = ? \n"
-                      + "and Quantity > 0";;
+                      + "and Quantity > 0";
             if (brandId != 0) {
                 sql += " and BrandId = " + brandId;
             }
@@ -337,8 +337,7 @@ public class ProductDAO extends DBContext implements IProductDAO {
             System.out.println(brand);
         }
 
-        int count = dao.getNumberOfPage(1, 2, "a");
-        System.out.println(count);
+    
 
 //        Product p = dao.getProductById(2);
 //       

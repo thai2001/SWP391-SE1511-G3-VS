@@ -54,6 +54,9 @@
           <a class="nav-link link-light " href="profile">Profile</a>
           </c:if>
           <c:if test="${sessionScope.account != null}">
+          <a class="nav-link link-light " href="QandA">Q&A</a>
+          </c:if>
+          <c:if test="${sessionScope.account != null}">
           <a class="nav-link link-light " href="logout">Sign Out</a>
           </c:if>
          

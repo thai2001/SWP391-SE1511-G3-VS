@@ -11,9 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageProductDao;
-import entity.Account;
 import entity.Product;
-import entity.Seller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,41 +29,12 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-    /**
-     *
-     * @param username
-     * @return
-     * @throws Exception
-     */
-    
-       @Override
-        public Seller getSeller(String username) throws Exception {
-        Seller seller = new Seller();
-        try {
-            con = getConnection();
-            String sql = "select * from Seller\n"
-                    + "where Username like ? ";
-            ps = con.prepareStatement(sql);
-            ps.setString(1,"%"+ username +"%");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                seller = new Seller(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),new Account(rs.getString(7)));
-            }
-        } catch (SQLException ex) {
-            throw ex;
-        } finally {
-            rs.close();
-            ps.close();
-            con.close();
-        }
-        return seller;
-    }
-     //Lấy danh sách các sản phẩm theo ID của người bán
-    /**
-     *
-     * @param sid
-     * @return
-     * @throws Exception
+     /**
+     *Lấy danh sách các sản phẩm theo ID của người bán.Tất cả sản phẩm có sid khớp với sellerid và quantity >= 0 sẽ được trả về
+     *Kết quả trả về 1 list các sản phẩm với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     *@param sid id của seller
+     *@return list các đối tượng <code>Product</code>
+     *@throws Exception
      */
     @Override
     public List<Product> getProductBySellerid(int sid) throws Exception {
@@ -109,24 +78,28 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         return list;
       }
     }
-
+    
+//====================================================================================================================================================================//
+    
     /**
-     *
-     * @param vehicleTypeid
-     * @param name
-     * @param brandid
-     * @param madein
-     * @param manufactureYear
-     * @param descript
-     * @param img
-     * @param quatity
-     * @param price
-     * @param discount
-     * @param sid
+     *Thêm mới 1 sản phẩm 
+     *Kết quả sẽ thêm 1 sản phẩm mới với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     * @param vehicleTypeid     id của vehicleType
+     * @param name              tên sản phẩm
+     * @param brandid           id của brand
+     * @param madein            Nơi sản xuất
+     * @param manufactureYear   Năm sản xuất
+     * @param descript          Mô tả sản phẩm
+     * @param img               Ảnh sản phẩm
+     * @param quatity           Số lượng sản phẩm
+     * @param price             Gía sản phẩm
+     * @param discount          Gỉam giá
+     * @param sid               id của seller
+     * return 
      * @throws Exception
      */
     @Override
-    public void AddProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) throws Exception {
+    public void addProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) throws Exception {
         String sql="insert Product\n" +
 "(vehicleTypeId,ProductName,BrandId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -158,11 +131,15 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             }
       }
     }
-
-    //Xoá sản phẩm theo id sản phẩm
+    
+//====================================================================================================================================================================//
+    
+    //
     /**
-     *
-     * @param pid
+     *Xoá sản phẩm theo id sản phẩm
+     * Cập nhật quantity = -1 để ẩn sản phẩm dựa theo điều kiện quantity >=0 của method getProductBySellerid() bên trên
+     * @param pid id của sản phẩm
+     * return
      * @throws Exception
      */
     @Override
@@ -187,12 +164,14 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             }
       }
     }
-
-    //Hiển thị thông tin sản phẩm dựa trên id sản phẩm
+    
+//====================================================================================================================================================================//
+    
     /**
-     *
+     *Hiển thị thông tin sản phẩm dựa trên id sản phẩm
+     * Kết quả bao gồm đối tượng <code>Product</code> với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount.
      * @param pid
-     * @return
+     * @return đối tượng <code>Product</code>
      * @throws Exception
      */
     @Override
@@ -232,19 +211,18 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         
         return null;
     }
-
-    
-    // Tìm kiếm sản phẩm theo tên
-
+//====================================================================================================================================================================//
+  
     /**
-     *
-     * @param sid
-     * @param name
-     * @return
+     *Tìm kiếm sản phẩm theo tên sản phẩm và id của seller và quantity >= 0
+     * Kết quả bao gồm 1 list đối tượng <code>Product</code> với ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     * @param sid   id của seller
+     * @param name  tên sản phẩm
+     * @return list các đối tượng <code>Product</code>
      * @throws Exception
      */
     @Override
-    public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
+    public List<Product> searchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
                    "where SellerId = ? \n" +
@@ -291,36 +269,31 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return list;
       }
+          return list;
     }
-
-    /**
-     *
-     * @param name
-     * @return
-     * @throws Exception
-     */
+//====================================================================================================================================================================//
     
     
-    //Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
     /**
-     *
-     * @param vehicleTypeId
-     * @param name
-     * @param Branid
-     * @param MadeIn
-     * @param manufactureYear
-     * @param description
-     * @param image
-     * @param quantity
-     * @param price
-     * @param discount
-     * @param id
+     *Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
+     * Kết quả bao gồm 1 đối tượng <code>Product</code> với ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount
+     * @param vehicleTypeId     id của vehicleType
+     * @param name              tên sản phẩm
+     * @param Branid            id của brand
+     * @param MadeIn            nơi sản xuất
+     * @param manufactureYear   năm sản xuất
+     * @param description       mô tả sản phẩm
+     * @param image             ảnh sản phẩm
+     * @param quantity          số lượng sản phẩm
+     * @param price             giá sản phẩm
+     * @param discount          giảm giá
+     * @param id                id của sản phẩm
+     * return đối tượng <code>Product</code> với dữ liệu được cập nhật
      * @throws Exception
      */
     @Override
-    public void EditProduct(int vehicleTypeId,int Branid, String name,  String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
+    public void editProduct(int vehicleTypeId,int Branid, String name,  String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
          String sql= "update Product\n" +
 "set  BrandId = ?,\n" + 
 "     vehicleTypeId = ?,\n" +
@@ -360,6 +333,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             }
       }
     }
+    //====================================================================================================================================================================//
+
     
        @Override
     public List<Product> getProductByPage(List<Product> list,int start,int end) throws Exception{
@@ -375,7 +350,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
   
-        List <Product> lp = bd.SearchProductByNameForSeller(2,"");
+        List <Product> lp = bd.searchProductByNameForSeller(2,"");
         for(int i =0; i < lp.size();i++){
             System.out.print(lp.get(i).getName());
         }
