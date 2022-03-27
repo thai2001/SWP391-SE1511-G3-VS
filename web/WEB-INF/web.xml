@@ -116,6 +116,10 @@
         <servlet-name>QandA</servlet-name>
         <servlet-class>controller.QandA</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddRely</servlet-name>
+        <servlet-class>controller.AddRely</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>QandA</servlet-name>
         <url-pattern>/QandA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRely</servlet-name>
+        <url-pattern>/AddRely</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
