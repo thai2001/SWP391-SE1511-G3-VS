@@ -165,4 +165,14 @@ public class ManageReportDAO extends DBContext implements IManageReportDAO {
         }
         return report;
         }
+
+    @Override
+    public void checkReport(int ReportId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createReport(int reportId, int buyerId, int productId, int reportTypeId, Boolean isChecked, String Content) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

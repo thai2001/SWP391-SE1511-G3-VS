@@ -9,6 +9,8 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  * tạo các trường cho lớp Report
  * thêm contrustor và getter,setter
@@ -21,7 +23,9 @@ public class Report {
     private Product productId;
     private Seller seller;
     private ReportType reportTypeId;
+    private Date dateCreated;
     private String Content;
+    private Boolean isChecked;
 
     public Report() {
     }

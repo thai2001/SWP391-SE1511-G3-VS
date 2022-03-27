@@ -23,4 +23,6 @@ public interface IManageReportDAO {
     public List<Report> getReportByFilter(int buyerId,int productId, int typeReportId, String Sort) throws Exception;
     public List<ReportType> getAllReportType()throws Exception;
     public List<Report>  GetreportByPage (List<Report> list,int start,int end);
+    public void checkReport(int reportId) throws Exception;
+    public void createReport(int reportId, int buyerId, int productId, int reportTypeId , Boolean isChecked, String Content) throws Exception;
 }
