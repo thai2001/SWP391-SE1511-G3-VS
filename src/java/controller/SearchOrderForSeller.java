@@ -5,24 +5,19 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-17      1.0                 QuanTBA          Add field
  */
 package controller;
 
 import dao.ManageOrderDAO;
-import dao.ManageProductDAO;
 import dao.SellerDAO;
 import dao.impl.IManageOrderDAO;
-import dao.impl.IManageProductDao;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Order;
-import entity.OrderDetail;
-import entity.Product;
 import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,7 +85,7 @@ public class SearchOrderForSeller extends HttpServlet {
          Seller seller = isellerDAO.getSeller(a.getUsername());
         String datecre = request.getParameter("datecreated").trim();
             
-  List<Order> listorder = iOrderDetailDAO.SearchOrderByDateForSeller(seller.getSellerId(),datecre);
+  List<Order> listorder = iOrderDetailDAO.searchOrderByDateForSeller(seller.getSellerId(),datecre);
          int size= listorder.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);

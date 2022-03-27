@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-18      1.0                 QuanTBA           First Implement
  */
 package controller;
 
@@ -123,7 +123,6 @@ public class SendMail extends HttpServlet {
        
        request.setAttribute("num", numPage); 
        request.setAttribute("buyer", listbuy);
-       request.setAttribute("buyerall", listbuy);
         request.setAttribute("page", page);
             
                 JavaMail.send(to,sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");

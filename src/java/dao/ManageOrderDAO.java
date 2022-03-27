@@ -124,7 +124,7 @@ Connection con = null;
      * @throws Exception
      */
     @Override
-    public List<Order> SearchOrderByDateForSeller(int sid, String datecre) throws Exception {
+    public List<Order> searchOrderByDateForSeller(int sid, String datecre) throws Exception {
          IManageTransactionDAO imd = new ManageTransactionDAO();
          List<Order> listorder = new ArrayList<>();
          String sql ="Select * from [ORDER]"

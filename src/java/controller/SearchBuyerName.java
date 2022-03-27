@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-11      1.0                 QuanTBA          Add field
  */
 package controller;
 
@@ -88,7 +88,7 @@ public class SearchBuyerName extends HttpServlet {
             name = "";
         }
         
-        List<Buyer> listbuyer = imanageCustomerDAO.SearchBuyerName(seller.getSellerId(), name);
+        List<Buyer> listbuyer = imanageCustomerDAO.searchBuyerName(seller.getSellerId(), name);
          int size= listbuyer.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);

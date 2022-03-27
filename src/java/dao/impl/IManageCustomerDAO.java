@@ -21,5 +21,5 @@ import java.util.List;
 public interface IManageCustomerDAO {
      public List<Buyer> getBuyerBySellerId(int id) throws Exception;
     public List<Buyer> getCusByPage(List<Buyer> list,int start,int end) throws Exception;
-    public List<Buyer> SearchBuyerName(int sid,String name) throws Exception;
+    public List<Buyer> searchBuyerName(int sid,String name) throws Exception;
 }

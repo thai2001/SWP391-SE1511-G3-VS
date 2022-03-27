@@ -87,7 +87,7 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
      * @throws Exception
      */
         @Override
-    public List<Buyer> SearchBuyerName(int sid,String name) throws Exception {
+    public List<Buyer> searchBuyerName(int sid,String name) throws Exception {
        
          List<Buyer> list=new ArrayList<>();
          String sql = "Select Buyer.BuyerID,\n" +
