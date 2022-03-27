@@ -5,12 +5,11 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 202-03-16      1.0                 QuanTBA          Add Field
  */
 package controller;
 
 import dao.BrandDAO;
-import dao.ManageProductDAO;
 import dao.VehicleTypeDAO;
 import entity.Brand;
 import entity.VehicleType;
@@ -25,8 +24,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to get vehicleType and brand information from table Brand and vehicleType in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class LoadAddProduct extends HttpServlet {
 

@@ -27,8 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to search product information by product seller id and product name from table Product in database 
+ * In the search method,all data will be normalized(trim space) before getting data from database
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class SearchProductforSeller extends HttpServlet {
 

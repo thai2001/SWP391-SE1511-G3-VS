@@ -5,19 +5,16 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-18      1.0                 QuanTBA          Add Field
  */
 package controller;
 
 import dao.ManageOrderDAO;
-import dao.ManageProductDAO;
 import dao.SellerDAO;
-import dao.impl.IManageProductDao;
 import dao.impl.IManageOrderDAO;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Order;
-import entity.OrderDetail;
 import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,8 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to get data from table Order in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class ManageOrder extends HttpServlet {
 

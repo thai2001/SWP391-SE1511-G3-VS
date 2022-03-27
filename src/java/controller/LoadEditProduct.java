@@ -26,9 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Lấy và hiển thị thông tin sản phẩm từ database
- * Thông tin chi tiết sản phẩm có thể được sửa đổi  
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to get product,brand,vehicleType information from table Product,Brand,vehicleType in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class LoadEditProduct extends HttpServlet {
 
@@ -74,7 +75,7 @@ public class LoadEditProduct extends HttpServlet {
          int pid = Integer.parseInt(request.getParameter("pid")); //Lấy id của sản phẩm
         ManageProductDAO manageproductdao = new ManageProductDAO();
         BrandDAO brandDao = new BrandDAO();
-         VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
+        VehicleTypeDAO vehicleTypeDao = new VehicleTypeDAO();
         Product prod = manageproductdao.getProductByID(pid);
         List<Brand> listbrand = brandDao.getAllBrand();
         List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();

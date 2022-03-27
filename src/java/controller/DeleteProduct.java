@@ -20,9 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Xoá toàn bộ thông tin sản phẩm khỏi database và danh sách
- * sản phẩm của người bán
- * @author QuanTBA 
+ *This class contains method to delete product information from table Product in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class DeleteProduct extends HttpServlet {
 

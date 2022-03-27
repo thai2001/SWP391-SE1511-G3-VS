@@ -29,8 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to send email to all buyer
+ * In the send method,all data will be normalized(trim space) before sending to all buyer
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs:Still have some issues related to validate mess variable </p>
+ * @author QuanTBA
  */
 public class SendAllBuyer extends HttpServlet {
 

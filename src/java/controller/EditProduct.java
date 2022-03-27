@@ -26,10 +26,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Chỉnh sửa thông tin sản phẩm được lấy từ database
- * Hiển thị thông tin mới của sản phẩm trong database và danh sách sản phẩm
- * của người bán
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to edit  product information from table Product in database 
+ * In the edit method,all data will be normalized(trim space) before update into database
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class EditProduct extends HttpServlet {
 

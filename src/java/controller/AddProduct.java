@@ -30,8 +30,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *Thêm thông tin 1 sản phẩm mới vào trong database đồng thời hiển thị trong
- * danh sách sản phẩm của người bán
+ *This class contains method to add new product information to table Product in database 
+ * In the add method,all data will be normalized(trim space) before update into database
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
  * @author QuanTBA
  */
 public class AddProduct extends HttpServlet {

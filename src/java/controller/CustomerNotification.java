@@ -5,15 +5,13 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-19     1.0                  QuanTBA          Add Field
  */
 package controller;
 
 import dao.ManageCustomerDAO;
-import dao.ManageProductDAO;
 import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
-import dao.impl.IManageProductDao;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
@@ -30,8 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author QuanTBA <your.name at your.org>
+ *This class contains method to get data from table Buyer in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class CustomerNotification extends HttpServlet {
 
