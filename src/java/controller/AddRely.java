@@ -73,6 +73,7 @@ public class AddRely extends BaseReqAuth {
         CommentandRelyDAO cdao = new CommentandRelyDAO();
         c = cdao.InsertRely(c);
      
+        System.out.println("76");
         Account ac = (Account) request.getSession().getAttribute("account");
         c.setRoleid(ac.getRoleId().getRoleId());
         AccountDAO acdao = new AccountDAO();
