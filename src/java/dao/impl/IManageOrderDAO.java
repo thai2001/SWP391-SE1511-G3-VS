@@ -8,12 +8,13 @@
  * 2022-03-11      1.0                 QuanTBA           First Implement
  */
 package dao.impl;
-
 import entity.Order;
 import java.util.List;
 
 /**
- *
+ *Interface này gồm các phương thức thực hiện truy vấn và lấy dữ liệu từ bảng Order
+ * Trong phương thức search dữ liệu được chuẩn hoá(loại bỏ dấu cách 2 đầu) trước khi lấy ra từ cơ sở dữ liệu.
+ * Các phương thức sẽ throw <code>Exception</code> nếu có bất kì lỗi xảy ra trong quá trình truy vấn, nhập liệu.
  * @author QuanTBA <your.name at your.org>
  */
 public interface IManageOrderDAO {

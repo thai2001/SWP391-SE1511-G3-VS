@@ -82,7 +82,7 @@ public class SearchProductforSeller extends HttpServlet {
         if(name == null){
             name = "";
         }
-        List<Product> listproduct = manageproductdao.SearchProductByNameForSeller(seller.getSellerId(), name);
+        List<Product> listproduct = manageproductdao.searchProductByNameForSeller(seller.getSellerId(), name);
          int size= listproduct.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);

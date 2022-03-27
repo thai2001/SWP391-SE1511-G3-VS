@@ -11,9 +11,7 @@ package dao;
 
 import context.DBContext;
 import dao.impl.IManageProductDao;
-import entity.Account;
 import entity.Product;
-import entity.Seller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,7 +96,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @throws Exception
      */
     @Override
-    public void AddProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) throws Exception {
+    public void addProduct(int vehicleTypeid, String name, int brandid, String madein, String manufactureYear, String descript, String img, int quatity, float price, float discount, int sid) throws Exception {
         String sql="insert Product\n" +
 "(vehicleTypeId,ProductName,BrandId,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -216,7 +214,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @throws Exception
      */
     @Override
-    public List<Product> SearchProductByNameForSeller(int sid, String name) throws Exception {
+    public List<Product> searchProductByNameForSeller(int sid, String name) throws Exception {
         List<Product> list=new ArrayList<>();
         String sql="select * from Product\n" +
                    "where SellerId = ? \n" +
@@ -263,8 +261,8 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
             } catch (SQLException ex) {
                 Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        return list;
       }
+          return list;
     }
 
     /**
@@ -292,7 +290,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
      * @throws Exception
      */
     @Override
-    public void EditProduct(int vehicleTypeId,int Branid, String name,  String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
+    public void editProduct(int vehicleTypeId,int Branid, String name,  String MadeIn, String manufactureYear, String description, String image, int quantity, float price, float discount, int id) throws Exception {
          String sql= "update Product\n" +
 "set  BrandId = ?,\n" + 
 "     vehicleTypeId = ?,\n" +
@@ -347,7 +345,7 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     public static void main(String[] args) throws Exception {
          ManageProductDAO bd = new ManageProductDAO();
   
-        List <Product> lp = bd.SearchProductByNameForSeller(2,"");
+        List <Product> lp = bd.searchProductByNameForSeller(2,"");
         for(int i =0; i < lp.size();i++){
             System.out.print(lp.get(i).getName());
         }

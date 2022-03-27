@@ -185,7 +185,8 @@ public class AddProduct extends HttpServlet {
      Seller seller = isellerDAO.getSeller(a.getUsername());
 
     if(name.length() != 0 && description.length() != 0 && MadeIn.length() != 0){
-    manageProductDao.AddProduct(vehicletype, name,brand, MadeIn, ManufactureYear, description, image, quantity, price, discount, seller.getSellerId());
+    manageProductDao.addProduct(vehicletype, name,brand, MadeIn, ManufactureYear, 
+                                description, image, quantity, price, discount, seller.getSellerId());
     } 
    
  
