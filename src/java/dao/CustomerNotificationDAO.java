@@ -10,7 +10,7 @@
 package dao;
 
 import context.DBContext;
-import dao.impl.IManageCustomerDAO;
+import dao.impl.ICustomerNotificationDAO;
 import entity.Buyer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author QuanTBA 
  */
-public class CustomerNotificationDAO extends DBContext implements IManageCustomerDAO{
+public class CustomerNotificationDAO extends DBContext implements  ICustomerNotificationDAO{
      Connection con = null;
      PreparedStatement ps = null;
      ResultSet rs = null;
@@ -143,7 +143,7 @@ public class CustomerNotificationDAO extends DBContext implements IManageCustome
 
    
     public static void main(String[] args) throws Exception {
-        IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
+        ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
         List<Buyer> listbu = iManageCustomer.getBuyerBySellerId(2);
         CustomerNotificationDAO mc = new CustomerNotificationDAO();
         mc.getBuyerBySellerId(2);

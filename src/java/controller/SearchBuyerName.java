@@ -11,7 +11,7 @@ package controller;
 
 import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
-import dao.impl.IManageCustomerDAO;
+import dao.impl.ICustomerNotificationDAO;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
@@ -76,12 +76,11 @@ public class SearchBuyerName extends HttpServlet {
             throws ServletException, IOException {
          try{
        request.setCharacterEncoding("UTF-8");
-     //  int sid = Integer.parseInt(request.getParameter("sid"));
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
-             IManageCustomerDAO  imanageCustomerDAO= new CustomerNotificationDAO();
-              ISellerDAO isellerDAO = new SellerDAO();
-         Seller seller = isellerDAO.getSeller(a.getUsername());
+        ICustomerNotificationDAO  imanageCustomerDAO= new CustomerNotificationDAO();
+        ISellerDAO isellerDAO = new SellerDAO();
+        Seller seller = isellerDAO.getSeller(a.getUsername());
         String name= request.getParameter("buyername").trim().replaceAll("\\s\\s+"," ");
         if(name == null){
             name = "";

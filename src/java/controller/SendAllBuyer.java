@@ -11,7 +11,7 @@ package controller;
 
 import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
-import dao.impl.IManageCustomerDAO;
+import dao.impl.ICustomerNotificationDAO;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
@@ -92,10 +92,10 @@ public class SendAllBuyer extends HttpServlet {
         String sub = request.getParameter("subject1").trim().replaceAll("\\s\\s+"," ");
         String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
-            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
-            ISellerDAO isellerDAO = new SellerDAO();
-          Account a = (Account) sess.getAttribute("account"); 
-          Seller seller = isellerDAO.getSeller(a.getUsername());
+        ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
+        ISellerDAO isellerDAO = new SellerDAO();
+        Account a = (Account) sess.getAttribute("account"); 
+        Seller seller = isellerDAO.getSeller(a.getUsername());
          
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());

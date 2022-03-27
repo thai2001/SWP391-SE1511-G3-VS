@@ -11,7 +11,7 @@ package controller;
 
 import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
-import dao.impl.IManageCustomerDAO;
+import dao.impl.ICustomerNotificationDAO;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
@@ -75,11 +75,10 @@ public class NotifyCustomer extends HttpServlet {
             throws ServletException, IOException {
         try{
        HttpSession sess = request.getSession();
-            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
+            ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
           Account a = (Account) sess.getAttribute("account"); 
             ISellerDAO isellerDAO = new SellerDAO();
           Seller seller = isellerDAO.getSeller(a.getUsername());
-          // String name= request.getParameter("productname").trim();
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
         int size= listbuyer.size();

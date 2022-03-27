@@ -10,7 +10,7 @@
 package entity;
 
 import dao.CustomerNotificationDAO;
-import dao.impl.IManageCustomerDAO;
+import dao.impl.ICustomerNotificationDAO;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Session;
@@ -109,7 +109,7 @@ public class JavaMail {
             /* Create an instance of MimeMessage, 
  	      it accept MIME types and headers 
              */
-            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
+            ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
         List<Buyer> listbu = iManageCustomer.getBuyerBySellerId(2);
      
        
