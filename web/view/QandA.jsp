@@ -105,13 +105,13 @@
                                     </div>
                                     <c:if test = "${c.countrely > 3}">
                                         <div style="text-align: center;" id="blockloadrely${c.id}">
-                                            <a style="text-decoration: none;" onclick="LoadMoreRely('${c.id}','${c.countrely}')"> Load More Rely</a> 
+                                            <a style="text-decoration: none;" onclick="LoadMoreRely('${c.id}', '${c.countrely}')"> Load More Rely</a> 
                                         </div>
                                     </c:if>
 
                                     <!-- Comments -->
                                     <textarea class="form-control" rows="2" placeholder="What are you thinking?" id="t${c.id}" minlength="1"></textarea>
-                                    <button class="btn btn-sm btn-primary pull-right" type="submit" style="margin-top: 10px;" id ="buttonrely${c.id}" onclick="Rely('${c.id}', '${sessionScope.account.username}','${c.countrely}')"><i class="fa fa-pencil fa-fw"></i> Rely</button>
+                                    <button class="btn btn-sm btn-primary pull-right" type="submit" style="margin-top: 10px;" id ="buttonrely${c.id}" onclick="Rely('${c.id}', '${sessionScope.account.username}', '${c.countrely}')"><i class="fa fa-pencil fa-fw"></i> Rely</button>
                                     <span><button class="btn btn-sm btn-primary pull-right" type="submit" style="margin-right: 10px; margin-top: 10px; display: none;" id ="buttonrelydes${c.id}" onclick="Destroy('buttonrely', '${c.id}', 't${c.id}')"><i class="fa fa-pencil fa-fw"></i> Destroy</button></span>
                                     <span><button class="btn btn-sm btn-primary pull-right" type="submit" style="margin-right: 10px; margin-top: 10px; display: none;" id ="buttonrelyent${c.id}" onclick=""><i class="fa fa-pencil fa-fw"></i> EnterEdit</button></span>
                                 </div>
