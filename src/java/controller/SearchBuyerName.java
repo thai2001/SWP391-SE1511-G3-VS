@@ -87,7 +87,7 @@ public class SearchBuyerName extends HttpServlet {
         }
         
         List<Buyer> listbuyer = imanageCustomerDAO.searchBuyerName(seller.getSellerId(), name);
-         int size= listbuyer.size();
+        int size= listbuyer.size();
         int numperPage=5;
         int numPage=size/numperPage+(size%numperPage== 0?0:1);
         String spage= request.getParameter("page");

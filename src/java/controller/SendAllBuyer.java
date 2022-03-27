@@ -75,7 +75,7 @@ public class SendAllBuyer extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
+                
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -89,8 +89,8 @@ public class SendAllBuyer extends HttpServlet {
             throws ServletException, IOException {
          String resultMessage = "";
         try {
-        String sub = request.getParameter("subject1").trim().replaceAll("\\s\\s+"," ");
-        String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");
+        String sub = request.getParameter("subject1").trim().replaceAll("\\s\\s+"," ");                 //get name "subject2" in jsp and set to "sub" variable
+        String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");                 //get name "message2" in jsp and set to "mess" variable
        HttpSession sess = request.getSession();
         ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
         ISellerDAO isellerDAO = new SellerDAO();
@@ -119,6 +119,7 @@ public class SendAllBuyer extends HttpServlet {
         request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
         
+        //Validate message
           if( mess.isEmpty()){     
         request.setAttribute("alert4", "Message not allow space or not null !");
         request.setAttribute("alert3", "Fail to send!");
