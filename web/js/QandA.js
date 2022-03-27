@@ -277,7 +277,7 @@ function LoadMoreComment(obj)
 {
     var exist = document.getElementsByClassName("blockcomment").length;
     $.ajax({
-        url: "/GitHub/LoadMoreComment",
+        url: "/GitHub/LoadMoreCommentQandA",
         type: "post", //send it through get method
         data: {
             exist: exist,

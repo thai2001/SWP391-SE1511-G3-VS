@@ -128,6 +128,10 @@
         <servlet-name>LoadMoreRely</servlet-name>
         <servlet-class>controller.LoadMoreRely</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadMoreCommentQandA</servlet-name>
+        <servlet-class>controller.LoadMoreCommentQandA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>LoadMoreRely</servlet-name>
         <url-pattern>/LoadMoreRely</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadMoreCommentQandA</servlet-name>
+        <url-pattern>/LoadMoreCommentQandA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
