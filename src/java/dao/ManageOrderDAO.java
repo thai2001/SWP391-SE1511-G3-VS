@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2018-09-10      1.0                 MinhLH           First Implement
+ * 2022-03-19     1.0                  QuanTBA          Add Field
  */
 package dao;
 
