@@ -33,10 +33,10 @@ Connection con = null;
         ResultSet rs = null;
         
   /**
-     *Hiển thị thông tin đơn hàng dựa trên id của seller
-     *Kết quả bao gồm 1 list đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName
-     *@param sid   id của seller
-     *@return list các đối tượng <code>Order</code>
+     *Display detail informations of order by id of seller
+     *The result contains <code>Order</code> objects with OrderId,DateCreated,TotalPrice,BuyerName.
+     *@param sid   id of seller
+     *@return list <code>Order</code> object
      *@throws Exception
      */
     @Override
@@ -76,10 +76,10 @@ Connection con = null;
     //====================================================================================================================================================================//
     
     /**
-     *Hiển thị thông tin đơn hàng dựa trên id đơn hàng
-     * Kết quả bao gồm đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName.
-     * @param oid id của đơn hàng.
-     * @return đối tượng <code>Order</code>
+     *Display detail informations of order by id of order
+     * The result contains <code>Order</code> objects with OrderId,DateCreated,TotalPrice,BuyerName.
+     * @param oid id of order.
+     * @return <code>Order</code> object
      * @throws Exception
      */
     @Override
@@ -116,11 +116,11 @@ Connection con = null;
 //====================================================================================================================================================================//
     
   /**
-     *Tìm kiếm đơn hàng theo ngày tạo và id của seller 
-     * Kết quả bao gồm 1 list đối tượng <code>Order</code> với OrderId,DateCreated,TotalPrice,BuyerName.
-     * @param sid      id của seller
-     * @param datecre  Ngày tạo đơn hàng
-     * @return list các đối tượng <code>Order</code>
+     *Searching order by date created and id of seller 
+     * The result contains a list <code>Order</code> objects with OrderId,DateCreated,TotalPrice,BuyerName.
+     * @param sid      id of seller
+     * @param datecre  date when order created
+     * @return list of <code>Order</code> objects
      * @throws Exception
      */
     @Override

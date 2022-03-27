@@ -29,11 +29,11 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-     /**
-     *Lấy danh sách các sản phẩm theo ID của người bán.Tất cả sản phẩm có sid khớp với sellerid và quantity >= 0 sẽ được trả về
-     *Kết quả trả về 1 list các sản phẩm với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
-     *@param sid id của seller
-     *@return list các đối tượng <code>Product</code>
+    /**
+     *Get list of product by id of seller.All product have sid match with SellerId and quantity >= 0 will be returned
+     *The result contains list of <code>Product</code> object with ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     *@param sid id of seller
+     *@return list <code>Product</code> object
      *@throws Exception
      */
     @Override
@@ -82,19 +82,19 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
 //====================================================================================================================================================================//
     
     /**
-     *Thêm mới 1 sản phẩm 
-     *Kết quả sẽ thêm 1 sản phẩm mới với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
-     * @param vehicleTypeid     id của vehicleType
-     * @param name              tên sản phẩm
-     * @param brandid           id của brand
-     * @param madein            Nơi sản xuất
-     * @param manufactureYear   Năm sản xuất
-     * @param descript          Mô tả sản phẩm
-     * @param img               Ảnh sản phẩm
-     * @param quatity           Số lượng sản phẩm
-     * @param price             Gía sản phẩm
-     * @param discount          Gỉam giá
-     * @param sid               id của seller
+     *Add a new Product
+     *The result add a product with ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     * @param vehicleTypeid     id of vehicleType
+     * @param name              name of product
+     * @param brandid           id of brand
+     * @param madein            manufacturing place
+     * @param manufactureYear   manufacturing year
+     * @param descript          description of product
+     * @param img               image of product
+     * @param quatity           quantity of product
+     * @param price             price of product
+     * @param discount          discount for product
+     * @param sid               id of seller
      * return 
      * @throws Exception
      */
@@ -136,9 +136,9 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
     
     //
     /**
-     *Xoá sản phẩm theo id sản phẩm
-     * Cập nhật quantity = -1 để ẩn sản phẩm dựa theo điều kiện quantity >=0 của method getProductBySellerid() bên trên
-     * @param pid id của sản phẩm
+     *Delete product by id of product
+     * Update quantity = -1 =to hide product by condition quantity >=0 of method getProductBySellerid() above
+     * @param pid id of product
      * return
      * @throws Exception
      */
@@ -168,10 +168,10 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
 //====================================================================================================================================================================//
     
     /**
-     *Hiển thị thông tin sản phẩm dựa trên id sản phẩm
-     * Kết quả bao gồm đối tượng <code>Product</code> với Productid,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount.
+     *Display product's information by id of product
+     * The result contains list of <code>Product</code> object with ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount.
      * @param pid
-     * @return đối tượng <code>Product</code>
+     * @return <code>Product</code> object
      * @throws Exception
      */
     @Override
@@ -211,14 +211,16 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
         
         return null;
     }
+    
 //====================================================================================================================================================================//
-  
+    
+
     /**
-     *Tìm kiếm sản phẩm theo tên sản phẩm và id của seller và quantity >= 0
-     * Kết quả bao gồm 1 list đối tượng <code>Product</code> với ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
-     * @param sid   id của seller
-     * @param name  tên sản phẩm
-     * @return list các đối tượng <code>Product</code>
+     *Searching product by name and id of seller and quantity >= 0
+     * The result contains list of <code>Product</code> object with ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount,SellerId
+     * @param sid   id of seller
+     * @param name  name of product
+     * @return list <code>Product</code> object
      * @throws Exception
      */
     @Override
@@ -272,24 +274,25 @@ public class ManageProductDAO extends DBContext implements IManageProductDao {
       }
           return list;
     }
+    
 //====================================================================================================================================================================//
     
     
     /**
-     *Chỉnh sửa thông tin sản phẩm dựa trên id sản phẩm đó
-     * Kết quả bao gồm 1 đối tượng <code>Product</code> với ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount
-     * @param vehicleTypeId     id của vehicleType
-     * @param name              tên sản phẩm
-     * @param Branid            id của brand
-     * @param MadeIn            nơi sản xuất
-     * @param manufactureYear   năm sản xuất
-     * @param description       mô tả sản phẩm
-     * @param image             ảnh sản phẩm
-     * @param quantity          số lượng sản phẩm
-     * @param price             giá sản phẩm
-     * @param discount          giảm giá
-     * @param id                id của sản phẩm
-     * return đối tượng <code>Product</code> với dữ liệu được cập nhật
+     *Edit product's informations by id of product
+     * The result contains list of <code>Product</code> objects with ProductId,BrandId,vehicleTypeId,ProductName,MadeIn,ManufactureYear,Description,Image,Quantity,UnitPrice,Discount
+     * @param vehicleTypeId     id of vehicleType
+     * @param name              name of product
+     * @param Branid            id of brand
+     * @param MadeIn            manufacturing place
+     * @param manufactureYear   manufacturing year
+     * @param description       description of product
+     * @param image             image of product
+     * @param quantity          quantity of product
+     * @param price             price of product
+     * @param discount          discount for product
+     * @param id                id of product
+     * return <code>Product</code> object with data updated
      * @throws Exception
      */
     @Override

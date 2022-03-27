@@ -32,10 +32,10 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
         
   
      /**
-     *Hiển thị thông tin người mua dựa trên id của seller
-     *Kết quả bao gồm 1 list đối tượng <code>Buyer</code> với BuyerID,BuyerName,Gmail,Phone.
-     *@param sid   id của seller
-     *@return list các đối tượng <code>Buyer</code>
+     *Display informations of buyer by id of seller
+     *The result contains list of <code>Buyer</code> object with BuyerID,BuyerName,Gmail,Phone.
+     *@param sid   id of seller
+     *@return list <code>Buyer</code> object
      *@throws Exception
      */
     @Override
@@ -79,11 +79,11 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
     //====================================================================================================================================================================//
 
      /**
-     *Tìm kiếm người mua theo tên và id của seller 
-     * Kết quả bao gồm 1 list đối tượng <code>Buyer</code> với BuyerID,BuyerName,Gmail,Phone.
-     * @param sid      id của seller
-     * @param name     tên người mua
-     * @return list các đối tượng <code>Buyer</code>
+     *Searching buyer by name and id of seller 
+     * The result contains list of <code>Buyer</code> object with BuyerID,BuyerName,Gmail,Phone.
+     * @param sid      id of seller
+     * @param name     name of buyer
+     * @return list  <code>Buyer</code> object
      * @throws Exception
      */
         @Override

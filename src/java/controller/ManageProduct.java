@@ -28,8 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *Hiển thị 1 vài thông tin về các sản phẩm của người bán
- * @author Acer
+ *This class display selling product contains method to get data from table Product in database 
+ * The method will throw<code>Exception</code> if there is any error occurring when getting data from database
+ * <p> Bugs: </p>
+ * @author QuanTBA
  */
 public class ManageProduct extends HttpServlet {
 
