@@ -208,7 +208,7 @@ header img{
     />
   </head>
 
-  <body style="background-color: #fffdf9">
+  <body style="background-color: #fffdf9; background-image: url('https://carconfigurator.ferrari.com/assets/cars/portofinom/packages/default/car-ferrari-portofino-m_splash.jpg')">
 
 
     <!-- Header -->

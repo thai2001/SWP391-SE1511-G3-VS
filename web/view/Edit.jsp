@@ -125,7 +125,7 @@ header{
 </style>
   </head>
 
-  <body style="background-color: #fffdf9">
+  <body style="background-color: #fffdf9;  background-image: url('https://carconfigurator.ferrari.com/assets/cars/portofinom/packages/default/car-ferrari-portofino-m_splash.jpg')">
 
 
     <!-- Header -->
@@ -150,7 +150,7 @@ header{
                 <div class="modal-content" style="border-radius: 15px;">
                     <form action="editproduct" method="post">
                         <div class="modal-header">						
-                            <h4 class="modal-title">Product's<b> Info</b></h4>
+                            <h4 class="modal-title" style='font-size: 35px;'>Product's<b> Info</b></h4>
                             <p style="color:green;font-size: 25px;">${alert}</p>
                         </div>
                         <div class="modal-body">

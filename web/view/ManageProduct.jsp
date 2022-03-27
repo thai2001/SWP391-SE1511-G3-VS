@@ -200,7 +200,7 @@ header img{
     />
   </head>
 
-  <body style="background-color: #fffdf9">
+  <body style="background-color: #fffdf9; background-image: url('https://carconfigurator.ferrari.com/assets/cars/portofinom/packages/default/car-ferrari-portofino-m_splash.jpg')">
 
 
     <!-- Header -->
@@ -210,7 +210,7 @@ header img{
     
     <div class="container-lg">
     <div class="table-responsive">
-        <div class="table-wrapper" style="border-radius: 15px;">
+        <div class="table-wrapper" style="border-radius: 15px;  ">
             <div class="table-title" >
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>

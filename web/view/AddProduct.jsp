@@ -106,7 +106,7 @@ border-radius: 20px;
     width: 1000px;
 }
 img{
-    width: 50%;
+    width: 180px;
 }
 .navlink{
     display: flex;
@@ -128,9 +128,10 @@ header{
    color: red;
 }
 </style>
+
   </head>
 
-  <body style="background-color: #fffdf9">
+  <body style="background-color: #fffdf9; background-image: url('https://carconfigurator.ferrari.com/assets/cars/portofinom/packages/default/car-ferrari-portofino-m_splash.jpg')">
 
 
     <!-- Header -->
@@ -220,7 +221,7 @@ header{
                                 <label>Image</label><p style="color:red">${alert4}</p>
                                 </div>
                                <div class="vehicle-img" style="width:270px;">
-                                   <input minlength="10" maxlength="1000" pattern="\s\https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" value="${image}" type="text" name ="img" class="form-control" title="Not a link" value="control" id="vehicle-img">
+                                   <input minlength="10" maxlength="1000" pattern=" https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" value="${image}" type="text" name ="img" class="form-control" title="Not a link" value="control" id="vehicle-img">
  
                             </div>
                                  <div class="form-group">
