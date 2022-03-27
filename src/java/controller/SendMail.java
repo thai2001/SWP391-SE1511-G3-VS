@@ -90,15 +90,16 @@ public class SendMail extends HttpServlet {
             throws ServletException, IOException {
         String resultMessage = "";
         try {
-        String to = request.getParameter("to").trim().replaceAll("\\s\\s+"," ");
-        String sub = request.getParameter("subject2").trim().replaceAll("\\s\\s+"," ");
-        String mess =request.getParameter("message2").trim().replaceAll("\\s\\s+"," ");
+        String to = request.getParameter("to").trim().replaceAll("\\s\\s+"," ");                  //get name "to" in jsp and set to "to" variable
+        String sub = request.getParameter("subject2").trim().replaceAll("\\s\\s+"," ");          //get name "subject2" in jsp and set to "sub" variable
+        String mess =request.getParameter("message2").trim().replaceAll("\\s\\s+"," ");          //get name "message2" in jsp and set to "mess" variable
        HttpSession sess = request.getSession();
         ICustomerNotificationDAO iManageCustomer = new CustomerNotificationDAO();
         ISellerDAO isellerDAO = new SellerDAO();
         Account a = (Account) sess.getAttribute("account"); 
         Seller seller = isellerDAO.getSeller(a.getUsername());
          
+       
        
        List<Buyer> listbuyer = iManageCustomer.getBuyerBySellerId(seller.getSellerId());
         int size= listbuyer.size();
@@ -115,13 +116,23 @@ public class SendMail extends HttpServlet {
         start=(page-1)*numperPage;
         end=Math.min(size, page*numperPage);
           List<Buyer> listbuy= iManageCustomer.getCusByPage(listbuyer, start, end);
-          
-       
-       request.setAttribute("num", numPage); 
-       request.setAttribute("buyer", listbuy);
+        request.setAttribute("num", numPage); 
+        request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
-            
+        
+        
+          if( mess.isEmpty()){     
+        request.setAttribute("alert2", "Message not allow space or not null !");
+        request.setAttribute("alert3", "Fail to send!");
+        request.setAttribute("num", numPage); 
+        request.setAttribute("sub2", sub);
+        request.setAttribute("buyer", listbuy);
+        request.setAttribute("page", page);
+        request.getRequestDispatcher("view/customerNotification.jsp").forward(request, response);
+        }
+            if(mess.length() != 0){
                 JavaMail.send(to,sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");
+                 }
             }catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "There were an error: " + ex.getMessage();

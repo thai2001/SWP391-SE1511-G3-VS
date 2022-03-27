@@ -115,11 +115,23 @@ public class SendAllBuyer extends HttpServlet {
           List<Buyer> listbuy= iManageCustomer.getCusByPage(listbuyer, start, end);
           
        
-       request.setAttribute("num", numPage); 
-       request.setAttribute("buyer", listbuy);
+        request.setAttribute("num", numPage); 
+        request.setAttribute("buyer", listbuy);
         request.setAttribute("page", page);
+        
+          if( mess.isEmpty()){     
+        request.setAttribute("alert4", "Message not allow space or not null !");
+        request.setAttribute("alert3", "Fail to send!");
+        request.setAttribute("num", numPage); 
+        request.setAttribute("sub1", sub);
+        request.setAttribute("buyer", listbuy);
+        request.setAttribute("page", page);
+        request.getRequestDispatcher("view/customerNotification.jsp").forward(request, response);
+        }
             
+           if(mess.length() != 0){
                 JavaMail.sendall(sub, mess, "projectgroup3se1511@gmail.com", "Projectse1511");
+                }
             }catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "There were an error: " + ex.getMessage();

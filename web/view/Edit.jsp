@@ -213,7 +213,7 @@ header{
                             
                             <div class="col-md-4">
                                 <div class="form-group">
-                                <label>Image</label><p style="color:red">${alert4}</p><p style="color:red">${alert5}</p>
+                                <label>Image</label><p style="color:red">${alert5}</p>
                                 <input minlength="10" maxlength="1000"  type="text" value="${product.img}" name="image" class="form-control" required></input>
                             </div>
                             </div>

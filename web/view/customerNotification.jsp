@@ -237,6 +237,7 @@ header img{
     </form>
               
                <p style="color:green; margin-left: 990px;margin-bottom: 10px;">${alert}</p>
+               <p style="color:red; margin-left: 1050px;margin-bottom: 10px;">${alert3}</p>
               <a href="#sendall" type="button" class="btn btn-info" data-toggle="modal" style="margin-left: 1020px;border-radius: 20px;margin-bottom: -10px;height: 35px;"><i class="fa fa-send" aria-hidden="true"></i> Send Email</a> 
              
         </div>
@@ -264,13 +265,13 @@ header img{
                             
                               <div class="form-group">
                                 <label>Subject :</label>
-                                <input minlength="5" maxlength="1000" name="subject1" pattern="^(?!\s*$).+" title="Not allow space or null" class="form-control"  style="width:400px;">
+                                <input minlength="5" maxlength="1000" value="${sub1}" name="subject1" pattern="^(?!\s*$).+" title="Not allow space or null" class="form-control"  style="width:400px;">
                               </div>
                                 
         
      
                                  <div class="form-group">
-                                <label>Message</label>
+                                <label>Message</label><p style="color:red">${alert4}</p>
                                 <textarea id="mess1" name="message1" class="form-control" required style="height: 200px;"></textarea>
                                 
                             </div>
@@ -347,20 +348,20 @@ header img{
                             
                               <div class="form-group">
                                 <label>Subject :</label>
-                                <p style="color:red;">${alert1}</p>
+                                <p style="color:red;">
                            <div class="input-group mb-1">
     
                                 <div class="input-group-prepend" >
                                    <span class="input-group-text" ><i class="fa fa-question" aria-hidden="true"></i></span>
                                   </div>
-                               <input minlength="5" maxlength="1000" name="subject2" pattern="^(?!\s*$).+" title="Not allow space or null" type="text" class="form-control" required >
+                               <input minlength="5" maxlength="1000" value="${sub2}" name="subject2" pattern="^(?!\s*$).+" title="Not allow space or null" type="text" class="form-control" required >
                             </div>
                               </div>
                                 
           </div>
      
                                  <div class="form-group">
-                                <label>Message</label>
+                                <label>Message</label><p style="color:red">${alert2}</p>
                                 <textarea id="mess2" minlength="10" maxlength="3000"  class="form-control" name="message2" title="Not null or spaces" required style="height: 200px;"></textarea>
               
                             </div>
@@ -426,7 +427,7 @@ header img{
     <script type="text/javascript">
                         
                              
-         document.getElementById("mess2").pattern = /^(?!\s*$).+/ ;
+         document.getElementById("mess2").pattern = "^(?!\s*$).+" ;
                     
        
     </script>
