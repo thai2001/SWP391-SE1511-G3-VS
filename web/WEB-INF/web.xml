@@ -120,6 +120,10 @@
         <servlet-name>AddRely</servlet-name>
         <servlet-class>controller.AddRely</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteEditRelyComment</servlet-name>
+        <servlet-class>controller.DeleteEditRelyComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>AddRely</servlet-name>
         <url-pattern>/AddRely</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEditRelyComment</servlet-name>
+        <url-pattern>/DeleteEditRelyComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
