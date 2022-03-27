@@ -218,10 +218,10 @@ header{
                             
                             
                             <div class="form-group">
-                                <label>Image</label><p style="color:red">${alert4}</p>
+                                <label>Image</label><p style="color:red">${alert5}</p>
                                 </div>
                                <div class="vehicle-img" style="width:270px;">
-                                   <input minlength="10" maxlength="1000" pattern=" https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" value="${image}" type="text" name ="img" class="form-control" title="Not a link" value="control" id="vehicle-img">
+                                   <input minlength="10" maxlength="1000" value="${image}" type="text" name ="img" class="form-control" title="Not a link" value="control" id="vehicle-img">
  
                             </div>
                                  <div class="form-group">

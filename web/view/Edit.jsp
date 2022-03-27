@@ -213,8 +213,8 @@ header{
                             
                             <div class="col-md-4">
                                 <div class="form-group">
-                                <label>Image</label>
-                                <input minlength="10" maxlength="1000" pattern="\s\https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" type="text" value="${product.img}" name="image" class="form-control" required></input>
+                                <label>Image</label><p style="color:red">${alert4}</p><p style="color:red">${alert5}</p>
+                                <input minlength="10" maxlength="1000"  type="text" value="${product.img}" name="image" class="form-control" required></input>
                             </div>
                             </div>
                             </div>

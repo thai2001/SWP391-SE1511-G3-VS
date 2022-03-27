@@ -20,6 +20,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -94,54 +96,76 @@ public class EditProduct extends HttpServlet {
          List<Brand> listbrand = brandDao.getAllBrand();
         List<VehicleType> listvehicleType = vehicleTypeDao.getAllVehicleType();
          
-        String image = request.getParameter("image").trim().replaceAll("\\s\\s+"," ");
+       
         float price = Float.parseFloat(request.getParameter("price").trim().replaceAll("\\s\\s+"," "));
         float discount =Float.parseFloat(request.getParameter("discount").trim().replaceAll("\\s\\s+"," "));
         int brand =Integer.parseInt(request.getParameter("brand"));
         int type =Integer.parseInt(request.getParameter("type"));
         String manufactureyear = request.getParameter("Myear").trim().replaceAll("\\s\\s+"," ");
-         int pid = Integer.parseInt(request.getParameter("productid"));
+        int pid = Integer.parseInt(request.getParameter("productid"));
         int quantity = Integer.parseInt(request.getParameter("quantity").trim().replaceAll("\\s\\s+"," "));
         
-        
-        //Validate
-        String name = request.getParameter("proname").trim().replaceAll("\\s\\s+"," "); 
-         if(name.isEmpty()){
-         name = "";
-          Product prod = manageProductDao.getProductByID(pid);
-    request.setAttribute("product", prod);
+//===========================================================================================================================================================//     
+       
+         //Validate product name
+         String name = request.getParameter("proname").trim().replaceAll("\\s\\s+"," "); 
+       if(name.isEmpty()){
+         Product prod = manageProductDao.getProductByID(pid);
+         request.setAttribute("product", prod);
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
          request.setAttribute("alert1", "Product name not allow space or not null !");    
          request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
-     }
+        }
          
-       
-        String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
-          if( description.isEmpty()){
-             Product prod = manageProductDao.getProductByID(pid);
-    request.setAttribute("product", prod);
+         //Validate description
+         String description = request.getParameter("description").trim().replaceAll("\\s\\s+"," ");
+       if( description.isEmpty()){
+         Product prod = manageProductDao.getProductByID(pid);
+         request.setAttribute("product", prod);
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
          request.setAttribute("alert2", "Description not allow space or not null !");
          request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
-     }
+        }
          
-           String madein = request.getParameter("MadeIn").trim().replaceAll("\\s\\s+"," ");
-             if(madein.isEmpty()){  
-                 Product prod = manageProductDao.getProductByID(pid);
-    request.setAttribute("product", prod);
+         //Validate madein
+         String madein = request.getParameter("MadeIn").trim().replaceAll("\\s\\s+"," ");
+       if(madein.isEmpty()){  
+         Product prod = manageProductDao.getProductByID(pid);
+         request.setAttribute("product", prod);
          request.setAttribute("vehicleType", listvehicleType);
          request.setAttribute("brand", listbrand);
          request.setAttribute("alert3", "MadeIn not allow space or not null !");
-         request.getRequestDispatcher("view/view/Edit.jsp").forward(request, response);
-           
-             }
-          
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);   
+        }
+             
+          //Validate image
+         String image = request.getParameter("image").trim().replaceAll("\\s\\s+"," ");
+         String pattern = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+         Pattern r = Pattern.compile(pattern);
+         Matcher m = r.matcher(image);
+       if(!m.matches()){
+         Product prod = manageProductDao.getProductByID(pid);
+         request.setAttribute("product", prod);
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+         request.setAttribute("alert5", "Not a link !");
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
+        }
+        
+       if(image.isEmpty()){  
+         Product prod = manageProductDao.getProductByID(pid);
+         request.setAttribute("product", prod);
+         request.setAttribute("vehicleType", listvehicleType);
+         request.setAttribute("brand", listbrand);
+         request.setAttribute("alert4", "Image not allow space or not null !");
+         request.getRequestDispatcher("view/Edit.jsp").forward(request, response);
+        }
+//===========================================================================================================================================================//           
          
-    
-       
-        if(name.length() != 0 && description.length() != 0 && madein.length() != 0){
+
+        if(name.length() != 0 && description.length() != 0 && madein.length() != 0 && image.length() != 0 && m.matches()){
         manageProductDao.editProduct(type,brand,name, madein , manufactureyear, description, image, quantity, price, discount, pid);
         }
     Product prod = manageProductDao.getProductByID(pid);
