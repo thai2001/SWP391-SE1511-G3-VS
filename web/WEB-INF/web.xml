@@ -112,6 +112,10 @@
         <servlet-name>CustomerNotification</servlet-name>
         <servlet-class>controller.CustomerNotification</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QandA</servlet-name>
+        <servlet-class>controller.QandA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
         <url-pattern>/homePage</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>CustomerNotification</servlet-name>
         <url-pattern>/customernotification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QandA</servlet-name>
+        <url-pattern>/QandA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
