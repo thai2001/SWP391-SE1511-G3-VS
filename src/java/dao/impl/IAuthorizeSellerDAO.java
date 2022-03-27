@@ -22,4 +22,5 @@ public interface IAuthorizeSellerDAO {
     public List<Seller> getInactiveSellerAccount();
     public void denySellerAccount(String username);
     public List<Seller> GetSellerAccountByPage(List<Seller> list, int start, int end);
+    public void acceptSellerAccount(String username);
 }

@@ -112,4 +112,9 @@ public class AuthorizeSellerDAO extends DBContext implements IAuthorizeSellerDAO
         }
         return seller;
     }
+
+    @Override
+    public void acceptSellerAccount(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
