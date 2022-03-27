@@ -64,6 +64,7 @@ public class AddRely extends BaseReqAuth {
         String username = request.getParameter("account");
         String idcom = request.getParameter("idcom");
         String content = request.getParameter("contents");
+        System.out.println("67");
         CommentQandA c = new CommentQandA();
         c.setUsername(username);
         c.setContent(content);
