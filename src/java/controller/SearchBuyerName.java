@@ -9,8 +9,7 @@
  */
 package controller;
 
-import dao.ManageCustomerDAO;
-import dao.ManageProductDAO;
+import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
 import dao.impl.ISellerDAO;
@@ -80,7 +79,7 @@ public class SearchBuyerName extends HttpServlet {
      //  int sid = Integer.parseInt(request.getParameter("sid"));
         HttpSession sess = request.getSession();
         Account a = (Account) sess.getAttribute("account"); 
-             IManageCustomerDAO  imanageCustomerDAO= new ManageCustomerDAO();
+             IManageCustomerDAO  imanageCustomerDAO= new CustomerNotificationDAO();
               ISellerDAO isellerDAO = new SellerDAO();
          Seller seller = isellerDAO.getSeller(a.getUsername());
         String name= request.getParameter("buyername").trim().replaceAll("\\s\\s+"," ");

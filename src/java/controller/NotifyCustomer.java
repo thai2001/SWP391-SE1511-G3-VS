@@ -9,7 +9,7 @@
  */
 package controller;
 
-import dao.ManageCustomerDAO;
+import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
 import dao.impl.ISellerDAO;
@@ -33,7 +33,7 @@ import javax.servlet.http.HttpSession;
  * <p> Bugs: </p>
  * @author QuanTBA
  */
-public class CustomerNotification extends HttpServlet {
+public class NotifyCustomer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +52,10 @@ public class CustomerNotification extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CustomerNotification</title>");            
+            out.println("<title>Servlet NotifyCustomer</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CustomerNotification at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet NotifyCustomer at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,7 +75,7 @@ public class CustomerNotification extends HttpServlet {
             throws ServletException, IOException {
         try{
        HttpSession sess = request.getSession();
-            IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
+            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
           Account a = (Account) sess.getAttribute("account"); 
             ISellerDAO isellerDAO = new SellerDAO();
           Seller seller = isellerDAO.getSeller(a.getUsername());

@@ -222,7 +222,7 @@ header img{
                 <div class="row">
                     <div class="col-sm-4"><a class="link-dark" href="manageproduct">Manage <b>Products</b></a></div>
                     <div class="col-sm-4"><a class="link-dark" href="manageorder">Orders <b>History</b></a></div>
-                     <div class="col-sm-4"><a class="link-dark" href="customernotification">Customer <b>Notification</b></a></div>
+                     <div class="col-sm-4"><a class="link-dark" href="notifycustomer">Customer <b>Notification</b></a></div>
                 </div>
                 <div class="row1">
                          <form class="navbar-form navbar-right" action="searchbuyername" method="get" >

@@ -9,21 +9,17 @@
  */
 package controller;
 
-import dao.ManageCustomerDAO;
-import dao.ManageProductDAO;
+import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
-import dao.impl.IManageProductDao;
 import dao.impl.ISellerDAO;
 import entity.Account;
 import entity.Buyer;
 import entity.JavaMail;
-import entity.Role;
 import entity.Seller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -98,7 +94,7 @@ public class SendMail extends HttpServlet {
         String sub = request.getParameter("subject2").trim().replaceAll("\\s\\s+"," ");
         String mess =request.getParameter("message2").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
-            IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
+            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
             ISellerDAO isellerDAO = new SellerDAO();
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = isellerDAO.getSeller(a.getUsername());

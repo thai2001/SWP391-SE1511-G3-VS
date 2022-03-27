@@ -9,7 +9,7 @@
  */
 package controller;
 
-import dao.ManageCustomerDAO;
+import dao.CustomerNotificationDAO;
 import dao.SellerDAO;
 import dao.impl.IManageCustomerDAO;
 import dao.impl.ISellerDAO;
@@ -92,7 +92,7 @@ public class SendAllBuyer extends HttpServlet {
         String sub = request.getParameter("subject1").trim().replaceAll("\\s\\s+"," ");
         String mess =request.getParameter("message1").trim().replaceAll("\\s\\s+"," ");
        HttpSession sess = request.getSession();
-            IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
+            IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
             ISellerDAO isellerDAO = new SellerDAO();
           Account a = (Account) sess.getAttribute("account"); 
           Seller seller = isellerDAO.getSeller(a.getUsername());

@@ -23,14 +23,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author QuanTBA <your.name at your.org>
+ * @author QuanTBA 
  */
-public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-  
+public class CustomerNotificationDAO extends DBContext implements IManageCustomerDAO{
+     Connection con = null;
+     PreparedStatement ps = null;
+     ResultSet rs = null;
+     
+     
      /**
      *Display informations of buyer by id of seller
      *The result contains list of <code>Buyer</code> object with BuyerID,BuyerName,Gmail,Phone.
@@ -40,8 +40,7 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
      */
     @Override
     public List<Buyer> getBuyerBySellerId(int sid) throws Exception {
-       
-         List<Buyer> list=new ArrayList<>();
+        List<Buyer> list=new ArrayList<>();
          String sql = "Select Buyer.BuyerID,\n" +
                       "       Buyer.BuyerName,\n" +
                       "	      Gmail,\n" +
@@ -70,7 +69,7 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                 rs.close();
                 con.close();
           } catch (SQLException ex) {
-                Logger.getLogger(ManageCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerNotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
             return list;
@@ -86,10 +85,9 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
      * @return list  <code>Buyer</code> object
      * @throws Exception
      */
-        @Override
-    public List<Buyer> searchBuyerName(int sid,String name) throws Exception {
-       
-         List<Buyer> list=new ArrayList<>();
+     @Override
+    public List<Buyer> searchBuyerName(int sid, String name) throws Exception {
+       List<Buyer> list=new ArrayList<>();
          String sql = "Select Buyer.BuyerID,\n" +
                       "       Buyer.BuyerName,\n" +
                       "	      Gmail,\n" +
@@ -126,31 +124,32 @@ public class ManageCustomerDAO extends DBContext implements IManageCustomerDAO {
                 rs.close();
                 con.close();
           } catch (SQLException ex) {
-                Logger.getLogger(ManageCustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerNotificationDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
       }
             return list;
     }
     
     //====================================================================================================================================================================//
+    
     @Override
     public List<Buyer> getCusByPage(List<Buyer> list, int start, int end) throws Exception {
-        List<Buyer> o=new ArrayList<>();
+         List<Buyer> o=new ArrayList<>();
         for(int i=start;i<end;i++){
             o.add(list.get(i));
         }
         return o;
     }
-    
+
+   
     public static void main(String[] args) throws Exception {
-        IManageCustomerDAO iManageCustomer = new ManageCustomerDAO();
+        IManageCustomerDAO iManageCustomer = new CustomerNotificationDAO();
         List<Buyer> listbu = iManageCustomer.getBuyerBySellerId(2);
-        ManageCustomerDAO mc = new ManageCustomerDAO();
+        CustomerNotificationDAO mc = new CustomerNotificationDAO();
         mc.getBuyerBySellerId(2);
         for(int i =0; i < listbu.size();i++){
             System.out.print(listbu.get(i).getGmail());
         }
         
     }
-  
 }

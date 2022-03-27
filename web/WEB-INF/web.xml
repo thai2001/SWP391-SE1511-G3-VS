@@ -109,10 +109,6 @@
         <servlet-class>controller.SendAllBuyer</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CustomerNotification</servlet-name>
-        <servlet-class>controller.CustomerNotification</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>QandA</servlet-name>
         <servlet-class>controller.QandA</servlet-class>
     </servlet>
@@ -131,6 +127,10 @@
     <servlet>
         <servlet-name>LoadMoreCommentQandA</servlet-name>
         <servlet-class>controller.LoadMoreCommentQandA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotifyCustomer</servlet-name>
+        <servlet-class>controller.NotifyCustomer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>homePage</servlet-name>
@@ -241,10 +241,6 @@
         <url-pattern>/sendallbuyer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CustomerNotification</servlet-name>
-        <url-pattern>/customernotification</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>QandA</servlet-name>
         <url-pattern>/QandA</url-pattern>
     </servlet-mapping>
@@ -263,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>LoadMoreCommentQandA</servlet-name>
         <url-pattern>/LoadMoreCommentQandA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotifyCustomer</servlet-name>
+        <url-pattern>/notifycustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
