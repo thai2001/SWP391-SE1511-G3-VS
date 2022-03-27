@@ -39,7 +39,7 @@
                                     <h6 class="user-email">${Account.email}</h6>
                                 </div>
                                 <div class="about"
-                                     <c:if test = "${role != 2}">
+                                     <c:if test = "${role != 3}">
                                          style="display: none;"
                                      </c:if>>
                                     <h5>Description</h5>
@@ -69,7 +69,7 @@
                                         <div class="form-group">
                                             <label for="fullName">Full Name
                                                 <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span>
                                             </label>
                                             <p id="name" style="display: none;">Name not be blank</p>
@@ -80,7 +80,7 @@
                                         <div class="form-group">
                                             <label for="eMail">Email
                                                 <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span>
                                             </label>
                                             <p id="gmail" style="display: none;">Gmail not be blank or invalid</p>
@@ -91,7 +91,7 @@
                                         <div class="form-group">
                                             <label for="phone">Phone
                                                 <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span>
                                             </label>
                                             <p id="phone" style="display: none;">Phone not be blank or invalid</p>
@@ -102,7 +102,7 @@
                                         <div class="form-group">
                                             <label for="website">Address 
                                                 <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span>
                                             </label>
                                             <p id="address" style="display: none;">Address not be blank </p>
@@ -110,14 +110,14 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"
-                                         <c:if test = "${role != 2}">
+                                         <c:if test = "${role != 3}">
                                              style="display: none;"
                                          </c:if>>
                                         <div class="form-group">
 
                                             <label for="website">Description 
                                                 <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span>
                                             </label>
                                             <textarea type="text" class="form-control" id="idescription" name="description" placeholder="Description" value="${Account.description}">${Account.description}</textarea>
@@ -134,7 +134,7 @@
                             <form action="changePass" method="post" onsubmit="return validateform()">
                                 <div class="row gutters">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <h6 class="mt-3 mb-2 text-primary">Reset pass 
+                                        <h6 class="mt-3 mb-2 text-primary">Change pass 
                                             <span <c:if test = "${mess != 'InvalidAC'}">
                                                     style="display:none;"
                                                 </c:if> style = "color: red;" > (Your account or password wrong! please reenter)
@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <p id="username" style="display: none;">Username must be no more than 20 characters long and not blank</p>
                                             <label for="Street">Account<span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span></label>
                                             <input type="name" class="form-control" name="username" placeholder="Account" value="${Account1.username}">
                                         </div>
@@ -159,7 +159,7 @@
                                         <div class="form-group">
                                             <p id="newpassword" style="display: none;">New Password must be at least 6 characters long and not blank and no more than 20 characters</p>
                                             <label for="ciTy">New PassWord <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span></label>
                                             <input type="password" class="form-control" name="newpassword" placeholder="New PassWord" >
                                         </div>
@@ -168,7 +168,7 @@
                                         <div class="form-group">
                                             <p id="oldpassword" style="display: none;">Old Password must be at least 6 characters long and not blank and no more than 20 characters</p>
                                             <label for="sTate">Old PassWord <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span></label>
                                             <input type="password" class="form-control" name="oldpassword" placeholder="Old PassWord" value="${Account1.password}">
                                         </div>
@@ -177,7 +177,7 @@
                                         <div class="form-group">
                                             <p id="repassword" style="display: none;">Confirm password must be the same pass</p>
                                             <label for="zIp">Confirm PassWord <span style="color: red; font-size: 12px;"> 
-                                                    * Require
+                                                    *
                                                 </span></label>
                                             <input type="password" class="form-control" name="repassword" placeholder="Confirm PassWord">
                                         </div>
@@ -185,7 +185,7 @@
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="text-right">
-                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Reset pass</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Change pass</button>
                                     </div>
                                 </div>
                             </form>
@@ -247,7 +247,7 @@
                 var gmail = document.getElementsByName("gmail")[0].value;
                 var phone = document.getElementsByName("phone")[0].value;
                 var add = document.getElementsByName("address")[0].value;
-
+                
                 if (name.trim() == "" || name.trim().length > 20) {
                     document.getElementById('name').style.display = 'block';
                     return false;
@@ -273,7 +273,7 @@
                     document.getElementById('gmail').style.display = 'none';
                 }
 
-                var regexphone = /^\d{0,10}$/;
+                var regexphone = /^\d{8,10}$/;
                 if (!phone.trim().match(regexphone)) {
                     document.getElementById('phone').style.display = 'block';
                     return false;
