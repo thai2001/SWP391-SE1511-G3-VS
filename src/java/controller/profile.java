@@ -52,10 +52,10 @@ public class profile extends BaseReqAuth {
         AccountDAO adb = new AccountDAO();
         a = adb.getProfile(ac);
         int role;
-        if (ac.getRoleId().getRoleId() == 1) {
-            role = 1;
-        } else {
+        if (ac.getRoleId().getRoleId() == 2) {
             role = 2;
+        } else {
+            role = 3;
         }
         request.setAttribute("role", role);
         request.setAttribute("Account", a);
@@ -81,7 +81,7 @@ public class profile extends BaseReqAuth {
         String contextPath = request.getContextPath();
         Account ac = (Account) request.getSession().getAttribute("account");
         String description = null;
-        if (ac.getRoleId().getRoleId() == 2) {
+        if (ac.getRoleId().getRoleId() == 3) {
             description = request.getParameter("description").trim();
         }
         AccountDAO adb = new AccountDAO();
@@ -96,10 +96,10 @@ public class profile extends BaseReqAuth {
         adb.updateProfile(a);
         //response.sendRedirect(contextPath + "/profile");
         int role;
-        if (ac.getRoleId().getRoleId() == 1) {
-            role = 1;
-        } else {
+        if (ac.getRoleId().getRoleId() == 2) {
             role = 2;
+        } else {
+            role = 3;
         }
         request.setAttribute("mess1", 1);
         request.setAttribute("role", role);

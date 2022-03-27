@@ -130,7 +130,7 @@ public class register extends HttpServlet {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            int messcode = 1;
+            int messcode = 2;
             mess = "ValidCode";
             request.setAttribute("Account", a);
             request.getRequestDispatcher("view/login.jsp").forward(request, response);
