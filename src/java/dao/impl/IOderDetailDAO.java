@@ -22,7 +22,7 @@ public interface IOderDetailDAO {
     public List<OrderDetail> getOrderBySellerId(int id) throws Exception;
 
     //create a new order detail
-    public void createOrderDetail(int oid, int pid, int quantity, String from, String to,boolean isCancle) throws Exception;
+    public void createOrderDetail(int oid, int pid, int quantity, String from, String to,boolean isCancle,boolean isPaid) throws Exception;
 
     // get order detail with order id
     public Vector<OrderDetail> getOrderDetailByOderId(int oid) throws Exception;

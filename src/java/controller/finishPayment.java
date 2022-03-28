@@ -72,6 +72,7 @@ public class finishPayment extends HttpServlet {
             } catch (Exception ex) {
                 Logger.getLogger(finishPayment.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
         request.getRequestDispatcher("view/finishPayment.jsp").forward(request, response);
     }

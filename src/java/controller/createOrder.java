@@ -100,7 +100,7 @@ public class createOrder extends HttpServlet {
             for (Map.Entry<Product, Integer> entry : list.entrySet()) {
                 Product key = entry.getKey();
                 Integer value = entry.getValue();
-                orderDetailDAO.createOrderDetail(oid, key.getId(), value, from, to,false);
+                orderDetailDAO.createOrderDetail(oid, key.getId(), value, from, to,false,false);
                 shoppingCartDAO.deleteCart(buyer.getBuyerId(), key.getId());
             }
             Vector<Order> history = orderDAO.getOrderInPage(1,buyer.getBuyerId());

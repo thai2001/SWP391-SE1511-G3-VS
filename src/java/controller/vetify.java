@@ -82,7 +82,7 @@ public class vetify extends HttpServlet {
         for (String string : code) {
             codeTake += string;
         }
-        if (vetifyCode.endsWith(codeTake)) {
+        if (vetifyCode.equalsIgnoreCase(codeTake)) {
             ses.setAttribute("done", true);
             response.sendRedirect("finishPayment");
         }

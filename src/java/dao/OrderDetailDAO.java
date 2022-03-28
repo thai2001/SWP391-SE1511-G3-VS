@@ -36,7 +36,7 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
 
     // get order detail with order id
     @Override
-    public void createOrderDetail(int oid, int pid, int quantity, String from, String to, boolean isCancle) throws Exception {
+    public void createOrderDetail(int oid, int pid, int quantity, String from, String to, boolean isCancle, boolean isPaid) throws Exception {
         Connection con = null;
         PreparedStatement ps = null;
 
@@ -48,9 +48,10 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
                     + "           ,[Quantity]\n"
                     + "           ,[dateFrom]\n"
                     + "           ,[dateTo]\n"
-                    + "           ,[isCancle])\n"
+                    + "           ,[isCancle]\n"
+                    + "           ,[isPaid])\n"
                     + "     VALUES\n"
-                    + "           ( ?, ?, ?, ?, ?, ?)";
+                    + "           (?, ?, ?, ?, ?, ?,?)";
             ps = con.prepareStatement(sql);
             ps.setInt(1, oid);
             ps.setInt(2, pid);
@@ -58,6 +59,7 @@ public class OrderDetailDAO extends DBContext implements IOderDetailDAO {
             ps.setString(4, from);
             ps.setString(5, to);
             ps.setBoolean(6, isCancle);
+            ps.setBoolean(7, isPaid);
             ps.execute();
 
         } catch (SQLException ex) {
